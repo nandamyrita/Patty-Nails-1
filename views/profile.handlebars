@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Minha Agenda</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/agendamento">Agendar Evento</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Bem-vindo, {{username}}</h2>
+        
+        <!-- Exibir mensagens de flash -->
+        {{#if success_msg}}
+        <div class="alert alert-success">
+            {{success_msg}}
+        </div>
+        {{/if}}
+        {{#if error_msg}}
+        <div class="alert alert-danger">
+            {{error_msg}}
+        </div>
+        {{/if}}
+
+        <h4>Seus Agendamentos</h4>
+        
+        {{#if events.length}}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Data de Início</th>
+                    <th>Hora</th> <!-- Adicionando coluna para Hora -->
+                    <th>Profissional</th> <!-- Adicionando coluna para Profissional -->
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each events}}
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.start}}</td>
+                    <td>{{this.hora}}</td> <!-- Exibindo Hora -->
+                    <td>{{this.professionalName}}</td> <!-- Exibindo nome do profissional -->
+                    <td>
+<td>
+    {{#if (canCancel this.start)}}
+    <form action="/delete-event-user/{{this.id}}" method="POST">
+        <button type="submit" class="btn btn-danger">Cancelar</button>
+    </form>
+    {{else}}
+    <button class="btn btn-secondary" disabled>Não pode cancelar</button>
+    {{/if}}
+</td>
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <p>Você não tem agendamentos.</p>
+        {{/if}}
+
+        <a href="/agendamento" class="btn btn-primary">Agendar Novo Evento</a>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.2.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

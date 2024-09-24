@@ -1,32 +1,187 @@
-    <style>
-        body {
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card {
-            border-radius: 1rem;
-            width: 100%;
-            max-width: 400px; /* Ajusta a largura máxima do cartão */
-        }
-        .input-group-text {
-            cursor: pointer;
-        }
-    </style>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Agendamento</h2>
-                        <p class="text-center mb-4">Bem-vindo à página de agendamento. Aqui você pode gerenciar seus agendamentos.</p>
-                        <!-- Adicione seu conteúdo de agendamento aqui -->
-                    </div>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Evento</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Minha Agenda</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/agendamento">Agendar Evento</a>
+                </li>
+            </ul>
         </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center">Agendar Evento</h1>
+        
+        <!-- Formulário de agendamento -->
+        <form id="event-form" class="mb-4">
+            <!-- Passo 1: Seleção de Serviço -->
+            <div id="step-1" class="form-step">
+                <div class="form-group">
+                    <label for="service">Selecione o Serviço</label>
+                    <select id="service" name="service" class="form-control" required>
+                  <option value="">Escolha um serviço</option>
+            <option value="Manicure Simples - R$ 25,00">Manicure Simples - R$ 25,00</option>
+            <option value="Manicure Simples - R$ 25,00">Manicure Simples - R$ 25,00</option>
+            <option value="Pedicure Simples - R$ 30,00">Pedicure Simples - R$ 30,00</option>
+            <option value="Pedicure Completa - R$ 55,00">Pedicure Completa - R$ 55,00</option>
+            <option value="Esmaltação em Gel - R$ 45,00">Esmaltação em Gel - R$ 45,00</option>
+            <option value="Alongamento de Unhas - R$ 80,00">Alongamento de Unhas - R$ 80,00</option>
+            <option value="Remoção de Cutículas - R$ 20,00">Remoção de Cutículas - R$ 20,00</option>
+            <option value="Spa para Pés - R$ 40,00">Spa para Pés - R$ 40,00</option>
+            <option value="Francesinha - R$ 35,00">Francesinha - R$ 35,00</option>
+            <option value="Decoração de Unhas - R$ 60,00<">Decoração de Unhas - R$ 60,00</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="nextStep(2)">Próximo</button>
+            </div>
+
+            <!-- Passo 2: Seleção de Profissional -->
+            <div id="step-2" class="form-step" style="display:none;">
+                <div class="form-group">
+                    <label for="professionalName">Selecione o Profissional</label>
+                    <select class="form-control" id="professionalName" name="professionalName" required>
+                        <option value="">Escolha um profissional</option>
+                        <option value="Ana">Ana</option>
+                        <option value="Bruna">Bruna</option>
+                        <option value="Carla">Carla</option>
+                        <option value="Diana">Diana</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep(3)">Próximo</button>
+            </div>
+
+            <!-- Passo 3: Seleção de Data -->
+            <div id="step-3" class="form-step" style="display:none;">
+                <div class="form-group">
+                    <label for="start">Data do Agendamento</label>
+                    <input type="date" id="start" name="start" class="form-control" required>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="checkAvailability()">Ver Horários Disponíveis</button>
+            </div>
+
+            <!-- Passo 4: Seleção de Horários -->
+            <div id="step-4" class="form-step" style="display:none;">
+                <div class="form-group">
+                    <label for="time">Horários Disponíveis</label>
+                    <select id="time" name="time" class="form-control" required>
+                        <!-- Horários disponíveis serão carregados dinamicamente -->
+                    </select>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Voltar</button>
+                <button type="button" class="btn btn-primary" id="submit-event">Agendar Evento</button>
+            </div>
+
+        </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Funções para avançar e voltar nas etapas
+        function nextStep(step) {
+            $('.form-step').hide(); // Oculta todas as etapas
+            $('#step-' + step).show(); // Mostra a etapa atual
+        }
+
+        function prevStep(step) {
+            $('.form-step').hide(); // Oculta todas as etapas
+            $('#step-' + step).show(); // Mostra a etapa anterior
+        }
+
+        // Verifica horários disponíveis quando a data é escolhida
+        function checkAvailability() {
+            const date = $('#start').val();
+            const professional = $('#professionalName').val(); // Obtém o ID do profissional
+
+            if (date && professional) {
+                $.ajax({
+                    url: '/check-availability',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        date: date,
+                        professionalName: professional // Enviando o ID
+                    }),
+                    success: function(response) {
+                        console.log('Eventos retornados:', response);
+                        const occupiedTimes = response.map(event => event.hora);
+                        
+                        const availableTimes = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00']; 
+                        const freeTimes = availableTimes.filter(time => !occupiedTimes.includes(time));
+
+                        const timeSelect = $('#time');
+                        timeSelect.empty(); // Limpa as opções anteriores
+                        
+                        if (freeTimes.length > 0) {
+                            freeTimes.forEach(item => {
+                                timeSelect.append(`<option value="${item}">${item}</option>`);
+                            });
+                            nextStep(4); // Avança para a seleção de horários
+                        } else {
+                            timeSelect.append('<option value="">Sem horários disponíveis</option>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro na requisição:', error);
+                        alert('Erro ao buscar horários disponíveis. Tente novamente.');
+                    }
+                });
+            } else {
+                alert('Por favor, selecione uma data e um profissional.');
+            }
+        }
+
+        // Lida com a submissão do formulário para agendar evento
+$(document).ready(function() {
+    $('#submit-event').on('click', function() {
+        const service = $('#service').val();
+        const professionalName = $('#professionalName').val(); 
+        const start = $('#start').val();
+        const time = $('#time').val(); // Este deve ser uma string, pois é um select único
+
+        if (!time) {
+            alert('Por favor, selecione um horário.');
+            return;
+        }
+
+        $.ajax({
+            url: '/add-event',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ 
+                title: service, 
+                start: `${start}T${time}`, // Formatação correta
+                hora: time, // Incluindo o horário selecionado
+                professionalName: professionalName // Enviando o ID do profissional
+            }),
+            success: function(response) {
+                console.log('Evento criado:', response);
+                alert('Evento agendado com sucesso!');
+                window.location.href = '/profile'; // Redireciona para o perfil
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao criar evento:', error);
+                alert('Erro ao criar evento. Tente novamente.');
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>
