@@ -8,8 +8,12 @@ const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 const exphbs = require('express-handlebars');
 const moment = require('moment');
-require('dotenv').config();
+const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 
+require('dotenv').config();
+dotenv.config();
 const app = express();
 
 // Conexão com o Banco de Dados
@@ -376,8 +380,60 @@ app.post('/select-time', isAuthenticated, async (req, res) => {
     }
 });
 
+// Rota para página de esqueci minha senha (GET)
+app.get('/forgot-password', (req, res) => {
+    res.render('forgot-password'); // Certifique-se de ter um arquivo Handlebars 'forgot-password.handlebars'
+});
 
+// Rota para processar a solicitação de redefinição de senha (POST)
+app.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
 
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            req.flash('error_msg', 'Email não encontrado!');
+            return res.redirect('/forgot-password');
+        }
+
+        // Gerar token JWT para redefinição de senha
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        // Link para redefinir a senha
+        const resetLink = `http://localhost:3000/reset-password?token=${token}`;
+
+        // Configurar transporte do nodemailer
+        const nodemailer = require('nodemailer');
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              type: 'OAuth2',
+              user: 'seu-email@gmail.com',
+              clientId: 'CLIENT_ID',
+              clientSecret: 'CLIENT_SECRET',
+              refreshToken: 'REFRESH_TOKEN',
+              accessToken: 'ACCESS_TOKEN',
+            },
+          });
+
+        // Configuração do email
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Redefinição de senha',
+            html: `<p>Clique <a href="${resetLink}">aqui</a> para redefinir sua senha.</p>`
+        };
+
+        // Enviar o email
+        await transporter.sendMail(mailOptions);
+
+        req.flash('success_msg', 'Email de redefinição de senha enviado com sucesso!');
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Erro ao processar a solicitação de redefinição de senha:', error);
+        res.status(500).send('Erro ao processar a solicitação de redefinição de senha');
+    }
+});
 // Inicializa o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
