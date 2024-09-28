@@ -1,0 +1,42 @@
+<header class="w-full justify-center flex fixed bg-black py-4 z-10">
+    <nav class="max-w-screen-xl w-full flex items-center justify-between h-20 mx-auto px-4">
+        <a class="navbar-brand flex items-center">
+            <img src="/img/logo.svg" alt="Logo" class="h-10" /> <!-- Ajuste a altura conforme necessário -->
+        </a>
+        <div class="flex items-center">
+            <ul class="hidden md:flex gap-10 text-white">
+                <li>
+                    <a href="/" class="px-2 py-1 hover:text-gray-300">Início</a>
+                </li>
+                <li>
+                    <button onclick="window.location.href='/profile'" class="ml-4 px-5 py-1 bg-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">Perfil</button>
+                </li>
+                <li>
+                    <button onclick="window.location.href='/agendamento'" class="ml-4 px-5 py-1 bg-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">Perfil</button>
+
+                </li>
+                <li></li>
+                 <button onclick="window.location.href='/logout'" class="ml-2 px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">Cadastro</button>
+                </li>
+            </ul>
+        </div>
+        <button class="navbar-toggler md:hidden" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</header>
+
+<!-- Navbar Collapsable for Mobile -->
+<div class="collapse navbar-collapse md:hidden" id="navbarNav">
+    <ul class="navbar-nav text-white flex flex-col">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Início</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/profile">Perfil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+    </ul>
+</div>

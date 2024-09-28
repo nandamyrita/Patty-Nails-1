@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+   
     <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,17 +21,8 @@
   <title>Cadastro - Patty Nails</title>
 </head>
 <body>
-  <header class="w-full justify-center flex fixed backdrop-blur-sm bg-zinc-900/10 py-4">
-    <nav class="max-w-screen-xl w-full flex items-center gap-20 h-20">
-      <h1 class="flex-1 text-white font-s"><img src="./img/logo.svg" alt="Logo" /></h1>
-      <ul class="flex gap-10 text-white">
-        <li class="px-2 py-1 hidden md:block"><a href="index.html#sobre">Quem somos</a></li>
-        <li class="px-2 py-1 hidden md:block"><a href="index.html#equipe">Equipe</a></li>
-        <li class="px-2 py-1 hidden md:block"><a href="index.html#itens">Especialidade</a></li>
-        <li class="px-2 py-1 hidden md:block"><a href="index.html#loc">Localização</a></li>
-      </ul>
-    </nav>
-  </header>
+ 
+ {{> header1}} 
 
     <div class="min-h-screen flex items-center justify-center bg-black w-full p-5">
         <div class="bg-zinc-500/10 flex rounded-2xl shadow-lg max-w-2xl w-full mt-28 gap-4 md:flex md:min-h-full">
@@ -60,6 +52,52 @@
             </div>
         </div>
     </div>
+
+    <footer class="bg-zinc-900 text-white py-10"></footer>
+  <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+    <div>
+      <h4 class="text-xl font-bold mb-4">Patty Nails</h4>
+      <p class="text-gray-400 mb-2">Endereço: Rua Exemplo, 123, Centro, Cidade - Estado</p>
+      <p class="text-gray-400 mb-2">Telefone: (11) 1234-5678</p>
+      <p class="text-gray-400">Email: contato@pattynails.com</p>
+    </div>
+    <div>
+      <h4 class="text-xl font-bold mb-4">Horários de Funcionamento</h4>
+      <ul class="text-gray-400 space-y-2">
+        <li>Segunda a Sexta: 9h - 18h</li>
+        <li>Sábado: 9h - 16h</li>
+        <li>Domingo: Fechado</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-xl font-bold mb-4">
+        <img src="./img/logo.svg" alt="Patty Nails Logo" />
+      </h4>
+      <div class="flex gap-4">
+        <a
+          href="https://www.facebook.com/pattynails" <!-- Redireciona para a página do Facebook -->
+          target="_blank"
+          class="hover:text-pink-500 transition-colors duration-300"
+        >
+          <img src="/img/icon-facebook.svg" alt="Facebook" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://www.instagram.com/pattynails" <!-- Redireciona para a página do Instagram -->
+          target="_blank"
+          class="hover:text-pink-500 transition-colors duration-300"
+        >
+          <img src="/img/icon-instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://www.twitter.com/pattynails" <!-- Redireciona para a página do Twitter -->
+          target="_blank"
+          class="hover:text-pink-500 transition-colors duration-300"
+        >
+          <img src="/img/icon-twitter.svg" alt="Twitter" class="w-6 h-6" />
+        </a>
+      </div>
+    </div>
+  </div>
 
     <script>
         function togglePasswordVisibility() {
