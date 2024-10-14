@@ -38,7 +38,6 @@ Event.associate = (models) => {
 
 module.exports = Event;
 
-
 sequelize.sync({ force: false })
     .then(() => {
         console.log('Tabelas sincronizadas');

@@ -1,35 +1,200 @@
-    <style>
-        body {
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card {
-            border-radius: 1rem;
-            width: 100%;
-            max-width: 600px; /* Aumenta a largura máxima do cartão */
-        }
-        .input-group-text {
-            cursor: pointer;
-        }
-    </style>
-
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="row text-center">
-            <div class="col-md-10">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h1 class="card-title mb-4">Bem-vindo ao Sistema de Agendamento</h1>
-                        <p class="lead mb-4">Para agendar o seu próximo horário, você pode se cadastrar ou entrar com sua conta existente.</p>
-                        <a href="/cadastrar-form" class="btn btn-primary btn-lg">Ir para Cadastro</a>
-                        <a href="/login" class="btn btn-primary btn-lg">Entrar</a>
-                    </div>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script src="./assets/script.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
+  <title>Patty Nails</title>
+  <style>
+    h1 { font-family: "Sorts Mill Goudy", serif; }
+    html {
+      scroll-behavior: smooth; /* Rolagem suave garantida */
+    }
+    header {
+      z-index: 10; /* Certifique-se de que o cabeçalho esteja acima de outros elementos */
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center">
+<header class="w-full justify-center flex fixed bg-black py-4">
+    <nav class="max-w-screen-xl w-full flex items-center gap-20 h-20">
+        <h1 class="flex-1 text-white font-s">
+            <img src="./img/logo.svg" alt="Logo" />
+        </h1>
+        <ul class="flex gap-10 text-white">
+            <li class="px-2 py-1 hidden md:block">
+                <a href="#sobre">Quem somos</a>
+            </li>
+            <li class="px-2 py-1 hidden md:block">
+                <a href="#equipe">Equipe</a>
+            </li>
+            <li class="px-2 py-1 hidden md:block">
+                <a href="#itens">Especialidade</a>
+            </li>
+            <li class="px-2 py-1 hidden md:block">
+                <a href="#loc">Localização</a>
+            </li>
+        </ul>
+        <div class="flex gap-5">
+            <button onclick="window.location.href='/login'" class="px-5 py-1 bg-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">Login</button>
+            <button onclick="window.location.href='/cadastrar-form'" class="px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">Cadastro</button>
         </div>
-    </div>
+    </nav>
+</header>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<main class="w-full flex flex-col pt-20">
+    <!-- Hero Section -->
+    <section id="sobre" class="w-full bg-cover bg-no-repeat bg-center h-screen flex items-center justify-center text-center lg:text-left" style="background-image: url(./img/hero.svg)">
+      <div class="flex flex-col gap-7 px-4 lg:px-0">
+        <h1 class="text-white text-6xl lg:text-8xl font-custom">Patty Nails</h1>
+        <button onclick="window.location.href='/agendamento'" class="px-8 py-2 bg-zinc-900/30 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800">Agende Aqui</button>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="itens" class="bg-black w-full py-16 flex justify-center">
+      <div class="flex flex-col lg:flex-row gap-10 justify-center items-center lg:-mt-36">
+        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="max-w-full h-auto mb-2" src="./img/mani.svg" alt="Manicure e Pedicure" />
+          <p class="text-white">Manicure e Pedicure</p>
+        </div>
+        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="max-w-full h-auto mb-2" src="./img/gel.svg" alt="Unha em Gel" />
+          <p class="text-white">Unha em Gel/Fibra/Decorada</p>
+        </div>
+        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="max-w-full h-auto mb-2" src="./img/spa.svg" alt="SPA das Mãos e Pés" />
+          <p class="text-white">SPA das Mãos e Pés</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="equipe" class="bg-black w-full py-16 flex flex-col items-center gap-8">
+      <div class="text-white text-center">
+        <h1 class="text-4xl lg:text-5xl">Nossa Equipe</h1>
+        <p>Qualificados para sua beleza</p>
+      </div>
+      <div class="flex gap-4">
+        <button>
+          <img src="./img/leftArrow.svg" alt="Left Arrow" />
+        </button>
+        <div class="flex gap-6 overflow-hidden">
+          <div class="w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
+            <img class="w-full h-full object-cover" src="./img/prof1.svg" alt="Profissional 1" />
+          </div>
+          <div class="w-64 h-64 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
+            <img class="w-full h-full object-cover" src="./img/prof2.svg" alt="Profissional 2" />
+          </div>
+          <div class="w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
+            <img class="w-full h-full object-cover" src="./img/prof3.svg" alt="Profissional 3" />
+          </div>
+        </div>
+        <button>
+          <img src="./img/rightArrow.svg" alt="Right Arrow" />
+        </button>
+      </div>
+    </section>
+
+    <!-- Localização Section -->
+    <section id="loc" class="bg-black w-full py-16 flex justify-center">
+      <div class="flex gap-8">
+        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="w-full h-full object-cover" src="./img/img1.svg" alt="Testimonial 1" />
+          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
+            <span>Kayblack - "To Chave"</span>
+          </div>
+        </div>
+        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="w-full h-full object-cover" src="./img/img2.svg" alt="Testimonial 2" />
+          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
+            <span>Ana Julia - "Amei a experiência"</span>
+          </div>
+        </div>
+        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="w-full h-full object-cover" src="./img/img3.svg" alt="Testimonial 3" />
+          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
+            <span>Virginia - "Melhor que meus produtos"</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+<footer class="bg-zinc-900 text-white py-10">
+  <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+    <div>
+      <h4 class="text-xl font-bold mb-4">Patty Nails</h4>
+      <p class="text-gray-400 mb-2">Endereço: Rua Exemplo, 123, Centro, Cidade - Estado</p>
+      <p class="text-gray-400 mb-2">Telefone: (11) 1234-5678</p>
+      <p class="text-gray-400">Email: contato@pattynails.com</p>
+    </div>
+    <div>
+      <h4 class="text-xl font-bold mb-4">Horários de Funcionamento</h4>
+      <ul class="text-gray-400 space-y-2">
+        <li>Segunda a Sexta: 9h - 18h</li>
+        <li>Sábado: 9h - 16h</li>
+        <li>Domingo: Fechado</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-xl font-bold mb-4">
+        <img src="./img/logo.svg" alt="Patty Nails Logo" />
+      </h4>
+      <div class="flex gap-4">
+        <a
+          href="https://www.facebook.com/pattynails" <!-- Redireciona para a página do Facebook -->
+          target="_blank"
+          class="hover:text-pink-500 transition-colors duration-300"
+        >
+          <img src="/img/icon-facebook.svg" alt="Facebook" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://www.instagram.com/pattynails" <!-- Redireciona para a página do Instagram -->
+          target="_blank"
+          class="hover:text-pink-500 transition-colors duration-300"
+        >
+          <img src="/img/icon-instagram.svg" alt="Instagram" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://www.twitter.com/pattynails" <!-- Redireciona para a página do Twitter -->
+          target="_blank"
+          class="hover:text-pink-500 transition-colors duration-300"
+        >
+          <img src="/img/icon-twitter.svg" alt="Twitter" class="w-6 h-6" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full mt-10">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.83543450915!2d144.9537363153168!3d-37.81627977975175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577cace2954fa0!2sPatty%20Nails!5e0!3m2!1sen!2sbr!4v1631635622912!5m2!1sen!2sbr"
+      width="100%"
+      height="300"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+    ></iframe>
+  </div>
+
+  <div class="text-center text-white mt-8">
+    <p>&copy; 2024 Patty Nails. Todos os direitos reservados.</p>
+  </div>
+</footer>
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+  </main>
+</body>
+</html>

@@ -1,26 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendar Evento</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+   
+    <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <script src="./assets/script.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+    <title>Agendar Sessão</title>
 </head>
+<style>
+    body {
+        background-color: rgb(28, 28, 28);
+    }
+</style>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Minha Agenda</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/agendamento">Agendar Evento</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<nav class="w-full flex justify-center bg-black py-4 shadow-md">
+    <div class="max-w-screen-xl w-full flex items-center justify-between h-20">
+        <h1 class="flex-1 text-white font-s">
+            <img src="/img/logo.svg" alt="Logo" onclick="window.location.href='/'" style="cursor: pointer;" />
+        </h1>
+        <ul class="flex gap-4">
+                <ul class="flex gap-10 text-white">
+            <li class="px-2 py-1 hidden md:block">
+                <a href="/#sobre">Quem somos</a>
+            </li>
+            <li class="px-2 py-1 hidden md:block">
+                <a href="/#equipe">Equipe</a>
+            </li>
+            <li class="px-2 py-1 hidden md:block">
+                <a href="/#itens">Especialidade</a>
+            </li>
+            <li class="px-2 py-1 hidden md:block">
+                <a href="/#loc">Localização</a>
+            </li>
+        </ul>
+            <li>
+                <button onclick="window.location.href='/profile'" class="px-5 py-1 bg-white text-black rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">
+                    Perfil
+                </button>
+            </li>
+            <li>
+                <button onclick="window.location.href='/agendamento'" class="px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">
+                    Agendar Evento
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 
     <div class="container mt-4">
         <h1 class="text-center">Agendar Evento</h1>
@@ -32,17 +63,16 @@
                 <div class="form-group">
                     <label for="service">Selecione o Serviço</label>
                     <select id="service" name="service" class="form-control" required>
-                  <option value="">Escolha um serviço</option>
-            <option value="Manicure Simples - R$ 25,00">Manicure Simples - R$ 25,00</option>
-            <option value="Manicure Simples - R$ 25,00">Manicure Simples - R$ 25,00</option>
-            <option value="Pedicure Simples - R$ 30,00">Pedicure Simples - R$ 30,00</option>
-            <option value="Pedicure Completa - R$ 55,00">Pedicure Completa - R$ 55,00</option>
-            <option value="Esmaltação em Gel - R$ 45,00">Esmaltação em Gel - R$ 45,00</option>
-            <option value="Alongamento de Unhas - R$ 80,00">Alongamento de Unhas - R$ 80,00</option>
-            <option value="Remoção de Cutículas - R$ 20,00">Remoção de Cutículas - R$ 20,00</option>
-            <option value="Spa para Pés - R$ 40,00">Spa para Pés - R$ 40,00</option>
-            <option value="Francesinha - R$ 35,00">Francesinha - R$ 35,00</option>
-            <option value="Decoração de Unhas - R$ 60,00<">Decoração de Unhas - R$ 60,00</option>
+                        <option value="">Escolha um serviço</option>
+                        <option value="Manicure Simples - R$ 25,00">Manicure Simples - R$ 25,00</option>
+                        <option value="Pedicure Simples - R$ 30,00">Pedicure Simples - R$ 30,00</option>
+                        <option value="Pedicure Completa - R$ 55,00">Pedicure Completa - R$ 55,00</option>
+                        <option value="Esmaltação em Gel - R$ 45,00">Esmaltação em Gel - R$ 45,00</option>
+                        <option value="Alongamento de Unhas - R$ 80,00">Alongamento de Unhas - R$ 80,00</option>
+                        <option value="Remoção de Cutículas - R$ 20,00">Remoção de Cutículas - R$ 20,00</option>
+                        <option value="Spa para Pés - R$ 40,00">Spa para Pés - R$ 40,00</option>
+                        <option value="Francesinha - R$ 35,00">Francesinha - R$ 35,00</option>
+                        <option value="Decoração de Unhas - R$ 60,00">Decoração de Unhas - R$ 60,00</option>
                     </select>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="nextStep(2)">Próximo</button>
@@ -79,6 +109,7 @@
                 <div class="form-group">
                     <label for="time">Horários Disponíveis</label>
                     <select id="time" name="time" class="form-control" required>
+                        <option value="">Selecione um horário</option>
                         <!-- Horários disponíveis serão carregados dinamicamente -->
                     </select>
                 </div>
@@ -148,40 +179,40 @@
         }
 
         // Lida com a submissão do formulário para agendar evento
-$(document).ready(function() {
-    $('#submit-event').on('click', function() {
-        const service = $('#service').val();
-        const professionalName = $('#professionalName').val(); 
-        const start = $('#start').val();
-        const time = $('#time').val(); // Este deve ser uma string, pois é um select único
+        $(document).ready(function() {
+            $('#submit-event').on('click', function() {
+                const service = $('#service').val();
+                const professionalName = $('#professionalName').val(); 
+                const start = $('#start').val();
+                const time = $('#time').val(); // Este deve ser uma string, pois é um select único
 
-        if (!time) {
-            alert('Por favor, selecione um horário.');
-            return;
-        }
+                if (!time) {
+                    alert('Por favor, selecione um horário.');
+                    return;
+                }
 
-        $.ajax({
-            url: '/add-event',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ 
-                title: service, 
-                start: `${start}T${time}`, // Formatação correta
-                hora: time, // Incluindo o horário selecionado
-                professionalName: professionalName // Enviando o ID do profissional
-            }),
-            success: function(response) {
-                console.log('Evento criado:', response);
-                alert('Evento agendado com sucesso!');
-                window.location.href = '/profile'; // Redireciona para o perfil
-            },
-            error: function(xhr, status, error) {
-                console.error('Erro ao criar evento:', error);
-                alert('Erro ao criar evento. Tente novamente.');
-            }
+                $.ajax({
+                    url: '/add-event',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ 
+                        title: service, 
+                        start: `${start}T${time}`, // Formatação correta
+                        hora: time, // Incluindo o horário selecionado
+                        professionalName: professionalName // Enviando o ID do profissional
+                    }),
+                    success: function(response) {
+                        console.log('Evento criado:', response);
+                        alert('Evento agendado com sucesso!');
+                        window.location.href = '/profile'; // Redireciona para o perfil
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro ao criar evento:', error);
+                        alert('Erro ao criar evento. Tente novamente.');
+                    }
+                });
+            });
         });
-    });
-});
     </script>
 </body>
 </html>

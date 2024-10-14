@@ -48,7 +48,7 @@ const hbs = exphbs.create({
     }
 });
 
-
+app.use(express.static(__dirname + '/views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -435,7 +435,9 @@ app.post('/forgot-password', async (req, res) => {
     }
 });
 // Inicializa o servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+

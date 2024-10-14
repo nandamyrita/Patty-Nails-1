@@ -1,83 +1,94 @@
-<div class="container text-center mt-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 col-md-12 bg-primary">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">SISTEMA WEB</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="/">Cadastrar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/login">Login</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Cadastro - Patty Nails</title>
+</head>
+<body>
+    {{> header1}}
 
-        <div class="row justify-content-center mt-4">
-            <div class="col-lg-10 col-md-12 bg-white p-4">
-                <h4 class="text-start">Cadastrar - Agendamento de Potenciais Clientes</h4>
-                <p class="text-start">Sistema utilizado para agendamento de serviços.</p>
-
-                <!-- Exibir mensagens de erro usando alert -->
-                <div id="alert-container"></div>
-
-                <!-- Formulário -->
-                <form action="/cadastrar" method="POST">
-                    <div class="mb-3 text-start">
-                        <label for="nome" class="form-label">Nome:</label>
-                        <input type="text" name="nome" class="form-control" id="nome" required>
-                    </div>
-
-                    <div class="mb-3 text-start">
-                        <label for="telefone" class="form-label">Telefone:</label>
-                        <input type="tel" name="telefone" class="form-control" id="telefone" placeholder="(00) 00000-0000" required>
-                    </div>
-
-                    <div class="mb-3 text-start">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" name="email" class="form-control" id="email" required>
-                    </div>
-
-                    <div class="mb-3 text-start">
-                        <label for="senha" class="form-label">Senha:</label>
-                        <div class="input-group">
-                            <input type="password" name="senha" class="form-control" id="senha" required>
-                            <span class="input-group-text" onclick="togglePassword()">
-                                <i class="bi bi-eye"></i>
+    <div class="min-h-screen flex items-center justify-center bg-black w-full p-5">
+        <div class="bg-zinc-500/10 flex rounded-2xl shadow-lg max-w-2xl w-full mt-28 gap-4 md:flex md:min-h-full">
+            <!-- Coluna do Formulário -->
+            <div class="p-8 w-full md:w-1/2 flex justify-center items-center">
+                <div class="w-full">
+                    <h2 class="font-bold text-2xl text-white text-center md:text-left">Cadastrar</h2>
+                    <p class="text-xs mt-4 text-white text-center md:text-left">Agende seu serviço facilmente.</p>
+                    <form action="/cadastrar" method="POST" class="flex flex-col gap-4 mt-4" id="cadastroForm">
+                        <input class="p-2 rounded-xl border" type="text" name="nome" id="nome" placeholder="Nome" required>
+                        <input class="p-2 rounded-xl border" type="tel" name="telefone" id="telefone" placeholder="(00) 00000-0000" required>
+                        <input class="p-2 rounded-xl border" type="email" name="email" id="email" placeholder="Email" required>
+                        <div class="relative">
+                            <input class="p-2 rounded-xl border w-full" placeholder="Senha" type="password" name="senha" id="senha" required>
+                            <span class="absolute right-2 top-2 cursor-pointer" onclick="togglePasswordVisibility()">
+                                <i id="eyeIcon" class="bi bi-eye"></i>
                             </span>
                         </div>
-                    </div>
+                        <button type="submit" class="bg-black rounded-xl text-white py-2 hover:scale-105 duration-300">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
 
-                    <div class="mb-3 text-start">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </div>
-                </form>
+            <!-- Coluna da Imagem -->
+            <div class="md:w-1/2 hidden md:block">
+                <img class="rounded-r-2xl w-full h-full object-cover" src="https://img.freepik.com/fotos-gratis/mulher-cuidando-das-unhas_23-2148974583.jpg?t=st=1727392135~exp=1727395735~hmac=6ceb587424adfdf618c335e08de5da3f124326ee7879732bc34e2bc9c76c7723&w=740" alt="Imagem de Cadastro">
             </div>
         </div>
     </div>
 
-  <script>
+    <script>
+        // Função para formatar o telefone
+        document.getElementById('telefone').addEventListener('input', function (e) {
+            let telefone = e.target.value.replace(/\D/g, ""); // Remove todos os caracteres que não são números
+            if (telefone.length > 11) {
+                telefone = telefone.slice(0, 11); // Limita o número a 11 dígitos
+            }
 
-        function togglePassword() {
-            const passwordField = document.getElementById('senha');
-            const passwordIcon = document.querySelector('.input-group-text i');
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                passwordIcon.classList.remove('bi-eye');
-                passwordIcon.classList.add('bi-eye-slash');
+            // Formata o número para (XX) XXXXX-XXXX
+            telefone = telefone.replace(/^(\d{2})(\d)/g, "($1) $2"); 
+            telefone = telefone.replace(/(\d{5})(\d)/, "$1-$2");
+            e.target.value = telefone;
+        });
+
+        // Função para validar o número de telefone e senha
+        document.getElementById('cadastroForm').addEventListener('submit', function (e) {
+            const telefone = document.getElementById('telefone').value.replace(/\D/g, ""); // Remove formatação para contar dígitos
+            const senha = document.getElementById('senha').value;
+
+            // Validação do telefone
+            if (telefone.length !== 11) {
+                alert("O telefone deve conter 11 dígitos.");
+                e.preventDefault(); // Impede o envio do formulário se inválido
+                return;
+            }
+
+            // Validação da senha
+            if (senha.length < 6) {
+                alert("A senha deve conter no mínimo 6 caracteres.");
+                e.preventDefault();
+            }
+        });
+
+        // Função para alternar a visibilidade da senha
+        function togglePasswordVisibility() {
+            var senhaInput = document.getElementById("senha");
+            var eyeIcon = document.getElementById("eyeIcon");
+
+            if (senhaInput.type === "password") {
+                senhaInput.type = "text"; // Mostra a senha
+                eyeIcon.classList.remove("bi-eye");
+                eyeIcon.classList.add("bi-eye-slash"); // Troca para o ícone de olho fechado
             } else {
-                passwordField.type = 'password';
-                passwordIcon.classList.remove('bi-eye-slash');
-                passwordIcon.classList.add('bi-eye');
+                senhaInput.type = "password"; // Oculta a senha
+                eyeIcon.classList.remove("bi-eye-slash");
+                eyeIcon.classList.add("bi-eye"); // Volta para o ícone de olho aberto
             }
         }
     </script>
+</body>
+</html>
