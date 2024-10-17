@@ -380,9 +380,23 @@ app.post('/select-time', isAuthenticated, async (req, res) => {
     }
 });
 
+require('dotenv').config();
+
+
+app.use(express.json()); // Para interpretar JSON no body das requisições
+
+// Configurar transporte do Nodemailer com Gmail
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'projetopi.agendamento@gmail.com',
+        pass: 'seyf bmel gmnq dpie', // Senha de aplicativo
+    },
+});
+
 // Rota para página de esqueci minha senha (GET)
 app.get('/forgot-password', (req, res) => {
-    res.render('forgot-password'); // Certifique-se de ter um arquivo Handlebars 'forgot-password.handlebars'
+    res.render('forgot-password'); // Certifique-se de ter o arquivo Handlebars 'forgot-password.handlebars'
 });
 
 // Rota para processar a solicitação de redefinição de senha (POST)
@@ -400,33 +414,18 @@ app.post('/forgot-password', async (req, res) => {
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         // Link para redefinir a senha
-        const resetLink = `http://localhost:3000/reset-password?token=${token}`;
-
-        // Configurar transporte do nodemailer
-        const nodemailer = require('nodemailer');
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              type: 'OAuth2',
-              user: 'seu-email@gmail.com',
-              clientId: 'CLIENT_ID',
-              clientSecret: 'CLIENT_SECRET',
-              refreshToken: 'REFRESH_TOKEN',
-              accessToken: 'ACCESS_TOKEN',
-            },
-          });
+        const resetLink = `http://localhost:3003/reset-password?token=${token}`;
 
         // Configuração do email
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: 'projetopi.agendamento@gmail.com', // Coloque o seu email diretamente
             to: email,
             subject: 'Redefinição de senha',
-            html: `<p>Clique <a href="${resetLink}">aqui</a> para redefinir sua senha.</p>`
+            html: `<p>Clique <a href="${resetLink}">aqui</a> para redefinir sua senha.</p>`,
         };
 
         // Enviar o email
         await transporter.sendMail(mailOptions);
-
         req.flash('success_msg', 'Email de redefinição de senha enviado com sucesso!');
         res.redirect('/login');
     } catch (error) {
@@ -434,10 +433,60 @@ app.post('/forgot-password', async (req, res) => {
         res.status(500).send('Erro ao processar a solicitação de redefinição de senha');
     }
 });
+
+// Rota para a página de redefinição de senha (GET)
+app.get('/reset-password', (req, res) => {
+    const { token } = req.query; // Pega o token da query string
+    if (!token) {
+        req.flash('error_msg', 'Token inválido ou expirado!');
+        return res.redirect('/forgot-password');
+    }
+    
+    // Verifica se o token é válido
+    try {
+        jwt.verify(token, process.env.JWT_SECRET); // Verifica o token sem decodificar para ver se ainda é válido
+        res.render('reset-password', { token }); // Carrega a página de redefinição com o token
+    } catch (error) {
+        req.flash('error_msg', 'Token inválido ou expirado!');
+        return res.redirect('/forgot-password');
+    }
+});
+
+// Rota POST para processar a redefinição de senha
+app.post('/reset-password', async (req, res) => {
+    const { newPassword, token } = req.body;
+
+    try {
+        // Verificar o token JWT e obter o ID do usuário
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findOne({ where: { id: decoded.id } });
+
+        if (!user) {
+            req.flash('error_msg', 'Usuário não encontrado!');
+            return res.redirect('/forgot-password');
+        }
+
+        // Atualizar a senha do usuário (criptografar a senha)
+        user.password = await bcrypt.hash(newPassword, 10);
+        await user.save();
+
+        req.flash('success_msg', 'Senha redefinida com sucesso!');
+        
+        // Redirecionar para a página de login após a redefinição
+        res.redirect('/login');
+    } catch (error) {
+        if (error.name === 'TokenExpiredError') {
+            req.flash('error_msg', 'Token expirado! Por favor, solicite uma nova redefinição de senha.');
+            return res.redirect('/forgot-password');
+        }
+
+        console.error('Erro ao redefinir a senha:', error);
+        res.status(500).send('Erro ao redefinir a senha');
+    }
+});
+
 // Inicializa o servidor
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
-
-
