@@ -7,36 +7,105 @@
   <script src="./assets/script.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Perfil</title>
 </head>
-    <style>
-        body {
-            background-color: rgb(28, 28, 28);
-            color: aliceblue;
-        }
-        
-        .container {
-            background-color: rgb(28, 28, 28);
-            padding: 20px;
-            border-radius: 5px;
-        }
+<style>
+      body {
+        background-color: rgb(28, 28, 28);
+        color: aliceblue;
+        display: flex; /* Usado para centralizar o conteúdo */
+        flex-direction: column; /* Direção da coluna */
+        align-items: center; /* Alinhamento centralizado */
+    }
+  .container {
+        background-color: rgb(28, 28, 28);
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 600px; /* Largura máxima para centralizar melhor */
+        width: 100%; /* Para ocupar a largura total possível */
+        margin: 20px; /* Margem ao redor da caixa */
+        text-align: center; /* Centraliza o texto dentro da caixa */
+    }
 
-        .table-custom {
-            background-color: rgb(45, 45, 45); /* Cor de fundo da tabela */
-            color: white; /* Cor do texto da tabela */
-            border-collapse: collapse; /* Para remover espaços entre as células */
-        }
+    .table-custom {
+        background-color: rgb(45, 45, 45); /* Cor de fundo da tabela */
+        color: white; /* Cor do texto da tabela */
+        border-collapse: collapse; /* Para remover espaços entre as células */
+        margin: 20px 0; /* Margem para separar a tabela dos botões */
+    }
 
-        .table-custom th, .table-custom td {
-            padding: 10px; /* Espaçamento interno nas células */
-            border: 1px solid rgb(60, 60, 60); /* Bordas das células */
-        }
+    .table-custom th, .table-custom td {
+        padding: 10px; /* Espaçamento interno nas células */
+        border: 1px solid rgb(60, 60, 60); /* Bordas das células */
+    }
 
-        .table-custom tbody tr:nth-child(odd) {
-            background-color: rgb(60, 60, 60); /* Cor de fundo para linhas ímpares */
-        }
-    </style>
-</head>
+    .table-custom tbody tr:nth-child(odd) {
+        background-color: rgb(60, 60, 60); /* Cor de fundo para linhas ímpares */
+    }
+
+    /* Estilo dos botões */
+    .btn-custom {
+        background-color: white; /* Cor de fundo do botão */
+        color: black; /* Cor do texto */
+        margin: 10px; /* Espaçamento entre os botões */
+        transition: background-color 0.3s; /* Transição suave para mudança de cor */
+    }
+
+    .btn-custom:hover {
+        background-color: rgb(240, 240, 240); /* Cor de fundo ao passar o mouse */
+    }
+
+    /* Botão de logout mais escuro */
+    .btn-logout {
+        background-color: rgb(200, 0, 0); /* Cor de fundo mais escura */
+        color: white; /* Cor do texto */
+    }
+
+    /* Estilo do modal */
+    .modal-header, .modal-footer .btn-primary {
+        background-color: rgb(28, 28, 28); /* Cor de fundo */
+        color: white; /* Cor do texto */
+    }
+
+    .modal-content {
+        background-color: #333; /* Um tom mais claro de cinza para o fundo */
+        color: white; /* Cor do texto */
+    }
+
+    ul {
+        list-style-type: none; /* Remove marcadores de lista */
+        padding: 0; /* Remove padding padrão */
+        margin: 0; /* Remove margin padrão */
+    }
+
+    .no-underline {
+        text-decoration: none; /* Remove sublinhado dos links */
+    }
+
+    a:hover {
+        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse (opcional) */
+    }
+    /* Estilo personalizado para botões brancos */
+    .btn-white {
+        background-color: white; /* Fundo branco */
+        color: black; /* Texto preto */
+        border: 1px solid #ccc; /* Bordas cinzas, opcional */
+    }
+
+    .btn-white:hover {
+        background-color: #cacaca; /* Fundo levemente cinza ao passar o mouse */
+    }
+
+    .btn-logout {
+        background-color: #b2b2b2; /* Cor de fundo do botão de logout */
+        color: black; /* Texto preto */
+    }
+
+    .btn-logout:hover {
+        background-color: #fcfbfb; /* Efeito hover no botão de logout */
+    }
+</style>
 <body>
 <nav class="w-full flex justify-center bg-black py-4 shadow-md">
     <div class="max-w-screen-xl w-full flex items-center justify-between h-20">
@@ -44,34 +113,31 @@
             <img src="/img/logo.svg" alt="Logo" onclick="window.location.href='/'" style="cursor: pointer;" />
         </h1>
         <ul class="flex gap-4">
-                <ul class="flex gap-10 text-white">
             <li class="px-2 py-1 hidden md:block">
-                <a href="/#sobre">Quem somos</a>
+                <a href="/#sobre" class="text-white no-underline hover:underline">Quem somos</a>
             </li>
             <li class="px-2 py-1 hidden md:block">
-                <a href="/#equipe">Equipe</a>
+                <a href="/#equipe" class="text-white no-underline hover:underline">Equipe</a>
             </li>
             <li class="px-2 py-1 hidden md:block">
-                <a href="/#itens">Especialidade</a>
+                <a href="/#itens" class="text-white no-underline hover:underline">Especialidade</a>
             </li>
             <li class="px-2 py-1 hidden md:block">
-                <a href="/#loc">Localização</a>
+                <a href="/#loc" class="text-white no-underline hover:underline">Localização</a>
             </li>
-        </ul>
             <li>
-                <button onclick="window.location.href='/profile'" class="px-5 py-1 bg-white text-black rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">
+                <button onclick="window.location.href='/profile'" class="px-5 py-1 btn-white rounded-xl transition-transform duration-300 transform hover:scale-105 md:text-lg">
                     Perfil
                 </button>
             </li>
             <li>
-                <button onclick="window.location.href='/agendamento'" class="px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">
+                <button onclick="window.location.href='/agendamento'" class="px-5 py-1 btn-white rounded-xl transition-transform duration-300 transform hover:scale-105 md:text-lg">
                     Agendar Evento
                 </button>
             </li>
         </ul>
     </div>
 </nav>
-
 <div class="container mt-5">
     <h2>Bem-vindo, {{username}}</h2>
     
@@ -123,11 +189,54 @@
     <p>Você não tem agendamentos.</p>
     {{/if}}
 
-    <a href="/agendamento" class="btn btn-primary">Agendar Novo Evento</a>
-    <a href="/logout" class="btn btn-secondary">Logout</a>
-</div>
+    <div class="mt-4"> <!-- Espaçamento entre a tabela e os botões -->
+        <a href="/agendamento" class="btn btn-white mr-2">Agendar Novo Evento</a>
+        <button class="btn btn-white mr-2" data-toggle="modal" data-target="#editProfileModal">
+            Editar Perfil
+        </button>
+        <a href="/logout" class="btn btn-logout">Logout</a>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.5.2.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Modal para editar perfil -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #2D2D2D;"> <!-- Cor de fundo do modal -->
+                <div class="modal-header" style="background-color: rgb(28, 28, 28);">
+                    <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm" action="/update-profile" method="POST">
+                        <!-- Campo Nome -->
+                        <div class="form-group">
+                            <label for="name">Nome:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{user.nome}}" required>
+                        </div>
+                        <!-- Campo Email -->
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
+                        </div>
+                        <!-- Campo Telefone -->
+                        <div class="form-group">
+                            <label for="phone">Telefone:</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{user.telefone}}" required>
+                        </div>
+                        <!-- Botão de Salvar -->
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

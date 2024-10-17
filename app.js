@@ -199,13 +199,63 @@ app.post('/edit-event/:id', async (req, res) => {
     console.log('Atualizando evento:', { eventId, title, start }); // Verifique os dados que estão sendo recebidos
 
     try {
+        // Encontrar o evento atual para obter detalhes como a data, horário e profissional
+        const event = await Event.findByPk(eventId, { include: [{ model: User, as: 'user' }] }); // Usar o alias 'user'
+        if (!event) {
+            return res.status(404).send('Evento não encontrado');
+        }
+
+        // Armazenar as informações antigas
+        const oldTitle = event.title;
+        const oldStart = event.start;
+        const oldHour = event.hora; // Supondo que você tenha um campo para o horário
+        const professionalName = event.professionalName; // Supondo que você tenha um campo para o nome do profissional
+        const user = event.user; // O usuário já está incluído na consulta
+
+        // Atualizar o evento
         await Event.update({ title, start }, { where: { id: eventId } });
+
+        // Configuração do email
+        const mailOptions = {
+            from: 'projetopi.agendamento@gmail.com',
+            to: user.email,
+            subject: 'Atualização de Agendamento',
+            html: `<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                       <h2 style="color: #333;">Atualização de Agendamento</h2>
+                       <p>Olá ${user.nome},</p>
+                       <p>Seu agendamento foi atualizado:</p>
+                       
+                       <h3 style="color: #555;">Detalhes do Agendamento Antigo:</h3>
+                       <p><strong>Serviço:</strong> ${oldTitle}</p>
+                       <p><strong>Data:</strong> ${moment(oldStart).format('DD/MM/YYYY')}</p>
+                       <p><strong>Horário:</strong> ${oldHour}</p> <!-- Inclua o horário antigo aqui -->
+                       <p><strong>Profissional:</strong> ${professionalName}</p>
+                       
+                       <h3 style="color: #555;">Novos Detalhes do Agendamento:</h3>
+                       <p><strong>Serviço:</strong> ${title}</p>
+                       <p><strong>Data:</strong> ${moment(start).format('DD/MM/YYYY')}</p>
+                       <p><strong>Horário:</strong> ${moment(start).format('HH:mm')}</p>
+                       <p><strong>Profissional:</strong> ${professionalName}</p>
+                       
+                       <p>Se você tiver alguma dúvida, entre em contato conosco.</p>
+                       <footer style="margin-top: 20px; font-size: 12px; color: #999;">
+                           <p>Obrigado,</p>
+                           <p>Equipe PattyNails</p>
+                       </footer>
+                   </div>`,
+        };
+
+        // Enviar o email
+        await transporter.sendMail(mailOptions);
         res.status(200).send('Evento atualizado com sucesso');
     } catch (error) {
         console.error('Erro ao atualizar evento:', error);
         res.status(500).send('Erro ao atualizar evento');
     }
 });
+
+
+
 app.get('/edit-event/:id', async (req, res) => {
     const eventId = req.params.id;
 
@@ -227,6 +277,9 @@ app.get('/profile', isAuthenticated, async (req, res) => {
     const userId = req.user.id;
 
     try {
+        // Busca os dados do usuário autenticado
+        const user = await User.findByPk(userId); // Supondo que você tenha um modelo User
+
         // Busca todos os eventos do usuário
         const userEvents = await Event.findAll({ where: { userId } });
 
@@ -238,23 +291,137 @@ app.get('/profile', isAuthenticated, async (req, res) => {
 
         res.render('profile', {
             events: eventsWithProfessionalNames,
-            username: req.user.nome, // Corrige para pegar o nome do usuário autenticado
+            user: { // Passa os dados do usuário para o template
+                nome: user.nome,
+                email: user.email,
+                telefone: user.telefone
+            },
+            username: req.user.nome, // Correção para pegar o nome do usuário autenticado
             success_msg: req.flash('success_msg'),
             error_msg: req.flash('error_msg')
         });
     } catch (error) {
-        console.error('Erro ao buscar eventos do usuário:', error);
-        res.status(500).send('Erro ao buscar eventos');
+        console.error('Erro ao buscar dados do usuário:', error);
+        res.status(500).send('Erro ao buscar dados do usuário');
     }
 });
 
 
 // Rota para deletar evento do usuário
+app.delete('/delete-event/:id', async (req, res) => {
+    const eventId = req.params.id;
+
+    try {
+        // Busca o evento
+        const event = await Event.findOne({ where: { id: eventId } });
+        if (!event) {
+            return res.status(404).send('Evento não encontrado.');
+        }
+
+        // Busca o usuário associado ao evento
+        const user = await User.findOne({ where: { id: event.userId } });
+        if (!user) {
+            return res.status(404).send('Usuário não encontrado.');
+        }
+
+        // Deleta o evento
+        await Event.destroy({ where: { id: eventId } });
+
+        // Configuração do email para o usuário
+        const mailOptionsUser = {
+            from: 'projetopi.agendamento@gmail.com',
+            to: user.email,
+            subject: 'Cancelamento de Sessão pelo Administrador',
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                    <h2 style="color: #333;">Cancelamento de Sessão</h2>
+                    <p>Olá ${user.nome},</p>
+                    <p>Informamos que a sua sessão de ${event.title} agendada para o dia ${event.start} foi cancelada pelo administrador.</p>
+                    <p>Se tiver dúvidas, entre em contato conosco.</p>
+                    <footer style="margin-top: 20px; font-size: 12px; color: #999;">
+                        <p>Obrigado,</p>
+                        <p>Equipe PattyNails</p>
+                    </footer>
+                </div>
+            `,
+        };
+
+        // Envia o email para o usuário
+        await transporter.sendMail(mailOptionsUser);
+
+        res.status(204).send(); // Retorna uma resposta sem conteúdo
+    } catch (error) {
+        console.error('Erro ao deletar evento:', error);
+        res.status(500).send('Erro ao cancelar sessão.');
+    }
+});
+
+//Rota para cancelamento do Usuario
 app.post('/delete-event-user/:id', async (req, res) => {
     const eventId = req.params.id;
 
     try {
+        // Busca o evento
+        const event = await Event.findOne({ where: { id: eventId } });
+        if (!event) {
+            req.flash('error_msg', 'Evento não encontrado.');
+            return res.redirect('/profile');
+        }
+
+        // Busca o usuário associado ao evento
+        const user = await User.findOne({ where: { id: event.userId } });
+        if (!user) {
+            req.flash('error_msg', 'Usuário não encontrado.');
+            return res.redirect('/profile');
+        }
+
+        // Deleta o evento
         await Event.destroy({ where: { id: eventId } });
+
+        // Configuração do email para o usuário
+        const mailOptionsUser = {
+            from: 'projetopi.agendamento@gmail.com',
+            to: user.email,
+            subject: 'Cancelamento de Sessão',
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                    <h2 style="color: #333;">Cancelamento de Sessão</h2>
+                    <p>Olá ${user.nome},</p>
+                    <p>Informamos que a sua sessão de ${event.title} agendada para o dia ${event.start} foi cancelada.</p>
+                    <p>Se tiver dúvidas, entre em contato conosco.</p>
+                    <footer style="margin-top: 20px; font-size: 12px; color: #999;">
+                        <p>Obrigado,</p>
+                        <p>Equipe PattyNails</p>
+                    </footer>
+                </div>
+            `,
+        };
+
+        // Envia o email para o usuário
+        await transporter.sendMail(mailOptionsUser);
+
+        // Envia um email para os administradores
+        const admins = await User.findAll({ where: { isAdmin: true } });
+        for (const admin of admins) {
+            const mailOptionsAdmin = {
+                from: 'projetopi.agendamento@gmail.com',
+                to: admin.email,
+                subject: 'Sessão Cancelada pelo Usuário',
+                html: `
+                    <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                        <h2 style="color: #333;">Sessão Cancelada</h2>
+                        <p>Olá ${admin.nome},</p>
+                        <p>O usuário ${user.nome} cancelou a sua sessão de ${event.title} agendada para o dia ${event.start}.</p>
+                        <footer style="margin-top: 20px; font-size: 12px; color: #999;">
+                            <p>Obrigado,</p>
+                            <p>Equipe PattyNails</p>
+                        </footer>
+                    </div>
+                `,
+            };
+            await transporter.sendMail(mailOptionsAdmin);
+        }
+
         req.flash('success_msg', 'Sessão cancelada com sucesso!');
         res.redirect('/profile');
     } catch (error) {
@@ -263,17 +430,8 @@ app.post('/delete-event-user/:id', async (req, res) => {
         res.redirect('/profile');
     }
 });
-app.delete('/delete-event/:id', async (req, res) => {
-    const eventId = req.params.id;
 
-    try {
-        await Event.destroy({ where: { id: eventId } });
-        res.status(204).send(); // Retorna uma resposta sem conteúdo
-    } catch (error) {
-        console.error('Erro ao deletar evento:', error);
-        res.status(500).send('Erro ao cancelar sessão.');
-    }
-});
+
 
 
 // Rota para listar eventos
@@ -422,13 +580,13 @@ app.post('/forgot-password', async (req, res) => {
             subject: 'Redefinição de senha',
             html: `<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
             <h2 style="color: #333;">Redefinição de Senha</h2>
-            <p>Olá,</p>
+            <p>Olá ${user.nome},</p>
             <p>Recebemos um pedido para redefinir sua senha. Clique no link abaixo para criar uma nova senha:</p>
             <a href="${resetLink}" style="display: inline-block; margin: 20px 0; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Redefinir Senha</a>
             <p style="color: #777;">Se você não fez esse pedido, pode ignorar este e-mail.</p>
             <footer style="margin-top: 20px; font-size: 12px; color: #999;">
                 <p>Obrigado,</p>
-                <p>Time Pi</p>
+                <p>Equpe PattyNails</p>
             </footer>
         </div>
     `,
@@ -477,7 +635,7 @@ app.post('/reset-password', async (req, res) => {
         }
 
         // Atualizar a senha do usuário (criptografar a senha)
-        user.password = await bcrypt.hash(newPassword, 10);
+        user.senha = await bcrypt.hash(newPassword, 10);
         await user.save();
 
         req.flash('success_msg', 'Senha redefinida com sucesso!');
@@ -492,6 +650,21 @@ app.post('/reset-password', async (req, res) => {
 
         console.error('Erro ao redefinir a senha:', error);
         res.status(500).send('Erro ao redefinir a senha');
+    }
+});
+
+app.post('/update-profile', async (req, res) => {
+    const { name, email, phone } = req.body;
+    const userId = req.user.id; // Supondo que você tenha a informação do usuário autenticado
+
+    try {
+        await User.update({ nome: name, email: email, telefone: phone }, { where: { id: userId } });
+        req.flash('success_msg', 'Perfil atualizado com sucesso!');
+        res.redirect('/profile');
+    } catch (error) {
+        console.error(error);
+        req.flash('error_msg', 'Erro ao atualizar o perfil.');
+        res.redirect('/profile');
     }
 });
 
