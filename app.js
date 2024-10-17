@@ -395,10 +395,9 @@ const transporter = nodemailer.createTransport({
 });
 
 // Rota para página de esqueci minha senha (GET)
-app.get('/forgot-password', (req, res) => {
+app.get('/forgot-password', (req, res)=> {
     res.render('forgot-password'); // Certifique-se de ter o arquivo Handlebars 'forgot-password.handlebars'
 });
-
 // Rota para processar a solicitação de redefinição de senha (POST)
 app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
@@ -418,11 +417,22 @@ app.post('/forgot-password', async (req, res) => {
 
         // Configuração do email
         const mailOptions = {
-            from: 'projetopi.agendamento@gmail.com', // Coloque o seu email diretamente
+            from: 'projetopi.agendamento@gmail.com', 
             to: email,
             subject: 'Redefinição de senha',
-            html: `<p>Clique <a href="${resetLink}">aqui</a> para redefinir sua senha.</p>`,
-        };
+            html: `<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <h2 style="color: #333;">Redefinição de Senha</h2>
+            <p>Olá,</p>
+            <p>Recebemos um pedido para redefinir sua senha. Clique no link abaixo para criar uma nova senha:</p>
+            <a href="${resetLink}" style="display: inline-block; margin: 20px 0; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Redefinir Senha</a>
+            <p style="color: #777;">Se você não fez esse pedido, pode ignorar este e-mail.</p>
+            <footer style="margin-top: 20px; font-size: 12px; color: #999;">
+                <p>Obrigado,</p>
+                <p>Time Pi</p>
+            </footer>
+        </div>
+    `,
+};
 
         // Enviar o email
         await transporter.sendMail(mailOptions);
