@@ -8,14 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <script src="./assets/script.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Agendar Sessão</title>
 </head>
 <style>
     body {
-        background-color: rgb(28, 28, 28);
+        background-color: black;
+        color: white;
     }
+    
 </style>
 <body>
 <nav class="w-full flex justify-center bg-black py-4 shadow-md">
@@ -24,20 +26,20 @@
             <img src="/img/logo.svg" alt="Logo" onclick="window.location.href='/'" style="cursor: pointer;" />
         </h1>
         <ul class="flex gap-4">
-                <ul class="flex gap-10 text-white">
-            <li class="px-2 py-1 hidden md:block">
-                <a href="/#sobre">Quem somos</a>
-            </li>
-            <li class="px-2 py-1 hidden md:block">
-                <a href="/#equipe">Equipe</a>
-            </li>
-            <li class="px-2 py-1 hidden md:block">
-                <a href="/#itens">Especialidade</a>
-            </li>
-            <li class="px-2 py-1 hidden md:block">
-                <a href="/#loc">Localização</a>
-            </li>
-        </ul>
+            <ul class="flex gap-10 text-white">
+                <li class="px-2 py-1 hidden md:block">
+                    <a href="/#sobre">Quem somos</a>
+                </li>
+                <li class="px-2 py-1 hidden md:block">
+                    <a href="/#equipe">Equipe</a>
+                </li>
+                <li class="px-2 py-1 hidden md:block">
+                    <a href="/#itens">Especialidade</a>
+                </li>
+                <li class="px-2 py-1 hidden md:block">
+                    <a href="/#loc">Localização</a>
+                </li>
+            </ul>
             <li>
                 <button onclick="window.location.href='/profile'" class="px-5 py-1 bg-white text-black rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">
                     Perfil
@@ -52,76 +54,66 @@
     </div>
 </nav>
 
-
-    <div class="container mt-4">
-        <h1 class="text-center">Agendar Evento</h1>
+<div class="flex justify-center items-start min-h-screen pt-12">
+    <div class="bg-zinc-500/10 p-10 rounded-lg shadow-lg w-full max-w-lg"> <!-- Alterado para max-w-lg e aumentado o padding -->
+        <h1 class="text-center text-2xl font-bold mb-6">Agende sua sessão</h1>
+        
         
         <!-- Formulário de agendamento -->
-        <form id="event-form" class="mb-4">
-            <!-- Passo 1: Seleção de Serviço -->
-            <div id="step-1" class="form-step">
-                <div class="form-group">
-                    <label for="service">Selecione o Serviço</label>
-                    <select id="service" name="service" class="form-control" required>
-                        <option value="">Escolha um serviço</option>
-                        <option value="Manicure Simples - R$ 25,00">Manicure Simples - R$ 25,00</option>
-                        <option value="Pedicure Simples - R$ 30,00">Pedicure Simples - R$ 30,00</option>
-                        <option value="Pedicure Completa - R$ 55,00">Pedicure Completa - R$ 55,00</option>
-                        <option value="Esmaltação em Gel - R$ 45,00">Esmaltação em Gel - R$ 45,00</option>
-                        <option value="Alongamento de Unhas - R$ 80,00">Alongamento de Unhas - R$ 80,00</option>
-                        <option value="Remoção de Cutículas - R$ 20,00">Remoção de Cutículas - R$ 20,00</option>
-                        <option value="Spa para Pés - R$ 40,00">Spa para Pés - R$ 40,00</option>
-                        <option value="Francesinha - R$ 35,00">Francesinha - R$ 35,00</option>
-                        <option value="Decoração de Unhas - R$ 60,00">Decoração de Unhas - R$ 60,00</option>
-                    </select>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="nextStep(2)">Próximo</button>
+        <form id="event-form" class="space-y-4">
+            <!-- Seleção de Serviço -->
+  <div>
+          <label for="service" class="block mb-2">Selecione o Serviço</label>
+                <select id="service" name="service" class="w-full p-2 rounded bg-zinc-700 text-white focus:outline-none" required>
+                    <option value="">Escolha um serviço</option>
+                    <option value="Manicure Simples - R$ 25,00">Manicure Simples - R$ 25,00</option>
+                    <option value="Pedicure Simples - R$ 30,00">Pedicure Simples - R$ 30,00</option>
+                    <option value="Pedicure Completa - R$ 55,00">Pedicure Completa - R$ 55,00</option>
+                    <option value="Esmaltação em Gel - R$ 45,00">Esmaltação em Gel - R$ 45,00</option>
+                    <option value="Alongamento de Unhas - R$ 80,00">Alongamento de Unhas - R$ 80,00</option>
+                    <option value="Remoção de Cutículas - R$ 20,00">Remoção de Cutículas - R$ 20,00</option>
+                    <option value="Spa para Pés - R$ 40,00">Spa para Pés - R$ 40,00</option>
+                    <option value="Francesinha - R$ 35,00">Francesinha - R$ 35,00</option>
+                    <option value="Decoração de Unhas - R$ 60,00">Decoração de Unhas - R$ 60,00</option>
+                </select>
+        </div>
+
+            <!-- Seleção de Profissional -->
+            <div>
+                <label for="professionalName" class="block mb-2">Selecione o Profissional</label>
+                <select id="professionalName" name="professionalName" class="w-full p-2 rounded bg-zinc-700 text-white focus:outline-none" required disabled>
+                    <option value="">Escolha um profissional</option>
+                    <option value="Ana">Ana</option>
+                    <option value="Bruna">Bruna</option>
+                    <option value="Carla">Carla</option>
+                    <option value="Diana">Diana</option>
+                </select>
             </div>
 
-            <!-- Passo 2: Seleção de Profissional -->
-            <div id="step-2" class="form-step" style="display:none;">
-                <div class="form-group">
-                    <label for="professionalName">Selecione o Profissional</label>
-                    <select class="form-control" id="professionalName" name="professionalName" required>
-                        <option value="">Escolha um profissional</option>
-                        <option value="Ana">Ana</option>
-                        <option value="Bruna">Bruna</option>
-                        <option value="Carla">Carla</option>
-                        <option value="Diana">Diana</option>
-                    </select>
-                </div>
-                <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Voltar</button>
-                <button type="button" class="btn btn-primary" onclick="nextStep(3)">Próximo</button>
+            <!-- Seleção de Data -->
+            <div>
+                <label for="start" class="block mb-2">Data do Agendamento</label>
+                <input type="date" id="start" name="start" class="w-full p-2 rounded bg-zinc-700 text-white focus:outline-none" required disabled>
             </div>
 
-            <!-- Passo 3: Seleção de Data -->
-            <div id="step-3" class="form-step" style="display:none;">
-                <div class="form-group">
-                    <label for="start">Data do Agendamento</label>
-                    <input type="date" id="start" name="start" class="form-control" required>
-                </div>
-                <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Voltar</button>
-                <button type="button" class="btn btn-primary" onclick="checkAvailability()">Ver Horários Disponíveis</button>
+            <!-- Seleção de Horários -->
+            <div>
+                <label for="time" class="block mb-2">Horários Disponíveis</label>
+                <select id="time" name="time" class="w-full p-2 rounded bg-zinc-700 text-white focus:outline-none" required disabled>
+                    <option value="">Selecione um horário</option>
+                </select>
             </div>
 
-            <!-- Passo 4: Seleção de Horários -->
-            <div id="step-4" class="form-step" style="display:none;">
-                <div class="form-group">
-                    <label for="time">Horários Disponíveis</label>
-                    <select id="time" name="time" class="form-control" required>
-                        <option value="">Selecione um horário</option>
-                        <!-- Horários disponíveis serão carregados dinamicamente -->
-                    </select>
-                </div>
-                <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Voltar</button>
-                <button type="button" class="btn btn-primary" id="submit-event">Agendar Evento</button>
-            </div>
-
+            <button type="button" class="w-full p-3 bg-white text-black rounded-lg font-bold transition-transform duration-300 transform hover:scale-105" id="submit-event" disabled>
+                Agendar
+            </button>
         </form>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
         // Funções para avançar e voltar nas etapas
@@ -177,42 +169,129 @@
                 alert('Por favor, selecione uma data e um profissional.');
             }
         }
+        
+$(document).ready(function() {
+    $('#service').on('change', function() {
+        const serviceSelected = $(this).val() !== '';
+        $('#professionalName').prop('disabled', !serviceSelected);
+        $('#professionalName').toggleClass('bg-zinc-700/50 cursor-not-allowed', !serviceSelected);
+        if (!serviceSelected) {
+            resetFields();
+        }
+    });
 
-        // Lida com a submissão do formulário para agendar evento
-        $(document).ready(function() {
-            $('#submit-event').on('click', function() {
-                const service = $('#service').val();
-                const professionalName = $('#professionalName').val(); 
-                const start = $('#start').val();
-                const time = $('#time').val(); // Este deve ser uma string, pois é um select único
+    $('#professionalName').on('change', function() {
+        const professionalSelected = $(this).val() !== '';
+        $('#start').prop('disabled', !professionalSelected);
+        $('#start').toggleClass('bg-zinc-700/50 cursor-not-allowed', !professionalSelected);
+        if (!professionalSelected) {
+            resetTimeAndButton();
+        }
+    });
 
-                if (!time) {
-                    alert('Por favor, selecione um horário.');
-                    return;
+    $('#start').on('change', function() {
+        if ($(this).val() !== '') {
+            checkAvailability();
+        } else {
+            resetTimeAndButton();
+        }
+    });
+
+
+// Verifica horários disponíveis quando a data é escolhida
+function checkAvailability() {
+    const date = $('#start').val();
+    const professional = $('#professionalName').val();
+
+    if (date && professional) {
+        const selectedDate = new Date(date);
+        const dayOfWeek = selectedDate.getDay(); // 0 é domingo, 1 é segunda, ..., 6 é sábado
+
+        let availableTimes = [];
+        
+        // Horários disponíveis de segunda a sexta
+       if (dayOfWeek >= 0 && dayOfWeek <= 4) { // De segunda a sexta
+            availableTimes = [
+                '08:00', '09:00', '10:00', '11:00',
+                '12:00', '13:00', '14:00', '15:00',
+                '16:00', '17:00', '18:00', '19:00',
+                '20:00'
+            ];
+        } else if (dayOfWeek === 5 || dayOfWeek === 6 ) { // Sábado (6) e domingo (0)
+            availableTimes = []; // Sem horários disponíveis
+        }
+
+        $.ajax({
+            url: '/check-availability',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                date: date,
+                professionalName: professional
+            }),
+            success: function(response) {
+                const occupiedTimes = response.map(event => event.hora);
+                const freeTimes = availableTimes.filter(time => !occupiedTimes.includes(time));
+
+                const timeSelect = $('#time');
+                timeSelect.empty();
+                
+                if (freeTimes.length > 0) {
+                    freeTimes.forEach(item => {
+                        timeSelect.append(`<option value="${item}">${item}</option>`);
+                    });
+                    $('#time').prop('disabled', false);
+                    $('#submit-event').prop('disabled', false);
+                } else {
+                    timeSelect.append('<option value="">Sem horários disponíveis</option>');
+                    $('#time').prop('disabled', true);
+                    $('#submit-event').prop('disabled', true);
                 }
-
-                $.ajax({
-                    url: '/add-event',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ 
-                        title: service, 
-                        start: `${start}T${time}`, // Formatação correta
-                        hora: time, // Incluindo o horário selecionado
-                        professionalName: professionalName // Enviando o ID do profissional
-                    }),
-                    success: function(response) {
-                        console.log('Evento criado:', response);
-                        alert('Evento agendado com sucesso!');
-                        window.location.href = '/profile'; // Redireciona para o perfil
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Erro ao criar evento:', error);
-                        alert('Erro ao criar evento. Tente novamente.');
-                    }
-                });
-            });
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao buscar horários disponíveis. Tente novamente.');
+            }
         });
+    }
+}
+
+
+
+    // Lida com a submissão do formulário
+    $('#submit-event').on('click', function() {
+        const service = $('#service').val();
+        const professionalName = $('#professionalName').val();
+        const start = $('#start').val();
+        const time = $('#time').val();
+
+        if (!time) {
+            alert('Por favor, selecione um horário.');
+            return;
+        }
+
+        $.ajax({
+            url: '/add-event',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                title: service,
+                start: `${start}T${time}`,
+                hora: time,
+                professionalName: professionalName
+            }),
+            success: function(response) {
+                alert('Evento agendado com sucesso!');
+                window.location.href = '/profile';
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao criar evento:', error);
+                alert('Erro ao criar evento. Tente novamente.');
+            }
+        });
+    });
+});
+
     </script>
 </body>
 </html>
