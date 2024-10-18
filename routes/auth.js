@@ -5,10 +5,15 @@ const bcrypt = require('bcrypt');
 const User = require('./models/user'); // Ajuste o caminho se necessário
 const flash = require('connect-flash');
 
-// Rota para a página de login (GET)
+// Rota para o login (GET)
 router.get('/login', (req, res) => {
+    // Verificar se o usuário já está logado
+    if (req.session.userId) {
+        return res.redirect('/agendamento'); // Redireciona para a página de agendamento
+    }
     res.render('login', { error: req.flash('error_msg') });
 });
+
 
 // Rota para o login (POST)
 router.post('/login', async (req, res) => {
@@ -40,39 +45,47 @@ router.post('/login', async (req, res) => {
 
 // Rota para a página de cadastro (GET)
 router.get('/cadastrar-form', (req, res) => {
+    // Verificar se o usuário já está logado
+    if (req.session.userId) {
+        return res.redirect('/calendario'); // Redireciona para a página do calendário
+    }
     res.render('cadastrar', { error: req.flash('error_msg') });
 });
 
-// Rota para o cadastro (POST)
-router.post('/cadastrar', async (req, res) => {
-    const { nome, telefone, email, senha } = req.body;
+
+// Rota para o cadastro (POST)// Rota para o login (POST)
+router.post('/login', async (req, res) => {
+    // Verificar se o usuário já está logado
+    if (req.session.userId) {
+        return res.redirect('/agendamento'); // Redireciona para a página de agendamento
+    }
+
+    const { email, senha } = req.body;
 
     try {
-        // Verificar se o email já está registrado
-        const userExists = await User.findOne({ where: { email: email } });
-        if (userExists) {
-            req.flash('error_msg', 'Email já registrado!');
-            return res.redirect('/cadastrar-form');
+        // Encontrar o usuário pelo email
+        const user = await User.findOne({ where: { email: email } });
+        if (!user) {
+            req.flash('error_msg', 'Email não encontrado!');
+            return res.redirect('/login');
         }
 
-        // Hash da senha
-        const hashedPassword = await bcrypt.hash(senha, 10);
+        // Verificar a senha
+        const match = await bcrypt.compare(senha, user.senha);
+        if (!match) {
+            req.flash('error_msg', 'Senha incorreta!');
+            return res.redirect('/login');
+        }
 
-        // Criar novo usuário
-        await User.create({
-            nome: nome,
-            telefone: telefone,
-            email: email,
-            senha: hashedPassword
-        });
-
-        console.log('Dados Cadastrados com sucesso!');
-        res.redirect('/login');
+        // Autenticação bem-sucedida
+        req.session.userId = user.id;
+        res.redirect('/agendamento');
     } catch (error) {
-        console.error('Erro ao gravar os dados na entidade:', error);
-        res.send('Erro ao gravar os dados na entidade');
+        console.error('Erro ao autenticar o usuário:', error);
+        res.send('Erro ao autenticar o usuário');
     }
 });
+
 
 // Rota de logout
 router.get('/logout', (req, res) => {

@@ -8,6 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+
   <title>Perfil</title>
 </head>
 <style>
@@ -274,6 +277,34 @@
         </div>
     </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Verifica se há parâmetros na URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const message = urlParams.get('message');
+
+    if (status && message) {
+      if (status === 'success') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: message,
+          confirmButtonText: 'OK'
+        });
+      } else if (status === 'error') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: message,
+          confirmButtonText: 'Tente novamente'
+        });
+      }
+    }
+  });
+</script>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

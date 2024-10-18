@@ -83,10 +83,7 @@ app.get('/', (req, res) => {
     res.render('primeira_pagina');
 });
 
-// Rota para a página de cadastro (GET)
-app.get('/cadastrar-form', (req, res) => {
-    res.render('cadastrar', { error: req.flash('error_msg') });
-});
+
 
 // Rota para a página de agendamento (GET)
 app.get('/agendamento', isAuthenticated, (req, res) => {
@@ -143,6 +140,11 @@ app.get('/calendar', isAdmin, async (req, res) => {
 
 // Rota para o cadastro (POST)
 app.post('/cadastrar', async (req, res) => {
+    // Verifica se o usuário já está logado
+    if (req.isAuthenticated()) {
+        return res.redirect(req.user.isAdmin ? '/calendar' : '/agendamento'); // Redireciona para a página correspondente
+    }
+
     const { nome, telefone, email, senha } = req.body;
 
     try {
@@ -162,10 +164,17 @@ app.post('/cadastrar', async (req, res) => {
     }
 });
 
-// Rota para a página de login (GET)
-app.get('/login', (req, res) => {
-    res.render('login', { error: req.flash('error_msg') });
+
+// Rota para a página de cadastro (GET)
+app.get('/cadastrar-form', (req, res) => {
+    // Verifica se o usuário já está logado
+    if (req.isAuthenticated()) {
+        return res.redirect(req.user.isAdmin ? '/calendar' : '/agendamento'); // Redireciona para a página correspondente
+    }
+    res.render('cadastrar', { error: req.flash('error_msg') });
 });
+
+
 
 // Rota para o login (POST)
 app.post('/login', passport.authenticate('local', {
@@ -179,6 +188,16 @@ app.post('/login', passport.authenticate('local', {
     };
     res.redirect(req.user.isAdmin ? '/calendar' : '/agendamento');
 });
+
+// Rota para a página de login (GET)
+app.get('/login', (req, res) => {
+    // Verifica se o usuário já está logado
+    if (req.isAuthenticated()) {
+        return res.redirect(req.user.isAdmin ? '/calendar' : '/agendamento'); // Redireciona para a página correspondente
+    }
+    res.render('login', { error: req.flash('error_msg') });
+});
+
 
 // Rota de logout
 app.get('/logout', (req, res, next) => {
@@ -655,16 +674,14 @@ app.post('/reset-password', async (req, res) => {
 
 app.post('/update-profile', async (req, res) => {
     const { name, email, phone } = req.body;
-    const userId = req.user.id; // Supondo que você tenha a informação do usuário autenticado
+    const userId = req.user.id;
 
     try {
         await User.update({ nome: name, email: email, telefone: phone }, { where: { id: userId } });
-        req.flash('success_msg', 'Perfil atualizado com sucesso!');
-        res.redirect('/profile');
+        res.redirect('/profile?status=success&message=Perfil atualizado com sucesso!');
     } catch (error) {
         console.error(error);
-        req.flash('error_msg', 'Erro ao atualizar o perfil.');
-        res.redirect('/profile');
+        res.redirect('/profile?status=error&message=Erro ao atualizar o perfil.');
     }
 });
 
