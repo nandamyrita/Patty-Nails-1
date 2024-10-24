@@ -9,119 +9,243 @@
   <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
   <title>Patty Nails</title>
   <style>
-    h1 { font-family: "Sorts Mill Goudy", serif; }
+     h1,
+    h2,
+    h3,
+    a,
+    button {
+      font-family: "Sorts Mill Goudy", serif;
+    }
     html {
       scroll-behavior: smooth; /* Rolagem suave garantida */
     }
     header {
       z-index: 10; /* Certifique-se de que o cabeçalho esteja acima de outros elementos */
     }
+    .custom-gradient {
+     background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, hsla(0, 88%, 77%, 1) 71%);
+}
   </style>
 </head>
 <body class="flex flex-col items-center">
-<header class="w-full justify-center flex fixed bg-black py-4">
-    <nav class="max-w-screen-xl w-full flex items-center gap-20 h-20">
-        <h1 class="flex-1 text-white font-s">
-            <img src="./img/logo.svg" alt="Logo" />
-        </h1>
-        <ul class="flex gap-10 text-white">
-            <li class="px-2 py-1 hidden md:block">
-                <a href="#sobre">Quem somos</a>
-            </li>
-            <li class="px-2 py-1 hidden md:block">
-                <a href="#equipe">Equipe</a>
-            </li>
-            <li class="px-2 py-1 hidden md:block">
-                <a href="#itens">Especialidade</a>
-            </li>
-            <li class="px-2 py-1 hidden md:block">
-                <a href="#loc">Localização</a>
-            </li>
-        </ul>
-        <div class="flex gap-5">
-            <button onclick="window.location.href='/login'" class="px-5 py-1 bg-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">Login</button>
-            <button onclick="window.location.href='/cadastrar-form'" class="px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">Cadastro</button>
+<body class="flex flex-col items-center">
+    <header class="w-full justify-center flex fixed">
+      <nav
+        class="absolute backdrop bg-zinc-800/10 w-full px-10 py-4 flex justify-between items-center text-white z-10"
+      >
+        <div class="flex space-x-6">
+          <a href="#" class="hover:underline">Home</a>
+          <a href="#" class="hover:underline">Pages</a>
+          <a href="#" class="hover:underline">Service</a>
+          <a href="#" class="hover:underline">Blog</a>
         </div>
-    </nav>
-</header>
 
-<main class="w-full flex flex-col pt-20">
-    <!-- Hero Section -->
-    <section id="sobre" class="w-full bg-cover bg-no-repeat bg-center h-screen flex items-center justify-center text-center lg:text-left" style="background-image: url(./img/hero.svg)">
-      <div class="flex flex-col gap-7 px-4 lg:px-0">
-        <h1 class="text-white text-6xl lg:text-8xl font-custom">Patty Nails</h1>
-        <button onclick="window.location.href='/agendamento'" class="px-8 py-2 bg-zinc-900/30 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800">Agende Aqui</button>
-      </div>
-    </section>
+        <div>
+          <a href="#"><img src="img/logo.svg" alt="unha" /></a>
+        </div>
 
-    <!-- Services Section -->
-    <section id="itens" class="bg-black w-full py-16 flex justify-center">
-      <div class="flex flex-col lg:flex-row gap-10 justify-center items-center lg:-mt-36">
-        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
-          <img class="max-w-full h-auto mb-2" src="./img/mani.svg" alt="Manicure e Pedicure" />
-          <p class="text-white">Manicure e Pedicure</p>
-        </div>
-        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
-          <img class="max-w-full h-auto mb-2" src="./img/gel.svg" alt="Unha em Gel" />
-          <p class="text-white">Unha em Gel/Fibra/Decorada</p>
-        </div>
-        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
-          <img class="max-w-full h-auto mb-2" src="./img/spa.svg" alt="SPA das Mãos e Pés" />
-          <p class="text-white">SPA das Mãos e Pés</p>
-        </div>
-      </div>
-    </section>
+        <a
+         <button onclick="window.location.href='/login'"
+          class="px-4 py-2 border-[0.5px] border-white text-white hover:border-[#E6C2A1] hover:border-2 transition duration-100"
+        >
+          Agende Aqui
+        </a>
+      </nav>
+    </header>
 
-    <!-- Team Section -->
-    <section id="equipe" class="bg-black w-full py-16 flex flex-col items-center gap-8">
-      <div class="text-white text-center">
-        <h1 class="text-4xl lg:text-5xl">Nossa Equipe</h1>
-        <p>Qualificados para sua beleza</p>
-      </div>
-      <div class="flex gap-4">
-        <button>
-          <img src="./img/leftArrow.svg" alt="Left Arrow" />
-        </button>
-        <div class="flex gap-6 overflow-hidden">
-          <div class="w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img class="w-full h-full object-cover" src="./img/prof1.svg" alt="Profissional 1" />
+
+<main class="w-full justify-center flex flex-col">
+      <section
+        
+        class=" custom-gradient w-full bg-cover bg-no-repeat bg-center h-screen flex items-center gap-14"
+      >
+        <div class="flex flex-col ml-40 w-full">
+          <h1 class="w-full text-white text-8xl w- font-custom">Patty Nails</h1>
+          <h2 class="text-[#E6C2A1] text-9xl font-custom font-italic italic">
+            Lets Shine
+          </h2>
+
+          <a
+            <button onclick="window.location.href='/login'"
+            class="w-40 py-2 border-[0.5px] border-white text-white hover:border-[#E6C2A1] hover:border-2 transition duration-100 text-center"
+          >
+            Agende Aqui
+          </a>
+        </div>
+        <div class="w-9/12 justify-start">
+          <img src="img/nailsFirst.svg" alt="imagem de unha" />
+        </div>
+      </section>
+
+         <section class="bg-black w-full py-10">
+        <div class="max-w-6xl mx-auto grid grid-cols-3 gap-8">
+          <div class="relative group">
+            <img
+              src="img/imgUnha1.svg"
+              alt="Unha Em Gel"
+              class="w-full h-[300px] object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all"
+            ></div>
+            <p class="absolute bottom-4 left-4 text-white text-xl">
+              Unha Em Gel
+            </p>
           </div>
-          <div class="w-64 h-64 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img class="w-full h-full object-cover" src="./img/prof2.svg" alt="Profissional 2" />
+
+          <!-- Card 2: Pedicure -->
+          <div class="relative group">
+            <img
+              src="img/imgUnha2 (1).svg"
+              alt="Pedicure"
+              class="w-full h-[230px] object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all"
+            ></div>
+            <p class="absolute bottom-20 left-4 text-white text-xl">Pedicure</p>
           </div>
-          <div class="w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img class="w-full h-full object-cover" src="./img/prof3.svg" alt="Profissional 3" />
+
+          <div class="relative group">
+            <img
+              src="img/imgUnha3 (1).svg"
+              alt="Unha Em Gel"
+              class="w-full h-[250px] object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all"
+            ></div>
+            <p class="absolute bottom-16 left-4 text-white text-xl">
+              Unha Em Gel
+            </p>
           </div>
         </div>
-        <button>
-          <img src="./img/rightArrow.svg" alt="Right Arrow" />
-        </button>
-      </div>
-    </section>
+
+    
+        <div class="max-w-6xl mx-auto mt-10 border-t border-gray-700 pt-6">
+          <div class="flex justify-between items-center">
+            <!-- Texto "Serviços" -->
+            <h2 class="text-white text-2xl">Serviços</h2>
+
+            <!-- Ícone de seta -->
+            <button class="text-white text-3xl">
+              &#10132;
+              <!-- HTML code for a right arrow (→) -->
+            </button>
+          </div>
+        </div>
+      </section>
+    
+
+     <section class="bg-black w-full py-10 flex justify-center items-center">
+        <div class="flex justify-between w-3/4">
+          <!-- Imagem e horários -->
+          <div class="relative">
+            <img
+              src="img/quemSomos.svg"
+              alt="Imagem de mãos pintando unhas"
+              class="w-full h-auto"
+            />
+            <div
+              class="absolute bottom-[-40px] left-44 bg-[#E6C2A1] bg-opacity-10 text-white p-6 w-80"
+            >
+              <h1 class="text-3x1 mb-2">Horários</h1>
+              <p>Mon - Thu: 9:00 am - 9:00 pm</p>
+              <p>Saturday: 10:00 am - 10:00 pm</p>
+              <p>Sunday: Closed</p>
+            </div>
+          </div>
+          <!-- Texto Quem Somos -->
+          <div class="text-white w-1/2 pl-10 flex flex-col">
+            <h3 class="w-1 text-3xl mb-5">Quem Somos</h3>
+
+            <div class="flex flex-col gap-6">
+              <p class="mb-1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Fermentum leo vel orci porta non.
+              </p>
+
+              <a
+                href="#"
+                class="w-40 py-2 border-[0.5px] border-white text-white hover:border-[#E6C2A1] hover:border-2 transition duration-100 text-center"
+              >
+                Saiba Mais
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
     <!-- Localização Section -->
-    <section id="loc" class="bg-black w-full py-16 flex justify-center">
-      <div class="flex gap-8">
-        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
-          <img class="w-full h-full object-cover" src="./img/img1.svg" alt="Testimonial 1" />
-          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
-            <span>Kayblack - "To Chave"</span>
+    <section class="bg-black text-white flex flex-col items-center py-8">
+        <div class="text-center mb-8">
+          <h2 class="text-lg text-[#E6C2A1]">Nosso Time</h2>
+          <p class="text-3xl">Profissionais Qualificados</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-24">
+          <div class="flex flex-col items-center">
+            <img
+              class="rounded-full w-40 h-40 mb-3 object-cover"
+              src="img/prof1.svg"
+              alt="Julia"
+            />
+            <h3 class="text-xl">Julia</h3>
+            <p class="text-sm text-[#E6C2A1]">Pedicure</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <img
+              class="rounded-full w-40 h-40 mb-3 object-cover"
+              src="img/prof2.svg"
+              alt="Nanda"
+            />
+            <h3 class="text-xl">Nanda</h3>
+            <p class="text-sm text-[#E6C2A1]">Unha em Gel</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <img
+              class="rounded-full w-40 h-40 mb-3 object-cover"
+              src="img/prof3.svg"
+              alt="Lucas"
+            />
+            <h3 class="text-xl">Lucas</h3>
+            <p class="text-sm text-[#E6C2A1]">Unha de Fibra</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <img
+              class="rounded-full w-40 h-40 mb-3 object-cover"
+              src="img/prof4.svg"
+              alt="Alicia"
+            />
+            <h3 class="text-xl">Alicia</h3>
+            <p class="text-sm text-[#E6C2A1]">Spa dos Pés</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <img
+              class="rounded-full w-40 h-40 mb-3 object-cover"
+              src="img/prof5.svg"
+              alt="Junior"
+            />
+            <h3 class="text-xl">Junior</h3>
+            <p class="text-sm text-[#E6C2A1]">Unha Decor</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <img
+              class="rounded-full w-40 h-40 mb-3 object-cover"
+              src="img/prof6.svg"
+              alt="Ana"
+            />
+            <h3 class="text-xl">Ana</h3>
+            <p class="text-sm text-[#E6C2A1]">Unha em Gel</p>
           </div>
         </div>
-        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
-          <img class="w-full h-full object-cover" src="./img/img2.svg" alt="Testimonial 2" />
-          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
-            <span>Ana Julia - "Amei a experiência"</span>
-          </div>
-        </div>
-        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
-          <img class="w-full h-full object-cover" src="./img/img3.svg" alt="Testimonial 3" />
-          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
-            <span>Virginia - "Melhor que meus produtos"</span>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
     <!-- Footer -->
 <footer class="bg-zinc-900 text-white py-10">
   <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
