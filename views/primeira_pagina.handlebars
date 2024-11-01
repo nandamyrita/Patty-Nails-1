@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang = "pt-BR">
+<html lang="pt-BR">
 <head>
-  <meta   charset = "UTF-8" />
-  <meta   name    = "viewport" content                                                                    = "width=device-width, initial-scale=1.0" />
-  <link   rel     = "stylesheet" href                                                                     = "/assets/style.css" />
-  <script src     = "./assets/script.js"></script>
-  <script src     = "https://cdn.tailwindcss.com"></script>
-  <link   href    = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
+  <script src="https://vlibras.gov.br/vlibras.min.js"></script>
   <title>Patty Nails</title>
   <style>
     h1 { font-family: "Sorts Mill Goudy", serif; }
@@ -18,110 +17,123 @@
     }
   </style>
 </head>
-<body   class = "flex flex-col items-center">
-<header class = "w-full justify-center flex fixed bg-black py-4">
-<nav    class = "max-w-screen-xl w-full flex items-center gap-20 h-20">
-<h1     class = "flex-1 text-white font-s">
-<img    src   = "./img/logo.svg" alt = "Logo" />
-        </h1>
-        <ul class = "flex gap-10 text-white">
-        <li class = "px-2 py-1 hidden md:block">
-        <a  href  = "#sobre">Quem somos</a>
-            </li>
-            <li class = "px-2 py-1 hidden md:block">
-            <a  href  = "#equipe">Equipe</a>
-            </li>
-            <li class = "px-2 py-1 hidden md:block">
-            <a  href  = "#itens">Especialidade</a>
-            </li>
-            <li class = "px-2 py-1 hidden md:block">
-            <a  href  = "#loc">Localização</a>
-            </li>
-        </ul>
-        <div    class   = "flex gap-5">
-        <button onclick = "window.location.href='/login'" class          = "px-5 py-1 bg-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">Login</button>
-        <button onclick = "window.location.href='/cadastrar-form'" class = "px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">Cadastro</button>
-        </div>
+<body class="flex flex-col items-center">
+  <header class="w-full justify-center flex fixed bg-black py-4">
+    <nav class="max-w-screen-xl w-full flex items-center gap-20 h-20">
+      <h1 class="flex-1 text-white font-s">
+        <img src="./img/logo.svg" alt="Logo" />
+      </h1>
+      <ul class="flex gap-10 text-white">
+        <li class="px-2 py-1 hidden md:block">
+          <a href="#sobre">Quem somos</a>
+        </li>
+        <li class="px-2 py-1 hidden md:block">
+          <a href="#equipe">Equipe</a>
+        </li>
+        <li class="px-2 py-1 hidden md:block">
+          <a href="#itens">Especialidade</a>
+        </li>
+        <li class="px-2 py-1 hidden md:block">
+          <a href="#loc">Localização</a>
+        </li>
+      </ul>
+      <div class="flex gap-5">
+        <button onclick="window.location.href='/login'" class="px-5 py-1 bg-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">Login</button>
+        <button onclick="window.location.href='/cadastrar-form'" class="px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">Cadastro</button>
+      </div>
     </nav>
-</header>
+  </header>
 
-<main class = "w-full flex flex-col pt-20">
+  <!-- vlibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+
+  <main class="w-full flex flex-col pt-20">
     <!-- Hero Section -->
-    <section id      = "sobre" class                               = "w-full bg-cover bg-no-repeat bg-center h-screen flex items-center justify-center text-center lg:text-left" style = "background-image: url(./img/hero.svg)">
-    <div     class   = "flex flex-col gap-7 px-4 lg:px-0">
-    <h1      class   = "text-white text-6xl lg:text-8xl font-custom">Patty Nails</h1>
-    <button  onclick = "window.location.href='/agendamento'" class = "px-8 py-2 bg-zinc-900/30 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800">Agende Aqui</button>
+    <section id="sobre" class="w-full bg-cover bg-no-repeat bg-center h-screen flex items-center justify-center text-center lg:text-left" style="background-image: url(./img/hero.svg)">
+      <div class="flex flex-col gap-7 px-4 lg:px-0">
+        <h1 class="text-white text-6xl lg:text-8xl font-custom">Patty Nails</h1>
+        <button onclick="window.location.href='/agendamento'" class="px-8 py-2 bg-zinc-900/30 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800">Agende Aqui</button>
       </div>
     </section>
 
     <!-- Services Section -->
-    <section id    = "itens" class                = "bg-black w-full py-16 flex justify-center">
-    <div     class = "flex flex-col lg:flex-row gap-10 justify-center items-center lg:-mt-36">
-    <div     class = "w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
-    <img     class = "max-w-full h-auto mb-2" src = "./img/mani.svg" alt = "Manicure e Pedicure" />
-    <p       class = "text-white">Manicure e Pedicure</p>
+    <section id="itens" class="bg-black w-full py-16 flex justify-center">
+      <div class="flex flex-col lg:flex-row gap-10 justify-center items-center lg:-mt-36">
+        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="max-w-full h-auto mb-2" src="./img/mani.svg" alt="Manicure e Pedicure" />
+          <p class="text-white">Manicure e Pedicure</p>
         </div>
-        <div class = "w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
-        <img class = "max-w-full h-auto mb-2" src = "./img/gel.svg" alt = "Unha em Gel" />
-        <p   class = "text-white">Unha em Gel/Fibra/Decorada</p>
+        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="max-w-full h-auto mb-2" src="./img/gel.svg" alt="Unha em Gel" />
+          <p class="text-white">Unha em Gel/Fibra/Decorada</p>
         </div>
-        <div class = "w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
-        <img class = "max-w-full h-auto mb-2" src = "./img/spa.svg" alt = "SPA das Mãos e Pés" />
-        <p   class = "text-white">SPA das Mãos e Pés</p>
+        <div class="w-72 h-72 bg-neutral-50/50 rounded-xl text-center flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="max-w-full h-auto mb-2" src="./img/spa.svg" alt="SPA das Mãos e Pés" />
+          <p class="text-white">SPA das Mãos e Pés</p>
         </div>
       </div>
     </section>
 
     <!-- Team Section -->
-    <section id    = "equipe" class = "bg-black w-full py-16 flex flex-col items-center gap-8">
-    <div     class = "text-white text-center">
-    <h1      class = "text-4xl lg:text-5xl">Nossa Equipe</h1>
+    <section id="equipe" class="bg-black w-full py-16 flex flex-col items-center gap-8">
+      <div class="text-white text-center">
+        <h1 class="text-4xl lg:text-5xl">Nossa Equipe</h1>
         <p>Qualificados para sua beleza</p>
       </div>
-      <div class = "flex gap-4">
+      <div class="flex gap-4">
         <button>
-          <img src = "./img/leftArrow.svg" alt = "Left Arrow" />
+          <img src="./img/leftArrow.svg" alt="Left Arrow" />
         </button>
-        <div class = "flex gap-6 overflow-hidden">
-        <div class = "w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
-        <img class = "w-full h-full object-cover" src = "./img/prof1.svg" alt = "Profissional 1" />
+        <div class="flex gap-6 overflow-hidden">
+          <div class="w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
+            <img class="w-full h-full object-cover" src="./img/prof1.svg" alt="Profissional 1" />
           </div>
-          <div class = "w-64 h-64 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
-          <img class = "w-full h-full object-cover" src = "./img/prof2.svg" alt = "Profissional 2" />
+          <div class="w-64 h-64 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
+            <img class="w-full h-full object-cover" src="./img/prof2.svg" alt="Profissional 2" />
           </div>
-          <div class = "w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
-          <img class = "w-full h-full object-cover" src = "./img/prof3.svg" alt = "Profissional 3" />
+          <div class="w-64 h-64 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
+            <img class="w-full h-full object-cover" src="./img/prof3.svg" alt="Profissional 3" />
           </div>
         </div>
         <button>
-          <img src = "./img/rightArrow.svg" alt = "Right Arrow" />
+          <img src="./img/rightArrow.svg" alt="Right Arrow" />
         </button>
       </div>
     </section>
 
     <!-- Localização Section -->
-    <section id    = "loc" class                      = "bg-black w-full py-16 flex justify-center">
-    <div     class = "flex gap-8">
-    <div     class = "relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
-    <img     class = "w-full h-full object-cover" src = "./img/img1.svg" alt = "Testimonial 1" />
-    <div     class = "absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
+    <section id="loc" class="bg-black w-full py-16 flex justify-center">
+      <div class="flex gap-8">
+        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="w-full h-full object-cover" src="./img/img1.svg" alt="Testimonial 1" />
+          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
             <span>Kayblack - "To Chave"</span>
           </div>
         </div>
-        <div class = "relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
-        <img class = "w-full h-full object-cover" src = "./img/img2.svg" alt = "Testimonial 2" />
-        <div class = "absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
+        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="w-full h-full object-cover" src="./img/img2.svg" alt="Testimonial 2" />
+          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
             <span>Ana Julia - "Amei a experiência"</span>
           </div>
         </div>
-        <div class = "relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
-        <img class = "w-full h-full object-cover" src = "./img/img3.svg" alt = "Testimonial 3" />
-        <div class = "absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
+        <div class="relative h-[550px] w-72 bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-110 hover:opacity-80">
+          <img class="w-full h-full object-cover" src="./img/img3.svg" alt="Testimonial 3" />
+          <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 px-4">
             <span>Virginia - "Melhor que meus produtos"</span>
           </div>
         </div>
       </div>
     </section>
+
     <!-- Footer -->
 <footer class = "bg-zinc-900 text-white py-10">
 <div    class = "max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">

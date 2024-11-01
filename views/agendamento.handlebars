@@ -21,6 +21,7 @@
 </style>
 
 <body>
+    
 <nav class = "w-full flex justify-center bg-black py-4 shadow-md">
 <div class = "max-w-screen-xl w-full flex items-center justify-between h-20">
 <h1  class = "flex-1 text-white font-s">
@@ -54,7 +55,17 @@
         </ul>
     </div>
 </nav>
-
+  <!-- vlibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+      </script>
 <div class = "flex justify-center items-start min-h-screen pt-12">
 <div class = "bg-zinc-500/10 p-10 rounded-lg shadow-lg w-full max-w-lg"> <!-- Alterado para max-w-lg e aumentado o padding -->
 <h1  class = "text-center text-2xl font-bold mb-6">Agende sua sessão</h1>

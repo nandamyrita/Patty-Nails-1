@@ -10,11 +10,22 @@
   <link   href    = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
   <link   rel     = "stylesheet" href                                                                     = "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <script src     = "https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://vlibras.gov.br/vlibras.min.js"></script>
   <title>Login</title>
 </head>
 
 {{> header1}} <!-- Incluindo o cabeçalho aqui -->
-
+   <!-- vlibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+      </script>
 <div class = "min-h-screen flex items-center justify-center bg-black w-full p-5">
 <div class = "bg-zinc-500/10 flex rounded-2xl shadow-lg max-w-2xl w-full mt-28 gap-4 md:flex md:min-h-full">
     <!-- Coluna da Imagem -->

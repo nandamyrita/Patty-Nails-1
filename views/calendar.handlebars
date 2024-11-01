@@ -68,7 +68,17 @@
             </button>
         </div>
     </nav>
-
+  <!-- vlibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+      </script>
     <div class = "container mx-auto mt-3 p-2">
     <h1  class = "text-3xl text-center font-bold mb-6"></h1>
     <div id    = "calendar" class = "bg-zinc-800 rounded-lg p-4 shadow-lg"></div>
