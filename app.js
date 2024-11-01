@@ -1,3 +1,5 @@
+const ejs = require('ejs');
+const fs = require('fs');
 const express    = require('express');
 const session    = require('express-session');
 const bodyParser = require('body-parser');
@@ -7,6 +9,7 @@ const flash      = require('connect-flash');
 const Sequelize  = require('sequelize');
 const bcrypt     = require('bcrypt');
 const exphbs     = require('express-handlebars');
+const handlebars = require('handlebars');
 const moment     = require('moment');
 const nodemailer = require('nodemailer');
 const jwt        = require('jsonwebtoken');
@@ -239,67 +242,67 @@ app.get('/logout', (req, res, next) => {
 app.use('/', eventRouter);
 
     // Rota para editar evento
-app.post('/edit-event/:id', async (req, res) => {
-    const { title, start } = req.body;       // Extraindo título e start do corpo da requisição
-    const eventId          = req.params.id;
-
-    console.log('Atualizando evento:', { eventId, title, start });  // Verifique os dados que estão sendo recebidos
-
-    try {
-                                                                                                  // Encontrar o evento atual para obter detalhes como a data, horário e profissional
-        const event = await Event.findByPk(eventId, { include: [{ model: User, as: 'user' }] });  // Usar o alias 'user'
-        if (!event) {
-            return res.status(404).send('Evento não encontrado');
+    app.post('/edit-event/:id', async (req, res) => {
+        const { title, start } = req.body;
+        const eventId = req.params.id;
+    
+        console.log('Atualizando evento:', { eventId, title, start });
+    
+        try {
+            const event = await Event.findByPk(eventId, { include: [{ model: User, as: 'user' }] });
+            if (!event) {
+                return res.status(404).send('Evento não encontrado');
+            }
+    
+            const oldTitle = event.title;
+            const oldStart = event.start;
+            const oldHour = event.hora;
+            const professionalName = event.professionalName;
+            const user = event.user;
+    
+            await Event.update({ title, start }, { where: { id: eventId } });
+    
+            // Ler e compilar o template Handlebars
+            const templatePath = path.join(__dirname, 'views', 'emails', 'event-update.handlebars'); // ajuste o caminho conforme necessário
+            const templateSource = fs.readFileSync(templatePath, 'utf8');
+            const template = handlebars.compile(templateSource);
+    
+            // Extrair propriedades do usuário
+            const userData = {
+                id: user.id,
+                nome: user.nome,
+                telefone: user.telefone,
+                email: user.email
+            };
+    
+            // Dados a serem enviados ao template
+            const emailHtml = template({
+                user: userData, // Passar um objeto simplificado
+                oldTitle,
+                oldStart,
+                oldHour,
+                professionalName,
+                title,
+                start,
+                formatDate: (date) => moment(date).format('DD/MM/YYYY'),  // Função para formatar datas
+                formatTime: (date) => moment(date).format('HH:mm'),      // Função para formatar horários
+            });
+    
+            const mailOptions = {
+                from: 'projetopi.agendamento@gmail.com',
+                to: user.email,
+                subject: 'Atualização de Agendamento',
+                html: emailHtml,
+            };
+    
+            await transporter.sendMail(mailOptions);
+            res.status(200).send('Evento atualizado com sucesso');
+        } catch (error) {
+            console.error('Erro ao atualizar evento:', error);
+            res.status(500).send('Erro ao atualizar evento');
         }
-
-            // Armazenar as informações antigas
-        const oldTitle         = event.title;
-        const oldStart         = event.start;
-        const oldHour          = event.hora;              // Supondo que você tenha um campo para o horário
-        const professionalName = event.professionalName;  // Supondo que você tenha um campo para o nome do profissional
-        const user             = event.user;              // O usuário já está incluído na consulta
-
-            // Atualizar o evento
-        await Event.update({ title, start }, { where: { id: eventId } });
-
-            // Configuração do email
-        const mailOptions = {
-            from   : 'projetopi.agendamento@gmail.com',
-            to     : user.email,
-            subject: 'Atualização de Agendamento',
-            html   : `<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                       <h2 style = "color: #333;">Atualização de Agendamento</h2>
-                       <p>Olá ${user.nome},</p>
-                       <p>Seu agendamento foi atualizado: </p>
-                       
-                       <h3 style="color: #555;">Detalhes do Agendamento Antigo: </h3>
-                           <p><strong>Serviço                                 : </strong> ${oldTitle}</p>
-                           <p><strong>Data                                    : </strong> ${moment(oldStart).format('DD/MM/YYYY')}</p>
-                           <p><strong>Horário                                 : </strong> ${oldHour}</p> <!-- Inclua o horário antigo aqui -->
-                           <p><strong>Profissional                            : </strong> ${professionalName}</p>
-                       
-                       <h3 style="color: #555;">Novos Detalhes do Agendamento: </h3>
-                           <p><strong>Serviço                                : </strong> ${title}</p>
-                           <p><strong>Data                                   : </strong> ${moment(start).format('DD/MM/YYYY')}</p>
-                           <p><strong>Horário                                : </strong> ${moment(start).format('HH:mm')}</p>
-                           <p><strong>Profissional                           : </strong> ${professionalName}</p>
-                       
-                       <p>Se você tiver alguma dúvida, entre em contato conosco.</p>
-                       <footer style = "margin-top: 20px; font-size: 12px; color: #999;">
-                           <p>Obrigado,</p>
-                           <p>Equipe PattyNails</p>
-                       </footer>
-                   </div>`,
-        };
-
-            // Enviar o email
-        await transporter.sendMail(mailOptions);
-        res.status(200).send('Evento atualizado com sucesso');
-    } catch (error) {
-        console.error('Erro ao atualizar evento:', error);
-        res.status(500).send('Erro ao atualizar evento');
-    }
-});
+    });
+    
 
 
 

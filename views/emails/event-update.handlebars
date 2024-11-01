@@ -1,0 +1,23 @@
+<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+    <h2 style="color: #333;">Atualização de Agendamento</h2>
+    <p>Olá {{user.nome}},</p>
+    <p>Seu agendamento foi atualizado:</p>
+    
+    <h3 style="color: #555;">Detalhes do Agendamento Antigo:</h3>
+    <p><strong>Serviço:</strong> {{oldTitle}}</p>
+    <p><strong>Data:</strong> {{formatDate oldStart}}</p>
+    <p><strong>Horário:</strong> {{oldHour}}</p>
+    <p><strong>Profissional:</strong> {{professionalName}}</p>
+    
+    <h3 style="color: #555;">Novos Detalhes do Agendamento:</h3>
+    <p><strong>Serviço:</strong> {{title}}</p>
+    <p><strong>Data:</strong> {{formatDate start}}</p>
+    <p><strong>Horário:</strong> {{formatTime start}}</p>
+    <p><strong>Profissional:</strong> {{professionalName}}</p>
+    
+    <p>Se você tiver alguma dúvida, entre em contato conosco.</p>
+    <footer style="margin-top: 20px; font-size: 12px; color: #999;">
+        <p>Obrigado,</p>
+        <p>Equipe PattyNails</p>
+    </footer>
+</div>
