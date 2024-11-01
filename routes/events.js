@@ -1,10 +1,10 @@
 const express = require('express');
-const { Op } = require('sequelize');
-const router = express.Router();
-const Event = require('../models/event'); // Caminho corrigido
-const moment = require('moment');
+const { Op }  = require('sequelize');
+const router  = express.Router();
+const Event   = require('../models/event');  // Caminho corrigido
+const moment  = require('moment');
 
-// Middleware para verificar se o usuário está autenticado
+  // Middleware para verificar se o usuário está autenticado
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
@@ -12,11 +12,11 @@ function isAuthenticated(req, res, next) {
     res.redirect('/login');
 }
 
-// Rota para exibir a página de calendário (apenas para admin)
+  // Rota para exibir a página de calendário (apenas para admin)
 router.get('/calendar', isAuthenticated, async (req, res) => {
     if (req.user.isAdmin) {
         const events = await Event.findAll({
-            include: [{ model: User, as: 'user' }] // Inclua o usuário aqui
+            include: [{ model: User, as: 'user' }]  // Inclua o usuário aqui
         });
         res.render('calendar', { events });
     } else {
@@ -24,7 +24,7 @@ router.get('/calendar', isAuthenticated, async (req, res) => {
     }
 });
 
-// Rota para exibir o perfil do usuário com seus agendamentos
+  // Rota para exibir o perfil do usuário com seus agendamentos
 router.get('/profile', isAuthenticated, async (req, res) => {
     const userId = req.session.user.id;
 
@@ -35,7 +35,7 @@ router.get('/profile', isAuthenticated, async (req, res) => {
     res.render('profile', { events, moment });
 });
 
-// Rota para deletar evento com restrição de tempo
+  // Rota para deletar evento com restrição de tempo
 router.post('/delete-event-user/:id', isAuthenticated, async (req, res) => {
     const { id } = req.params;
     const userId = req.session.user.id;
@@ -49,8 +49,8 @@ router.post('/delete-event-user/:id', isAuthenticated, async (req, res) => {
     }
 
     const eventDate = moment(event.start);
-    const today = moment();
-    const diff = eventDate.diff(today, 'days');
+    const today     = moment();
+    const diff      = eventDate.diff(today, 'days');
 
     if (diff >= 1) {
         return res.status(400).send('Você só pode excluir eventos com no máximo 1 dia de antecedência.');

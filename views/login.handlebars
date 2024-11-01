@@ -1,89 +1,108 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang = "pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta rel="icon" href="./" type="image/x-icon">
-  <link rel="stylesheet" href="/assets/style.css" />
-  <script src="./assets/script.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
+  <meta   charset = "UTF-8" />
+  <meta   name    = "viewport" content                                                                    = "width=device-width, initial-scale=1.0" />
+  <meta   rel     = "icon" href                                                                           = "./" type = "image/x-icon">
+  <link   rel     = "stylesheet" href                                                                     = "/assets/style.css" />
+  <script src     = "./assets/script.js"></script>
+  <script src     = "https://cdn.tailwindcss.com"></script>
+  <link   href    = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
+  <link   rel     = "stylesheet" href                                                                     = "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src     = "https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Login</title>
 </head>
 
- {{> header1}} <!-- Incluindo o cabeçalho aqui -->
+{{> header1}} <!-- Incluindo o cabeçalho aqui -->
 
+<div class = "min-h-screen flex items-center justify-center bg-black w-full p-5">
+<div class = "bg-zinc-500/10 flex rounded-2xl shadow-lg max-w-2xl w-full mt-28 gap-4 md:flex md:min-h-full">
+    <!-- Coluna da Imagem -->
+    <div class = "md:w-1/2 hidden md:block">
+    <img class = "rounded-l-2xl w-full h-full object-cover" src = "https://img.freepik.com/fotos-gratis/mulher-cuidando-das-unhas_23-2148974583.jpg" alt = "Imagem de Login">
+    </div>
 
-    <div class="min-h-screen flex items-center justify-center bg-black w-full p-5">
-      <div class="bg-zinc-500/10 flex rounded-2xl shadow-lg max-w-2xl w-full mt-28 gap-4 md:flex md:min-h-full">
-        <!-- Coluna da Imagem -->
-        <div class="md:w-1/2 hidden md:block">
-          <img class="rounded-l-2xl w-full h-full object-cover" src="https://img.freepik.com/fotos-gratis/mulher-cuidando-das-unhas_23-2148974583.jpg" alt="Imagem de Login">
+    <!-- Coluna do Formulário -->
+    <div   class  = "p-8 w-full md:w-1/2 flex justify-center items-center">
+    <div   class  = "w-full">
+    <h2    class  = "font-bold text-2xl text-white text-center md:text-left">Login</h2>
+    <p     class  = "text-xs mt-4 text-white text-center md:text-left">Se você já é um membro, faça login facilmente.</p>
+    <form  action = "/login" method                                                           = "POST" class = "flex flex-col gap-4 mt-4">
+    <input class  = "p-2 rounded-xl border" type                                              = "email" name = "email" id      = "email" placeholder = "Email" required>
+    <div   class  = "relative">
+    <input class  = "p-2 rounded-xl border w-full" placeholder                                = "Senha" type = "password" name = "senha" id          = "senha" required>
+    <span  class  = "absolute right-2 top-2 cursor-pointer" onclick                           = "togglePasswordVisibility()">
+    <i     id     = "eyeIcon" class                                                           = "bi bi-eye"></i>
+            </span>
+          </div>
+          <button type = "submit" class = "bg-black rounded-xl text-white py-2 hover:scale-105 duration-300">Login</button>
+        </form>
+
+        <div class = "mt-6 grid grid-cols-3 items-center text-gray-400">
+        <hr  class = "border-gray-400">
+        <p   class = "text-center text-sm">OU</p>
+        <hr  class = "border-gray-400">
         </div>
 
-        <!-- Coluna do Formulário -->
-        <div class="p-8 w-full md:w-1/2 flex justify-center items-center">
-          <div class="w-full">
-            <h2 class="font-bold text-2xl text-white text-center md:text-left">Login</h2>
-            <p class="text-xs mt-4 text-white text-center md:text-left">Se você já é um membro, faça login facilmente.</p>
-            <form action="/login" method="POST" class="flex flex-col gap-4 mt-4">
-              <input class="p-2 rounded-xl border" type="email" name="email" id="email" placeholder="Email" required>
-              <div class="relative">
-                <input class="p-2 rounded-xl border w-full" placeholder="Senha" type="password" name="senha" id="senha" required>
-                <span class="absolute right-2 top-2 cursor-pointer" onclick="togglePasswordVisibility()">
-                  <i id="eyeIcon" class="bi bi-eye"></i>
-                </span>
-              </div>
-              <button type="submit" class="bg-black rounded-xl text-white py-2 hover:scale-105 duration-300">Login</button>
-            </form>
+        <div class = "mt-4">
+        <div id    = "g_id_onload" data-client_id = "SUA_CLIENT_ID.apps.googleusercontent.com" data-context = "signin" data-ux_mode    = "popup" data-callback = "handleCredentialResponse" data-auto_select = "true" data-login_uri       = "https://seusite.com/login_google"></div>
+        <div class = "g_id_signin" data-type      = "standard" data-shape                                   = "rectangular" data-theme = "outline" data-text   = "signin_with" data-size                     = "large" data-logo_alignment = "left"></div>
+        </div>
 
-            <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
-              <hr class="border-gray-400">
-              <p class="text-center text-sm">OU</p>
-              <hr class="border-gray-400">
-            </div>
+        <div class = "btn btn-link mt-5 text-xs border-b border-gray-400 py-4 text-zinc-500 text-center md:text-left">
+        <a   href  = "/forgot-password">Esqueceu sua senha?</a>
+        </div>
 
-    
-            <div class="mt-4">
-              <div id="g_id_onload" data-client_id="SUA_CLIENT_ID.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_select="true" data-login_uri="https://seusite.com/login_google"></div>
-              <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
-            </div>
-
-            <div class="btn btn-link mt-5 text-xs border-b border-gray-400 py-4 text-zinc-500 text-center md:text-left">
-              <a href="/forgot-password">Esqueceu sua senha?</a>
-            </div>
-
-            <div class="mt-3 text-xs flex justify-between items-center text-zinc-500">
-              <p>Não tem uma conta?</p>
-              <button onclick="window.location.href='/cadastrar-form'" class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300 text-black">Registrar</button>
-            </div>
-          </div>
+        <div class = "mt-3 text-xs flex justify-between items-center text-zinc-500">
+          <p>Não tem uma conta?</p>
+          <button onclick = "window.location.href='/cadastrar-form'" class = "py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300 text-black">Registrar</button>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-   
+<script>
+  function togglePasswordVisibility() {
+    var senhaInput = document.getElementById("senha");
+    var eyeIcon    = document.getElementById("eyeIcon");
 
-    <script>
-      function togglePasswordVisibility() {
-        var senhaInput = document.getElementById("senha");
-        var eyeIcon = document.getElementById("eyeIcon");
+    if (senhaInput.type === "password") {
+      senhaInput.type = "text";  // Mostra a senha
+      eyeIcon.classList.remove("bi-eye");
+      eyeIcon.classList.add("bi-eye-slash");  // Troca para o ícone de olho fechado
+    } else {
+      senhaInput.type = "password";  // Oculta a senha
+      eyeIcon.classList.remove("bi-eye-slash");
+      eyeIcon.classList.add("bi-eye");  // Volta para o ícone de olho aberto
+    }
+  }
 
-        if (senhaInput.type === "password") {
-          senhaInput.type = "text"; // Mostra a senha
-          eyeIcon.classList.remove("bi-eye");
-          eyeIcon.classList.add("bi-eye-slash"); // Troca para o ícone de olho fechado
-        } else {
-          senhaInput.type = "password"; // Oculta a senha
-          eyeIcon.classList.remove("bi-eye-slash");
-          eyeIcon.classList.add("bi-eye"); // Volta para o ícone de olho aberto
+  function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+      // Enviar token para o backend para validação
+  }
+
+    // Exibir SweetAlert2 em caso de erro
+        const urlParams  = new URLSearchParams(window.location.search);
+        const errorMsg   = urlParams.get('error');
+        const successMsg = urlParams.get('success');
+  if (errorMsg) {
+            Swal.fire({
+                icon             : 'error',
+                title            : 'Erro!',
+                text             : errorMsg,
+                confirmButtonText: 'OK'
+            });
         }
-      }
-
-      function handleCredentialResponse(response) {
-        console.log("Encoded JWT ID token: " + response.credential);
-        // Enviar token para o backend para validação
-      }
-    </script>
-  </body>
+ if (successMsg) {
+        Swal.fire({
+            icon             : 'success',
+            title            : 'Sucesso!',
+            text             : successMsg,
+            confirmButtonText: 'OK'
+        });
+        }
+</script>
+</body>
 </html>

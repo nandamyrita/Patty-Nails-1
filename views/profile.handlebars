@@ -1,176 +1,131 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang = "pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/assets/style.css" />
-  <script src="./assets/script.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+  <meta   charset = "UTF-8" />
+  <meta   name    = "viewport" content                                                                    = "width=device-width, initial-scale=1.0" />
+  <link   rel     = "stylesheet" href                                                                     = "/assets/style.css" />
+  <script src     = "./assets/script.js"></script>
+  <script src     = "https://cdn.tailwindcss.com"></script>
+  <link   href    = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
+  <link   rel     = "stylesheet" href                                                                     = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src     = "https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <title>Perfil</title>
-</head>
-<style>
+  <style>
       body {
         background-color: black;
-        color: aliceblue;
-        display: flex; /* Usado para centralizar o conteúdo */
-        flex-direction: column; /* Direção da coluna */
-        align-items: center; /* Alinhamento centralizado */
-    }
-  .container {
-        
-        padding: 20px;
+        color           : aliceblue;
+        display         : flex;
+        flex-direction  : column;
+        align-items     : center;
+      }
+      .container {
+        padding      : 20px;
         border-radius: 5px;
-        max-width: 600px; /* Largura máxima para centralizar melhor */
-        width: 100%; /* Para ocupar a largura total possível */
-        margin: 20px; /* Margem ao redor da caixa */
-        text-align: center; /* Centraliza o texto dentro da caixa */
-    }
+        max-width    : 600px;
+        width        : 100%;
+        margin       : 20px;
+        text-align   : center;
+      }
+      .table-custom {
+        background-color: rgb(45, 45, 45);
+        color           : white;
+        border-collapse : collapse;
+        margin          : 20px 0;
+        width           : 100%;
+      }
+      .table-custom th, .table-custom td {
+        padding: 10px;
+        border : 1px solid rgb(60, 60, 60);
+      }
+      .table-custom tbody tr:nth-child(odd) {
+        background-color: rgb(60, 60, 60);
+      }
+      .btn-custom {
+        background-color: white;
+        color           : black;
+        margin          : 10px;
+        transition      : background-color 0.3s;
+      }
+      .btn-custom:hover {
+        background-color: rgb(240, 240, 240);
+      }
+      .btn-logout {
+        background-color: rgb(200, 0, 0);
+        color           : white;
+      }
+      .modal-header, .modal-footer .btn-primary {
+        background-color: rgb(28, 28, 28);
+        color           : white;
+      }
+      .modal-content {
+        background-color: #333;
+        color           : white;
+      }
+      ul {
+        list-style-type: none;
+        padding        : 0;
+        margin         : 0;
+      }
+      .no-underline {
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .btn-white {
+        background-color: white;
+        color           : black;
+        border          : 1px solid #ccc;
+      }
+      .btn-white:hover {
+        background-color: #cacaca;
+      }
+      nav a {
+        color          : white;
+        text-decoration: none;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      .custom-container {
+        max-width: 900px;
+        width    : 100%;
+        margin   : 0 auto;
+      }
+    
 
-   .table-custom {
-    background-color: rgb(45, 45, 45); /* Cor de fundo da tabela */
-    color: white; /* Cor do texto da tabela */
-    border-collapse: collapse; /* Para remover espaços entre as células */
-    margin: 20px 0; /* Margem para separar a tabela dos botões */
-    width: 100%; /* Largura total da tabela */
-    /* Removido max-width aqui para ocupar toda a largura da div container */
-}
-
-.table-custom th, .table-custom td {
-    padding: 10px; /* Espaçamento interno nas células */
-    border: 1px solid rgb(60, 60, 60); /* Bordas das células */
-}
-
-.table-custom tbody tr:nth-child(odd) {
-    background-color: rgb(60, 60, 60); /* Cor de fundo para linhas ímpares */
-}
-
-
-    /* Estilo dos botões */
-    .btn-custom {
-        background-color: white; /* Cor de fundo do botão */
-        color: black; /* Cor do texto */
-        margin: 10px; /* Espaçamento entre os botões */
-        transition: background-color 0.3s; /* Transição suave para mudança de cor */
-    }
-
-    .btn-custom:hover {
-        background-color: rgb(240, 240, 240); /* Cor de fundo ao passar o mouse */
-    }
-
-    /* Botão de logout mais escuro */
-    .btn-logout {
-        background-color: rgb(200, 0, 0); /* Cor de fundo mais escura */
-        color: white; /* Cor do texto */
-    }
-
-    /* Estilo do modal */
-    .modal-header, .modal-footer .btn-primary {
-        background-color: rgb(28, 28, 28); /* Cor de fundo */
-        color: white; /* Cor do texto */
-    }
-
-    .modal-content {
-        background-color: #333; /* Um tom mais claro de cinza para o fundo */
-        color: white; /* Cor do texto */
-    }
-
-    ul {
-        list-style-type: none; /* Remove marcadores de lista */
-        padding: 0; /* Remove padding padrão */
-        margin: 0; /* Remove margin padrão */
-    }
-
-    .no-underline {
-        text-decoration: none; /* Remove sublinhado dos links */
-    }
-
-    a:hover {
-        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse (opcional) */
-    }
-    /* Estilo personalizado para botões brancos */
-    .btn-white {
-        background-color: white; /* Fundo branco */
-        color: black; /* Texto preto */
-        border: 1px solid #ccc; /* Bordas cinzas, opcional */
-    }
-
-    .btn-white:hover {
-        background-color: #cacaca; /* Fundo levemente cinza ao passar o mouse */
-    }
-
-    .btn-logout {
-        background-color: rgb(255, 35, 35); /* Cor de fundo do botão de logout */
-        color: black; /* Texto preto */
-    }
-
-    .btn-logout:hover {
-        background-color: #c00000; /* Efeito hover no botão de logout */
-    }
-
-     nav a {
-        color: white; /* Muda a cor do texto para branco */
-        text-decoration: none; /* Remove o sublinhado padrão */
-    }
-
-    nav a:hover {
-        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse (opcional) */
-         color: white; /* Muda a cor do texto para branco */
-    }
-</style>
+  </style>
+</head>
 <body>
-<style>
-    /* Seus outros estilos */
 
-    nav a {
-        color: white; /* Muda a cor do texto para branco */
-        text-decoration: none; /* Remove o sublinhado padrão */
-    }
-
-    nav a:hover {
-        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse (opcional) */
-    }
-   
-   .custom-container {
-    max-width: 900px; /* Ou qualquer valor desejado */
-    width: 100%; /* Para garantir que ocupe toda a largura */
-    margin: 0 auto; /* Centraliza o container */
-}
-
-
-</style>
-
-<nav class="w-full flex justify-center bg-black py-4 shadow-md">
-    <div class="max-w-screen-xl w-full flex items-center justify-between h-20">
-        <h1 class="flex-1 text-white font-s">
-            <img src="/img/logo.svg" alt="Logo" onclick="window.location.href='/'" style="cursor: pointer;" />
+<nav class = "w-full flex justify-center bg-black py-4 shadow-md">
+<div class = "max-w-screen-xl w-full flex items-center justify-between h-20">
+<h1  class = "flex-1 text-white font-s">
+<img src   = "/img/logo.svg" alt = "Logo" onclick = "window.location.href='/'" style = "cursor: pointer;" />
         </h1>
-        <ul class="flex gap-4">
-            <ul class="flex gap-10">
-                <li class="px-2 py-1 hidden md:block">
-                    <a href="/#sobre">Quem somos</a>
+        <ul class = "flex gap-4">
+        <ul class = "flex gap-10">
+        <li class = "px-2 py-1 hidden md:block">
+        <a  href  = "/#sobre">Quem somos</a>
                 </li>
-                <li class="px-2 py-1 hidden md:block">
-                    <a href="/#equipe">Equipe</a>
+                <li class = "px-2 py-1 hidden md:block">
+                <a  href  = "/#equipe">Equipe</a>
                 </li>
-                <li class="px-2 py-1 hidden md:block">
-                    <a href="/#itens">Especialidade</a>
+                <li class = "px-2 py-1 hidden md:block">
+                <a  href  = "/#itens">Especialidade</a>
                 </li>
-                <li class="px-2 py-1 hidden md:block">
-                    <a href="/#loc">Localização</a>
+                <li class = "px-2 py-1 hidden md:block">
+                <a  href  = "/#loc">Localização</a>
                 </li>
             </ul>
             <li>
-                <button onclick="window.location.href='/profile'" class="px-5 py-1 bg-white text-black rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">
+                <button onclick = "window.location.href='/profile'" class = "px-5 py-1 bg-white text-black rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-gray-100 md:text-lg">
                     Perfil
                 </button>
             </li>
             <li>
-                <button onclick="window.location.href='/agendamento'" class="px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">
+                <button onclick = "window.location.href='/agendamento'" class = "px-5 py-1 bg-zinc-900 text-white rounded-xl transition-transform duration-300 transform hover:scale-105 hover:bg-zinc-800 md:text-lg">
                     Agendar Sessão
                 </button>
             </li>
@@ -178,136 +133,204 @@
     </div>
 </nav>
 
+<div class = "container mt-5 bg-zinc-500/10 p-6 rounded-lg shadow-lg custom-container">
+  <h2>Bem-vindo, {{username}}</h2>
 
-<div class="container mt-5 bg-zinc-500/10 p-6 rounded-lg shadow-lg custom-container">
+  {{#if success_msg}}
+  <div class = "alert alert-success">{{success_msg}}</div>
+  {{/if}}
+  {{#if error_msg}}
+  <div class = "alert alert-danger">{{error_msg}}</div>
+  {{/if}}
 
-    <h2>Bem-vindo, {{username}}</h2>
-    
-    {{#if success_msg}}
-    <div class="alert alert-success">
-        {{success_msg}}
-    </div>
-    {{/if}}
-    {{#if error_msg}}
-    <div class="alert alert-danger">
-        {{error_msg}}
-    </div>
-    {{/if}}
+  <h4>Seus Agendamentos</h4>
 
-    <h4>Seus Agendamentos</h4>
-    
-    {{#if events.length}}
-    <table class="table-custom">
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Profissional</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each events}}
-            <tr>
-                <td>{{this.title}}</td>
-                <td>{{this.start}}</td>
-                <td>{{this.hora}}</td>
-                <td>{{this.professionalName}}</td>
-                <td>
-                    {{#if (canCancel this.start)}}
-                    <form action="/delete-event-user/{{this.id}}" method="POST">
-                        <button type="submit" class="btn btn-danger">Cancelar</button>
-                    </form>
-                    {{else}}
-                    <button class="btn btn-secondary" disabled>Não pode cancelar</button>
-                    {{/if}}
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-    {{else}}
-    <p>Você não tem agendamentos.</p>
-    {{/if}}
+  {{#if events.length}}
+  <table class = "table-custom">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Profissional</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each events}}
+      <tr>
+        <td>{{this.title}}</td>
+        <td>{{this.start}}</td>
+        <td>{{this.hora}}</td>
+        <td>{{this.professionalName}}</td>
+        <td>
+          {{#if (canCancel this.start)}}
+          <form   action = "/delete-event-user/{{this.id}}" method = "POST" onsubmit = "return confirmarCancelamento(event)">
+          <button type   = "submit" class                          = "btn btn-danger">Cancelar</button>
+          </form>
+          {{else}}
+          <button class = "btn btn-secondary" disabled>Não pode cancelar</button>
+          {{/if}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>Você não tem agendamentos.</p>
+  {{/if}}
 
-    <div class="mt-4"> <!-- Espaçamento entre a tabela e os botões -->
-        <a href="/agendamento" class="btn btn-white mr-2">Agendar Novo Evento</a>
-        <button class="btn btn-white mr-2" data-toggle="modal" data-target="#editProfileModal">
-            Editar Perfil
+  <div    class = "mt-4">
+  <a      href  = "/agendamento" class             = "btn btn-white mr-2">Agendar Novo Evento</a>
+  <button class = "btn btn-white mr-2" data-toggle = "modal" data-target      = "#editProfileModal">Editar Perfil</button>
+  <a      href  = "/logout" class                  = "btn btn-danger" onclick = "confirmarLogout(event)">Logout</a>
+  </div>
+<!-- Modal para editar perfil -->
+<div    class       = "modal fade" id                           = "editProfileModal" tabindex     = "-1" role          = "dialog" aria-labelledby = "editProfileModalLabel" aria-hidden = "true" onshow = "openEditProfileModal()">
+<div    class       = "modal-dialog modal-dialog-centered" role = "document">
+<div    class       = "modal-content" style                     = "background-color: #2D2D2D;">
+<div    class       = "modal-header" style                      = "background-color: rgb(28, 28, 28);">
+<h5     class       = "modal-title" id                          = "editProfileModalLabel">Editar Perfil</h5>
+<button type        = "button" class                            = "close text-white" data-dismiss = "modal" aria-label = "Fechar">
+<span   aria-hidden = "true">&times;</span>
         </button>
-        <a href="/logout" class="btn btn-danger">Logout</a>
+      </div>
+      <div   class = "modal-body">
+      <form  id    = "editProfileForm" action = "/update-profile" method = "POST">
+      <div   class = "form-group">
+      <label for   = "name">Nome:</label>
+      <input type  = "text" class             = "form-control" id        = "name" name = "name" value = "{{user.nome}}" required>
+          </div>
+          <div   class = "form-group">
+          <label for   = "email">Email:</label>
+          <input type  = "email" class = "form-control" id = "email" name = "email" value = "{{user.email}}" required>
+          </div>
+          <div   class = "form-group">
+          <label for   = "phone">Telefone:</label>
+          <input type  = "tel" class = "form-control" id = "phone" name = "phone" value = "{{user.telefone}}" required>
+          </div>
+          <button type = "submit" class = "btn btn-primary" disabled>Salvar Alterações</button>
+        </form>
+      </div>
+      <div    class = "modal-footer">
+      <button type  = "button" class = "btn btn-secondary" data-dismiss = "modal">Fechar</button>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- Modal para editar perfil -->
-    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="background-color: #2D2D2D;"> <!-- Cor de fundo do modal -->
-                <div class="modal-header" style="background-color: rgb(28, 28, 28);">
-                    <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editProfileForm" action="/update-profile" method="POST">
-                        <!-- Campo Nome -->
-                        <div class="form-group">
-                            <label for="name">Nome:</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{user.nome}}" required>
-                        </div>
-                        <!-- Campo Email -->
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
-                        </div>
-                        <!-- Campo Telefone -->
-                        <div class="form-group">
-                            <label for="phone">Telefone:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="{{user.telefone}}" required>
-                        </div>
-                        <!-- Botão de Salvar -->
-                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
+        // Armazena os valores originais
+  let originalValues = {};
+
+    // Função que é chamada quando o modal é aberto
+  function openEditProfileModal() {
+    const nameInput  = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+
+      // Armazena os valores originais
+    originalValues = {
+      name : nameInput.value,
+      email: emailInput.value,
+      phone: phoneInput.value,
+    };
+
+      // Reseta o estado do botão
+    updateSaveButton();
+  }
+
+    // Função para atualizar o estado do botão "Salvar Alterações"
+  function updateSaveButton() {
+    const nameInput  = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const saveButton = document.querySelector('#editProfileForm .btn-primary');
+
+    if (nameInput.value !== originalValues.name || 
+        emailInput.value !== originalValues.email ||
+        phoneInput.value !== originalValues.phone) {
+      saveButton.disabled = false;
+      saveButton.classList.remove('btn-disabled');
+    } else {
+      saveButton.disabled = true;
+      saveButton.classList.add('btn-disabled');
+    }
+  }
+
+    // Adiciona eventos de input para monitorar alterações nos campos
   document.addEventListener('DOMContentLoaded', function () {
-    // Verifica se há parâmetros na URL
+    const nameInput  = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+
+    nameInput.addEventListener('input', updateSaveButton);
+    emailInput.addEventListener('input', updateSaveButton);
+    phoneInput.addEventListener('input', updateSaveButton);
+  });
+  document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const status = urlParams.get('status');
-    const message = urlParams.get('message');
+    const status    = urlParams.get('status');
+    const message   = urlParams.get('message');
 
     if (status && message) {
-      if (status === 'success') {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sucesso!',
-          text: message,
-          confirmButtonText: 'OK'
-        });
-      } else if (status === 'error') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erro!',
-          text: message,
-          confirmButtonText: 'Tente novamente'
-        });
-      }
+      Swal.fire({
+        icon             : status === 'success' ? 'success' : 'error',
+        title            : status === 'success' ? 'Sucesso!': 'Erro!',
+        text             : message,
+        confirmButtonText: 'OK'
+      });
     }
   });
+
+    // Função para confirmar cancelamento de agendamento
+  function confirmarCancelamento(event) {
+    event.preventDefault();
+    const form = event.target;
+
+    Swal.fire({
+      title             : 'Tem certeza?',
+      text              : "Você está prestes a cancelar este agendamento.",
+      icon              : 'warning',
+      showCancelButton  : true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor : '#3085d6',
+      confirmButtonText : 'Sim, cancelar!',
+      cancelButtonText  : 'Não!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        form.submit();
+      }
+    });
+  }
+
+    // Função para confirmar logout
+  function confirmarLogout(event) {
+    event.preventDefault();
+    Swal.fire({
+      title             : 'Tem certeza?',
+      text              : "Você deseja sair?",
+      icon              : 'warning',
+      showCancelButton  : true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor : '#3085d6',
+      confirmButtonText : 'Sim, sair!',
+      cancelButtonText  : 'Não, retornar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/logout';
+      }
+    });
+  }
 </script>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src = "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>
