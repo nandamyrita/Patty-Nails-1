@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang = "pt-BR">
+
+<head>
+    <meta charset = "UTF-8">
+    <meta name    = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Agendamento Cancelado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&display=swap');
+
+        body {
+            font-family     : "Red Hat Display", sans-serif;
+            background-color: #f4f4f4;
+            margin          : 0;
+            padding         : 0;
+        }
+
+        .email-container {
+            max-width       : 600px;
+            margin          : 50px auto;
+            background-color: #ffffff;
+            padding         : 30px;
+            border-radius   : 12px;
+            border          : 1px solid #ddd;
+            box-shadow      : 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color           : #ffffff;
+            text-align      : center;
+            background-color: #f87fc4;
+            padding         : 15px;
+            border-radius   : 12px 12px 0 0;
+            font-size       : 24px;
+            font-weight     : 700;
+            margin          : 0;
+        }
+
+        p {
+            color      : #555;
+            line-height: 1.8;
+            margin     : 15px 0;
+            font-size  : 16px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin    : 30px 0;
+        }
+
+        a.button {
+            display         : inline-block;
+            padding         : 15px 35px;
+            background-color: #fd9323;
+            color           : white;
+            text-decoration : none;
+            border-radius   : 6px;
+            font-size       : 18px;
+            font-weight     : bold;
+        }
+
+        a.button:hover {
+            background-color: #ffa54d;
+            transition      : background-color 0.3s;
+        }
+
+        .agendamento-container {
+            display        : flex;
+            justify-content: space-between;
+            gap            : 20px;
+            margin-top     : 20px;
+        }
+
+        .agendamento-antigo,
+        .agendamento-novo {
+            width           : 48%;
+            padding         : 10px;
+            background-color: #f9f9f9;
+            border-radius   : 8px;
+            box-shadow      : 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color     : #999;
+            font-size : 12px;
+        }
+
+        .footer img {
+            width        : 150px;
+            height       : auto;
+            margin-bottom: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class = "email-container">
+        <h1>Sessão Cancelada</h1>
+
+        <p>Olá {{user.nome}}, </p>
+        <p>Informamos que a sua sessão de ${event.title}</p>
+        <p>Agendada para o dia ${event.start}</p>
+        <p>Foi infelizmente cancelada.</p>
+
+
+        <p>Se você tiver alguma dúvida, entre em contato conosco.</p>
+        <p>Atenciosamente,<br>A Equipe PattyNails ♡</p>
+        
+        <div class = "footer">
+        <a   href  = "http://localhost:3003/">
+        <img src   = "cid:logoPattyNails" alt = "Logo PattyNails">
+            </a>
+            <p>© 2024 PattyNails</p>
+        </div>
+    </div>
+</body>
+
+</html>

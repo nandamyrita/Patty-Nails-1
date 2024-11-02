@@ -369,53 +369,64 @@ app.get('/profile', isAuthenticated, async (req, res) => {
 
 
     // Rota para deletar evento do usuário
-app.delete('/delete-event/:id', async (req, res) => {
-    const eventId = req.params.id;
-
-    try {
+    app.delete('/delete-event/:id', async (req, res) => {
+        const eventId = req.params.id;
+    
+        try {
             // Busca o evento
-        const event = await Event.findOne({ where: { id: eventId } });
-        if (!event) {
-            return res.status(404).send('Evento não encontrado.');
-        }
-
+            const event = await Event.findOne({ where: { id: eventId } });
+            if (!event) {
+                return res.status(404).send('Evento não encontrado.');
+            }
+    
             // Busca o usuário associado ao evento
-        const user = await User.findOne({ where: { id: event.userId } });
-        if (!user) {
-            return res.status(404).send('Usuário não encontrado.');
-        }
-
+            const user = await User.findOne({ where: { id: event.userId } });
+            if (!user) {
+                return res.status(404).send('Usuário não encontrado.');
+            }
+    
             // Deleta o evento
-        await Event.destroy({ where: { id: eventId } });
-
-            // Configuração do email para o usuário
-        const mailOptionsUser = {
-            from   : 'projetopi.agendamento@gmail.com',
-            to     : user.email,
-            subject: 'Cancelamento de Sessão pelo Administrador',
-            html   : `
-                <div style = "font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                <h2  style = "color: #333;">Cancelamento de Sessão</h2>
-                    <p>Olá ${user.nome},</p>
-                    <p>Informamos que a sua sessão de ${event.title} agendada para o dia ${event.start} foi cancelada pelo administrador.</p>
-                    <p>Se tiver dúvidas, entre em contato conosco.</p>
-                    <footer style = "margin-top: 20px; font-size: 12px; color: #999;">
-                        <p>Obrigado,</p>
-                        <p>Equipe PattyNails</p>
-                    </footer>
-                </div>
-            `,
-        };
-
+            await Event.destroy({ where: { id: eventId } });
+    
+            // Carregar e compilar o template Handlebars para o usuário
+            const userTemplatePath = path.join(__dirname, 'views', 'emails', 'delete-event-user.handlebars');
+            const userTemplateSource = fs.readFileSync(userTemplatePath, 'utf8');
+            const userTemplate = handlebars.compile(userTemplateSource);
+    
+            // Dados para o email do usuário
+            const userEmailHtml = userTemplate({
+                user: { nome: user.nome },
+                title: event.title,
+                start: event.start,
+                formatDate: (date) => moment(date).format('DD/MM/YYYY'),
+                formatTime: (date) => moment(date).format('HH:mm'),
+            });
+    
+            // Configurações do e-mail com a imagem embutida
+            const mailOptionsUser = {
+                from: 'projetopi.agendamento@gmail.com',
+                to: user.email,
+                subject: 'Cancelamento de Sessão pelo Administrador',
+                html: userEmailHtml,
+                attachments: [
+                    {
+                        filename: 'logoPattyNails.png', // Nome do arquivo
+                        path: path.join(__dirname, '/views/img/logo1.png'), // Caminho para o arquivo de imagem
+                        cid: 'logoPattyNails' // Usado como referência para a tag <img src="cid:logoPattyNails">
+                    }
+                ]
+            };
+    
             // Envia o email para o usuário
-        await transporter.sendMail(mailOptionsUser);
-
-        res.status(204).send();  // Retorna uma resposta sem conteúdo
-    } catch (error) {
-        console.error('Erro ao deletar evento:', error);
-        res.status(500).send('Erro ao cancelar sessão.');
-    }
-});
+            await transporter.sendMail(mailOptionsUser);
+    
+            res.status(204).send();  // Retorna uma resposta sem conteúdo
+        } catch (error) {
+            console.error('Erro ao deletar evento:', error);
+            res.status(500).send('Erro ao cancelar sessão.');
+        }
+    });
+    
 
   //Rota para cancelamento do Usuario
   // Rota para cancelamento do Usuario
