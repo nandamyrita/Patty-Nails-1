@@ -277,22 +277,30 @@ app.use('/', eventRouter);
     
             // Dados a serem enviados ao template
             const emailHtml = template({
-                user: userData, // Passar um objeto simplificado
+                user: userData,
                 oldTitle,
                 oldStart,
                 oldHour,
                 professionalName,
                 title,
                 start,
-                formatDate: (date) => moment(date).format('DD/MM/YYYY'),  // Função para formatar datas
-                formatTime: (date) => moment(date).format('HH:mm'),      // Função para formatar horários
+                formatDate: (date) => moment(date).format('DD/MM/YYYY'),
+                formatTime: (date) => moment(date).format('HH:mm'),
             });
     
+            // Configurações do e-mail com a imagem embutida
             const mailOptions = {
                 from: 'projetopi.agendamento@gmail.com',
                 to: user.email,
                 subject: 'Atualização de Agendamento',
                 html: emailHtml,
+                attachments: [
+                    {
+                        filename: 'logoPattyNails.png', // Nome do arquivo
+                        path: path.join(__dirname, '/views/img/logo1.png'), // Caminho para o arquivo de imagem
+                        cid: 'logoPattyNails' // Usado como referência para a tag <img src="cid:logoPattyNails">
+                    }
+                ]
             };
     
             await transporter.sendMail(mailOptions);
@@ -408,68 +416,90 @@ app.delete('/delete-event/:id', async (req, res) => {
 
   //Rota para cancelamento do Usuario
   // Rota para cancelamento do Usuario
-app.post('/delete-event-user/:id', async (req, res) => {
+  app.post('/delete-event-user/:id', async (req, res) => {
     const eventId = req.params.id;
 
     try {
-          // Busca o evento
+        // Busca o evento
         const event = await Event.findOne({ where: { id: eventId } });
         if (!event) {
             return res.status(404).json({ error: 'Evento não encontrado.' });
         }
 
-          // Busca o usuário associado ao evento
+        // Busca o usuário associado ao evento
         const user = await User.findOne({ where: { id: event.userId } });
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
 
-          // Deleta o evento
+        // Deleta o evento
         await Event.destroy({ where: { id: eventId } });
 
-          // Configuração do email para o usuário
+        // Carregar e compilar o template Handlebars para o usuário
+        const userTemplatePath = path.join(__dirname, 'views', 'emails', 'delete-event-user.handlebars');
+        const userTemplateSource = fs.readFileSync(userTemplatePath, 'utf8');
+        const userTemplate = handlebars.compile(userTemplateSource);
+
+        // Dados para o email do usuário
+        const userEmailHtml = userTemplate({
+            user: { nome: user.nome },
+            title: event.title,
+            start: event.start,
+            formatDate: (date) => moment(date).format('DD/MM/YYYY'),
+            formatTime: (date) => moment(date).format('HH:mm'),
+        });
+
+        // Configuração do email para o usuário com anexo
         const mailOptionsUser = {
-            from   : 'projetopi.agendamento@gmail.com',
-            to     : user.email,
+            from: 'projetopi.agendamento@gmail.com',
+            to: user.email,
             subject: 'Cancelamento de Sessão',
-            html   : `
-                <div style = "font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                <h2  style = "color: #333;">Cancelamento de Sessão</h2>
-                    <p>Olá ${user.nome},</p>
-                    <p>Informamos que a sua sessão de ${event.title} agendada para o dia ${event.start} foi cancelada.</p>
-                    <p>Se tiver dúvidas, entre em contato conosco.</p>
-                    <footer style = "margin-top: 20px; font-size: 12px; color: #999;">
-                        <p>Obrigado,</p>
-                        <p>Equipe PattyNails</p>
-                    </footer>
-                </div>
-            `,
+            html: userEmailHtml,
+            attachments: [
+                {
+                    filename: 'logoPattyNails.png',
+                    path: path.join(__dirname, '/views/img/logo1.png'),
+                    cid: 'logoPattyNails'
+                }
+            ]
         };
         await transporter.sendMail(mailOptionsUser);
 
-          // Envia email para os administradores
+        // Carregar e compilar o template Handlebars para os administradores
+        const adminTemplatePath = path.join(__dirname, 'views', 'emails', 'delete-event-admin.handlebars');
+        const adminTemplateSource = fs.readFileSync(adminTemplatePath, 'utf8');
+        const adminTemplate = handlebars.compile(adminTemplateSource);
+
+        // Dados para o email do administrador
+        const adminEmailHtml = adminTemplate({
+            admin: { nome: user.nome }, // Exemplo de dados do usuário cancelador
+            user: { nome: user.nome },
+            title: event.title,
+            start: event.start,
+            formatDate: (date) => moment(date).format('DD/MM/YYYY'),
+            formatTime: (date) => moment(date).format('HH:mm'),
+        });
+
+        // Envia email para todos os administradores com o anexo
         const admins = await User.findAll({ where: { isAdmin: true } });
         for (const admin of admins) {
             const mailOptionsAdmin = {
-                from   : 'projetopi.agendamento@gmail.com',
-                to     : admin.email,
+                from: 'projetopi.agendamento@gmail.com',
+                to: admin.email,
                 subject: 'Sessão Cancelada pelo Usuário',
-                html   : `
-                    <div style = "font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                    <h2  style = "color: #333;">Sessão Cancelada</h2>
-                        <p>Olá ${admin.nome},</p>
-                        <p>O usuário ${user.nome} cancelou a sua sessão de ${event.title} agendada para o dia ${event.start}.</p>
-                        <footer style = "margin-top: 20px; font-size: 12px; color: #999;">
-                            <p>Obrigado,</p>
-                            <p>Equipe PattyNails</p>
-                        </footer>
-                    </div>
-                `,
+                html: adminEmailHtml,
+                attachments: [
+                    {
+                        filename: 'logoPattyNails.png',
+                        path: path.join(__dirname, '/views/img/logo1.png'),
+                        cid: 'logoPattyNails'
+                    }
+                ]
             };
             await transporter.sendMail(mailOptionsAdmin);
         }
 
-          // Redireciona para a página de perfil com a mensagem de sucesso
+        // Redireciona para a página de perfil com a mensagem de sucesso
         res.redirect('/profile?status=success&message=Sessão cancelada com sucesso!');
     } catch (error) {
         console.error('Erro ao deletar evento:', error);
