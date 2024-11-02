@@ -56,13 +56,13 @@
     </div>
 </nav>
   <!-- vlibras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
+    <div vw class               = "enabled">
+    <div vw-access-button class = "active"></div>
         <div vw-plugin-wrapper>
-          <div class="vw-plugin-top-wrapper"></div>
+          <div class = "vw-plugin-top-wrapper"></div>
         </div>
       </div>
-      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script src = "https://vlibras.gov.br/app/vlibras-plugin.js"></script>
       <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
       </script>
@@ -128,7 +128,7 @@
 <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
-              // Funções para avançar e voltar nas etapas
+                // Funções para avançar e voltar nas etapas
         function nextStep(step) {
             $('.form-step').hide();     // Oculta todas as etapas
             $('#step-' + step).show();  // Mostra a etapa atual
@@ -139,68 +139,62 @@
             $('#step-' + step).show();  // Mostra a etapa anterior
         }
 
-              // Verifica horários disponíveis quando a data é escolhida
-        function checkAvailability() {
-            const date         = $('#start').val();
-            const professional = $('#professionalName').val();  // Obtém o ID do profissional
-
-            if (date && professional) {
-                $.ajax({
-                    url        : '/check-availability',
-                    method     : 'POST',
-                    contentType: 'application/json',
-                    data       : JSON.stringify({
-                        date            : date,
-                        professionalName: professional  // Enviando o ID
-                    }),
-                    success: function(response) {
-                        console.log('Eventos retornados:', response);
-                        const occupiedTimes = response.map(event => event.hora);
-                        
-                        const availableTimes = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
-                        const freeTimes      = availableTimes.filter(time => !occupiedTimes.includes(time));
-
-                        const timeSelect = $('#time');
-                        timeSelect.empty();  // Limpa as opções anteriores
-                        
-                        if (freeTimes.length > 0) {
-                            freeTimes.forEach(item => {
-                                timeSelect.append(`<option value="${item}">${item}</option>`);
-                            });
-                            nextStep(4);  // Avança para a seleção de horários
-                        } else {
-                            timeSelect.append('<option value="">Sem horários disponíveis</option>');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Erro na requisição:', error);
-                        alert('Erro ao buscar horários disponíveis. Tente novamente.');
-                    }
-                });
-            } else {
-                alert('Por favor, selecione uma data e um profissional.');
-            }
-        }
-        
 $(document).ready(function() {
+    let previousServiceValue = '';
+
+      // When service changes
     $('#service').on('change', function() {
-        const serviceSelected = $(this).val() !== '';
-        $('#professionalName').prop('disabled', !serviceSelected);
-        $('#professionalName').toggleClass('bg-zinc-700/50 cursor-not-allowed', !serviceSelected);
-        if (!serviceSelected) {
+        const serviceValue = $(this).val();
+        
+          // Enable professional selection if not already selected
+        if (!$('#professionalName').val()) {
+            $('#professionalName').prop('disabled', !serviceValue);
+            $('#professionalName').toggleClass('bg-zinc-700/50 cursor-not-allowed', !serviceValue);
+        }
+
+          // If there's a service selected (new or changed)
+        if (serviceValue) {
+              // Se mudou o serviço e já tem profissional e data selecionados
+            if (previousServiceValue && previousServiceValue !== serviceValue) {
+                const professionalSelected = $('#professionalName').val();
+                const dateSelected         = $('#start').val();
+                
+                if (professionalSelected && dateSelected) {
+                    checkAvailability();
+                }
+            }
+            
+            previousServiceValue = serviceValue;
+            
+              // If professional and date are already selected, update available times
+            const professionalSelected = $('#professionalName').val();
+            const dateSelected         = $('#start').val();
+            
+            if (professionalSelected && dateSelected) {
+                checkAvailability();
+            }
+        } else {
             resetFields();
         }
     });
 
+      // When professional changes
     $('#professionalName').on('change', function() {
         const professionalSelected = $(this).val() !== '';
         $('#start').prop('disabled', !professionalSelected);
         $('#start').toggleClass('bg-zinc-700/50 cursor-not-allowed', !professionalSelected);
+
         if (!professionalSelected) {
             resetTimeAndButton();
+        } else {
+            const dateSelected = $('#start').val();
+            if (dateSelected) {
+                checkAvailability();
+            }
         }
     });
 
+      // When date changes
     $('#start').on('change', function() {
         if ($(this).val() !== '') {
             checkAvailability();
@@ -209,112 +203,124 @@ $(document).ready(function() {
         }
     });
 
+    function resetFields() {
+        $('#professionalName').val('').prop('disabled', true);
+        $('#start').val('').prop('disabled', true);
+        resetTimeAndButton();
+    }
 
-      // Verifica horários disponíveis quando a data é escolhida
-function checkAvailability() {
-    const date         = $('#start').val();
-    const professional = $('#professionalName').val();
+    function resetTimeAndButton() {
+        $('#time').empty().append('<option value="">Selecione um horário</option>').prop('disabled', true);
+        $('#submit-event').prop('disabled', true);
+    }
 
-    if (date && professional) {
-        const selectedDate = new Date(date);
-        const dayOfWeek    = selectedDate.getDay();  // 0 é domingo, 1 é segunda, ..., 6 é sábado
+    function checkAvailability() {
+        const date           = $('#start').val();
+        const professional   = $('#professionalName').val();
+        const currentService = $('#service').val();
 
-        let availableTimes = [];
-        
-              // Horários disponíveis de segunda a sexta
-       if (dayOfWeek >= 0 && dayOfWeek <= 4) { // De segunda a sexta
-            availableTimes = [
+        if (date && professional) {
+            const selectedDate = new Date(date);
+            const dayOfWeek    = selectedDate.getDay();
+
+            let availableTimes = [];
+            
+            if (dayOfWeek >= 0 && dayOfWeek <= 4) { // Monday to Friday
+                availableTimes = [
                 '08:00', '09:00', '10:00', '11:00',
                 '12:00', '13:00', '14:00', '15:00',
                 '16:00', '17:00', '18:00', '19:00',
                 '20:00'
-            ];
-        } else if (dayOfWeek === 5 || dayOfWeek === 6 ) { // Sábado (6) e domingo (0)
-            availableTimes = [];  // Sem horários disponíveis
+                ];
+            } else if (dayOfWeek === 5 || dayOfWeek === 6) { // Saturday and Sunday
+                availableTimes = [];
+            }
+
+            $.ajax({
+                url        : '/check-availability',
+                method     : 'POST',
+                contentType: 'application/json',
+                data       : JSON.stringify({
+                    date            : date,
+                    professionalName: professional,
+                    service         : currentService  // Adicionando o serviço atual na requisição
+                }),
+                success: function(response) {
+                      // Filtra apenas os horários ocupados pelo serviço atual
+                    const occupiedTimes = response
+                        .filter(event => event.title === currentService)
+                        .map(event => event.hora);
+
+                    const freeTimes = availableTimes.filter(time => !occupiedTimes.includes(time));
+
+                    const timeSelect = $('#time');
+                    timeSelect.empty();
+                    
+                    if (freeTimes.length > 0) {
+                        freeTimes.forEach(item => {
+                            timeSelect.append(`<option value="${item}">${item}</option>`);
+                        });
+                        $('#time').prop('disabled', false);
+                        $('#submit-event').prop('disabled', false);
+                    } else {
+                        timeSelect.append('<option value="">Sem horários disponíveis</option>');
+                        $('#time').prop('disabled', true);
+                        $('#submit-event').prop('disabled', true);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro na requisição:', error);
+                    alert('Erro ao buscar horários disponíveis. Tente novamente.');
+                }
+            });
+        }
+    }
+
+      // Form submission handler
+    $('#submit-event').on('click', function() {
+        const service          = $('#service').val();
+        const professionalName = $('#professionalName').val();
+        const start            = $('#start').val();
+        const time             = $('#time').val();
+
+        if (!time) {
+            Swal.fire({
+                icon : 'warning',
+                title: 'Atenção',
+                text : 'Por favor, selecione um horário.',
+            });
+            return;
         }
 
         $.ajax({
-            url        : '/check-availability',
+            url        : '/add-event',
             method     : 'POST',
             contentType: 'application/json',
             data       : JSON.stringify({
-                date            : date,
-                professionalName: professional
+                title           : service,
+                start           : `${start}T${time}`,
+                hora            : time,
+                professionalName: professionalName
             }),
             success: function(response) {
-                const occupiedTimes = response.map(event => event.hora);
-                const freeTimes     = availableTimes.filter(time => !occupiedTimes.includes(time));
-
-                const timeSelect = $('#time');
-                timeSelect.empty();
-                
-                if (freeTimes.length > 0) {
-                    freeTimes.forEach(item => {
-                        timeSelect.append(`<option value="${item}">${item}</option>`);
-                    });
-                    $('#time').prop('disabled', false);
-                    $('#submit-event').prop('disabled', false);
-                } else {
-                    timeSelect.append('<option value="">Sem horários disponíveis</option>');
-                    $('#time').prop('disabled', true);
-                    $('#submit-event').prop('disabled', true);
-                }
+                Swal.fire({
+                    icon : 'success',
+                    title: 'Sucesso',
+                    text : 'Evento agendado com sucesso!',
+                }).then(() => {
+                    window.location.href = '/profile';
+                });
             },
             error: function(xhr, status, error) {
-                console.error('Erro na requisição:', error);
-                alert('Erro ao buscar horários disponíveis. Tente novamente.');
+                console.error('Erro ao criar evento:', error);
+                Swal.fire({
+                    icon : 'error',
+                    title: 'Erro',
+                    text : 'Erro ao criar evento. Tente novamente.',
+                });
             }
         });
-    }
-}
-
- 
-       // Lida com a submissão do formulário
-$('#submit-event').on('click', function() {
-    const service          = $('#service').val();
-    const professionalName = $('#professionalName').val();
-    const start            = $('#start').val();
-    const time             = $('#time').val();
-
-    if (!time) {
-        Swal.fire({
-            icon : 'warning',
-            title: 'Atenção',
-            text : 'Por favor, selecione um horário.',
-        });
-        return;
-    }
-
-    $.ajax({
-        url        : '/add-event',
-        method     : 'POST',
-        contentType: 'application/json',
-        data       : JSON.stringify({
-            title           : service,
-            start           : `${start}T${time}`,
-            hora            : time,
-            professionalName: professionalName
-        }),
-        success: function(response) {
-            Swal.fire({
-                icon : 'success',
-                title: 'Sucesso',
-                text : 'Evento agendado com sucesso!',
-            }).then(() => {
-                window.location.href = '/profile';
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error('Erro ao criar evento:', error);
-            Swal.fire({
-                icon : 'error',
-                title: 'Erro',
-                text : 'Erro ao criar evento. Tente novamente.',
-            });
-        }
     });
-});
-
 });
 
     </script>

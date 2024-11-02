@@ -243,10 +243,10 @@ app.use('/', eventRouter);
 
     // Rota para editar evento
     app.post('/edit-event/:id', async (req, res) => {
-        const { title, start } = req.body;
+        const { title, start, professionalName: newProfessionalName } = req.body; // Captura o novo nome do profissional
         const eventId = req.params.id;
     
-        console.log('Atualizando evento:', { eventId, title, start });
+        console.log('Atualizando evento:', { eventId, title, start, newProfessionalName }); // Log da nova informação
     
         try {
             const event = await Event.findByPk(eventId, { include: [{ model: User, as: 'user' }] });
@@ -257,13 +257,17 @@ app.use('/', eventRouter);
             const oldTitle = event.title;
             const oldStart = event.start;
             const oldHour = event.hora;
-            const professionalName = event.professionalName;
+            const oldProfessionalName = event.professionalName; // Captura o nome do profissional antigo
             const user = event.user;
     
-            await Event.update({ title, start }, { where: { id: eventId } });
+            // Atualiza o evento com os novos dados
+            await Event.update(
+                { title, start, professionalName: newProfessionalName }, // Atualiza o nome do profissional
+                { where: { id: eventId } }
+            );
     
             // Ler e compilar o template Handlebars
-            const templatePath = path.join(__dirname, 'views', 'emails', 'event-update.handlebars'); // ajuste o caminho conforme necessário
+            const templatePath = path.join(__dirname, 'views', 'emails', 'event-update.handlebars');
             const templateSource = fs.readFileSync(templatePath, 'utf8');
             const template = handlebars.compile(templateSource);
     
@@ -281,14 +285,15 @@ app.use('/', eventRouter);
                 oldTitle,
                 oldStart,
                 oldHour,
-                professionalName,
+                oldProfessionalName, // Nome do profissional antigo
+                newProfessionalName,  // Nome do profissional novo
                 title,
                 start,
                 formatDate: (date) => moment(date).format('DD/MM/YYYY'),
                 formatTime: (date) => moment(date).format('HH:mm'),
             });
     
-            // Configurações do e-mail com a imagem embutida
+            // Configurações do e-mail
             const mailOptions = {
                 from: 'projetopi.agendamento@gmail.com',
                 to: user.email,
@@ -296,9 +301,9 @@ app.use('/', eventRouter);
                 html: emailHtml,
                 attachments: [
                     {
-                        filename: 'logoPattyNails.png', // Nome do arquivo
-                        path: path.join(__dirname, '/views/img/logo1.png'), // Caminho para o arquivo de imagem
-                        cid: 'logoPattyNails' // Usado como referência para a tag <img src="cid:logoPattyNails">
+                        filename: 'logoPattyNails.png',
+                        path: path.join(__dirname, '/views/img/logo1.png'),
+                        cid: 'logoPattyNails'
                     }
                 ]
             };
@@ -311,8 +316,6 @@ app.use('/', eventRouter);
         }
     });
     
-
-
 
 app.get('/edit-event/:id', async (req, res) => {
     const eventId = req.params.id;

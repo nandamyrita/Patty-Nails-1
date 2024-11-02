@@ -18,12 +18,12 @@
             margin   : 0 auto;  /* Centraliza o calendário na tela */
         }
 
-              /* Estilo ao passar o mouse sobre os botões */
+                /* Estilo ao passar o mouse sobre os botões */
         .fc-toolbar .btn:hover {
             background-color: rgba(255, 255, 255, 0.1);  /* Fundo escurecido */
         }
 
-              /* Estilo para o botão ativo */
+                /* Estilo para o botão ativo */
         .fc-toolbar .btn.active {
             background-color: rgb(0, 0, 0);        /* Fundo branco para o botão ativo */
             color           : rgb(255, 255, 255);  /* Texto preto */
@@ -35,18 +35,18 @@
             border          : 1px solid black;     /* Borda preta */
         }
 
-              /* Estilo ao passar o mouse sobre os botões */
+                /* Estilo ao passar o mouse sobre os botões */
         .fc-toolbar-chunk .btn:hover {
             background-color: rgba(255, 255, 255, 0.1);  /* Fundo escurecido */
         }
 
-              /* Estilo para o botão ativo */
+                /* Estilo para o botão ativo */
         .fc-toolbar-chunk .btn.active {
             background-color: rgb(0, 0, 0);        /* Fundo branco para o botão ativo */
             color           : rgb(255, 255, 255);  /* Texto preto */
         }
 
-              /* Botão desativado */
+                /* Botão desativado */
         .btn-disabled {
             background-color: gray;         /* Fundo cinza */
             cursor          : not-allowed;  /* Cursor não permitido */
@@ -54,6 +54,25 @@
         .btn-disabled:hover {
         background-color: rgb(220, 38, 38);  /* Fundo vermelho ao passar o mouse */
     }
+    .form-control {
+    background-color: #3c3f43; /* Ajuste para a cor desejada (bg-zinc-700) */
+    color: white; /* Cor do texto */
+}
+
+.form-control:focus {
+    background-color: #3c3f43; /* Mantém a cor ao focar */
+    color: white; /* Mantém a cor do texto */
+    border-color: #6c757d; /* Cor da borda ao focar (opcional) */
+    outline: none; /* Remove o contorno padrão (opcional) */
+}
+
+.form-control option {
+    background-color: #3c3f43; /* Cor de fundo para opções (pode variar entre navegadores) */
+    color: white; /* Cor do texto das opções */
+}
+
+
+
     </style>
 </head>
 <body class = "text-white font-sans">
@@ -69,13 +88,13 @@
         </div>
     </nav>
   <!-- vlibras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
+    <div vw class               = "enabled">
+    <div vw-access-button class = "active"></div>
         <div vw-plugin-wrapper>
-          <div class="vw-plugin-top-wrapper"></div>
+          <div class = "vw-plugin-top-wrapper"></div>
         </div>
       </div>
-      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script src = "https://vlibras.gov.br/app/vlibras-plugin.js"></script>
       <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
       </script>
@@ -84,41 +103,50 @@
     <div id    = "calendar" class = "bg-zinc-800 rounded-lg p-4 shadow-lg"></div>
     </div>
 
-    <!-- Modal para Detalhar Evento -->
-    <div    class       = "modal fade" id     = "eventModal" tabindex = "-1" role               = "dialog" aria-labelledby = "eventModalLabel" aria-hidden = "true">
-    <div    class       = "modal-dialog" role = "document">
-    <div    class       = "modal-content bg-zinc-800 text-white">
-    <div    class       = "modal-header border-b border-gray-600">
-    <h5     class       = "modal-title" id    = "eventModalLabel">Detalhes do Agendamento</h5>
-    <button type        = "button" class      = "close text-white" id = "closeModal" aria-label = "Close">
-    <span   aria-hidden = "true">&times;</span>
-                    </button>
-                </div>
-                <div                    class                  = "modal-body">
-                <p><strong>Serviço      :</strong> <span id    = "eventTitle"></span></p>
-                <p><strong>Profissional:</strong> <span id     = "eventprofessionalName"></span></p>
-                <p><strong>Data         :</strong> <span id    = "eventStart"></span></p>
-                <p><strong>Horário      :</strong> <span id    = "eventHora"></span></p>
-                <p><strong>Agendado     por:</strong> <span id = "eventUser"></span></p>
-                <p><strong>Email        :</strong> <span id    = "eventUserEmail"></span></p>
-                <p><strong>Telefone     :</strong> <span id    = "eventUserPhone"></span></p>
+<!-- Modal para Detalhar Evento -->
+<div    class       = "modal fade" id     = "eventModal" tabindex = "-1" role               = "dialog" aria-labelledby = "eventModalLabel" aria-hidden = "true">
+<div    class       = "modal-dialog" role = "document">
+<div    class       = "modal-content bg-zinc-800 text-white">
+<div    class       = "modal-header border-b border-gray-600">
+<h5     class       = "modal-title" id    = "eventModalLabel">Detalhes do Agendamento</h5>
+<button type        = "button" class      = "close text-white" id = "closeModal" aria-label = "Close">
+<span   aria-hidden = "true">&times;</span>
+                </button>
+            </div>
+            <div                    class                  = "modal-body">
+            <p><strong>Serviço      :</strong> <span id    = "eventTitle"></span></p>
+            <p><strong>Profissional:</strong> <span id     = "eventprofessionalName"></span></p>
+            <p><strong>Data         :</strong> <span id    = "eventStart"></span></p>
+            <p><strong>Horário      :</strong> <span id    = "eventHora"></span></p>
+            <p><strong>Agendado     por:</strong> <span id = "eventUser"></span></p>
+            <p><strong>Email        :</strong> <span id    = "eventUserEmail"></span></p>
+            <p><strong>Telefone     :</strong> <span id    = "eventUserPhone"></span></p>
 
-                    <div   class = "form-group">
-                    <label for   = "newEventDate" class = "text-gray-400">Nova Data:</label>
-                    <input type  = "date" class         = "form-control bg-zinc-700 text-white" id = "newEventDate" required>
-                    </div>
-                    <div   class = "form-group mt-2">
-                    <label for   = "newEventHour" class = "text-gray-400">Novo Horário:</label>
-                    <input type  = "time" class         = "form-control bg-zinc-700 text-white" id = "newEventHour" required>
-                    </div>
+                <div    class = "form-group">
+                <label  for   = "newEventProfessional" class = "text-gray-400">Novo Profissional:</label>
+                <select id    = "newEventProfessional" class = "form-control bg-zinc-700 text-white">
+                <option value = "Ana">Ana</option>
+                <option value = "Bruna">Bruna</option>
+                <option value = "Carla">Carla</option>
+                <option value = "Diana">Diana</option>
+                    </select>
                 </div>
-                <div    class = "modal-footer border-t border-gray-600">
-                <button type  = "button" class = "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md btn-disabled" id = "editEvent" disabled>Editar Informações</button>
-                <button type  = "button" class = "bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md" id                = "deleteEvent">Cancelar Agendamento</button>
+                <div   class = "form-group">
+                <label for   = "newEventDate" class = "text-gray-400">Nova Data:</label>
+                <input type  = "date" class         = "form-control bg-zinc-700 text-white" id = "newEventDate" required>
                 </div>
+                <div   class = "form-group mt-2">
+                <label for   = "newEventHour" class = "text-gray-400">Novo Horário:</label>
+                <input type  = "time" class         = "form-control bg-zinc-700 text-white" id = "newEventHour" required>
+                </div>
+            </div>
+            <div    class = "modal-footer border-t border-gray-600">
+            <button type  = "button" class = "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md btn-disabled" id = "editEvent" disabled>Editar Informações</button>
+            <button type  = "button" class = "bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md" id                = "deleteEvent">Cancelar Agendamento</button>
             </div>
         </div>
     </div>
+</div>
 
     <script src = "https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
     <script src = "https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -155,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
         themeSystem: 'bootstrap',
         events     : '/events',
         eventClick : function (info) {
-              // Preencher o modal com as informações do evento clicado
+                // Preencher o modal com as informações do evento clicado
             document.getElementById('eventTitle').innerText            = info.event.title;
             document.getElementById('eventprofessionalName').innerText = info.event.extendedProps.professionalName || 'Desconhecido';
             document.getElementById('eventStart').innerText            = info.event.start.toLocaleDateString();
@@ -164,25 +192,28 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('eventUserEmail').innerText        = info.event.extendedProps.user.email || 'N/A';
             document.getElementById('eventUserPhone').innerText        = info.event.extendedProps.user.telefone || 'N/A';
 
-              // Definir os valores padrão da data e horário com os dados do evento
+                // Definir os valores padrão da data e horário com os dados do evento
             const                   originalDate          = moment(info.event.start).format('YYYY-MM-DD');
             const                   originalHour          = moment(info.event.extendedProps.hora, 'HH:mm').format('HH:mm');
+            const originalProfessionalName = info.event.extendedProps.professionalName; 
             document.getElementById('newEventDate').value = originalDate;
             document.getElementById('newEventHour').value = originalHour;
+            const professionalSelect = document.getElementById('newEventProfessional');
+professionalSelect.value = originalProfessionalName; // Define o valor padrão
 
-              // Desabilitar o botão de editar inicialmente
+                // Desabilitar o botão de editar inicialmente
             const editButton          = document.getElementById('editEvent');
                   editButton.disabled = true;
             editButton.classList.add('btn-disabled');
 
-              // Adicionar evento de input para verificar alterações
+                // Adicionar evento de input para verificar alterações
             document.getElementById('newEventDate').addEventListener('input', checkEditability);
             document.getElementById('newEventHour').addEventListener('input', checkEditability);
-
-              // Exibir o modal
+            document.getElementById('newEventProfessional').addEventListener('change', checkEditability);
+                // Exibir o modal
             $('#eventModal').modal('show');
 
-              // Ação de deletar o evento
+                // Ação de deletar o evento
             document.getElementById('deleteEvent').onclick = function () {
                 Swal.fire({
                     title            : 'Você tem certeza?',
@@ -197,9 +228,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             url    : `/delete-event/${info.event.id}`,
                             type   : 'DELETE',
                             success: function () {
-                                  // Armazenar a mensagem de sucesso no localStorage
+                                    // Armazenar a mensagem de sucesso no localStorage
                                 localStorage.setItem('message', 'Seu agendamento foi excluído com sucesso.');
-                                  // Recarregar a página
+                                    // Recarregar a página
                                 location.reload();
                             },
                             error: function (xhr, status, error) {
@@ -210,79 +241,83 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             };
 
-              // Função para verificar se os campos foram alterados
-            function checkEditability() {
-                const newDate = document.getElementById('newEventDate').value;
-                const newHour = document.getElementById('newEventHour').value;
+// Função para verificar se os campos foram alterados
+function checkEditability() {
+    const newDate = document.getElementById('newEventDate').value;
+    const newHour = document.getElementById('newEventHour').value;
+    const newProfessional = document.getElementById('newEventProfessional').value;
 
-                if (newDate !== originalDate || newHour !== originalHour) {
-                    editButton.disabled = false;
-                    editButton.classList.remove('btn-disabled');
-                } else {
-                    editButton.disabled = true;
-                    editButton.classList.add('btn-disabled');
-                }
-            }
+    if (newDate !== originalDate || newHour !== originalHour || newProfessional !== originalProfessionalName) {
+        editButton.disabled = false;
+        editButton.classList.remove('btn-disabled');
+    } else {
+        editButton.disabled = true;
+        editButton.classList.add('btn-disabled');
+    }
+}
 
-              // Função para fechar o modal
+
+
+                // Função para fechar o modal
             document.getElementById('closeModal').onclick = function () {
                 $('#eventModal').modal('hide');
             };
 
-              // Ação de editar o evento
-            document.getElementById('editEvent').onclick = async function () {
-                const newStart = document.getElementById('newEventDate').value;
-                const newHour  = document.getElementById('newEventHour').value;
+                // Ação de editar o evento
+           document.getElementById('editEvent').onclick = async function () {
+    const newStart        = document.getElementById('newEventDate').value;
+    const newHour         = document.getElementById('newEventHour').value;
+    const newProfessional = document.getElementById('newEventProfessional').value;
 
-                if (newStart && newHour) {
-                    const newStartDateTime = moment(`${newStart}T${newHour}`).format();
+    if (newStart && newHour && newProfessional) {
+        const newStartDateTime = moment(`${newStart}T${newHour}`).format();
 
-                    try {
-                        const response = await fetch(`/edit-event/${info.event.id}`, {
-                            method : 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                title: info.event.title,
-                                start: newStartDateTime,
-                            }),
-                        });
+        try {
+            const response = await fetch(`/edit-event/${info.event.id}`, {
+                method : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title           : info.event.title,
+                    start           : newStartDateTime,
+                    professionalName: newProfessional,    // Adicionando o novo profissional
+                }),
+            });
 
-                        if (response.ok) {
-                              // Armazenar a mensagem de sucesso no localStorage
-                            localStorage.setItem('message', 'Evento atualizado com sucesso!');
-                              // Recarregar a página
-                            location.reload();
-                        } else {
-                            throw new Error('Erro ao atualizar o evento');
-                        }
-                    } catch (error) {
-                        console.error('Erro:', error);
-                        Swal.fire(
-                            'Erro!',
-                            'Erro ao atualizar o evento. Verifique o console para mais detalhes.',
-                            'error'
-                        );
-                    }
-                } else {
-                    Swal.fire(
-                        'Atenção!',
-                        'Por favor, preencha a nova data e o novo horário.',
-                        'warning'
-                    );
-                }
-            };
+            if (response.ok) {
+                localStorage.setItem('message', 'Evento atualizado com sucesso!');
+                location.reload();
+            } else {
+                throw new Error('Erro ao atualizar o evento');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            Swal.fire(
+                'Erro!',
+                'Erro ao atualizar o evento. Verifique o console para mais detalhes.',
+                'error'
+            );
+        }
+    } else {
+        Swal.fire(
+            'Atenção!',
+            'Por favor, preencha a nova data, o novo horário e escolha um novo profissional.',
+            'warning'
+        );
+    }
+};
+
         }
     });
 
     calendar.render();
 
-      // Exibir mensagem de sucesso após recarregar a página
+        // Exibir mensagem de sucesso após recarregar a página
     const message = localStorage.getItem('message');
     if (message) {
         Swal.fire('Sucesso!', message, 'success');
-          // Remover a mensagem do localStorage após exibi-la
+            // Remover a mensagem do localStorage após exibi-la
         localStorage.removeItem('message');
     }
 });
