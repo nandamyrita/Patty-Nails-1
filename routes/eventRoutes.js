@@ -3,6 +3,10 @@ const router     = express.Router();
 const Event      = require('../models/event');  // Ajuste para o caminho do seu modelo de eventos
 const User       = require('../models/user');   // Importação do modelo de usuários
 const nodemailer = require('nodemailer');       // Certifique-se de ter nodemailer instalado
+const fs = require('fs'); // Para anexar arquivos
+const path = require('path');
+const Handlebars = require('handlebars');
+
 
     // Configuração do transportador para envio de email
 const transporter = nodemailer.createTransport({
@@ -13,9 +17,18 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+// Função para carregar e compilar templates de email
+async function loadTemplate(templateName, context) {
+    const filePath = path.join(__dirname, `../views/emails/${templateName}.handlebars`);
+    const source = fs.readFileSync(filePath, 'utf-8');
+    const template = Handlebars.compile(source);
+    return template(context);
+}
+
+// Rota para criar o evento e enviar emails
 router.post('/add-event', async (req, res) => {
     const { title, start, hora, professionalName } = req.body;
-    const userId                                   = req.user ? req.user.id : null;
+    const userId = req.user ? req.user.id : null;
 
     console.log('Dados do evento:', { title, start, hora, professionalName, userId });
 
@@ -28,19 +41,16 @@ router.post('/add-event', async (req, res) => {
     }
 
     try {
-            // Verificar se o profissional existe
+        // Verificar se o profissional existe
         const professional = await User.findOne({ where: { nome: professionalName } });
-
         if (!professional) {
             console.log('Profissional não encontrado. Criando evento com nome do profissional fornecido:', professionalName);
-        } else {
-            console.log('Profissional encontrado:', professional.nome);
         }
 
-            // Verificar se já existe um evento para o mesmo horário
+        // Verificar se já existe um evento para o mesmo horário
         const existingEvent = await Event.findOne({
             where: {
-                professionalName: professional ? professional.nome: professionalName,
+                professionalName: professional ? professional.nome : professionalName,
                 start,
                 hora
             }
@@ -51,68 +61,60 @@ router.post('/add-event', async (req, res) => {
             return res.status(400).json({ message: 'Já existe um evento agendado para este horário.' });
         }
 
-            // Criar o evento
+        // Criar o evento
         const event = await Event.create({
             title,
             start,
             hora,
-            professionalName: professional ? professional.nome: professionalName,
+            professionalName: professional ? professional.nome : professionalName,
             userId
         });
 
         console.log('Evento criado com sucesso!', event);
 
-            // Enviar e-mail para os administradores sobre a criação do evento
+        // Dados de contexto para o template
+        const context = {
+            event: {
+                title: event.title,
+                start: event.start,
+                hora: event.hora,
+                professionalName: event.professionalName
+            },
+            user: {
+                nome: req.user.nome,
+                email: req.user.email
+            }
+        };
+
+        // Anexo
+        const attachment = {
+            filename: 'logoPattyNails.png', // Nome do arquivo
+            path: path.join(__dirname, '../views/img/logo 2 preto.png'), // Caminho para o arquivo de imagem
+            cid: 'logoPattyNails' // Usado como referência para a tag <img src="cid:logoPattyNails">
+        };
+
+        // Enviar e-mail para os administradores
         const admins = await User.findAll({ where: { isAdmin: true } });
         for (const admin of admins) {
+            const emailHtmlAdmin = await loadTemplate('add-event-admin', { ...context, admin: { nome: admin.nome } });
             const mailOptionsAdmin = {
-                from   : 'projetopi.agendamento@gmail.com',
-                to     : admin.email,
+                from: 'projetopi.agendamento@gmail.com',
+                to: admin.email,
                 subject: 'Novo Agendamento Criado',
-                html   : `
-                    <div style = "font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                    <h2  style = "color: #333;">Novo Agendamento Criado</h2>
-                        <p>Olá ${admin.nome},</p>
-                        <p>Um novo agendamento foi criado: </p>
-                        <ul>
-                            <li><strong>Serviço     : </strong> ${event.title}</li>
-                            <li><strong>Data        : </strong> ${event.start}</li>
-                            <li><strong>Horário     : </strong> ${event.hora}</li>
-                            <li><strong>Profissional: </strong> ${event.professionalName}</li>
-                            <li><strong>Usuário     : </strong> ${req.user.nome}</li>
-                        </ul>
-                        <footer style = "margin-top: 20px; font-size: 12px; color: #999;">
-                            <p>Obrigado,</p>
-                            <p>Equipe PattyNails</p>
-                        </footer>
-                    </div>
-                `,
+                html: emailHtmlAdmin,
+                attachments: [attachment]
             };
             await transporter.sendMail(mailOptionsAdmin);
         }
 
-            // Enviar e-mail de confirmação para o usuário
+        // Enviar e-mail de confirmação para o usuário
+        const emailHtmlUser = await loadTemplate('add-event-user', { ...context });
         const mailOptionsUser = {
-            from   : 'projetopi.agendamento@gmail.com',
-            to     : req.user.email,
+            from: 'projetopi.agendamento@gmail.com',
+            to: req.user.email,
             subject: 'Confirmação de Agendamento',
-            html   : `
-                <div style = "font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                <h2  style = "color: #333;">Confirmação de Agendamento</h2>
-                    <p>Olá ${req.user.nome},</p>
-                    <p>Seu agendamento foi criado com sucesso. Aqui estão os detalhes: </p>
-                    <ul>
-                        <li><strong>Serviço     : </strong> ${event.title}</li>
-                        <li><strong>Data        : </strong> ${event.start}</li>
-                        <li><strong>Horário     : </strong> ${event.hora}</li>
-                        <li><strong>Profissional: </strong> ${event.professionalName}</li>
-                    </ul>
-                    <footer style = "margin-top: 20px; font-size: 12px; color: #999;">
-                        <p>Obrigado por agendar conosco!</p>
-                        <p>Equipe PattyNails</p>
-                    </footer>
-                </div>
-            `,
+            html: emailHtmlUser,
+            attachments: [attachment]
         };
         await transporter.sendMail(mailOptionsUser);
 

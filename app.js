@@ -302,7 +302,7 @@ app.use('/', eventRouter);
                 attachments: [
                     {
                         filename: 'logoPattyNails.png',
-                        path: path.join(__dirname, '/views/img/logo1.png'),
+                        path: path.join(__dirname, '/views/img/logo 2 preto.png'), // Caminho para o arquivo de imagem
                         cid: 'logoPattyNails'
                     }
                 ]
@@ -411,7 +411,7 @@ app.get('/profile', isAuthenticated, async (req, res) => {
                 attachments: [
                     {
                         filename: 'logoPattyNails.png', // Nome do arquivo
-                        path: path.join(__dirname, '/views/img/logo1.png'), // Caminho para o arquivo de imagem
+                        path: path.join(__dirname, '/views/img/logo 2 preto.png'), // Caminho para o arquivo de imagem
                         cid: 'logoPattyNails' // Usado como referência para a tag <img src="cid:logoPattyNails">
                     }
                 ]
@@ -472,7 +472,7 @@ app.get('/profile', isAuthenticated, async (req, res) => {
             attachments: [
                 {
                     filename: 'logoPattyNails.png',
-                    path: path.join(__dirname, '/views/img/logo1.png'),
+                    path: path.join(__dirname, '/views/img/logo 2 preto.png'), // Caminho para o arquivo de imagem
                     cid: 'logoPattyNails'
                 }
             ]
@@ -505,7 +505,7 @@ app.get('/profile', isAuthenticated, async (req, res) => {
                 attachments: [
                     {
                         filename: 'logoPattyNails.png',
-                        path: path.join(__dirname, '/views/img/logo1.png'),
+                        path: path.join(__dirname, '/views/img/logo 2 preto.png'), // Caminho para o arquivo de imagem
                         cid: 'logoPattyNails'
                     }
                 ]
@@ -639,12 +639,13 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-    // Rota para página de esqueci minha senha (GET)
-app.get('/forgot-password', (req, res)=> {
-    res.render('forgot-password');  // Certifique-se de ter o arquivo Handlebars 'forgot-password.handlebars'
+ // Rota para exibir a página de solicitação de redefinição de senha
+app.get('/forgot-password', (req, res) => {
+    res.render('forgot-password'); // Certifique-se de ter o arquivo Handlebars 'forgot-password.handlebars'
 });
-    // Rota para processar a solicitação de redefinição de senha (POST)
-  app.post('/forgot-password', async (req, res) => {
+
+// Rota para processar a solicitação de redefinição de senha (POST)
+app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
 
     try {
@@ -653,31 +654,39 @@ app.get('/forgot-password', (req, res)=> {
             return res.status(404).json({ error: 'Email não encontrado!' });
         }
 
-          // Gerar token JWT para redefinição de senha
+        // Gerar token JWT para redefinição de senha
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-          // Link para redefinir a senha
+        // Link para redefinir a senha
         const resetLink = `http://localhost:3003/reset-password?token=${token}`;
 
-          // Configuração do email
+        // Carregar e compilar o template Handlebars para o e-mail
+        const templatePath = path.join(__dirname, 'views', 'emails', 'reset-password.handlebars');
+        const templateSource = fs.readFileSync(templatePath, 'utf8');
+        const template = handlebars.compile(templateSource);
+
+        // Dados para o e-mail
+        const emailHtml = template({
+            user: { nome: user.nome },
+            resetLink: resetLink,
+        });
+
+        // Configurações do e-mail com a imagem embutida
         const mailOptions = {
-            from   : 'projetopi.agendamento@gmail.com',
-            to     : email,
+            from: 'projetopi.agendamento@gmail.com',
+            to: email,
             subject: 'Redefinição de senha',
-            html   : `<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                <h2 style = "color: #333;">Redefinição de Senha</h2>
-                <p>Olá ${user.nome},</p>
-                <p>Recebemos um pedido para redefinir sua senha. Clique no link abaixo para criar uma nova senha: </p>
-                <a      href  = "${resetLink}" style                       = "display: inline-block; margin: 20px 0; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Redefinir Senha</a>
-                <p      style = "color: #777;">Se você não fez esse pedido, pode ignorar este e-mail.</p>
-                <footer style = "margin-top: 20px; font-size: 12px; color: #999;">
-                    <p>Obrigado,</p>
-                    <p>Equipe PattyNails</p>
-                </footer>
-            </div>`,
+            html: emailHtml,
+            attachments: [
+                {
+                    filename: 'logoPattyNails.png',
+                    path: path.join(__dirname, '/views/img/logo 2 preto.png'),
+                    cid: 'logoPattyNails'
+                }
+            ]
         };
 
-          // Enviar o email
+        // Enviar o e-mail
         await transporter.sendMail(mailOptions);
         return res.json({ message: 'Email de redefinição de senha enviado com sucesso!' });
     } catch (error) {
@@ -685,6 +694,7 @@ app.get('/forgot-password', (req, res)=> {
         return res.status(500).json({ message: 'Erro ao processar a solicitação de redefinição de senha' });
     }
 });
+
 
     // Rota para a página de redefinição de senha (GET)
 app.get('/reset-password', (req, res) => {
