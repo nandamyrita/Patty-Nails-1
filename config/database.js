@@ -8,9 +8,8 @@ const sequelize = new Sequelize(process.env.DB_NAME || "projeto_PI",
     dialect: "mysql"
 });
 
-// Testar a conexão com o banco de dados
-sequelize.authenticate()
+ ///Testar a conexão com o banco de dados
+ sequelize.authenticate()
     .then(() => console.log('Conectado ao banco de dados'))
-    .catch(err => console.log('Erro: ' + err));
-
-module.exports = sequelize;
+     .catch(err => console.log('Erro: ' + err));
+ module.exports = sequelize;

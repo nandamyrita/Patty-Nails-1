@@ -689,7 +689,7 @@ app.use('/img', express.static(__dirname + './views/img'));
 
 
 // Inicializa o servidor
-const PORT = process.env.PORT || 3003;
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
+ const PORT = process.env.PORT || 3003;
+ app.listen(PORT, () => {
+     console.log(`Servidor rodando na porta ${PORT}`);
+ });
