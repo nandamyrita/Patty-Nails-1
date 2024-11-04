@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta rel="icon" href="./" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script src="./assets/script.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
+  <title>Login</title>
+</head>
+
+<body>
+  {{> header1}} <!-- Incluindo o cabeçalho aqui -->
+
+  <style>
+    h1, h2, h3, a, button {
+      font-family: "Sorts Mill Goudy", serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    header {
+      z-index: 10;
+    }
+    .custom-gradient {
+      background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, hsla(0, 88%, 77%, 1) 71%);
+    }
+  </style>
+
+  <div class="min-h-screen flex items-center justify-center w-full custom-gradient">
+    <div class="bg-zinc-500/10 flex rounded-2xl shadow-lg max-w-4xl w-full mt-28 h-[600px] relative">
+      <!-- Coluna do Formulário de Login -->
+      <div class="w-1/2 h-full p-8 flex flex-col justify-center space-y-6 bg-black text-white">
+        <div class="w-full">
+          <h2 class="text-2xl">Login</h2>
+          <p class="text-xs mt-4 text-white">Se você já é um membro, faça login facilmente.</p>
+          <form action="/login" method="POST" class="flex flex-col gap-4 mt-4">
+            <input class="w-full px-3 py-2 border border-gray-300" type="email" name="email" id="email" placeholder="Email" required>
+            <div class="relative">
+              <input class="w-full px-3 py-2 border border-gray-300" placeholder="Senha" type="password" name="senha" id="senha" required>
+              <span class="absolute right-2 top-2 cursor-pointer" onclick="togglePasswordVisibility()">
+                <i id="eyeIcon" class="bi bi-eye black"></i>
+              </span>
+            </div>
+            <div class="text-white text-[12px] py-7">
+              <input type="checkbox" id="terms" />
+              <label for="terms">I accept the <a href="#">terms of use</a> and <a href="#">privacy policy</a></label>
+            </div>
+            <button type="submit" class="bg-black rounded-xl text-white hover:scale-105 duration-300">Login</button>
+          </form>
+          <div class="mt-4">
+            <div id="g_id_onload" data-client_id="SUA_CLIENT_ID.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_select="true" data-login_uri="https://seusite.com/login_google"></div>
+            <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
+          </div>
+          <div class="text-sm text-white hover:text-blue-300 underline">
+            <a href="/forgot-password">Esqueceu sua senha?</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna do Formulário de Cadastro -->
+      <div class="w-1/2 h-full p-8 flex flex-col justify-center space-y-6 bg-black text-white">
+        <h2 class="text-2xl text-start">Cadastrar</h2>
+        <p class="text-xs mt-4 text-white text-center md:text-left">Agende seu serviço facilmente.</p>
+        <form action="/cadastrar" method="POST" class="flex flex-col gap-4 mt-4" id="cadastroForm">
+          <input class="w-full px-3 py-2 border border-gray-300" type="text" name="nome" id="nome" placeholder="Nome" required>
+          <input class="w-full px-3 py-2 border border-gray-300" type="tel" name="telefone" id="telefone" placeholder="(00) 00000-0000" required>
+          <input class="w-full px-3 py-2 border border-gray-300" type="email" name="email" id="email" placeholder="Email" required>
+          <div class="relative">
+            <input class="w-full px-3 py-2 border border-gray-300" placeholder="Senha" type="password" name="senha" id="senha" required>
+            <span class="absolute right-2 top-2 cursor-pointer" onclick="togglePasswordVisibility()">
+              <i id="eyeIcon" class="bi bi-eye"></i>
+            </span>
+          </div>
+          <button type="submit" class="px-4 py-2 border-[0.5px] border-white text-white hover:border-[#E6C2A1] hover:border-2 transition duration-100 text-center">Cadastrar</button>
+        </form>
+      </div>
+
+      <!-- Painel Rosa -->
+      <div id="slider" class="absolute left-0 w-1/2 h-full bg-gradient-to-r custom-gradient transition-all duration-700 flex items-center justify-center">
+        <div id="panel-login" class="text-center text-black">
+          <h2 class="text-3xl mb-4">Bem-vindo de volta!</h2>
+          <button id="btn-signup" class="px-4 py-2 border-[0.5px] border-black text-black hover:border-black hover:border-2 transition duration-100 text-center">Cadastre-se</button>
+        </div>
+        <div id="panel-signup" class="text-center text-black hidden">
+          <h2 class="text-3xl mb-4">Faça Parte!</h2>
+          <button id="btn-login" class="px-4 py-2 border-[0.5px] border-black text-black hover:border-black hover:border-2 transition duration-100 text-center">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slider = document.getElementById("slider");
+    const panelLogin = document.getElementById("panel-login");
+    const panelSignup = document.getElementById("panel-signup");
+    const btnSignup = document.getElementById("btn-signup");
+    const btnLogin = document.getElementById("btn-login");
+
+    // Alternar para Cadastro
+    btnSignup.addEventListener("click", () => {
+      slider.style.transform = "translateX(100%)"; // Mover painel rosa para a direita
+      panelLogin.classList.add("hidden");
+      panelSignup.classList.remove("hidden");
+    });
+
+    // Alternar para Login
+    btnLogin.addEventListener("click", () => {
+      slider.style.transform = "translateX(0%)"; // Mover painel rosa de volta para a esquerda
+      panelSignup.classList.add("hidden");
+      panelLogin.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>

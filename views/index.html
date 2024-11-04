@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script src="./assets/script.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <title>Patty Nails</title>
+  <style>
+    h1, h2, h3, a, button {
+      font-family: "Libre Bodoni", serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    header {
+      z-index: 10;
+    }
+    .custom-gradient {
+      background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, hsla(0, 88%, 77%, 1) 71%);
+    }
+    .image {
+      background-image: url(./img/blur.svg);
+    }
+    .image2 {
+      background-image: url(./img/backgroundimg2.svg);
+    }
+  </style>
+</head>
+
+<body class="flex flex-col items-center">
+  <header class="w-full flex justify-center relative z-10">
+    <nav class="bg-transparent shadow- w-full px-20 py-1 flex justify-between absolute items-center text-black shadow-sm">
+      <div class="flex space-x-6">
+        <a href="#" class="hover:underline text-xs">Home</a>
+        <a href="#" class="hover:underline text-xs">Pages</a>
+        <a href="#" class="hover:underline text-xs">Service</a>
+        <a href="#" class="hover:underline text-xs">Blog</a>
+      </div>
+      <div>
+        <a href="#"><img src="img/logo.svg" alt="unha" class="h-24" /></a>
+      </div>
+      <button onclick="window.location.href='/login'" class="px-2 text-[13px] py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white transition duration-100 ">
+  Agende Aqui
+</button>
+    </nav>
+  </header>
+
+  <main class="w-full flex flex-col items-center ">
+    <!-- Primeira seção -->
+    <section class="image bg-cover bg-no-repeat w-full min-h-screen bg-center flex relative pb-32 md:pb-52">
+      <div class="flex flex-col gap-12 md:gap-8 w-11/12 md:w-1/2 pt-32 md:pt-44 ml-4 md:ml-32">
+        <h1 class="text-white text-4xl md:text-6xl font-custom">Patty Nails - Cuidado para Suas Unhas</h1>
+        <p class="text-[#333333] text-lg md:text-xl font-custom">
+          Um salão onde cada detalhe importa. Patty Nails combina sofisticação e técnica para oferecer serviços que valorizam a beleza de suas unhas.
+        </p>
+        <button onclick="window.location.href='/login'" class="w-32 py-2 border rounded-3xl border-black text-black hover:border-[#E6C2A1] transition duration-100">
+          Comece Agora
+        </button>
+
+        <div class="flex gap-8 mt-4 md:mt-8">
+          <!-- Itens estatísticos -->
+          <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 bg-cover rounded-3xl shadow-md text-center space-y-2">
+            <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+              <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+            </div>
+            <h2 class="text-2xl font-semibold text-black">2K</h2>
+            <p class="text-gray-500 w-1/2">Nossos Seguidores do Instagram</p>
+          </div>
+          <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 bg-cover rounded-3xl shadow-md text-center space-y-2">
+            <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+              <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+            </div>
+            <h2 class="text-2xl font-semibold text-black">50</h2>
+            <p class="text-gray-500 w-1/2">Atendimentos que fazemos em um dia</p>
+          </div>
+          <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 bg-cover rounded-3xl shadow-md text-center space-y-2">
+            <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+              <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+            </div>
+            <h2 class="text-[18px] font-semibold text-black">400</h2>
+            <p class="text-gray-500 w-1/2 text-[13px]">Maiores avaliações positivas</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute inset-y-0 right-0 flex items-center">
+        <img class="max-w-none h-full" src="./img/heroImg.svg" alt="imagem de unha">
+      </div>
+    </section>
+
+   <section class="py-12 bg-white w-full justify-center">
+  <div class="container mx-auto text-center flex flex-col items-center justify-center w-full ">
+    <p class="text-gray-600 mb-10 w-1/2 text-center">Services</p>
+    <h2 class="text-3xl font-bold mb-2">Os Mais Pedidos</h2>
+    <p class="text-gray-600 mb-10 w-1/2 text-center">
+      Salão especializado em cuidados com unhas. Venha para uma experiência completa de beleza e relaxamento. Oferecemos serviços de manicure, pedicure, alongamento de unhas e tratamento de spa para mãos e pés.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-11 mt-8 mb-8 mx-20">
+    <div class="border rounded-3xl p-6 h-72 gap-4 flex flex-col">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+      </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Manicure e Pedicure</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">View more →</a>
+      </div>
+    </div>
+
+    <div class="border rounded-3xl p-6 h-72 gap-4 flex flex-col">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+      </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Manicure e Pedicure</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">View more →</a>
+      </div>
+    </div>
+
+    <div class="border rounded-3xl p-6 h-72 gap-7 flex flex-col">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+      </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Manicure e Pedicure</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">View more →</a>
+      </div>
+    </div>
+
+    <div class="border rounded-3xl p-6 h-72 gap-7 flex flex-col">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+      </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Manicure e Pedicure</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">View more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto text-center flex flex-col items-center justify-center w-full">
+    <button onclick="window.location.href='/login'" class="w-40 py-2 border rounded-3xl border-black text-black hover:border-[#E6C2A1] transition duration-100">
+          Saiba mais
+        </button>
+  </div>
+</section>
+
+    <!-- Terceira seção: Sobre nós -->
+    <section class="image2 bg-no-repeat bg-cover w-full flex items-center">
+      <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div class="flex flex-col justify-center gap-6">
+          <h2 class="text-8xl font-semibold mb-4 text-black">About us</h2>
+          <p class="text-lg text-gray-500 mb-6 w-10/12">
+            Lorem ipsum dolor sit amet consectetur. Orci mauris semper semper ipsum. 
+            Lectus tellus sagittis parturient metus vestibulum adipiscing diam risus non. 
+            Leo mattis tortor vitae nibh neque tristique diam. Sodales in elementum consequat 
+            auctor volutpat lacus. Mauris at eleifend pellentesque risus.
+          </p>
+          <button onclick="window.location.href='/login'" class="w-40 py-2 border rounded-3xl border-black text-black hover:border-[#E6C2A1] transition duration-100">
+            Saiba mais
+          </button>
+        </div>
+        <div class="w-full">
+          <img src="./img/imgAboutUs.svg" alt="Imagem de Sobre nós" class=" h-[95%]">
+        </div>
+      </div>
+    </section>
+    
+    
+<section class="bg-white text-black flex flex-col items-center py-12 gap-4 ">
+  <div class="flex flex-col text-center mb-8 gap-3">
+    <p class="text-lg text-gray-500">Nosso Time</p>
+    <h2 class="text-5xl font-semibold">Profissionais Qualificados</h2>
+  </div>
+
+  <div class="grid grid-cols-2 gap-14 md:grid-cols-4">
+    <div class="flex flex-col items-center">
+      <img class="rounded-full w-70 h-70 mb-3 object-cover" src="img/prof1.svg" alt="Julia" />
+      <h3 class="text-xl font-semibold">Julia</h3>
+      <p class="text-sm text-gray-500">Pedicure</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <img class="rounded-full w-70 h-70 mb-3 object-cover" src="img/prof2.svg" alt="Nanda" />
+      <h3 class="text-xl font-semibold">Nanda</h3>
+      <p class="text-sm text-gray-500">Unha em Gel</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <img class="rounded-full w-70 h-70 mb-3 object-cover" src="img/prof3.svg" alt="Lucas" />
+      <h3 class="text-xl font-semibold">Lucas</h3>
+      <p class="text-sm text-gray-500">Unha de Fibra</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <img class="rounded-full w-70 h-70 mb-3 object-cover" src="img/prof4.svg" alt="Ana" />
+      <h3 class="text-xl font-semibold">Ana</h3>
+      <p class="text-sm text-gray-500">Unha em Gel</p>
+    </div>
+  </div>
+</section>
+
+  <section class="w-full py-16 bg-white flex items-center justify-center">
+    <div class="relative w-full m-20 text-center">
+      <!-- Container de Depoimentos -->
+      <div id="testimonials" class="text-gray-800 px-8">
+        <!-- Estrelas -->
+        <div class="text-lg text-gray-800 mb-4">★★★★★</div>
+        <!-- Depoimento -->
+       <p class="text-pink-500 text-[25px] font-light italic mb-4 mx-auto w-[50%]">
+  "I had so much fun on my first visit at Mira Salon and Spa. My hair came out great and they did a wonderful job. The entire staff was friendly and very welcoming. I will definitely be back again, thanks Mira!"
+</p>
+
+        <!-- Autor -->
+        <div class="text-sm text-gray-800 mt-4">- MC Win, <span class="font-bold">Webflow</span></div>
+      </div>
+
+      <!-- Controles -->
+      <div class="absolute inset-y-0 gap flex items-center justify-between w-full px-4">
+        <button onclick="prevTestimonial()" class="text-2xl text-gray-800 hover:text-gray-600">&#10094;</button>
+        <button onclick="nextTestimonial()" class="text-2xl text-gray-800 hover:text-gray-600">&#10095;</button>
+      </div>
+
+      <!-- Dots de Navegação -->
+      <div class="flex justify-center mt-6 space-x-2">
+        <span class="dot w-3 h-3 bg-gray-800 rounded-full cursor-pointer" onclick="currentTestimonial(0)"></span>
+        <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer" onclick="currentTestimonial(1)"></span>
+        <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer" onclick="currentTestimonial(2)"></span>
+        <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer" onclick="currentTestimonial(3)"></span>
+        <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer" onclick="currentTestimonial(4)"></span>
+        <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer" onclick="currentTestimonial(5)"></span>
+      </div>
+    </div>
+  </section>
+
+<section class="flex justify-center items-center h-screen">
+   <div class="flex flex-col items-center gap-4">
+      <div class="flex gap-4 w-full flex-row justify-center">
+         <!-- Imagem principal expandida -->
+         <figure id="first-image" class="relative transition-all duration-400 ease-in-out transform w-96 h-96 cursor-pointer flex-shrink-0 hover:bg-black/50">
+            <img 
+               src="./img/imgUnha1.svg" 
+               alt="Principal Image" 
+               class="object-cover rounded-lg shadow-md h-full"
+            >
+         </figure>
+         <!-- Imagens menores com hover para expandir -->
+         <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:bg-black/50" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+            <img 
+               class="object-cover rounded-lg shadow-md h-full" 
+               src="https://images.unsplash.com/photo-1704635021570-fd5af2fadf77?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHx8fA%3D%3D" 
+               alt="Lakeview Elegance preview"
+            >
+         </figure>
+         
+         <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 hover:bg-black/50 cursor-pointer flex-shrink-0  " onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+            <img 
+               class="object-cover rounded-lg shadow-md h-full hover:shadow-lg" 
+               src="https://images.unsplash.com/photo-1704635021570-fd5af2fadf77?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHx8fA%3D%3D" 
+               alt="Skyline Oasis preview"
+            >
+         </figure>
+         <!-- Mais figuras de exemplo -->
+         <figure class="relative transition-all duration-400 ease-in-out transform w-24  rounded-lg h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:bg-black/100" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+            <img 
+               class="object-cover rounded-lg shadow-md h-full" 
+               src="./img/imgUnha2 (1).svg" 
+               alt="Vista Paradiso preview"
+            >
+         </figure>
+         <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+            <img 
+               class="object-cover rounded-lg shadow-md h-full" 
+               src="https://plus.unsplash.com/premium_photo-1700590338986-0479436a2596?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               alt="Villa Verde preview"
+            >
+         </figure>
+         <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+            <img 
+               class="object-cover rounded-lg shadow-md h-full" 
+               src="https://plus.unsplash.com/premium_photo-1700590338986-0479436a2596?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               alt="Villa Verde preview"
+            >
+         </figure>
+      </div>
+      <!-- Título abaixo das imagens -->
+      <h2 class="text-[30px] font-semibold mt-4 tracking-widest text-gray-700"> B E S T <span class="italic"> S E L L E R S </span></h2>
+   </div>
+</section>
+
+
+
+<script>
+    // Função para encolher a primeira imagem
+    function shrinkFirstImage() {
+        const firstImage = document.getElementById('first-image');
+        firstImage.classList.remove('w-80'); // Remove a largura expandida
+        firstImage.classList.add('w-20'); // Define a largura encolhida
+    }
+
+    // Função para expandir a primeira imagem novamente
+    function expandFirstImage() {
+        const firstImage = document.getElementById('first-image');
+        if (!firstImage.classList.contains('hover:w-80')) {
+            firstImage.classList.remove('w-20'); // Remove a largura encolhida
+            firstImage.classList.add('w-80'); // Define a largura expandida
+        }
+    }
+
+    // Quando a página carrega, expande a primeira imagem
+    document.addEventListener('DOMContentLoaded', function () {
+        const firstImage = document.getElementById('first-image');
+        firstImage.classList.add('w-80'); // Adiciona a classe para a largura expandida
+    });
+</script>
+
+    
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+
+  const testimonials = [
+      {
+        text: "I had so much fun on my first visit at Mira Salon and Spa. My hair came out great and they did a wonderful job. The entire staff was friendly and very welcoming. I will definitely be back again, thanks Mira!",
+        author: "MC Win",
+        company: "Webflow",
+      },
+      {
+        text: "Mira Salon was an amazing experience! They really took care of me, and I loved the vibe of the place. Highly recommend to anyone!",
+        author: "Jane Doe",
+        company: "Google",
+      },
+      {
+        text: "The service at Mira Salon is unmatched. I felt pampered and special throughout my visit. I’ll be returning soon!",
+        author: "John Smith",
+        company: "Microsoft",
+      },
+      {
+        text: "Absolutely wonderful! The staff at Mira Salon made me feel like royalty. The quality of service is top-notch.",
+        author: "Emily Clark",
+        company: "Amazon",
+      },
+      {
+        text: "I was thoroughly impressed with the professionalism and skill at Mira Salon. My nails have never looked better!",
+        author: "Sarah Brown",
+        company: "Apple",
+      },
+      {
+        text: "Amazing atmosphere and incredible service. Mira Salon has won me over for life!",
+        author: "Robert Lee",
+        company: "Facebook",
+      },
+    ];
+
+    let currentIndex = 0;
+
+    function showTestimonial(index) {
+      const testimonialContainer = document.getElementById("testimonials");
+      testimonialContainer.innerHTML = `
+        <div class="text-lg text-gray-800 mb-4">★★★★★</div>
+        <p class="text-pink-500 text-[25px] font-light italic mb-4 mx-auto w-[50%]">
+          "${testimonials[index].text}"
+        </p>
+        <div class="text-4x1 text-gray-800 mt-4">- ${testimonials[index].author}, <span class="font-bold">${testimonials[index].company}</span></div>
+      `;
+
+      // Atualiza as bolinhas de navegação
+      document.querySelectorAll(".dot").forEach((dot, idx) => {
+        dot.classList.toggle("bg-gray-800", idx === index);
+        dot.classList.toggle("bg-gray-400", idx !== index);
+      });
+    }
+
+    function nextTestimonial() {
+      currentIndex = (currentIndex + 1) % testimonials.length;
+      showTestimonial(currentIndex);
+    }
+
+    function prevTestimonial() {
+      currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+      showTestimonial(currentIndex);
+    }
+
+    function currentTestimonial(index) {
+      currentIndex = index;
+      showTestimonial(currentIndex);
+    }
+
+    // Exibe o primeiro depoimento ao carregar a página
+    showTestimonial(currentIndex);
+
+    // Configura a rolagem automática a cada 5 segundos
+    setInterval(nextTestimonial, 5000);
+  </script>
+
+
+
+
+</main>
+
+
+</body>
+ <footer class="bg-gray-900 text-white py-10 px-5">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Coluna de informações de contato -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Entre em Contato</h2>
+            <p class="mb-2">Endereço:</p>
+            <p class="text-gray-400">123 Rua Principal, Bairro Central, Cidade, Estado</p>
+            <p class="mt-2 mb-2">Telefone:</p>
+            <p class="text-gray-400">(11) 1234-5678</p>
+            <p class="mt-2 mb-2">Email:</p>
+            <p class="text-gray-400">contato@seunegocio.com</p>
+        </div>
+
+        <!-- Coluna de links úteis -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Links Úteis</h2>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-gray-400 transition-colors">Sobre Nós</a></li>
+                <li><a href="#" class="hover:text-gray-400 transition-colors">Serviços</a></li>
+                <li><a href="#" class="hover:text-gray-400 transition-colors">Termos e Condições</a></li>
+                <li><a href="#" class="hover:text-gray-400 transition-colors">Política de Privacidade</a></li>
+                <li><a href="#" class="hover:text-gray-400 transition-colors">Contato</a></li>
+            </ul>
+        </div>
+
+        <!-- Coluna de redes sociais -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Siga-nos</h2>
+            <div class="flex space-x-4 mt-2">
+                <!-- Ícone do Facebook -->
+                <a href="#" class="hover:text-gray-400 transition-colors">
+                    <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.988H7.898v-2.89h2.54v-2.207c0-2.507 1.492-3.89 3.775-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.242 0-1.631.771-1.631 1.562v1.881h2.773l-.444 2.89h-2.329V22C18.343 21.128 22 16.991 22 12z"/>
+                    </svg>
+                </a>
+                <!-- Ícone do Instagram -->
+                <a href="#" class="hover:text-gray-400 transition-colors">
+                    <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.24 2.423.405a4.92 4.92 0 011.756 1.004 4.92 4.92 0 011.004 1.756c.165.454.349 1.217.405 2.423.058 1.267.07 1.647.07 4.851s-.012 3.584-.07 4.85c-.056 1.206-.24 1.97-.405 2.423a4.92 4.92 0 01-1.004 1.756 4.92 4.92 0 01-1.756 1.004c-.454.165-1.217.349-2.423.405-1.267.058-1.647.07-4.85.07s-3.584-.012-4.851-.07c-1.206-.056-1.97-.24-2.423-.405a4.92 4.92 0 01-1.756-1.004 4.92 4.92 0 01-1.004-1.756c-.165-.454-.349-1.217-.405-2.423-.058-1.267-.07-1.647-.07-4.85s.012-3.584.07-4.851c.056-1.206.24-1.97.405-2.423a4.92 4.92 0 011.004-1.756 4.92 4.92 0 011.756-1.004c.454-.165 1.217-.349 2.423-.405 1.267-.058 1.647-.07 4.851-.07zm0-2.163C8.748 0 8.335.013 7.057.072 5.775.13 4.751.302 3.846.6 2.879.914 2.021 1.382 1.378 2.025c-.643.643-1.111 1.501-1.425 2.468-.298.906-.47 1.93-.528 3.212C0 8.335 0 8.748 0 12c0 3.252.013 3.665.072 4.943.058 1.282.23 2.306.528 3.212.314.967.782 1.825 1.425 2.468.643.643 1.501 1.111 2.468 1.425.906.298 1.93.47 3.212.528C8.335 24 8.748 24 12 24c3.252 0 3.665-.013 4.943-.072 1.282-.058 2.306-.23 3.212-.528.967-.314 1.825-.782 2.468-1.425.643-.643 1.111-1.501 1.425-2.468.298-.906.47-1.93.528-3.212C24 15.665 24 15.252 24 12c0-3.252-.013-3.665-.072-4.943-.058-1.282-.23-2.306-.528-3.212a7.002 7.002 0 00-1.425-2.468 7.002 7.002 0 00-2.468-1.425c-.906-.298-1.93-.47-3.212-.528C15.665.013 15.252 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.838 3.838 0 110-7.676 3.838 3.838 0 010 7.676zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+                    </svg>
+                </a>
+                <!-- Ícone do Twitter -->
+                <a href="#" class="hover:text-gray-400 transition-colors">
+                    <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M22.162 5.656c-.82.363-1.703.607-2.631.718a4.53 4.53 0 001.987-2.5 9.066 9.066 0 01-2.881 1.1 4.518 4.518 0 00-7.69 4.117 12.827 12.827 0 01-9.297-4.714 4.524 4.524 0 001.4 6.04A4.503 4.503 0 012 9.75v.057a4.52 4.52 0 003.626 4.437 4.507 4.507 0 01-2.04.077 4.522 4.522 0 004.218 3.13 9.06 9.06 0 01-5.604 1.93A9.12 9.12 0 012 19.498a12.793 12.793 0 006.937 2.034c8.32 0 12.866-6.89 12.866-12.866 0-.196-.004-.392-.014-.586A9.19 9.19 0 0022.162 5.656z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center text-gray-500 mt-10">
+        <p>&copy; 2024 SeuNegocio. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+
+</html>
