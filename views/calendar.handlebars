@@ -150,7 +150,14 @@
    .custom-button {
     margin-right: 60px;  /* Ajuste conforme necessário */
 }
-
+             /* Botão desativado */
+        .btn-disabled {
+            background-color: gray;         /* Fundo cinza */
+            cursor          : not-allowed;  /* Cursor não permitido */
+        }
+        .btn-disabled:hover {
+        background-color: rgb(220, 38, 38);  /* Fundo vermelho ao passar o mouse */
+    }
  header {
       z-index: 10;
     }
@@ -160,6 +167,29 @@
   background-position: center;
   background-repeat: no-repeat;
     }
+    #closeModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem; /* Ajuste conforme necessário */
+    cursor: pointer;
+}
+.modal-content {
+    background-color: rgba(52, 52, 52, 0.8); /* Cinza com 80% de opacidade */
+    color: white; /* Mantém o texto em branco */
+}
+.form-control {
+    background-color: rgba(128, 128, 128, 0.6); /* Cinza com 60% de opacidade */
+    color: white; /* Texto em branco */
+    border: 1px solid #ccc; /* Bordas sutis */
+}
+
+/* Para placeholders com cor cinza claro */
+.modal-content .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
     </style>
 </head>
 <body class = "text-white font-sans custom-gradient2" >
@@ -176,7 +206,7 @@
 
       </div  class="logo-container">
         <div class="flex justify-center items-center flex-grow">
-        <a href = "#"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
+        <a href = "/"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
       </div>
       
    <div class="flex space-x-16"> <!-- Aumentei o espaçamento aqui -->
@@ -213,7 +243,7 @@
 <div    class       = "modal-content bg-zinc-800 text-white">
 <div    class       = "modal-header border-b border-gray-600">
 <h5     class       = "modal-title" id    = "eventModalLabel">Detalhes do Agendamento</h5>
-<button type        = "button" class      = "close text-white" id = "closeModal" aria-label = "Close">
+<button type="button" class="close text-white" id="closeModal" aria-label="Close">
 <span   aria-hidden = "true">&times;</span>
                 </button>
             </div>
