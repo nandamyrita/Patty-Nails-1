@@ -4,56 +4,132 @@
     <meta charset = "UTF-8">
     <meta name    = "viewport" content = "width=device-width, initial-scale=1.0">
     <title>Agenda de Eventos</title>
-    <script src  = "https://cdn.tailwindcss.com"></script>
-    <link   href = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
-    <link   href = "https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css" rel                    = "stylesheet">
-    <script src  = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
+<!-- Carregar o FullCalendar versão 5 -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
+
+    
+
     <style>
-        body {
-            
-        }
-
         #calendar {
-    max-width: 1000px;  /* Defina a largura máxima que você deseja */
-    margin: 40px auto;  /* Centraliza o calendário na tela e adiciona uma margem superior */
+    max-width: 1500px;  /* Defina a largura máxima que você deseja */
+    max-height: 800px;  /* Defina a altura máxima que você deseja */
+   color: rgb(109, 106, 106) ;
+    margin:55px auto;  /* Centraliza o calendário na tela e adiciona uma margem superior */
     padding-top: 20px;  /* Ajuste conforme necessário */
+    background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, rgb(250, 193, 193) 71%);
 }
-                /* Estilo ao passar o mouse sobre os botões */
-        .fc-toolbar .btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);  /* Fundo escurecido */
-        }
+/* Estilo para o grupo de botões do FullCalendar */
+.fc-button-group .fc-button {
+    background-color: transparent !important; /* Fundo transparente */
+    color: white !important; /* Texto branco */
+    border: 1px solid black !important; /* Borda preta */
+}
 
-                /* Estilo para o botão ativo */
-        .fc-toolbar .btn.active {
-            background-color: rgb(0, 0, 0);        /* Fundo branco para o botão ativo */
-            color           : rgb(255, 255, 255);  /* Texto preto */
-        }
+/* Estilo para os botões dentro do grupo quando são clicados (selecionados) */
+.fc-button-group .fc-button.fc-state-active {
+    background-color: black !important; /* Fundo preto quando selecionado */
+    color: white !important; /* Texto branco quando selecionado */
+    border: 1px solid black !important; /* Borda preta quando selecionado */
+}
 
-        .fc-toolbar-chunk .btn {
-            background-color: transparent;         /* Fundo transparente */
-            color           : rgb(255, 255, 255);  /* Texto preto */
-            border          : 1px solid black;     /* Borda preta */
-        }
+/* Estilo para os botões ao passar o mouse (hover) */
+.fc-button-group .fc-button:hover {
+    background-color: black!important; /* Fundo transparente ao passar o mouse */
+    border: 1px solid black !important; /* Borda preta ao passar o mouse */
+}
+/* Estilo para os botões de Mês */
+.fc-dayGridMonth-button {
+    background-color: transparent !important; /* Fundo transparente */
+    color: white !important; /* Texto branco */
+    border: 1px solid black !important; /* Borda preta */
+}
 
-                /* Estilo ao passar o mouse sobre os botões */
-        .fc-toolbar-chunk .btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);  /* Fundo escurecido */
-        }
+.fc-dayGridMonth-button:hover {
+    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
+    border: 1px solid black !important; /* Borda preta */
+}
 
-                /* Estilo para o botão ativo */
-        .fc-toolbar-chunk .btn.active {
-            background-color: rgb(0, 0, 0);        /* Fundo branco para o botão ativo */
-            color           : rgb(255, 255, 255);  /* Texto preto */
-        }
+.fc-dayGridMonth-button.fc-state-active {
+    background-color: black !important; /* Fundo preto quando selecionado */
+    color: white !important; /* Texto branco quando selecionado */
+    border: 1px solid black !important; /* Borda preta quando selecionado */
+}
 
-                /* Botão desativado */
-        .btn-disabled {
-            background-color: gray;         /* Fundo cinza */
-            cursor          : not-allowed;  /* Cursor não permitido */
-        }
-        .btn-disabled:hover {
-        background-color: rgb(220, 38, 38);  /* Fundo vermelho ao passar o mouse */
-    }
+/* Estilo para os botões de Semana */
+.fc-timeGridWeek-button {
+    background-color: transparent !important; /* Fundo transparente */
+    color: white !important; /* Texto branco */
+    border: 1px solid black !important; /* Borda preta */
+}
+
+.fc-timeGridWeek-button:hover {
+    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
+    border: 1px solid black !important; /* Borda preta */
+}
+
+.fc-timeGridWeek-button.fc-state-active {
+    background-color: black !important; /* Fundo preto quando selecionado */
+    color: white !important; /* Texto branco quando selecionado */
+    border: 1px solid black !important; /* Borda preta quando selecionado */
+}
+
+/* Estilo para os botões de Dia */
+.fc-timeGridDay-button {
+    background-color: transparent !important; /* Fundo transparente */
+    color: white !important; /* Texto branco */
+    border: 1px solid black !important; /* Borda preta */
+}
+
+.fc-timeGridDay-button:hover {
+    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
+    border: 1px solid black !important; /* Borda preta */
+}
+
+
+.fc-timeGridDay-button.fc-state-active {
+    background-color: black !important; /* Fundo preto quando selecionado */
+    color: white !important; /* Texto branco quando selecionado */
+    border: 1px solid black !important; /* Borda preta quando selecionado */
+}
+.fc-event-main{
+    background-color: rgba(255, 181, 255, 0.544) !important;
+}
+
+/* Remove as bordas das células do calendário */
+.fc-daygrid-day,
+.fc-daygrid-day-frame,
+.fc-daygrid-week-number,
+.fc-daygrid-day-top {
+    border: none !important;
+}
+
+/* Remove as bordas ao redor do calendário, se houver */
+.fc-daygrid {
+    border: none !important;
+}
+
+/* Estilo para o botão de Voltar ao Dia Atual */
+.fc-today-button {
+    background-color: transparent !important; /* Fundo transparente */
+    color: white !important; /* Texto branco */
+    border: 1px solid black !important; /* Borda preta */
+}
+
+.fc-today-button:hover {
+    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
+    border: 1px solid black !important; /* Borda preta */
+}
+
+.fc-today-button.fc-state-active {
+    background-color: black !important; /* Fundo preto quando selecionado */
+    color: white !important; /* Texto branco quando selecionado */
+    border: 1px solid black !important; /* Borda preta quando selecionado */
+}
+
     .form-control {
     background-color: #3c3f43; /* Ajuste para a cor desejada (bg-zinc-700) */
     color: white; /* Cor do texto */
@@ -74,6 +150,7 @@
    .custom-button {
     margin-right: 60px;  /* Ajuste conforme necessário */
 }
+
  header {
       z-index: 10;
     }
@@ -94,7 +171,6 @@
 <a      href  = "#home" class = "hover:underline text-lg">Home</a>
 <a      href  = "#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
 <a      href  = "#sobre" class = "hover:underline text-lg">Sobre</a>
-<a      href  = "#time" class = "hover:underline text-lg">Time</a>
 <a      href  = "#depoimentos" class = "hover:underline text-base">Depoimentos</a>
 <a      href  = "#bestsellers" class = "hover:underline text-base">Bestsellers</a>
 
@@ -104,12 +180,7 @@
       </div>
       
    <div class="flex space-x-16"> <!-- Aumentei o espaçamento aqui -->
-    <button onclick="window.location.href='/login'" class="px-2 text-lg py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white transition duration-100">
-        Agende Aqui
-    </button>
-    <button onclick="window.location.href='/profile'" class="px-2 text-lg py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white transition duration-100">
-        Meu Perfil
-    </button>
+
     <button onclick="confirmarLogout(event)" class="px-2 text-lg py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white transition duration-100">
         Logout
     </button>
@@ -133,7 +204,7 @@
       
     <div class = "container mx-auto mt-16 p-2 justify-center w-full">
     <h1  class = "text-3xl text-center font-bold mb-6"></h1>
-    <div id    = "calendar" class = "bg-zinc-700 rounded-lg p-4 shadow-lg"></div>
+    <div id    = "calendar" class = " rounded-lg p-4 shadow-lg"></div>
     </div>
 
 <!-- Modal para Detalhar Evento -->
@@ -202,18 +273,19 @@ function confirmarLogout(event) {
         }
     });
 }
-
+    
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'pt-br',
         initialView  : 'dayGridMonth',
         headerToolbar: {
             left  : 'prev,next today',
             center: 'title',
             right : 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        themeSystem: 'bootstrap',
+      
         events     : '/events',
         eventClick : function (info) {
                 // Preencher o modal com as informações do evento clicado
@@ -353,6 +425,23 @@ function checkEditability() {
             // Remover a mensagem do localStorage após exibi-la
         localStorage.removeItem('message');
     }
+});
+FullCalendar.globalLocales.push({
+    code: 'pt-br',
+    week: {
+        dow: 0, // Domingo começa a semana
+        doy: 6  // O primeiro dia da semana será o domingo
+    },
+    buttonText: {
+        prev: 'Anterior',
+        next: 'Próximo',
+        today: 'Hoje',
+        month: 'Mês',
+        week: 'Semana',
+        day: 'Dia',
+        list: 'Agenda'
+    },
+    // Adicionar traduções de outros textos conforme necessário
 });
 </script>
 

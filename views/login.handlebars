@@ -85,7 +85,6 @@
         <a href="/#home" class="hover:underline text-lg">Home</a>
         <a href="/#mais-pedidos" class="hover:underline text-lg">Mais pedidos</a>
         <a href="/#sobre" class="hover:underline text-lg">Sobre</a>
-        <a href="/#time" class="hover:underline text-lg">Time</a>
         <a href="/#depoimentos" class="hover:underline text-base">Depoimentos</a>
         <a href="/#bestsellers" class="hover:underline text-base">Bestsellers</a>
 
@@ -94,9 +93,13 @@
           <a href = "#"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
         </div>
         
-        <button onclick = "window.location.href='/login'" class = "px-2 text-lg py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white first-line:transition duration-100 ">
-    Agende Aqui
-  </button>
+     <div class="flex gap-4">
+        <button onclick="window.location.href='/login'" class="px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+          Agende Aqui
+        </button>
+        <button onclick="window.location.href='/profile'" class="px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+          Meu perfil
+        </button>
       </nav>
     </header>
       <!-- vlibras -->
@@ -110,6 +113,7 @@
   <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
+
   <div class="min-h-screen flex items-center justify-center w-full custom-gradient2">
     <div class="bg-zinc-500/10 flex rounded-2xl shadow-lg max-w-4xl w-full mt-28 h-[600px] relative">
       <!-- Coluna do Formulário de Login -->
@@ -303,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validação do formulário de cadastro
     const form = document.getElementById('cadastroForm');
     const telefoneInput = document.getElementById('telefone');
-    const senhaInput = document.getElementById('senha-cadastro');
+      
     
     // Validação em tempo real do telefone
     telefoneInput.addEventListener('input', function() {
