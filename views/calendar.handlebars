@@ -4,102 +4,102 @@
     <meta charset = "UTF-8">
     <meta name    = "viewport" content = "width=device-width, initial-scale=1.0">
     <title>Agenda de Eventos</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
+<script src  = "https://cdn.tailwindcss.com"></script>
+<link   href = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
 <!-- Carregar o FullCalendar versão 5 -->
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
+<link   href = "https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css" rel = "stylesheet">
+<script src  = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src  = "https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
 
     
 
     <style>
         #calendar {
-    max-width: 1500px;  /* Defina a largura máxima que você deseja */
-    max-height: 800px;  /* Defina a altura máxima que você deseja */
-   color: rgb(109, 106, 106) ;
-    margin:55px auto;  /* Centraliza o calendário na tela e adiciona uma margem superior */
-    padding-top: 20px;  /* Ajuste conforme necessário */
-    background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, rgb(250, 193, 193) 71%);
+   max-width  : 1500px;                                                                      /* Defina a largura máxima que você deseja */
+   max-height : 800px;                                                                       /* Defina a altura máxima que você deseja */
+   color      : rgb(109, 106, 106) ;
+   margin     : 55px auto;                                                                   /* Centraliza o calendário na tela e adiciona uma margem superior */
+   padding-top: 20px;                                                                        /* Ajuste conforme necessário */
+   background : radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, rgb(250, 193, 193) 71%);
 }
-/* Estilo para o grupo de botões do FullCalendar */
+  /* Estilo para o grupo de botões do FullCalendar */
 .fc-button-group .fc-button {
-    background-color: transparent !important; /* Fundo transparente */
-    color: white !important; /* Texto branco */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente */
+    color           : white !important;            /* Texto branco */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
-/* Estilo para os botões dentro do grupo quando são clicados (selecionados) */
+  /* Estilo para os botões dentro do grupo quando são clicados (selecionados) */
 .fc-button-group .fc-button.fc-state-active {
-    background-color: black !important; /* Fundo preto quando selecionado */
-    color: white !important; /* Texto branco quando selecionado */
-    border: 1px solid black !important; /* Borda preta quando selecionado */
+    background-color: black !important;            /* Fundo preto quando selecionado */
+    color           : white !important;            /* Texto branco quando selecionado */
+    border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 
-/* Estilo para os botões ao passar o mouse (hover) */
+  /* Estilo para os botões ao passar o mouse (hover) */
 .fc-button-group .fc-button:hover {
-    background-color: black!important; /* Fundo transparente ao passar o mouse */
-    border: 1px solid black !important; /* Borda preta ao passar o mouse */
+    background-color: black!important;             /* Fundo transparente ao passar o mouse */
+    border          : 1px solid black !important;  /* Borda preta ao passar o mouse */
 }
-/* Estilo para os botões de Mês */
+  /* Estilo para os botões de Mês */
 .fc-dayGridMonth-button {
-    background-color: transparent !important; /* Fundo transparente */
-    color: white !important; /* Texto branco */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente */
+    color           : white !important;            /* Texto branco */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 .fc-dayGridMonth-button:hover {
-    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente ao passar o mouse */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 .fc-dayGridMonth-button.fc-state-active {
-    background-color: black !important; /* Fundo preto quando selecionado */
-    color: white !important; /* Texto branco quando selecionado */
-    border: 1px solid black !important; /* Borda preta quando selecionado */
+    background-color: black !important;            /* Fundo preto quando selecionado */
+    color           : white !important;            /* Texto branco quando selecionado */
+    border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 
-/* Estilo para os botões de Semana */
+  /* Estilo para os botões de Semana */
 .fc-timeGridWeek-button {
-    background-color: transparent !important; /* Fundo transparente */
-    color: white !important; /* Texto branco */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente */
+    color           : white !important;            /* Texto branco */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 .fc-timeGridWeek-button:hover {
-    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente ao passar o mouse */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 .fc-timeGridWeek-button.fc-state-active {
-    background-color: black !important; /* Fundo preto quando selecionado */
-    color: white !important; /* Texto branco quando selecionado */
-    border: 1px solid black !important; /* Borda preta quando selecionado */
+    background-color: black !important;            /* Fundo preto quando selecionado */
+    color           : white !important;            /* Texto branco quando selecionado */
+    border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 
-/* Estilo para os botões de Dia */
+  /* Estilo para os botões de Dia */
 .fc-timeGridDay-button {
-    background-color: transparent !important; /* Fundo transparente */
-    color: white !important; /* Texto branco */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente */
+    color           : white !important;            /* Texto branco */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 .fc-timeGridDay-button:hover {
-    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente ao passar o mouse */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 
 .fc-timeGridDay-button.fc-state-active {
-    background-color: black !important; /* Fundo preto quando selecionado */
-    color: white !important; /* Texto branco quando selecionado */
-    border: 1px solid black !important; /* Borda preta quando selecionado */
+    background-color: black !important;            /* Fundo preto quando selecionado */
+    color           : white !important;            /* Texto branco quando selecionado */
+    border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 .fc-event-main{
     background-color: rgba(255, 181, 255, 0.544) !important;
 }
 
-/* Remove as bordas das células do calendário */
+  /* Remove as bordas das células do calendário */
 .fc-daygrid-day,
 .fc-daygrid-day-frame,
 .fc-daygrid-week-number,
@@ -107,50 +107,50 @@
     border: none !important;
 }
 
-/* Remove as bordas ao redor do calendário, se houver */
+  /* Remove as bordas ao redor do calendário, se houver */
 .fc-daygrid {
     border: none !important;
 }
 
-/* Estilo para o botão de Voltar ao Dia Atual */
+  /* Estilo para o botão de Voltar ao Dia Atual */
 .fc-today-button {
-    background-color: transparent !important; /* Fundo transparente */
-    color: white !important; /* Texto branco */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente */
+    color           : white !important;            /* Texto branco */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 .fc-today-button:hover {
-    background-color: transparent !important; /* Fundo transparente ao passar o mouse */
-    border: 1px solid black !important; /* Borda preta */
+    background-color: transparent !important;      /* Fundo transparente ao passar o mouse */
+    border          : 1px solid black !important;  /* Borda preta */
 }
 
 .fc-today-button.fc-state-active {
-    background-color: black !important; /* Fundo preto quando selecionado */
-    color: white !important; /* Texto branco quando selecionado */
-    border: 1px solid black !important; /* Borda preta quando selecionado */
+    background-color: black !important;            /* Fundo preto quando selecionado */
+    color           : white !important;            /* Texto branco quando selecionado */
+    border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 
     .form-control {
-    background-color: #3c3f43; /* Ajuste para a cor desejada (bg-zinc-700) */
-    color: white; /* Cor do texto */
+    background-color: #3c3f43;  /* Ajuste para a cor desejada (bg-zinc-700) */
+    color           : white;    /* Cor do texto */
 }
 
 .form-control:focus {
-    background-color: #3c3f43; /* Mantém a cor ao focar */
-    color: white; /* Mantém a cor do texto */
-    border-color: #6c757d; /* Cor da borda ao focar (opcional) */
-    outline: none; /* Remove o contorno padrão (opcional) */
+    background-color: #3c3f43;  /* Mantém a cor ao focar */
+    color           : white;    /* Mantém a cor do texto */
+    border-color    : #6c757d;  /* Cor da borda ao focar (opcional) */
+    outline         : none;     /* Remove o contorno padrão (opcional) */
 }
 
 .form-control option {
-    background-color: #3c3f43; /* Cor de fundo para opções (pode variar entre navegadores) */
-    color: white; /* Cor do texto das opções */
+    background-color: #3c3f43;  /* Cor de fundo para opções (pode variar entre navegadores) */
+    color           : white;    /* Cor do texto das opções */
 }
 
    .custom-button {
     margin-right: 60px;  /* Ajuste conforme necessário */
 }
-             /* Botão desativado */
+               /* Botão desativado */
         .btn-disabled {
             background-color: gray;         /* Fundo cinza */
             cursor          : not-allowed;  /* Cursor não permitido */
@@ -162,31 +162,31 @@
       z-index: 10;
     }
   .custom-gradient2 {
-      background-image: url(./img/blur.svg);
-      background-size: cover;
+  background-image   : url(./img/blur.svg);
+  background-size    : cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat  : no-repeat;
     }
     #closeModal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position  : absolute;
+    top       : 10px;
+    right     : 10px;
     background: transparent;
-    border: none;
-    font-size: 1.5rem; /* Ajuste conforme necessário */
-    cursor: pointer;
+    border    : none;
+    font-size : 1.5rem;       /* Ajuste conforme necessário */
+    cursor    : pointer;
 }
 .modal-content {
-    background-color: rgba(52, 52, 52, 0.8); /* Cinza com 80% de opacidade */
-    color: white; /* Mantém o texto em branco */
+    background-color: rgba(52, 52, 52, 0.8);  /* Cinza com 80% de opacidade */
+    color           : white;                  /* Mantém o texto em branco */
 }
 .form-control {
-    background-color: rgba(128, 128, 128, 0.6); /* Cinza com 60% de opacidade */
-    color: white; /* Texto em branco */
-    border: 1px solid #ccc; /* Bordas sutis */
+    background-color: rgba(128, 128, 128, 0.6);  /* Cinza com 60% de opacidade */
+    color           : white;                     /* Texto em branco */
+    border          : 1px solid #ccc;            /* Bordas sutis */
 }
 
-/* Para placeholders com cor cinza claro */
+  /* Para placeholders com cor cinza claro */
 .modal-content .form-control::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
@@ -195,23 +195,23 @@
 <body class = "text-white font-sans custom-gradient2" >
     <!-- Navbar -->
 
-    <header class = "w-full flex justify-center relative z-10">
-<nav    class = "bg-transparent shadow- w-full px-20 py-1 flex justify-between absolute items-center text-black shadow-sm">
+<header class = "w-full flex justify-center relative z-10">
+<nav    class = "bg-transparent shadow- w-full px-20 py-1 flex justify-around absolute items-center text-black shadow-sm">
 <div    class = "flex space-x-6">
-<a      href  = "#home" class = "hover:underline text-lg">Home</a>
-<a      href  = "#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
-<a      href  = "#sobre" class = "hover:underline text-lg">Sobre</a>
-<a      href  = "#depoimentos" class = "hover:underline text-base">Depoimentos</a>
-<a      href  = "#bestsellers" class = "hover:underline text-base">Bestsellers</a>
+<a      href  = "/#home" class         = "hover:underline text-lg">Home</a>
+<a      href  = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
+<a      href  = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
+<a      href  = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
+<a      href  = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
 
-      </div  class="logo-container">
-        <div class="flex justify-center items-center flex-grow">
-        <a href = "/"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
+      </div class = "logo-container">
+      <div  class = "flex justify-center items-center flex-grow">
+      <a    href  = "/"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
       </div>
       
-   <div class="flex space-x-16"> <!-- Aumentei o espaçamento aqui -->
+   <div class = "flex space-x-16"> <!-- Aumentei o espaçamento aqui -->
 
-    <button onclick="confirmarLogout(event)" class="px-2 text-lg py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white transition duration-100">
+    <button onclick = "confirmarLogout(event)" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
         Logout
     </button>
 </div>
@@ -243,7 +243,7 @@
 <div    class       = "modal-content bg-zinc-800 text-white">
 <div    class       = "modal-header border-b border-gray-600">
 <h5     class       = "modal-title" id    = "eventModalLabel">Detalhes do Agendamento</h5>
-<button type="button" class="close text-white" id="closeModal" aria-label="Close">
+<button type        = "button" class      = "close text-white" id = "closeModal" aria-label = "Close">
 <span   aria-hidden = "true">&times;</span>
                 </button>
             </div>
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        locale: 'pt-br',
+        locale       : 'pt-br',
         initialView  : 'dayGridMonth',
         headerToolbar: {
             left  : 'prev,next today',
@@ -316,9 +316,9 @@ document.addEventListener('DOMContentLoaded', function () {
             right : 'dayGridMonth,timeGridWeek,timeGridDay'
         },
       
-        events     : '/events',
-        eventClick : function (info) {
-                // Preencher o modal com as informações do evento clicado
+        events    : '/events',
+        eventClick: function (info) {
+                  // Preencher o modal com as informações do evento clicado
             document.getElementById('eventTitle').innerText            = info.event.title;
             document.getElementById('eventprofessionalName').innerText = info.event.extendedProps.professionalName || 'Desconhecido';
             document.getElementById('eventStart').innerText            = info.event.start.toLocaleDateString();
@@ -327,28 +327,28 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('eventUserEmail').innerText        = info.event.extendedProps.user.email || 'N/A';
             document.getElementById('eventUserPhone').innerText        = info.event.extendedProps.user.telefone || 'N/A';
 
-                // Definir os valores padrão da data e horário com os dados do evento
-            const                   originalDate          = moment(info.event.start).format('YYYY-MM-DD');
-            const                   originalHour          = moment(info.event.extendedProps.hora, 'HH:mm').format('HH:mm');
-            const originalProfessionalName = info.event.extendedProps.professionalName; 
-            document.getElementById('newEventDate').value = originalDate;
-            document.getElementById('newEventHour').value = originalHour;
-            const professionalSelect = document.getElementById('newEventProfessional');
-professionalSelect.value = originalProfessionalName; // Define o valor padrão
+                  // Definir os valores padrão da data e horário com os dados do evento
+const                   originalDate             = moment(info.event.start).format('YYYY-MM-DD');
+const                   originalHour             = moment(info.event.extendedProps.hora, 'HH:mm').format('HH:mm');
+const                   originalProfessionalName = info.event.extendedProps.professionalName;
+document.getElementById('newEventDate').value    = originalDate;
+document.getElementById('newEventHour').value    = originalHour;
+const                   professionalSelect       = document.getElementById('newEventProfessional');
+                        professionalSelect.value = originalProfessionalName;                                        // Define o valor padrão
 
-                // Desabilitar o botão de editar inicialmente
+                  // Desabilitar o botão de editar inicialmente
             const editButton          = document.getElementById('editEvent');
                   editButton.disabled = true;
             editButton.classList.add('btn-disabled');
 
-                // Adicionar evento de input para verificar alterações
+                  // Adicionar evento de input para verificar alterações
             document.getElementById('newEventDate').addEventListener('input', checkEditability);
             document.getElementById('newEventHour').addEventListener('input', checkEditability);
             document.getElementById('newEventProfessional').addEventListener('change', checkEditability);
-                // Exibir o modal
+                  // Exibir o modal
             $('#eventModal').modal('show');
 
-                // Ação de deletar o evento
+                  // Ação de deletar o evento
             document.getElementById('deleteEvent').onclick = function () {
                 Swal.fire({
                     title            : 'Você tem certeza?',
@@ -363,9 +363,9 @@ professionalSelect.value = originalProfessionalName; // Define o valor padrão
                             url    : `/delete-event/${info.event.id}`,
                             type   : 'DELETE',
                             success: function () {
-                                    // Armazenar a mensagem de sucesso no localStorage
+                                      // Armazenar a mensagem de sucesso no localStorage
                                 localStorage.setItem('message', 'Seu agendamento foi excluído com sucesso.');
-                                    // Recarregar a página
+                                      // Recarregar a página
                                 location.reload();
                             },
                             error: function (xhr, status, error) {
@@ -376,10 +376,10 @@ professionalSelect.value = originalProfessionalName; // Define o valor padrão
                 });
             };
 
-// Função para verificar se os campos foram alterados
+  // Função para verificar se os campos foram alterados
 function checkEditability() {
-    const newDate = document.getElementById('newEventDate').value;
-    const newHour = document.getElementById('newEventHour').value;
+    const newDate         = document.getElementById('newEventDate').value;
+    const newHour         = document.getElementById('newEventHour').value;
     const newProfessional = document.getElementById('newEventProfessional').value;
 
     if (newDate !== originalDate || newHour !== originalHour || newProfessional !== originalProfessionalName) {
@@ -393,12 +393,12 @@ function checkEditability() {
 
 
 
-                // Função para fechar o modal
+                  // Função para fechar o modal
             document.getElementById('closeModal').onclick = function () {
                 $('#eventModal').modal('hide');
             };
 
-                // Ação de editar o evento
+                  // Ação de editar o evento
            document.getElementById('editEvent').onclick = async function () {
     const newStart        = document.getElementById('newEventDate').value;
     const newHour         = document.getElementById('newEventHour').value;
@@ -448,30 +448,30 @@ function checkEditability() {
 
     calendar.render();
 
-        // Exibir mensagem de sucesso após recarregar a página
+          // Exibir mensagem de sucesso após recarregar a página
     const message = localStorage.getItem('message');
     if (message) {
         Swal.fire('Sucesso!', message, 'success');
-            // Remover a mensagem do localStorage após exibi-la
+              // Remover a mensagem do localStorage após exibi-la
         localStorage.removeItem('message');
     }
 });
 FullCalendar.globalLocales.push({
     code: 'pt-br',
     week: {
-        dow: 0, // Domingo começa a semana
-        doy: 6  // O primeiro dia da semana será o domingo
+        dow: 0,   // Domingo começa a semana
+        doy: 6    // O primeiro dia da semana será o domingo
     },
     buttonText: {
-        prev: 'Anterior',
-        next: 'Próximo',
+        prev : 'Anterior',
+        next : 'Próximo',
         today: 'Hoje',
         month: 'Mês',
-        week: 'Semana',
-        day: 'Dia',
-        list: 'Agenda'
+        week : 'Semana',
+        day  : 'Dia',
+        list : 'Agenda'
     },
-    // Adicionar traduções de outros textos conforme necessário
+      // Adicionar traduções de outros textos conforme necessário
 });
 </script>
 

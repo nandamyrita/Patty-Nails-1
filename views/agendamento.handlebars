@@ -23,9 +23,9 @@
 <link rel  = "preconnect" href                                                                                                                                                                                                                            = "https://fonts.gstatic.com" crossorigin>
 <link href = "https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet">
    
-<link   href = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet"/>
-<link   rel  = "preconnect" href                                                                     = "https://fonts.googleapis.com" />
-<link   rel  = "preconnect" href                                                                     = "https://fonts.gstatic.com" crossorigin />
+<link href = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet"/>
+<link rel  = "preconnect" href                                                                     = "https://fonts.googleapis.com" />
+<link rel  = "preconnect" href                                                                     = "https://fonts.gstatic.com" crossorigin />
 
 <title>Agendar Sessão</title>
 
@@ -62,7 +62,7 @@
 .custom-button {
     margin-right: 60px;  /* Ajuste conforme necessário */
 }
-   /* Ajusta a posição das divs para ficarem 20px mais próximas do centro */
+     /* Ajusta a posição das divs para ficarem 20px mais próximas do centro */
 
     .custom-container {
          gap: 600px;  /* Reduz o espaço entre as divs para aproximá-las */
@@ -125,13 +125,13 @@ p {
     <a   href  = "/"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
         </div>
     </div>
-  <div    class   = "flex space-x-1"> <!-- Altere aqui -->
-  <button onclick = "window.location.href='/login'" class = "px-2 text-lg py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white transition duration-100 custom-button">
-        Agende Aqui
-    </button>
-    <button onclick = "window.location.href='/profile'" class = "px-2 text-lg py-1 border rounded-3xl border-black text-black hover:border-pink-500 hover:bg-white transition duration-100">
-        Meu Perfil
-    </button>
+    <div    class   = "flex gap-4">
+    <button onclick = "window.location.href='/login'" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+          Agende Aqui
+        </button>
+        <button onclick = "window.location.href='/profile'" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+          Meu perfil
+        </button>
 </div>
 
 </nav>
@@ -206,84 +206,84 @@ p {
     </div>
 
   <!-- Replace the existing right div with this updated version -->
-<div class="p-10 shadow-lg w-full max-w-lg border border-black bg-transparent move-slightly-center-right custom-margin-top flex flex-col items-center">
-    <a href="#">
-        <img src="img/logo.svg" alt="unha" class="h-32 mb-4" />
+<div class = "p-10 shadow-lg w-full max-w-lg border border-black bg-transparent move-slightly-center-right custom-margin-top flex flex-col items-center">
+<a   href  = "#">
+<img src   = "img/logo.svg" alt = "unha" class = "h-32 mb-4" />
     </a>
 
     <!-- Summary content will be dynamically updated -->
-    <div id="summary-content" style="width: 100%; display: none;">
-        <p id="service-summary" class="mb-4 text-black"></p>
-        <p id="professional-summary" class="mb-4 text-black"></p>
-        <p id="duration-summary" class="mb-4 text-black"></p>
+    <div id = "summary-content" style      = "width: 100%; display: none;">
+    <p   id = "service-summary" class      = "mb-4 text-black"></p>
+    <p   id = "professional-summary" class = "mb-4 text-black"></p>
+    <p   id = "duration-summary" class     = "mb-4 text-black"></p>
         
-        <hr class="linha">
+        <hr class = "linha">
 
-        <p id="total-summary" class="mb-4 text-black"></p>
-        <p id="date-summary" class="mb-4 text-black"></p>
-        <p id="time-summary" class="mb-4 text-black"></p>
+        <p id = "total-summary" class = "mb-4 text-black"></p>
+        <p id = "date-summary" class  = "mb-4 text-black"></p>
+        <p id = "time-summary" class  = "mb-4 text-black"></p>
     </div>
 
     <!-- Initial message when no selections are made -->
-    <p id="initial-message" class="mb-4 text-black">Por favor, faça suas seleções no formulário</p>
+    <p id = "initial-message" class = "mb-4 text-black">Por favor, faça suas seleções no formulário</p>
 
-    <button type="button" class="w-full p-3 border border-black text-black font-bold transition-transform duration-300 transform hover:scale-105" id="submit-event" disabled>
+    <button type = "button" class = "w-full p-3 border border-black text-black font-bold transition-transform duration-300 transform hover:scale-105" id = "submit-event" disabled>
         Agendar
     </button>
 </div>
 </div>
 
-<footer class="bg-gray-900 text-white py-10 px-5 w-full">
-  <div class="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+<footer class = "bg-gray-900 text-white py-10 px-5 w-full">
+<div    class = "mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       <!-- Coluna de informações de contato -->
       <div>
-          <h2 class="text-2xl font-semibold mb-4">Entre em Contato</h2>
-          <p class="mb-2">Endereço:</p>
-          <p class="text-gray-400">Rua Goncalves Crespo 78, Tatuapé, São Paulo Shopping Boulevard Tatuapé - Loja 314 - Piso 2 - Tatuapé, São Paulo - SP, 03822-000</p>
-          <p class="mt-2 mb-2">Telefone:</p>
-          <p class="text-gray-400">(11) 2092-9925</p>
-          <p class="mt-2 mb-2">Email:</p>
-          <p class="text-gray-400">patty_esmalteria@gmail.com</p>
+          <h2 class = "text-2xl font-semibold mb-4">Entre em Contato</h2>
+          <p  class = "mb-2">Endereço:</p>
+          <p  class = "text-gray-400">Rua Goncalves Crespo 78, Tatuapé, São Paulo Shopping Boulevard Tatuapé - Loja 314 - Piso 2 - Tatuapé, São Paulo - SP, 03822-000</p>
+          <p  class = "mt-2 mb-2">Telefone:</p>
+          <p  class = "text-gray-400">(11) 2092-9925</p>
+          <p  class = "mt-2 mb-2">Email:</p>
+          <p  class = "text-gray-400">patty_esmalteria@gmail.com</p>
       </div>
 
       <!-- Coluna de links úteis -->
       <div>
-          <h2 class="text-2xl font-semibold mb-4">Links Úteis</h2>
-          <ul class="space-y-2">
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Sobre Nós</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Serviços</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Termos e Condições</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Política de Privacidade</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Contato</a></li>
+          <h2    class = "text-2xl font-semibold mb-4">Links Úteis</h2>
+          <ul    class = "space-y-2">
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Sobre Nós</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Serviços</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Termos e Condições</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Política de Privacidade</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Contato</a></li>
           </ul>
       </div>
 
       <!-- Coluna de redes sociais -->
       <div>
-          <h2 class="text-2xl font-semibold mb-4">Siga-nos</h2>
-          <div class="flex space-x-4 mt-2">
+          <h2  class = "text-2xl font-semibold mb-4">Siga-nos</h2>
+          <div class = "flex space-x-4 mt-2">
               <!-- Ícone do Facebook -->
-              <a href="#" class="hover:text-gray-400 transition-colors">
-                  <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.988H7.898v-2.89h2.54v-2.207c0-2.507 1.492-3.89 3.775-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.242 0-1.631.771-1.631 1.562v1.881h2.773l-.444 2.89h-2.329V22C18.343 21.128 22 16.991 22 12z"/>
+              <a    href  = "#" class                    = "hover:text-gray-400 transition-colors">
+              <svg  class = "w-6 h-6 fill-current" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 24 24">
+              <path d     = "M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.988H7.898v-2.89h2.54v-2.207c0-2.507 1.492-3.89 3.775-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.242 0-1.631.771-1.631 1.562v1.881h2.773l-.444 2.89h-2.329V22C18.343 21.128 22 16.991 22 12z"/>
                   </svg>
               </a>
               <!-- Ícone do Instagram -->
-              <a href="#" class="hover:text-gray-400 transition-colors">
-                  <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.24 2.423.405a4.92 4.92 0 011.756 1.004 4.92 4.92 0 011.004 1.756c.165.454.349 1.217.405 2.423.058 1.267.07 1.647.07 4.851s-.012 3.584-.07 4.85c-.056 1.206-.24 1.97-.405 2.423a4.92 4.92 0 01-1.004 1.756 4.92 4.92 0 01-1.756 1.004c-.454.165-1.217.349-2.423.405-1.267.058-1.647.07-4.85.07s-3.584-.012-4.851-.07c-1.206-.056-1.97-.24-2.423-.405a4.92 4.92 0 01-1.756-1.004 4.92 4.92 0 01-1.004-1.756c-.165-.454-.349-1.217-.405-2.423-.058-1.267-.07-1.647-.07-4.85s.012-3.584.07-4.851c.056-1.206.24-1.97.405-2.423a4.92 4.92 0 011.004-1.756 4.92 4.92 0 011.756-1.004c.454-.165 1.217-.349 2.423-.405 1.267-.058 1.647-.07 4.851-.07zm0-2.163C8.748 0 8.335.013 7.057.072 5.775.13 4.751.302 3.846.6 2.879.914 2.021 1.382 1.378 2.025c-.643.643-1.111 1.501-1.425 2.468-.298.906-.47 1.93-.528 3.212C0 8.335 0 8.748 0 12c0 3.252.013 3.665.072 4.943.058 1.282.23 2.306.528 3.212.314.967.782 1.825 1.425 2.468.643.643 1.501 1.111 2.468 1.425.906.298 1.93.47 3.212.528C8.335 24 8.748 24 12 24c3.252 0 3.665-.013 4.943-.072 1.282-.058 2.306-.23 3.212-.528.967-.314 1.825-.782 2.468-1.425.643-.643 1.111-1.501 1.425-2.468.298-.906.47-1.93.528-3.212C24 15.665 24 15.252 24 12c0-3.252-.013-3.665-.072-4.943-.058-1.282-.23-2.306-.528-3.212a7.002 7.002 0 00-1.425-2.468 7.002 7.002 0 00-2.468-1.425c-.906-.298-1.93-.47-3.212-.528C15.665.013 15.252 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.838 3.838 0 110-7.676 3.838 3.838 0 010 7.676zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+              <a    href  = "#" class                    = "hover:text-gray-400 transition-colors">
+              <svg  class = "w-6 h-6 fill-current" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 24 24">
+              <path d     = "M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.24 2.423.405a4.92 4.92 0 011.756 1.004 4.92 4.92 0 011.004 1.756c.165.454.349 1.217.405 2.423.058 1.267.07 1.647.07 4.851s-.012 3.584-.07 4.85c-.056 1.206-.24 1.97-.405 2.423a4.92 4.92 0 01-1.004 1.756 4.92 4.92 0 01-1.756 1.004c-.454.165-1.217.349-2.423.405-1.267.058-1.647.07-4.85.07s-3.584-.012-4.851-.07c-1.206-.056-1.97-.24-2.423-.405a4.92 4.92 0 01-1.756-1.004 4.92 4.92 0 01-1.004-1.756c-.165-.454-.349-1.217-.405-2.423-.058-1.267-.07-1.647-.07-4.85s.012-3.584.07-4.851c.056-1.206.24-1.97.405-2.423a4.92 4.92 0 011.004-1.756 4.92 4.92 0 011.756-1.004c.454-.165 1.217-.349 2.423-.405 1.267-.058 1.647-.07 4.851-.07zm0-2.163C8.748 0 8.335.013 7.057.072 5.775.13 4.751.302 3.846.6 2.879.914 2.021 1.382 1.378 2.025c-.643.643-1.111 1.501-1.425 2.468-.298.906-.47 1.93-.528 3.212C0 8.335 0 8.748 0 12c0 3.252.013 3.665.072 4.943.058 1.282.23 2.306.528 3.212.314.967.782 1.825 1.425 2.468.643.643 1.501 1.111 2.468 1.425.906.298 1.93.47 3.212.528C8.335 24 8.748 24 12 24c3.252 0 3.665-.013 4.943-.072 1.282-.058 2.306-.23 3.212-.528.967-.314 1.825-.782 2.468-1.425.643-.643 1.111-1.501 1.425-2.468.298-.906.47-1.93.528-3.212C24 15.665 24 15.252 24 12c0-3.252-.013-3.665-.072-4.943-.058-1.282-.23-2.306-.528-3.212a7.002 7.002 0 00-1.425-2.468 7.002 7.002 0 00-2.468-1.425c-.906-.298-1.93-.47-3.212-.528C15.665.013 15.252 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.838 3.838 0 110-7.676 3.838 3.838 0 010 7.676zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
                   </svg>
               </a>
               <!-- Ícone do Twitter -->
-              <a href="#" class="hover:text-gray-400 transition-colors">
-                  <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M22.162 5.656c-.82.363-1.703.607-2.631.718a4.53 4.53 0 001.987-2.5 9.066 9.066 0 01-2.881 1.1 4.518 4.518 0 00-7.69 4.117 12.827 12.827 0 01-9.297-4.714 4.524 4.524 0 001.4 6.04A4.503 4.503 0 012 9.75v.057a4.52 4.52 0 003.622 4.432 4.507 4.507 0 01-2.034.077 4.52 4.52 0 004.215 3.131A9.066 9.066 0 012 18.336a12.805 12.805 0 006.925 2.03c8.307 0 12.845-6.877 12.845-12.845 0-.195-.004-.39-.013-.585a9.173 9.173 0 002.306-2.344z"/>
+              <a    href  = "#" class                    = "hover:text-gray-400 transition-colors">
+              <svg  class = "w-6 h-6 fill-current" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 24 24">
+              <path d     = "M22.162 5.656c-.82.363-1.703.607-2.631.718a4.53 4.53 0 001.987-2.5 9.066 9.066 0 01-2.881 1.1 4.518 4.518 0 00-7.69 4.117 12.827 12.827 0 01-9.297-4.714 4.524 4.524 0 001.4 6.04A4.503 4.503 0 012 9.75v.057a4.52 4.52 0 003.622 4.432 4.507 4.507 0 01-2.034.077 4.52 4.52 0 004.215 3.131A9.066 9.066 0 012 18.336a12.805 12.805 0 006.925 2.03c8.307 0 12.845-6.877 12.845-12.845 0-.195-.004-.39-.013-.585a9.173 9.173 0 002.306-2.344z"/>
                   </svg>
               </a>
           </div>
       </div>
   </div>
-  <p class="text-center text-gray-500 mt-10">© 2023 Seu Negócio. Todos os direitos reservados.</p>
+  <p class = "text-center text-gray-500 mt-10">© 2023 Seu Negócio. Todos os direitos reservados.</p>
 </footer>
 
 
@@ -292,7 +292,7 @@ p {
 <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
-                  // Funções para avançar e voltar nas etapas
+                    // Funções para avançar e voltar nas etapas
         function nextStep(step) {
             $('.form-step').hide();     // Oculta todas as etapas
             $('#step-' + step).show();  // Mostra a etapa atual
@@ -306,19 +306,19 @@ p {
 $(document).ready(function() {
     let previousServiceValue = '';
 
-        // When service changes
+          // When service changes
     $('#service').on('change', function() {
         const serviceValue = $(this).val();
         
-            // Enable professional selection if not already selected
+              // Enable professional selection if not already selected
         if (!$('#professionalName').val()) {
             $('#professionalName').prop('disabled', !serviceValue);
             $('#professionalName').toggleClass('bg-zinc-700/50 cursor-not-allowed', !serviceValue);
         }
 
-            // If there's a service selected (new or changed)
+              // If there's a service selected (new or changed)
         if (serviceValue) {
-                // Se mudou o serviço e já tem profissional e data selecionados
+                  // Se mudou o serviço e já tem profissional e data selecionados
             if (previousServiceValue && previousServiceValue !== serviceValue) {
                 const professionalSelected = $('#professionalName').val();
                 const dateSelected         = $('#start').val();
@@ -330,7 +330,7 @@ $(document).ready(function() {
             
             previousServiceValue = serviceValue;
             
-                // If professional and date are already selected, update available times
+                  // If professional and date are already selected, update available times
             const professionalSelected = $('#professionalName').val();
             const dateSelected         = $('#start').val();
             
@@ -342,7 +342,7 @@ $(document).ready(function() {
         }
     });
 
-        // When professional changes
+          // When professional changes
     $('#professionalName').on('change', function() {
         const professionalSelected = $(this).val() !== '';
         $('#start').prop('disabled', !professionalSelected);
@@ -358,7 +358,7 @@ $(document).ready(function() {
         }
     });
 
-        // When date changes
+          // When date changes
     $('#start').on('change', function() {
         if ($(this).val() !== '') {
             checkAvailability();
@@ -410,7 +410,7 @@ $(document).ready(function() {
                     service         : currentService  // Adicionando o serviço atual na requisição
                 }),
                 success: function(response) {
-                        // Filtra apenas os horários ocupados pelo serviço atual
+                          // Filtra apenas os horários ocupados pelo serviço atual
                     const occupiedTimes = response
                         .filter(event => event.title === currentService)
                         .map(event => event.hora);
@@ -440,7 +440,7 @@ $(document).ready(function() {
         }
     }
 
-        // Form submission handler
+          // Form submission handler
     $('#submit-event').on('click', function() {
         const service          = $('#service').val();
         const professionalName = $('#professionalName').val();
@@ -487,7 +487,7 @@ $(document).ready(function() {
     });
 });
 
-    // Função para habilitar/desabilitar o botão "Agendar"
+      // Função para habilitar/desabilitar o botão "Agendar"
     function toggleButton() {
         const service          = document.getElementById('service').value;
         const professionalName = document.getElementById('professionalName').value;
@@ -496,7 +496,7 @@ $(document).ready(function() {
 
         const button = document.getElementById('submit-event');
         
-          // Verifica se todos os campos estão preenchidos
+            // Verifica se todos os campos estão preenchidos
         if (service && professionalName && start && time) {
             button.disabled = false;  // Habilita o botão
         } else {
@@ -504,7 +504,7 @@ $(document).ready(function() {
         }
     }
 
-      // Adiciona eventos de input nos campos do formulário
+        // Adiciona eventos de input nos campos do formulário
     document.getElementById('service').addEventListener('change', toggleButton);
     document.getElementById('professionalName').addEventListener('change', toggleButton);
     document.getElementById('start').addEventListener('change', toggleButton);
@@ -512,24 +512,24 @@ $(document).ready(function() {
 
 
 
-// Service durations in minutes
+  // Service durations in minutes
 const serviceDurations = {
-    'Manicure Simples - R$ 25,00': 40,
-    'Pedicure Simples - R$ 30,00': 45,
-    'Pedicure Completa - R$ 55,00': 60,
-    'Esmaltação em Gel - R$ 45,00': 45,
+    'Manicure Simples - R$ 25,00'    : 40,
+    'Pedicure Simples - R$ 30,00'    : 45,
+    'Pedicure Completa - R$ 55,00'   : 60,
+    'Esmaltação em Gel - R$ 45,00'   : 45,
     'Alongamento de Unhas - R$ 80,00': 60,
     'Remoção de Cutículas - R$ 20,00': 30,
-    'Spa para Pés - R$ 40,00': 60,
-    'Francesinha - R$ 35,00': 45,
-    'Decoração de Unhas - R$ 60,00': 60
+    'Spa para Pés - R$ 40,00'        : 60,
+    'Francesinha - R$ 35,00'         : 45,
+    'Decoração de Unhas - R$ 60,00'  : 60
 };
 
 function updateSummary() {
-    const service = $('#service').val();
-    const professional = $('#professionalName').val();
-    const date = $('#start').val();
-    const time = $('#time').val();
+    const service        = $('#service').val();
+    const professional   = $('#professionalName').val();
+    const date           = $('#start').val();
+    const time           = $('#time').val();
     const summaryContent = $('#summary-content');
     const initialMessage = $('#initial-message');
 
@@ -542,51 +542,51 @@ function updateSummary() {
         return;
     }
 
-    // Update service and price
+      // Update service and price
     if (service) {
         const duration = serviceDurations[service];
-        const price = service.match(/R\$ (\d+),00/)[1];
+        const price    = service.match(/R\$ (\d+),00/)[1];
         
         $('#service-summary').text(service);
         $('#duration-summary').text(`${Math.floor(duration / 60)}h ${duration % 60}min de duração`);
         $('#total-summary').text(`TOTAL R$ ${price},00`);
     }
 
-    // Update professional
+      // Update professional
     if (professional) {
         $('#professional-summary').text(`Profissional: ${professional}`);
     } else {
         $('#professional-summary').text('');
     }
 
-    // Update date
+      // Update date
     if (date) {
-        const formattedDate = new Date(date);
-        const days = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-        const dayName = days[formattedDate.getDay()];
+        const formattedDate    = new Date(date);
+        const days             = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+        const dayName          = days[formattedDate.getDay()];
         const formattedDateStr = formattedDate.toLocaleDateString('pt-BR');
         $('#date-summary').text(`${dayName} ${formattedDateStr}`);
     }
 
-    // Update time
+      // Update time
     if (time && service) {
         const duration = serviceDurations[service];
-        const endTime = addMinutes(time, duration);
+        const endTime  = addMinutes(time, duration);
         $('#time-summary').text(`${time} - (${Math.floor(duration / 60)}h ${duration % 60}min de duração)`);
     }
 }
 
 function addMinutes(timeStr, minutes) {
     const [hours, mins] = timeStr.split(':').map(Number);
-    const date = new Date();
+    const date          = new Date();
     date.setHours(hours, mins);
     date.setMinutes(date.getMinutes() + minutes);
     return date.toTimeString().slice(0, 5);
 }
 
-// Add these event listeners to your existing document.ready function
+  // Add these event listeners to your existing document.ready function
 $(document).ready(function() {
-    // Add to your existing ready function
+      // Add to your existing ready function
     $('#service, #professionalName, #start, #time').on('change', updateSummary);
 });
 </script>

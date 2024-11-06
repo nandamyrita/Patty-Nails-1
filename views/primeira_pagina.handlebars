@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang = "pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset = "UTF-8" />
+  <meta name    = "viewport" content = "width=device-width, initial-scale=1.0" />
   
   <!-- Estilos e Scripts -->
-  <link rel="stylesheet" href="/assets/style.css" />
-  <script src="./assets/script.js"></script>
-  <script src="https://vlibras.gov.br/vlibras.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link   rel = "stylesheet" href = "/assets/style.css" />
+  <script src = "./assets/script.js"></script>
+  <script src = "https://vlibras.gov.br/vlibras.min.js"></script>
+  <script src = "https://cdn.tailwindcss.com"></script>
   
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <link rel  = "preconnect" href                                                                                                                                                                                                    = "https://fonts.googleapis.com">
+  <link rel  = "preconnect" href                                                                                                                                                                                                    = "https://fonts.gstatic.com" crossorigin>
+  <link href = "https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel = "stylesheet">
   
   <title>Patty Nails</title>
   
   <!-- CSS Inline -->
   <style>
-    /* Fontes para Títulos */
+      /* Fontes para Títulos */
     h1, h2, h3 {
       font-family: "Libre Bodoni", serif;
     }
 
-    /* Comportamento de rolagem */
+      /* Comportamento de rolagem */
     html, body {
       scroll-behavior: smooth;
     }
 
-    /* Estilos do Header */
+      /* Estilos do Header */
     header {
       z-index: 10;
     }
 
-    /* Gradiente Personalizado */
+      /* Gradiente Personalizado */
     .custom-gradient {
       background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, hsla(0, 88%, 77%, 1) 71%);
     }
 
-    /* Imagem de Fundo */
+      /* Imagem de Fundo */
     .image {
       background-image: url(./img/blur.svg);
     }
@@ -53,30 +53,30 @@
 
 
 
-<body class="flex flex-col items-center">
-  <header class="w-full flex justify-center relative z-10">
-    <nav class="bg-transparent w-full px-20 py-1 flex justify-between items-center text-black shadow-sm absolute">
+<body   class = "flex flex-col items-center">
+<header class = "w-full flex justify-center relative z-10">
+<nav    class = "bg-transparent w-full px-20 py-1 flex justify-between items-center text-black shadow-sm absolute">
       
       <!-- Links de navegação -->
-      <div class="flex space-x-6 text-sm">
-        <a href="#home" class="hover:underline">Home</a>
-        <a href="#mais-pedidos" class="hover:underline">Serviços</a>
-        <a href="#sobre" class="hover:underline">Sobre</a>
-        <a href="#depoimentos" class="hover:underline">Depoimentos</a>
-        <a href="#bestsellers" class="hover:underline">Bestsellers</a>
+      <div class = "flex space-x-6 text-sm">
+      <a   href  = "#home" class         = "hover:underline">Home</a>
+      <a   href  = "#mais-pedidos" class = "hover:underline">Serviços</a>
+      <a   href  = "#sobre" class        = "hover:underline">Sobre</a>
+      <a   href  = "#depoimentos" class  = "hover:underline">Depoimentos</a>
+      <a   href  = "#bestsellers" class  = "hover:underline">Bestsellers</a>
       </div>
 
       <!-- Logo -->
-      <div class="flex-grow flex justify-center items-center">
-        <a href="/"><img src="img/logo.svg" alt="unha" class="h-24 mr-48" /></a>
+      <div class = "flex-grow flex justify-center items-center">
+      <a   href  = "/"><img src = "img/logo.svg" alt = "unha" class = "h-24 mr-48" /></a>
       </div>
 
       <!-- Botões de Ação -->
-      <div class="flex gap-4">
-        <button onclick="window.location.href='/login'" class="px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+      <div    class   = "flex gap-4">
+      <button onclick = "window.location.href='/login'" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
           Agende Aqui
         </button>
-        <button onclick="window.location.href='/profile'" class="px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+        <button onclick = "window.location.href='/profile'" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
           Meu perfil
         </button>
       </div>
@@ -86,22 +86,22 @@
 
 
   <!-- vlibras -->
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
+  <div vw class               = "enabled">
+  <div vw-access-button class = "active"></div>
     <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
+      <div class = "vw-plugin-top-wrapper"></div>
     </div>
   </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script src = "https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
   <main class = "w-full flex flex-col items-center ">
 
     <!-- Primeira seção -->
-    <section id="home" class="image bg-cover bg-no-repeat w-full min-h-screen bg-center flex relative pb-32 md:pb-52">
-      <div class = "flex flex-col gap-12 md:gap-8 w-11/12 md:w-1/2 pt-32 md:pt-44 ml-4 md:ml-32">
-       <h1 class = "text-white text-6xl md:text-6 xl font-custom">Patty Nails - Cuidado para Suas Unhas</h1>
+    <section id    = "home" class = "image bg-cover bg-no-repeat w-full min-h-screen bg-center flex relative pb-32 md:pb-52">
+    <div     class = "flex flex-col gap-12 md:gap-8 w-11/12 md:w-1/2 pt-32 md:pt-44 ml-4 md:ml-32">
+    <h1      class = "text-white text-6xl md:text-6 xl font-custom">Patty Nails - Cuidado para Suas Unhas</h1>
     <p       class = "text-[#333333] text-lg md:text-xl font-custom">
           Um salão onde cada detalhe importa. Patty Nails combina sofisticação e técnica para oferecer serviços que valorizam a beleza de suas unhas.
         </p>
@@ -140,7 +140,7 @@
       </div>
     </section>
 
-  <section id="mais-pedidos" class = "py-12 bg-white w-full justify-center">
+  <section id    = "mais-pedidos" class = "py-12 bg-white w-full justify-center">
   <div     class = "container mx-auto text-center flex flex-col items-center justify-center w-full ">
   <p       class = "text-gray-600 mb-10 w-1/2 text-center">Services</p>
   <h2      class = "text-3xl font-bold mb-2">Os Mais Pedidos</h2>
@@ -203,7 +203,7 @@
 </section>
 
     <!-- Terceira seção: Sobre nós -->
-    <section id="sobre" class = "image2 bg-no-repeat bg-cover w-full flex items-center">
+    <section id    = "sobre" class = "image2 bg-no-repeat bg-cover w-full flex items-center">
     <div     class = "max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20">
     <div     class = "flex flex-col justify-center gap-6">
     <h2      class = "text-8xl font-semibold mb-4 text-black">About us</h2>
@@ -226,7 +226,7 @@
     
 
 
-  <section id="depoimentos" class = "w-full py-16 bg-white flex items-center justify-center">
+  <section id    = "depoimentos" class = "w-full py-16 bg-white flex items-center justify-center">
   <div     class = "relative w-full m-20 text-center">
       <!-- Container de Depoimentos -->
       <div id = "testimonials" class = "text-gray-800 px-8">
@@ -259,7 +259,7 @@
     </div>
   </section>
 
-<section id="bestsellers" class = "flex justify-center items-center h-screen">
+<section id    = "bestsellers" class = "flex justify-center items-center h-screen">
 <div     class = "flex flex-col items-center gap-4">
 <div     class = "flex gap-4 w-full flex-row justify-center">
          <!-- Imagem principal expandida -->
@@ -331,23 +331,23 @@
 
 
 <script>
-      // Função para encolher a primeira imagem
+        // Função para encolher a primeira imagem
     function shrinkFirstImage() {
         const firstImage = document.getElementById('first-image');
-        firstImage.classList.remove('w-80');  // Remove a largura expandida
-        firstImage.classList.add   ('w-20');  // Define a largura encolhida
+        firstImage.classList.remove('w-80');   // Remove a largura expandida
+        firstImage.classList.add    ('w-20');  // Define a largura encolhida
     }
 
-      // Função para expandir a primeira imagem novamente
+        // Função para expandir a primeira imagem novamente
     function expandFirstImage() {
         const firstImage = document.getElementById('first-image');
         if (!firstImage.classList.contains('hover:w-80')) {
-            firstImage.classList.remove('w-20');  // Remove a largura encolhida
-            firstImage.classList.add   ('w-80');  // Define a largura expandida
+            firstImage.classList.remove('w-20');   // Remove a largura encolhida
+            firstImage.classList.add    ('w-80');  // Define a largura expandida
         }
     }
 
-      // Quando a página carrega, expande a primeira imagem
+        // Quando a página carrega, expande a primeira imagem
     document.addEventListener('DOMContentLoaded', function () {
         const firstImage = document.getElementById('first-image');
         firstImage.classList.add('w-80');  // Adiciona a classe para a largura expandida
@@ -358,14 +358,14 @@
 
   links.forEach(link => {
     link.addEventListener('click', function(event) {
-      event.preventDefault(); // Previne o comportamento padrão do link
+      event.preventDefault();  // Previne o comportamento padrão do link
   
-      const targetId = this.getAttribute('href'); // Pega o valor do atributo href
-      const targetElement = document.querySelector(targetId); // Seleciona o elemento de destino
+      const targetId      = this.getAttribute('href');         // Pega o valor do atributo href
+      const targetElement = document.querySelector(targetId);  // Seleciona o elemento de destino
   
-      // Faz a rolagem suave até o elemento
+        // Faz a rolagem suave até o elemento
       targetElement.scrollIntoView({
-        behavior: 'smooth' // Comportamento de rolagem suave
+        behavior: 'smooth'  // Comportamento de rolagem suave
       });
     });
   });</script>
@@ -428,7 +428,7 @@
         <div class = "text-4x1 text-gray-800 mt-4">- ${testimonials[index].author}, <span class = "font-bold">${testimonials[index].company}</span></div>
       `;
 
-        // Atualiza as bolinhas de navegação
+          // Atualiza as bolinhas de navegação
       document.querySelectorAll(".dot").forEach((dot, idx) => {
         dot.classList.toggle("bg-gray-800", idx === index);
         dot.classList.toggle("bg-gray-400", idx !== index);
@@ -450,10 +450,10 @@
       showTestimonial(currentIndex);
     }
 
-      // Exibe o primeiro depoimento ao carregar a página
+        // Exibe o primeiro depoimento ao carregar a página
     showTestimonial(currentIndex);
 
-      // Configura a rolagem automática a cada 5 segundos
+        // Configura a rolagem automática a cada 5 segundos
     setInterval(nextTestimonial, 5000);
   </script>
 
@@ -464,57 +464,57 @@
 
 
 </body>
-<footer class="bg-gray-900 text-white py-10 px-5 w-full">
-  <div class="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+<footer class = "bg-gray-900 text-white py-10 px-5 w-full">
+<div    class = "mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       <!-- Coluna de informações de contato -->
       <div>
-          <h2 class="text-2xl font-semibold mb-4">Entre em Contato</h2>
-          <p class="mb-2">Endereço:</p>
-          <p class="text-gray-400">Rua Goncalves Crespo 78, Tatuapé, São Paulo Shopping Boulevard Tatuapé - Loja 314 - Piso 2 - Tatuapé, São Paulo - SP, 03822-000</p>
-          <p class="mt-2 mb-2">Telefone:</p>
-          <p class="text-gray-400">(11) 2092-9925</p>
-          <p class="mt-2 mb-2">Email:</p>
-          <p class="text-gray-400">patty_esmalteria@gmail.com</p>
+          <h2 class = "text-2xl font-semibold mb-4">Entre em Contato</h2>
+          <p  class = "mb-2">Endereço:</p>
+          <p  class = "text-gray-400">Rua Goncalves Crespo 78, Tatuapé, São Paulo Shopping Boulevard Tatuapé - Loja 314 - Piso 2 - Tatuapé, São Paulo - SP, 03822-000</p>
+          <p  class = "mt-2 mb-2">Telefone:</p>
+          <p  class = "text-gray-400">(11) 2092-9925</p>
+          <p  class = "mt-2 mb-2">Email:</p>
+          <p  class = "text-gray-400">patty_esmalteria@gmail.com</p>
       </div>
 
       <!-- Coluna de links úteis -->
       <div>
-          <h2 class="text-2xl font-semibold mb-4">Links Úteis</h2>
-          <ul class="space-y-2">
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Sobre Nós</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Serviços</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Termos e Condições</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Política de Privacidade</a></li>
-              <li><a href="#" class="hover:text-gray-400 transition-colors">Contato</a></li>
+          <h2    class = "text-2xl font-semibold mb-4">Links Úteis</h2>
+          <ul    class = "space-y-2">
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Sobre Nós</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Serviços</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Termos e Condições</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Política de Privacidade</a></li>
+          <li><a href  = "#" class = "hover:text-gray-400 transition-colors">Contato</a></li>
           </ul>
       </div>
 
       <!-- Coluna de redes sociais -->
       <div>
-          <h2 class="text-2xl font-semibold mb-4">Siga-nos</h2>
-          <div class="flex space-x-4 mt-2">
+          <h2  class = "text-2xl font-semibold mb-4">Siga-nos</h2>
+          <div class = "flex space-x-4 mt-2">
               <!-- Ícone do Facebook -->
-              <a href="#" class="hover:text-gray-400 transition-colors">
-                  <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.988H7.898v-2.89h2.54v-2.207c0-2.507 1.492-3.89 3.775-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.242 0-1.631.771-1.631 1.562v1.881h2.773l-.444 2.89h-2.329V22C18.343 21.128 22 16.991 22 12z"/>
+              <a    href  = "#" class                    = "hover:text-gray-400 transition-colors">
+              <svg  class = "w-6 h-6 fill-current" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 24 24">
+              <path d     = "M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.988H7.898v-2.89h2.54v-2.207c0-2.507 1.492-3.89 3.775-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.242 0-1.631.771-1.631 1.562v1.881h2.773l-.444 2.89h-2.329V22C18.343 21.128 22 16.991 22 12z"/>
                   </svg>
               </a>
               <!-- Ícone do Instagram -->
-              <a href="#" class="hover:text-gray-400 transition-colors">
-                  <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.24 2.423.405a4.92 4.92 0 011.756 1.004 4.92 4.92 0 011.004 1.756c.165.454.349 1.217.405 2.423.058 1.267.07 1.647.07 4.851s-.012 3.584-.07 4.85c-.056 1.206-.24 1.97-.405 2.423a4.92 4.92 0 01-1.004 1.756 4.92 4.92 0 01-1.756 1.004c-.454.165-1.217.349-2.423.405-1.267.058-1.647.07-4.85.07s-3.584-.012-4.851-.07c-1.206-.056-1.97-.24-2.423-.405a4.92 4.92 0 01-1.756-1.004 4.92 4.92 0 01-1.004-1.756c-.165-.454-.349-1.217-.405-2.423-.058-1.267-.07-1.647-.07-4.85s.012-3.584.07-4.851c.056-1.206.24-1.97.405-2.423a4.92 4.92 0 011.004-1.756 4.92 4.92 0 011.756-1.004c.454-.165 1.217-.349 2.423-.405 1.267-.058 1.647-.07 4.851-.07zm0-2.163C8.748 0 8.335.013 7.057.072 5.775.13 4.751.302 3.846.6 2.879.914 2.021 1.382 1.378 2.025c-.643.643-1.111 1.501-1.425 2.468-.298.906-.47 1.93-.528 3.212C0 8.335 0 8.748 0 12c0 3.252.013 3.665.072 4.943.058 1.282.23 2.306.528 3.212.314.967.782 1.825 1.425 2.468.643.643 1.501 1.111 2.468 1.425.906.298 1.93.47 3.212.528C8.335 24 8.748 24 12 24c3.252 0 3.665-.013 4.943-.072 1.282-.058 2.306-.23 3.212-.528.967-.314 1.825-.782 2.468-1.425.643-.643 1.111-1.501 1.425-2.468.298-.906.47-1.93.528-3.212C24 15.665 24 15.252 24 12c0-3.252-.013-3.665-.072-4.943-.058-1.282-.23-2.306-.528-3.212a7.002 7.002 0 00-1.425-2.468 7.002 7.002 0 00-2.468-1.425c-.906-.298-1.93-.47-3.212-.528C15.665.013 15.252 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.838 3.838 0 110-7.676 3.838 3.838 0 010 7.676zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+              <a    href  = "#" class                    = "hover:text-gray-400 transition-colors">
+              <svg  class = "w-6 h-6 fill-current" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 24 24">
+              <path d     = "M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.24 2.423.405a4.92 4.92 0 011.756 1.004 4.92 4.92 0 011.004 1.756c.165.454.349 1.217.405 2.423.058 1.267.07 1.647.07 4.851s-.012 3.584-.07 4.85c-.056 1.206-.24 1.97-.405 2.423a4.92 4.92 0 01-1.004 1.756 4.92 4.92 0 01-1.756 1.004c-.454.165-1.217.349-2.423.405-1.267.058-1.647.07-4.85.07s-3.584-.012-4.851-.07c-1.206-.056-1.97-.24-2.423-.405a4.92 4.92 0 01-1.756-1.004 4.92 4.92 0 01-1.004-1.756c-.165-.454-.349-1.217-.405-2.423-.058-1.267-.07-1.647-.07-4.85s.012-3.584.07-4.851c.056-1.206.24-1.97.405-2.423a4.92 4.92 0 011.004-1.756 4.92 4.92 0 011.756-1.004c.454-.165 1.217-.349 2.423-.405 1.267-.058 1.647-.07 4.851-.07zm0-2.163C8.748 0 8.335.013 7.057.072 5.775.13 4.751.302 3.846.6 2.879.914 2.021 1.382 1.378 2.025c-.643.643-1.111 1.501-1.425 2.468-.298.906-.47 1.93-.528 3.212C0 8.335 0 8.748 0 12c0 3.252.013 3.665.072 4.943.058 1.282.23 2.306.528 3.212.314.967.782 1.825 1.425 2.468.643.643 1.501 1.111 2.468 1.425.906.298 1.93.47 3.212.528C8.335 24 8.748 24 12 24c3.252 0 3.665-.013 4.943-.072 1.282-.058 2.306-.23 3.212-.528.967-.314 1.825-.782 2.468-1.425.643-.643 1.111-1.501 1.425-2.468.298-.906.47-1.93.528-3.212C24 15.665 24 15.252 24 12c0-3.252-.013-3.665-.072-4.943-.058-1.282-.23-2.306-.528-3.212a7.002 7.002 0 00-1.425-2.468 7.002 7.002 0 00-2.468-1.425c-.906-.298-1.93-.47-3.212-.528C15.665.013 15.252 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.838 3.838 0 110-7.676 3.838 3.838 0 010 7.676zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
                   </svg>
               </a>
               <!-- Ícone do Twitter -->
-              <a href="#" class="hover:text-gray-400 transition-colors">
-                  <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M22.162 5.656c-.82.363-1.703.607-2.631.718a4.53 4.53 0 001.987-2.5 9.066 9.066 0 01-2.881 1.1 4.518 4.518 0 00-7.69 4.117 12.827 12.827 0 01-9.297-4.714 4.524 4.524 0 001.4 6.04A4.503 4.503 0 012 9.75v.057a4.52 4.52 0 003.622 4.432 4.507 4.507 0 01-2.034.077 4.52 4.52 0 004.215 3.131A9.066 9.066 0 012 18.336a12.805 12.805 0 006.925 2.03c8.307 0 12.845-6.877 12.845-12.845 0-.195-.004-.39-.013-.585a9.173 9.173 0 002.306-2.344z"/>
+              <a    href  = "#" class                    = "hover:text-gray-400 transition-colors">
+              <svg  class = "w-6 h-6 fill-current" xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 24 24">
+              <path d     = "M22.162 5.656c-.82.363-1.703.607-2.631.718a4.53 4.53 0 001.987-2.5 9.066 9.066 0 01-2.881 1.1 4.518 4.518 0 00-7.69 4.117 12.827 12.827 0 01-9.297-4.714 4.524 4.524 0 001.4 6.04A4.503 4.503 0 012 9.75v.057a4.52 4.52 0 003.622 4.432 4.507 4.507 0 01-2.034.077 4.52 4.52 0 004.215 3.131A9.066 9.066 0 012 18.336a12.805 12.805 0 006.925 2.03c8.307 0 12.845-6.877 12.845-12.845 0-.195-.004-.39-.013-.585a9.173 9.173 0 002.306-2.344z"/>
                   </svg>
               </a>
           </div>
       </div>
   </div>
-  <p class="text-center text-gray-500 mt-10">© 2023 Seu Negócio. Todos os direitos reservados.</p>
+  <p class = "text-center text-gray-500 mt-10">© 2023 Seu Negócio. Todos os direitos reservados.</p>
 </footer>
 <script>
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
