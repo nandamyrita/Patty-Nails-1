@@ -154,7 +154,7 @@ app.get('/calendar', isAdmin, async (req, res) => {
         const userExists = await User.findOne({ where: { email } });
         if (userExists) {
               // Redireciona com mensagem de erro
-            return res.redirect(`/cadastrar-form?error=${encodeURIComponent('Email já registrado!')}`);
+            return res.redirect(`/login?error=${encodeURIComponent('Email já registrado!')}`);
         }
 
         const hashedPassword = await bcrypt.hash(senha, 10);
@@ -166,7 +166,7 @@ app.get('/calendar', isAdmin, async (req, res) => {
     } catch (error) {
         console.error('Erro ao gravar os dados na entidade:', error);
           // Redireciona com mensagem de erro
-        return res.redirect(`/cadastrar-form?error=${encodeURIComponent('Erro ao gravar os dados na entidade.')}`);
+        return res.redirect(`/login?error=${encodeURIComponent('Erro ao gravar os dados na entidade.')}`);
     }
 });
 

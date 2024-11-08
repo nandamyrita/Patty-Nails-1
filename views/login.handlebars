@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta rel="icon" href="./" type="image/x-icon">
+  
   <link rel="stylesheet" href="/assets/style.css" />
   <script src="./assets/script.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,22 +14,16 @@
   <script src     = "https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://vlibras.gov.br/vlibras.min.js"></script>
   <title>Login</title>
- <style>
 
-  .eye-icon {
-      color: black; /* Cor do ícone */
-      font-size: 1.25rem; /* Ajusta o tamanho do ícone */
-    }
-  </style>
 </head>
 
 <body>
 
   <style>
-    /* Fontes para Títulos */
-    h1, h2, h3 {
-      font-family: "Libre Bodoni", serif;
-    }
+    .eye-icon {
+      color: black; /* Cor do ícone */
+      font-size: 1.25rem; /* Ajusta o tamanho do ícone */
+    } 
 
     /* Comportamento de rolagem */
     html, body {
@@ -44,6 +38,9 @@
     /* Imagem de Fundo */
     .image {
       background-image: url(./img/blur.svg);
+  background-size    : cover;
+  background-position: center;
+  background-repeat  : no-repeat;
     }
     .image2 {
       background-image: url(./img/backgroundimg2.svg);
@@ -63,11 +60,11 @@
       
       <!-- Links de navegação -->
       <div class="flex space-x-6  text-xl">
-        <a href="#home" class="hover:underline">Home</a>
-        <a href="#mais-pedidos" class="hover:underline">Serviços</a>
-        <a href="#sobre" class="hover:underline">Sobre</a>
-        <a href="#depoimentos" class="hover:underline">Depoimentos</a>
-        <a href="#bestsellers" class="hover:underline">Bestsellers</a>
+<a      href  = "/#home" class         = "hover:underline text-lg">Home</a>
+<a      href  = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
+<a      href  = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
+<a      href  = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
+<a      href  = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
       </div>
 
       <!-- Logo -->
@@ -75,18 +72,19 @@
         <a href="/" aria-label="Início"><img src="img/logo.svg" alt="Logo Patty Nails" class="h-24 mr-48" /></a>
       </div>
 
+      
       <!-- Botões de Ação -->
       <div class="flex gap-4">
-       <button onclick="window.location.href='/login'" 
+        <button onclick="window.location.href='/login'" 
     class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
     <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Meu Perfil </span>
+    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Agende Aqui</span>
 </button>
 
         <button onclick="window.location.href='/profile'" 
-    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-transparent rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
-    <span class="absolute inset-0 bg-white transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Meu Perfil </span>
+    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
+    <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
+    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Meu Perfil</span>
 </button>
       </div>
     </nav>
@@ -104,15 +102,18 @@
   </script>
 
 <body class="image flex flex-col items-center w-full">
- <div class=" flex items-center justify-center w-full p-32">
-  <div class="bg-zinc-500/10 flex rounded-3xl shadow-lg  w-auto mt-28 h-[500px] relative ">
+ <div class=" flex items-center justify-center w-[1200px] p-32">
+  <div class="bg-zinc-500/10 flex rounded-3xl shadow-lg  w-full mt-[50px] relative ">
 
     <!-- Coluna do Formulário de Login -->
-<div class="w-1/2 h-full p-8 flex flex-col justify-center items-start bg-white/50 bg-cover shadow-md text-left border-2 border-white space-y-6 rounded-l-3xl backdrop-blur-md">
-  <div class="w-full">
+<div class=" w-1/2 h-[700px] gap-7  p-20 flex flex-col justify-center items-start  bg-white/50 bg-cover shadow-md text-left border-2 border-white rounded-l-3xl backdrop-blur-md">
+  <div class="w-full h-full">
+    <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-3 ">
     <h2 class="text-3xl font-semibold text-black text-center">Login</h2>
-    <p class="text-xs text-black mb-4 text-left">Se você já é um membro, faça login facilmente.</p>
-    <form action="/login" method="POST" class="flex flex-col gap-6 mt-4">
+    <p class="text-xs text-black mb-4 text-center">Se você já é um membro, faça login facilmente.</p>
+    </div>
+    <form action="/login" method="POST" class="flex flex-col gap-6">
       <input class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 text-black transition-all ease-in-out" type="email" name="email" id="email" placeholder="Email" required>
       <div class="relative">
         <input class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 text-black transition-all ease-in-out" placeholder="Senha" type="password" name="senha" id="senha" required>
@@ -120,9 +121,10 @@
           <i id="eyeIcon" class="bi bi-eye text-gray-500"></i>
         </span>
       </div>
+      </div>
       <div class="text-xs text-black py-4 text-left">
         <input type="checkbox" id="terms" class="accent-pink-500"/>
-        <label for="terms">Eu aceito os <a href="#" class="text-pink-500">termos de uso</a> e <a href="#" class="text-pink-500">política de privacidade</a></label>
+        <label for="terms">  Eu aceito os <a href="#" class="text-pink-500">termos de uso</a> e <a href="#" class="text-pink-500">política de privacidade</a></label>
       </div>
       <button type="submit" class="w-full px-6 py-2 bg-gradient-to-r from-pink-500 to-pink-700 text-white rounded-md transition-all duration-300 hover:from-pink-700 hover:to-pink-500">Login</button>
     </form>
@@ -137,11 +139,15 @@
 </div>
 
 <!-- Coluna do Formulário de Cadastro -->
-<div class="w-1/2 h-full p-8 flex flex-col justify-center items-start bg-white/50 bg-cover shadow-md text-left border-2 border-white space-y-6 rounded-r-3xl backdrop-blur-md">
-  <div class="w-full">
+<div class=" w-1/2 h-[700px] gap-7  p-8 flex flex-col justify-center items-start  bg-white/50 bg-cover shadow-md text-left border-2 border-white rounded-r-3xl backdrop-blur-md">
+  <div class="w-full h-full mt-[44px]">
+    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-3 ">
     <h2 class="text-3xl font-semibold text-black text-center">Cadastrar</h2>
-    <p class="text-xs mt-4 text-white text-left">Agende seu serviço facilmente.</p>
-    <form action="/cadastrar" method="POST" class="flex flex-col gap-6 mt-4">
+     <p class="text-xs text-black mb-4 text-center">Faça seu cadastro e Agende seu serviço facilmente.</p>
+     </div>
+     <div class="flex flex-col">
+ <form action="/cadastrar" method="POST" id="cadastroForm" class="flex flex-col gap-6 mt-4">
       <input class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 text-black transition-all ease-in-out" type="text" name="nome" id="nome" placeholder="Nome" required>
       <input class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 text-black transition-all ease-in-out" type="tel" name="telefone" id="telefone" placeholder="(00) 00000-0000" required>
       <input class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 text-black transition-all ease-in-out" type="email" name="email" id="email" placeholder="Email" required>
@@ -150,23 +156,26 @@
         <span class="absolute right-3 top-3 cursor-pointer" onclick="togglePasswordVisibility('senha-cadastro', 'eyeIconCadastro')">
             <i id="eyeIconCadastro" class="bi bi-eye text-gray-500"></i>
         </span>
+       
       </div>
       <button type="submit" class="w-full px-6 py-2 bg-gradient-to-r from-pink-500 to-pink-700 text-white rounded-md transition-all duration-300 hover:from-pink-700 hover:to-pink-500">Cadastrar</button>
+     </div>
     </form>
   </div>
+</div>
 </div>
 
     
 
     <!-- Painel Rosa -->
    <div id="slider" class="absolute left-0 w-1/2 h-full transition-all duration-700 flex items-center justify-center bg-cover bg-center" style="background-image: url(./img/imglogin.svg);">
-  <div id="panel-login" class="text-center text-white p-6 bg-opacity-70 backdrop-blur-md rounded-lg shadow-lg">
+  <div id="panel-login" class=" text-center text-white p-6 bg-opacity-70 backdrop-blur-md rounded-lg shadow-lg">
     <h2 class="text-3xl font-semibold mb-6">Bem-vindo de volta!</h2>
-    <button id="btn-signup" class="px-6 py-3 border-2 border-white text-white hover:bg-white hover:text-black transition duration-200 rounded-lg shadow-lg transform hover:scale-105">Login</button>
+    <button id="btn-signup" class="px-6 py-3 border-2 border-white text-white hover:transition duration-200 rounded-lg shadow-lg transform hover:scale-105">Login</button>
   </div>
   <div id="panel-signup" class="text-center text-white p-6 bg-opacity-70 backdrop-blur-md rounded-lg shadow-lg hidden">
-    <h2 class="text-4xl font-semibold mb-6">Faça Parte!</h2>
-    <button id="btn-login" class="px-6 py-3 border-2 border-white text-white hover:bg-white hover:text-black transition duration-200 rounded-lg shadow-lg transform hover:scale-105">Cadastre-se</button>
+    <h2 class="text-3xl font-semibold mb-6">Faça Parte!</h2>
+    <button id="btn-login" class="px-6 py-3 border-2 border-white text-white hover:transition duration-200 rounded-lg shadow-lg transform hover:scale-105">Cadastre-se</button>
   </div>
 </div>
   </div>
@@ -312,6 +321,7 @@ function validarTelefone(telefone) {
 
 // Função para validar a senha
 function validarSenha(senha) {
+    // Verifique se a senha tem no mínimo 6 caracteres
     return senha.length >= 6;
 }
 
@@ -336,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validação do formulário de cadastro
     const form = document.getElementById('cadastroForm');
     const telefoneInput = document.getElementById('telefone');
-      
+    const senhaInput = document.getElementById('senha-cadastro');
     
     // Validação em tempo real do telefone
     telefoneInput.addEventListener('input', function() {
@@ -395,4 +405,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+</body>
 </html>
