@@ -20,6 +20,12 @@
       color: black; /* Cor do ícone */
       font-size: 1.25rem; /* Ajusta o tamanho do ícone */
     }
+  </style>
+</head>
+
+<body>
+
+  <style>
     /* Fontes para Títulos */
     h1, h2, h3 {
       font-family: "Libre Bodoni", serif;
@@ -42,6 +48,9 @@
     .image2 {
       background-image: url(./img/backgroundimg2.svg);
     }
+      input {
+      color: black;
+    }
 
    
   </style>
@@ -53,7 +62,7 @@
     <nav class="bg-transparent w-full px-20 py-1 flex justify-between items-center text-black shadow-sm absolute">
       
       <!-- Links de navegação -->
-      <div class="flex space-x-6 text-[15px]">
+      <div class="flex space-x-6  text-xl">
         <a href="#home" class="hover:underline">Home</a>
         <a href="#mais-pedidos" class="hover:underline">Serviços</a>
         <a href="#sobre" class="hover:underline">Sobre</a>
@@ -68,10 +77,10 @@
 
       <!-- Botões de Ação -->
       <div class="flex gap-4">
-        <button onclick="window.location.href='/login'" 
+       <button onclick="window.location.href='/login'" 
     class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
     <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Cadastro</span>
+    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Meu Perfil </span>
 </button>
 
         <button onclick="window.location.href='/profile'" 
@@ -196,7 +205,8 @@
       </div>
     </div>
   </footer>
-  <script>
+
+ <script>
    const slider = document.getElementById("slider");
 const panelLogin = document.getElementById("panel-login");
 const panelSignup = document.getElementById("panel-signup");
@@ -205,7 +215,7 @@ const btnLogin = document.getElementById("btn-login");
 
 // Alternar para Cadastro
 btnSignup.addEventListener("click", () => {
-  slider.style.transform = "translateX(100.4%)"; // Mover painel rosa para a direita
+  slider.style.transform = "translateX(100%)"; // Mover painel rosa para a direita
   panelLogin.classList.add("hidden");
   panelSignup.classList.remove("hidden");
 });
