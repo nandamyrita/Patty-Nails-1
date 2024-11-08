@@ -9,38 +9,67 @@
   <link   href    = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
   <link   rel     = "stylesheet" href                                                                     = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src     = "https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel  = "preconnect" href                                                                                       = "https://fonts.googleapis.com">
+<link rel  = "preconnect" href                                                                                       = "https://fonts.gstatic.com" crossorigin>
+<link href = "https://fonts.googleapis.com/css2?family=Bree+Serif&family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet">
+
+<link rel  = "preconnect" href                                                                                                                                                                                                                            = "https://fonts.googleapis.com">
+<link rel  = "preconnect" href                                                                                                                                                                                                                            = "https://fonts.gstatic.com" crossorigin>
+<link href = "https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet">
+   
+<link href = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet"/>
+<link rel  = "preconnect" href                                                                     = "https://fonts.googleapis.com" />
+<link rel  = "preconnect" href                                                                     = "https://fonts.gstatic.com" crossorigin />
 
   <title>Perfil</title>
   <style>
-      body {
-      
-        color         : aliceblue;
+<style>
+
+  
+    body {
         display       : flex;
         flex-direction: column;
         align-items   : center;
-      }
-      .container {
-        padding      : 20px;
-        border-radius: 5px;
-        max-width    : 1300px;
-        width        : 100%;
-        margin       : 20px;
-        text-align   : center;
-      }
-      .table-custom {
-        background-color: rgba(45, 45, 45, 0);
+    }
+
+    .container {
+        padding          : 20px;
+        border-radius    : 30px;
+        max-width        : 1300px;
+        width            : 100%;
+        margin           : 20px;
+        text-align       : center;
+        background-color : rgba(255, 255, 255, 0.197);
+        box-shadow       : 0 4px 8px rgba(0, 0, 0, 0.1);
+        border           : 1px solid white;
+    }
+
+    .saudacao {
+        max-width: 1300px;
+        width    : 100%;
+    }
+
+    .table-custom {
         color           : rgb(0, 0, 0);
-        border-collapse : collapse;
-        margin          : 20px 0;
+        border-collapse : separate;
+        border-spacing  : 0;
         width           : 100%;
-      }
-      .table-custom th, .table-custom td {
-        padding: 10px;
-        border : 1px solid rgba(60, 60, 60, 0.353);
-      }
-      .table-custom tbody tr:nth-child(odd) {
-        background-color: rgba(60, 60, 60, 0);
-      }
+        border-radius   : 20px;
+        overflow        : hidden;
+    }
+
+     .table-custom th {
+        color           : white;
+        background-color: rgba(23, 23, 23, 0.296); /* Adicione um fundo para contraste */
+        padding         : 15px;
+        border-bottom   : 1px solid rgba(60, 60, 60, 0.3);
+    }
+
+    .table-custom td {
+        padding         : 15px;
+        border-bottom   : 1px solid rgba(60, 60, 60, 0.3);
+    }
+    
       .btn-custom {
         background-color: white;
         color           : black;
@@ -54,14 +83,8 @@
         background-color: rgb(200, 0, 0);
         color           : white;
       }
-      .modal-header, .modal-footer .btn-primary {
-        background-color: rgb(28, 28, 28);
-        color           : white;
-      }
-      .modal-content {
-        background-color: #333;
-        color           : white;
-      }
+  
+     
       ul {
         list-style-type: none;
         padding        : 0;
@@ -106,12 +129,21 @@
   background-position: center;
   background-repeat  : no-repeat;
     }
-    h2{
-      color: black;
+   
+     h1, h2, h3, h4 {
+      font-family: "Libre Bodoni", bold;
+       color: rgb(255, 255, 255);
+      
     }
-     h4{
-      color: black;
-    }
+    .modal-content {
+    background-color: rgba(52, 52, 52, 0.8);  /* Cinza com 80% de opacidade */
+    color           : white;                  /* Mantém o texto em branco */
+}
+.form-control {
+    background-color: rgba(128, 128, 128, 0.6);  /* Cinza com 60% de opacidade */
+    color           : white;                     /* Texto em branco */
+    border          : 1px solid #ccc;            /* Bordas sutis */
+}
   </style>
 </head>
 <body   class = "custom-gradient2">
@@ -133,8 +165,11 @@
     <button onclick = "window.location.href='/login'" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
           Agende Aqui
         </button>
-        <button onclick = "window.location.href='/profile'" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-          Meu perfil
+        <button class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100"data-toggle = "modal" data-target      = "#editProfileModal">
+        Editar perfil
+        </button>
+     <button onclick="confirmarLogout(event);" class="px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100"onclick = "confirmarLogout(event)">
+         Logout
         </button>
 </div>
 
@@ -152,28 +187,32 @@
       <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
       </script>
-<div class = "min-h-screen flex items-center justify-center w-full custom-container">
-<div class = "container mt-10 bg-zinc-500/10 p-6 rounded-lg shadow-lg">
-        <h2 >Seja Bem-vindo, {{username}}</h2>
 
+<div class="min-h-screen flex items-center justify-center w-full flex-col">
+    <!-- Saudação em uma nova div fora da div container -->
+    <div class="saudacao text-left w-full max-w-1300px px-6 mt-10">
+        <h2 class="mb-2">Seja Bem-vindo(a), {{username}}</h2>
+        <h3 class="mb-4">Aos seus agendamentos!</h3>
+    </div>
+
+    <div class="container mt-2 p-6">
         {{#if success_msg}}
-        <div class = "alert alert-success">{{success_msg}}</div>
+        <div class="alert alert-success">{{success_msg}}</div>
         {{/if}}
+        
         {{#if error_msg}}
-        <div class = "alert alert-danger">{{error_msg}}</div>
+        <div class="alert alert-danger">{{error_msg}}</div>
         {{/if}}
-
-        <h4>Seus Agendamentos</h4>
 
         {{#if events.length}}
-        <table class = "table-custom">
+        <table class="table-custom">
             <thead>
                 <tr>
                     <th>Título</th>
                     <th>Data</th>
                     <th>Hora</th>
                     <th>Profissional</th>
-                    <th>Ação</th>
+                    <th>Deseja Cancelar?</th>
                 </tr>
             </thead>
             <tbody>
@@ -185,11 +224,11 @@
                     <td>{{this.professionalName}}</td>
                     <td>
                         {{#if (canCancel this.start)}}
-                        <form   action = "/delete-event-user/{{this.id}}" method = "POST" onsubmit = "return confirmarCancelamento(event)">
-                        <button type   = "submit" class                          = "btn btn-danger">Cancelar</button>
+                        <form action="/delete-event-user/{{this.id}}" method="POST" onsubmit="return confirmarCancelamento(event)">
+                            <button type="submit" class="btn btn-danger">Cancelar</button>
                         </form>
                         {{else}}
-                        <button class = "btn btn-secondary" disabled>Não pode cancelar</button>
+                        <button class="btn btn-secondary" disabled>Não pode cancelar</button>
                         {{/if}}
                     </td>
                 </tr>
@@ -199,17 +238,17 @@
         {{else}}
         <p>Você não tem agendamentos.</p>
         {{/if}}
+    </div>
+</div>
 
-        <div    class = "mt-4">
-        <a      href  = "/agendamento" class             = "btn btn-white mr-2">Agendar Novo Evento</a>
-        <button class = "btn btn-white mr-2" data-toggle = "modal" data-target      = "#editProfileModal">Editar Perfil</button>
-        <a      href  = "/logout" class                  = "btn btn-danger" onclick = "confirmarLogout(event)">Logout</a>
-        </div>
+
+
+
 <!-- Modal para editar perfil -->
 <div    class       = "modal fade" id                           = "editProfileModal" tabindex     = "-1" role          = "dialog" aria-labelledby = "editProfileModalLabel" aria-hidden = "true" onshow = "openEditProfileModal()">
 <div    class       = "modal-dialog modal-dialog-centered" role = "document">
-<div    class       = "modal-content" style                     = "background-color: #555555fa;">
-<div    class       = "modal-header" style                      = "background-color: rgba(126, 126, 126, 0.8);">
+<div    class       = "modal-content" style                     = "modal-content">
+<div    class       = "modal-header" style                      = "">
 <h5     class       = "modal-title" id                          = "editProfileModalLabel">Editar Perfil</h5>
 <button type        = "button" class                            = "close text-white" data-dismiss = "modal" aria-label = "Fechar">
 <span   aria-hidden = "true">&times;</span>
@@ -229,12 +268,12 @@
           <label for   = "phone">Telefone:</label>
           <input type  = "tel" class = "form-control" id = "phone" name = "phone" value = "{{user.telefone}}" required>
           </div>
-          <button type = "submit" class = "btn btn-primary" disabled>Salvar Alterações</button>
+        <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary" disabled>Salvar Alterações</button>
+</div>
         </form>
       </div>
-      <div    class = "modal-footer">
-      <button type  = "button" class = "btn btn-secondary" data-dismiss = "modal">Fechar</button>
-      </div>
+      
     </div>
   </div>
 </div>
