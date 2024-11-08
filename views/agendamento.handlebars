@@ -310,24 +310,29 @@ p {
         }
 
 $(document).ready(function() {
+    // Define a data mínima como hoje
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+    $('#start').attr('min', todayStr);
     let previousServiceValue = '';
 
-          // When service changes
+    // When service changes
     $('#service').on('change', function() {
         const serviceValue = $(this).val();
         
-              // Enable professional selection if not already selected
+        // Enable professional selection if not already selected
         if (!$('#professionalName').val()) {
             $('#professionalName').prop('disabled', !serviceValue);
             $('#professionalName').toggleClass('bg-zinc-700/50 cursor-not-allowed', !serviceValue);
         }
 
-              // If there's a service selected (new or changed)
         if (serviceValue) {
-                  // Se mudou o serviço e já tem profissional e data selecionados
             if (previousServiceValue && previousServiceValue !== serviceValue) {
                 const professionalSelected = $('#professionalName').val();
-                const dateSelected         = $('#start').val();
+                const dateSelected = $('#start').val();
                 
                 if (professionalSelected && dateSelected) {
                     checkAvailability();
@@ -336,9 +341,8 @@ $(document).ready(function() {
             
             previousServiceValue = serviceValue;
             
-                  // If professional and date are already selected, update available times
             const professionalSelected = $('#professionalName').val();
-            const dateSelected         = $('#start').val();
+            const dateSelected = $('#start').val();
             
             if (professionalSelected && dateSelected) {
                 checkAvailability();
@@ -348,7 +352,7 @@ $(document).ready(function() {
         }
     });
 
-          // When professional changes
+    // When professional changes
     $('#professionalName').on('change', function() {
         const professionalSelected = $(this).val() !== '';
         $('#start').prop('disabled', !professionalSelected);
@@ -364,8 +368,25 @@ $(document).ready(function() {
         }
     });
 
-          // When date changes
+ // When date changes
     $('#start').on('change', function() {
+        const selectedDate = new Date($(this).val() + 'T00:00:00');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        selectedDate.setHours(0, 0, 0, 0);
+
+        // Verifica se a data selecionada é anterior a hoje
+        if (selectedDate.getTime() < today.getTime()) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Data Inválida',
+                text: 'Não é possível agendar para datas passadas.'
+            });
+            $(this).val('');
+            resetTimeAndButton();
+            return;
+        }
+
         if ($(this).val() !== '') {
             checkAvailability();
         } else {
@@ -385,66 +406,88 @@ $(document).ready(function() {
     }
 
     function checkAvailability() {
-        const date           = $('#start').val();
-        const professional   = $('#professionalName').val();
+        const date = $('#start').val();
+        const professional = $('#professionalName').val();
         const currentService = $('#service').val();
 
         if (date && professional) {
             const selectedDate = new Date(date);
-            const dayOfWeek    = selectedDate.getDay();
-
+            const currentDate = new Date();
+            const dayOfWeek = selectedDate.getDay();
+            const currentHour = currentDate.getHours();
+            const currentMinutes = currentDate.getMinutes();
             let availableTimes = [];
             
             if (dayOfWeek >= 0 && dayOfWeek <= 4) { // Monday to Friday
-                availableTimes = [
-                '08:00', '09:00', '10:00', '11:00',
-                '12:00', '13:00', '14:00', '15:00',
-                '16:00', '17:00', '18:00', '19:00',
-                '20:00'
+                // Base array of available times
+                const baseTimesArray = [
+                    '08:00', '09:00', '10:00', '11:00',
+                    '12:00', '13:00', '14:00', '15:00',
+                    '16:00', '17:00', '18:00', '19:00',
+                    '20:00'
                 ];
-            } else if (dayOfWeek === 5 || dayOfWeek === 6) { // Saturday and Sunday
-                availableTimes = [];
-            }
 
-            $.ajax({
-                url        : '/check-availability',
-                method     : 'POST',
-                contentType: 'application/json',
-                data       : JSON.stringify({
-                    date            : date,
-                    professionalName: professional,
-                    service         : currentService  // Adicionando o serviço atual na requisição
-                }),
-                success: function(response) {
-                          // Filtra apenas os horários ocupados pelo serviço atual
-                    const occupiedTimes = response
-                        .filter(event => event.title === currentService)
-                        .map(event => event.hora);
+                // Check if it's today
+                const isToday = selectedDate.toDateString() === currentDate.toDateString();
 
-                    const freeTimes = availableTimes.filter(time => !occupiedTimes.includes(time));
-
-                    const timeSelect = $('#time');
-                    timeSelect.empty();
-                    
-                    if (freeTimes.length > 0) {
-                        freeTimes.forEach(item => {
-                            timeSelect.append(`<option value="${item}">${item}</option>`);
-                        });
-                        $('#time').prop('disabled', false);
-                        $('#submit-event').prop('disabled', false);
-                    } else {
-                        timeSelect.append('<option value="">Sem horários disponíveis</option>');
-                        $('#time').prop('disabled', true);
-                        $('#submit-event').prop('disabled', true);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Erro na requisição:', error);
-                    alert('Erro ao buscar horários disponíveis. Tente novamente.');
+                if (isToday) {
+                    // Filter times that are at least 30 minutes from now
+                    availableTimes = baseTimesArray.filter(time => {
+                        const [hours, minutes] = time.split(':').map(Number);
+                        if (hours > currentHour) return true;
+                        if (hours === currentHour) return minutes > (currentMinutes + 30);
+                        return false;
+                    });
+                } else {
+                    availableTimes = baseTimesArray;
                 }
-            });
+
+                // Ajax request to check occupied times
+                $.ajax({
+                    url: '/check-availability',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        date: date,
+                        professionalName: professional,
+                        service: currentService
+                    }),
+                    success: function(response) {
+                        const occupiedTimes = response
+                            .filter(event => event.title === currentService)
+                            .map(event => event.hora);
+
+                        const freeTimes = availableTimes.filter(time => !occupiedTimes.includes(time));
+
+                        const timeSelect = $('#time');
+                        timeSelect.empty().append('<option value="">Selecione um horário</option>');
+                        
+                        if (freeTimes.length > 0) {
+                            freeTimes.forEach(item => {
+                                timeSelect.append(`<option value="${item}">${item}</option>`);
+                            });
+                            timeSelect.prop('disabled', false);
+                            $('#submit-event').prop('disabled', false);
+                        } else {
+                            timeSelect.append('<option value="">Sem horários disponíveis</option>');
+                            timeSelect.prop('disabled', true);
+                            $('#submit-event').prop('disabled', true);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro na requisição:', error);
+                        alert('Erro ao buscar horários disponíveis. Tente novamente.');
+                        resetTimeAndButton();
+                    }
+                });
+            } else {
+                resetTimeAndButton();
+            }
+        } else {
+            resetTimeAndButton();
         }
     }
+
 
           // Form submission handler
     $('#submit-event').on('click', function() {
@@ -595,6 +638,8 @@ $(document).ready(function() {
       // Add to your existing ready function
     $('#service, #professionalName, #start, #time').on('change', updateSummary);
 });
+
+
 </script>
     </script>
 
