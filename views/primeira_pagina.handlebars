@@ -14,15 +14,18 @@
   <link rel  = "preconnect" href                                                                                                                                                                                                    = "https://fonts.googleapis.com">
   <link rel  = "preconnect" href                                                                                                                                                                                                    = "https://fonts.gstatic.com" crossorigin>
   <link href = "https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel = "stylesheet">
-  
-  <title>Patty Nails</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Patty Nails</title>
   
   <!-- CSS Inline -->
  
   <style>
     /* Fontes para Títulos */
-    h1, h2, h3 {
-      font-family: "Libre Bodoni", serif;
+     h1, h2 , h3{
+     font-family: "Poppins", sans-serif;
+
     }
 
     /* Comportamento de rolagem */
@@ -98,8 +101,8 @@
     <!-- Primeira seção -->
     <section id="home" class="image bg-cover bg-no-repeat w-full min-h-screen bg-center flex relative pb-32 md:pb-52">
       <div class="flex flex-col gap-12 md:gap-8 w-11/12 md:w-1/2 pt-32 md:pt-44 ml-4 md:ml-32">
-        <h1 class="text-white text-6xl md:text-6xl font-custom">Patty Nails - Cuidado para Suas Unhas</h1>
-        <p class="text-[#333333] text-lg md:text-xl font-custom">
+        <h1 class="text-white text-6xl w-90  md:text-6xl font-custom">Patty Nails - Cuidado para Suas Unhas</h1>
+        <p class="text-[#333333]  w-1/2 text-lg md:text-xl font-custom">
           Um salão onde cada detalhe importa. Patty Nails combina sofisticação e técnica para oferecer serviços que valorizam a beleza de suas unhas.
         </p>
         <button onclick="window.location.href='/login'" 
@@ -212,7 +215,7 @@
     <section id    = "sobre" class = "image2 bg-no-repeat bg-cover w-full flex items-center">
     <div     class = "max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20">
     <div     class = "flex flex-col justify-center gap-6">
-    <h2      class = "text-8xl font-semibold mb-4 text-black">Sobre Nós</h2>
+    <h2      class = "text-6xl font-semibold mb-4 text-black">Sobre Nós</h2>
     <p       class = "text-lg text-gray-500 mb-6 w-10/12">
             A Patty Esmalteria é uma esmalteria localizada no Shopping Metrô Boulevard Tatuapé, em São Paulo. Iniciando suas atividades em 2012, a loja se especializou em serviços de alongamento de unhas, utilizando técnicas como Gel, Polygel e Fibra de Vidro. Além disso, oferece uma ampla gama de tratamentos de beleza, incluindo esmaltação em gel, design de sobrancelhas, nail art e manicure e pedicure tradicionais. Um dos grandes diferenciais da Patty Esmalteria é a durabilidade de seus serviços: os alongamentos podem durar até três meses, enquanto a esmaltação em gel tem uma durabilidade de 10 a 15 dias sem descascar, borrões ou necessidade de secagem adicional.
           </p>
@@ -264,11 +267,11 @@
     </div>
   </section>
 
-<section id    = "bestsellers" class = "flex justify-center items-center h-screen">
+<section id    = "bestsellers" class = "flex justify-center items-center mb-40">
 <div     class = "flex flex-col items-center gap-4">
 <div     class = "flex gap-4 w-full flex-row justify-center">
          <!-- Imagem principal expandida -->
-         <figure id = "first-image" class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg">
+         <figure id = "first-image" class = "relative transition-all duration-400 ease-in-out transform w-[300px] h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg">
             <img 
                src   = "./img/best1.jpg"
                alt   = "Principal Image"
@@ -276,7 +279,7 @@
             >
          </figure>
          <!-- Imagens menores com hover para expandir -->
-        <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg " onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
+        <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg " onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
             <img 
                class = "object-cover rounded-lg shadow-md h-full hover:shadow-lg"
                src   = "./img/best2.jpg"
@@ -284,7 +287,7 @@
             >
          </figure>
          
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg  " onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
+         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg  " onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
             <img 
                class = "object-cover rounded-lg shadow-md h-full hover:shadow-lg"
                src   = "./img/best9.jpg"
@@ -292,35 +295,35 @@
             >
          </figure>
          <!-- Mais figuras de exemplo -->
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
+         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
             <img 
                class = "object-cover rounded-lg shadow-md h-full"
                src   = "./img/best4.jpg"
                alt   = "Vista Paradiso preview"
             >
          </figure>
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
+         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
             <img 
                class = "object-cover rounded-lg shadow-md h-full"
                src   = "./img/best5.jpg"
                alt   = "Villa Verde preview"
             >
          </figure>
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
+         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
             <img 
                class = "object-cover rounded-lg shadow-md h-full"
                src   = "./img/best6.jpg"
                alt   = "Villa Verde preview"
             >
          </figure>
-          <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
+          <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
             <img 
                class = "object-cover rounded-lg shadow-md h-full"
                src   = "./img/best7.jpg"
                alt   = "Villa Verde preview"
             >
          </figure>
-          <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-96 hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
+          <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
             <img 
                class = "object-cover rounded-lg shadow-md h-full"
                src   = "./img/best8.jpg"

@@ -348,7 +348,7 @@ $(document).ready(function() {
         }
     });
 
- // When date changes
+    // When date changes
     $('#start').on('change', function() {
         const selectedDate = new Date($(this).val() + 'T00:00:00');
         const today = new Date();
@@ -433,8 +433,10 @@ $(document).ready(function() {
                         service: currentService
                     }),
                     success: function(response) {
+                        // Modificação principal: agora considera todos os horários ocupados da profissional,
+                        // independente do serviço
                         const occupiedTimes = response
-                            .filter(event => event.title === currentService)
+                            .filter(event => event.professionalName === professional)
                             .map(event => event.hora);
 
                         const freeTimes = availableTimes.filter(time => !occupiedTimes.includes(time));
@@ -468,13 +470,12 @@ $(document).ready(function() {
         }
     }
 
-
-          // Form submission handler
+    // Form submission handler
     $('#submit-event').on('click', function() {
         const service          = $('#service').val();
         const professionalName = $('#professionalName').val();
-        const start            = $('#start').val();
-        const time             = $('#time').val();
+        const start           = $('#start').val();
+        const time            = $('#time').val();
 
         if (!time) {
             Swal.fire({
@@ -621,7 +622,7 @@ $(document).ready(function() {
 
 
 </script>
-    </script>
+
 
 </body>
 </html>

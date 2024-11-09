@@ -190,7 +190,7 @@
                     <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
                     <span class="relative text-[#000000] transition-colors duration-150 ease-in-out">Agende Aqui</span>
                 </button>
-                <!-- Botão Editar Perfil -->
+              <!-- Botão Editar Perfil -->
                 <button class="relative overflow-hidden text-sm px-6 py-2 border text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group" data-toggle="modal" data-target="#editProfileModal">
                     <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
                     <span class="relative text-[#000000] transition-colors duration-150 ease-in-out">Editar Perfil</span>
@@ -250,6 +250,42 @@
             <h6>Você não possui nenhum agendamento no momento.</h6>
             {{/if}}
         </div>
+        
+<!-- Modal para editar perfil -->
+<div    class       = "modal fade" id                           = "editProfileModal" tabindex     = "-1" role          = "dialog" aria-labelledby = "editProfileModalLabel" aria-hidden = "true" onshow = "openEditProfileModal()">
+<div    class       = "modal-dialog modal-dialog-centered" role = "document">
+<div    class       = "modal-content" style                     = "modal-content">
+<div    class       = "modal-header" style                      = "">
+<h5     class       = "modal-title" id                          = "editProfileModalLabel">Editar Perfil</h5>
+<button type        = "button" class                            = "close text-white" data-dismiss = "modal" aria-label = "Fechar">
+<span   aria-hidden = "true">&times;</span>
+        </button>
+      </div>
+      <div   class = "modal-body">
+      <form  id    = "editProfileForm" action = "/update-profile" method = "POST">
+      <div   class = "form-group">
+      <label for   = "name">Nome:</label>
+      <input type  = "text" class             = "form-control" id        = "name" name = "name" value = "{{user.nome}}" required>
+          </div>
+          <div   class = "form-group">
+          <label for   = "email">Email:</label>
+          <input type  = "email" class = "form-control" id = "email" name = "email" value = "{{user.email}}" required>
+          </div>
+          <div   class = "form-group">
+          <label for   = "phone">Telefone:</label>
+          <input type  = "tel" class = "form-control" id = "phone" name = "phone" value = "{{user.telefone}}" required>
+          </div>
+        <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary" disabled>Salvar Alterações</button>
+</div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
     </main>
     <footer class="bg-pink-50 text-center w-full mt-auto py-10">
         <!-- Links de navegação -->
