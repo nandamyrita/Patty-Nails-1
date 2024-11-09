@@ -3,7 +3,6 @@
 <head>
   <meta   charset = "UTF-8" />
   <meta   name    = "viewport" content                                                                    = "width=device-width, initial-scale=1.0" />
-  <link   rel     = "stylesheet" href                                                                     = "/assets/style.css" />
   <script src     = "./assets/script.js"></script>
   <script src     = "https://cdn.tailwindcss.com"></script>
   <link   href    = "https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel = "stylesheet" />
@@ -22,10 +21,8 @@
 <link rel  = "preconnect" href                                                                     = "https://fonts.gstatic.com" crossorigin />
 
   <title>Perfil</title>
-  <style>
+ 
 <style>
-
-  
     body {
         display       : flex;
         flex-direction: column;
@@ -95,6 +92,9 @@
       }
       a:hover {
         text-decoration: underline;
+      }
+      a {
+        color: black;
       }
       .btn-white {
         background-color: rgba(255, 255, 255, 0);
@@ -172,11 +172,13 @@
     <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Agende Aqui</span>
 </button>
 
-         <button onclick="window.location.href='/profile'" 
-    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
+    <button 
+    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group"
+    data-toggle="modal" data-target="#editProfileModal">
     <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Meu Perfil</span>
+    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Editar Perfil</span>
 </button>
+
 
   <button  onclick="confirmarLogout(event);"
     class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
@@ -288,11 +290,43 @@
       </div>
       
     </div>
+    
   </div>
 </div>
 
 </div>
+<footer class="bg-pink-50 text-center py-10 w-full">
+  <!-- Navigation Links -->
+  <div class="flex justify-center space-x-8 text-gray-700 mb-6">
+ <a      href  = "/#home" class         = "hover:underline text-lg">Home</a>
+<a      href  = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
+<a      href  = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
+<a      href  = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
+<a      href  = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
+  </div>
+  
+  <!-- Social Media Icons -->
+  <div class="flex justify-center space-x-6 text-gray-700 mb-10">
+    <a href="#" class="hover:text-gray-900"><img src="img/facebook-black.svg" alt="Facebook" class="w-5 h-5"></a>
+    <a href="#" class="hover:text-gray-900"><img src="img/Twitter.png" alt="Twitter" class="w-5 h-5"></a>
+    <a href="#" class="hover:text-gray-900"><img src="img/Instagram.png" alt="Instagram" class="w-5 h-5"></a>
+    <a href="#" class="hover:text-gray-900"><img src="img/Youtube.png" alt="YouTube" class="w-5 h-5"></a>
+  </div>
 
+  <!-- Logo and Legal Links -->
+  <div class="flex flex-col items-center space-y-4">
+    
+    <div class="flex items-center space-x-4 text-sm text-gray-500">
+      <p>© 2024 PattyNails. Todos os direitos reservados.</p>
+     
+ 
+    </div>
+         <div class="flex justify-center space-x-6 text-gray-500 mb-10">
+        <a href="#" class="hover:underline">Termos de Uso</a>
+        <a href="#" class="hover:underline">Política de Privacidade</a>
+      </div>
+  </div>
+</footer>
 <script>
           // Armazena os valores originais
   let originalValues = {};
