@@ -392,20 +392,24 @@ $(document).ready(function() {
         $('#submit-event').prop('disabled', true);
     }
 
+
     function checkAvailability() {
         const date = $('#start').val();
         const professional = $('#professionalName').val();
         const currentService = $('#service').val();
 
         if (date && professional) {
-            const selectedDate = new Date(date);
+            const selectedDate = new Date(date + 'T00:00:00');
             const currentDate = new Date();
             const dayOfWeek = selectedDate.getDay();
+            
+            // Obtém a hora e minutos atuais
             const currentHour = currentDate.getHours();
             const currentMinutes = currentDate.getMinutes();
             let availableTimes = [];
             
-            if (dayOfWeek >= 0 && dayOfWeek <= 4) { // Monday to Friday
+            // Verifica se não é sábado (6) nem domingo (0)
+            if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Segunda a Sexta
                 // Base array of available times
                 const baseTimesArray = [
                     '08:00', '09:00', '10:00', '11:00',
@@ -414,19 +418,20 @@ $(document).ready(function() {
                     '20:00'
                 ];
 
-                // Check if it's today
+                // Verifica se é hoje
                 const isToday = selectedDate.toDateString() === currentDate.toDateString();
 
                 if (isToday) {
-                    // Filter times that are at least 30 minutes from now
+                    // Para hoje, filtra apenas horários que estão pelo menos 30 minutos à frente
                     availableTimes = baseTimesArray.filter(time => {
                         const [hours, minutes] = time.split(':').map(Number);
-                        if (hours > currentHour) return true;
-                        if (hours === currentHour) return minutes > (currentMinutes + 30);
-                        return false;
+                        const timeInMinutes = hours * 60 + minutes;
+                        const currentTimeInMinutes = currentHour * 60 + currentMinutes + 30;
+                        return timeInMinutes > currentTimeInMinutes;
                     });
                 } else {
-                    availableTimes = baseTimesArray;
+                    // Para dias futuros, mostra todos os horários disponíveis
+                    availableTimes = [...baseTimesArray];
                 }
 
                 // Ajax request to check occupied times
@@ -440,8 +445,6 @@ $(document).ready(function() {
                         service: currentService
                     }),
                     success: function(response) {
-                        // Modificação principal: agora considera todos os horários ocupados da profissional,
-                        // independente do serviço
                         const occupiedTimes = response
                             .filter(event => event.professionalName === professional)
                             .map(event => event.hora);
@@ -470,6 +473,13 @@ $(document).ready(function() {
                     }
                 });
             } else {
+                // Se for sábado ou domingo
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Dia Não Disponível',
+                    text: 'Não há atendimento aos sábados e domingos.'
+                });
+                $('#start').val('');
                 resetTimeAndButton();
             }
         } else {
