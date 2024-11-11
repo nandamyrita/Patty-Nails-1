@@ -325,29 +325,67 @@
 </body>
 
 <script>
-          // Armazena os valores originais
-  let originalValues = {};
+document.addEventListener('DOMContentLoaded', function () {
+  // Função para ordenar os eventos por data
+  function sortEventsByDate() {
+    const tableBody = document.querySelector('.table-custom tbody');
+    if (!tableBody) return; // Se não houver tabela, retorna
+    
+    // Converte as linhas da tabela em um array
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+    
+    // Ordena as linhas baseado na data (segunda coluna)
+    rows.sort((a, b) => {
+      const dateA = new Date(a.cells[1].textContent + ' ' + a.cells[2].textContent);
+      const dateB = new Date(b.cells[1].textContent + ' ' + b.cells[2].textContent);
+      return dateA - dateB;
+    });
+    
+    // Remove as linhas existentes
+    rows.forEach(row => row.remove());
+    
+    // Adiciona as linhas ordenadas
+    rows.forEach(row => tableBody.appendChild(row));
+  }
+  
+  // Chama a função de ordenação quando a página carrega
+  sortEventsByDate();
+  
+  // Resto do código existente
+  const urlParams = new URLSearchParams(window.location.search);
+  const status = urlParams.get('status');
+  const message = urlParams.get('message');
 
-      // Função que é chamada quando o modal é aberto
-  function openEditProfileModal() {
-    const nameInput  = document.getElementById('name');
+  if (status && message) {
+    Swal.fire({
+      icon: status === 'success' ? 'success' : 'error',
+      title: status === 'success' ? 'Sucesso!' : 'Erro!',
+      text: message,
+      confirmButtonText: 'OK'
+    });
+  }
+  
+  // Armazena os valores originais para o modal de edição
+  let originalValues = {};
+  
+  // Função que é chamada quando o modal é aberto
+  window.openEditProfileModal = function() {
+    const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const phoneInput = document.getElementById('phone');
 
-        // Armazena os valores originais
     originalValues = {
-      name : nameInput.value,
+      name: nameInput.value,
       email: emailInput.value,
       phone: phoneInput.value,
     };
 
-        // Reseta o estado do botão
     updateSaveButton();
-  }
+  };
 
-      // Função para atualizar o estado do botão "Salvar Alterações"
+  // Função para atualizar o estado do botão "Salvar Alterações"
   function updateSaveButton() {
-    const nameInput  = document.getElementById('name');
+    const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const phoneInput = document.getElementById('phone');
     const saveButton = document.querySelector('#editProfileForm .btn-primary');
@@ -363,70 +401,55 @@
     }
   }
 
-      // Adiciona eventos de input para monitorar alterações nos campos
-  document.addEventListener('DOMContentLoaded', function () {
-    const nameInput  = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
+  // Adiciona eventos de input para monitorar alterações nos campos
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
 
-    nameInput.addEventListener('input', updateSaveButton);
-    emailInput.addEventListener('input', updateSaveButton);
-    phoneInput.addEventListener('input', updateSaveButton);
-  });
-  document.addEventListener('DOMContentLoaded', function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const status    = urlParams.get('status');
-    const message   = urlParams.get('message');
+  nameInput?.addEventListener('input', updateSaveButton);
+  emailInput?.addEventListener('input', updateSaveButton);
+  phoneInput?.addEventListener('input', updateSaveButton);
+});
 
-    if (status && message) {
-      Swal.fire({
-        icon             : status === 'success' ? 'success' : 'error',
-        title            : status === 'success' ? 'Sucesso!': 'Erro!',
-        text             : message,
-        confirmButtonText: 'OK'
-      });
+// Função para confirmar cancelamento de agendamento
+window.confirmarCancelamento = function(event) {
+  event.preventDefault();
+  const form = event.target;
+
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: "Você está prestes a cancelar este agendamento.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sim, cancelar!',
+    cancelButtonText: 'Não!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      form.submit();
     }
   });
+};
 
-      // Função para confirmar cancelamento de agendamento
-  function confirmarCancelamento(event) {
-    event.preventDefault();
-    const form = event.target;
-
-    Swal.fire({
-      title             : 'Tem certeza?',
-      text              : "Você está prestes a cancelar este agendamento.",
-      icon              : 'warning',
-      showCancelButton  : true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor : '#3085d6',
-      confirmButtonText : 'Sim, cancelar!',
-      cancelButtonText  : 'Não!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        form.submit();
-      }
-    });
-  }
-
-      // Função para confirmar logout
-  function confirmarLogout(event) {
-    event.preventDefault();
-    Swal.fire({
-      title             : 'Tem certeza?',
-      text              : "Você deseja sair?",
-      icon              : 'warning',
-      showCancelButton  : true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor : '#3085d6',
-      confirmButtonText : 'Sim, sair!',
-      cancelButtonText  : 'Não, retornar!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = '/logout';
-      }
-    });
-  }
+// Função para confirmar logout
+window.confirmarLogout = function(event) {
+  event.preventDefault();
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: "Você deseja sair?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sim, sair!',
+    cancelButtonText: 'Não, retornar!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = '/logout';
+    }
+  });
+};
 </script>
 
 
