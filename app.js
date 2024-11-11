@@ -243,10 +243,10 @@ app.use('/', eventRouter);
 
     // Rota para editar evento
     app.post('/edit-event/:id', async (req, res) => {
-        const { title, start, professionalName: newProfessionalName } = req.body; // Captura o novo nome do profissional
+        const { title, start, hora, professionalName: newProfessionalName } = req.body; // Adiciona hora aos parâmetros
         const eventId = req.params.id;
     
-        console.log('Atualizando evento:', { eventId, title, start, newProfessionalName }); // Log da nova informação
+        console.log('Atualizando evento:', { eventId, title, start, hora, newProfessionalName });
     
         try {
             const event = await Event.findByPk(eventId, { include: [{ model: User, as: 'user' }] });
@@ -257,12 +257,17 @@ app.use('/', eventRouter);
             const oldTitle = event.title;
             const oldStart = event.start;
             const oldHour = event.hora;
-            const oldProfessionalName = event.professionalName; // Captura o nome do profissional antigo
+            const oldProfessionalName = event.professionalName;
             const user = event.user;
     
-            // Atualiza o evento com os novos dados
+            // Atualiza o evento com os novos dados, incluindo a hora
             await Event.update(
-                { title, start, professionalName: newProfessionalName }, // Atualiza o nome do profissional
+                { 
+                    title, 
+                    start, 
+                    hora, // Adiciona a atualização da hora
+                    professionalName: newProfessionalName 
+                },
                 { where: { id: eventId } }
             );
     
@@ -285,10 +290,11 @@ app.use('/', eventRouter);
                 oldTitle,
                 oldStart,
                 oldHour,
-                oldProfessionalName, // Nome do profissional antigo
-                newProfessionalName,  // Nome do profissional novo
+                oldProfessionalName,
+                newProfessionalName,
                 title,
                 start,
+                newHour: hora, // Adiciona a nova hora ao template
                 formatDate: (date) => moment(date).format('DD/MM/YYYY'),
                 formatTime: (date) => moment(date).format('HH:mm'),
             });
@@ -302,14 +308,20 @@ app.use('/', eventRouter);
                 attachments: [
                     {
                         filename: 'logoPattyNails.png',
-                        path: path.join(__dirname, '/views/img/logo 2 preto.png'), // Caminho para o arquivo de imagem
+                        path: path.join(__dirname, '/views/img/logo 2 preto.png'),
                         cid: 'logoPattyNails'
                     }
                 ]
             };
     
             await transporter.sendMail(mailOptions);
-            res.status(200).send('Evento atualizado com sucesso');
+    
+            // Retorna o evento atualizado para o frontend
+            const updatedEvent = await Event.findByPk(eventId);
+            res.status(200).json({
+                message: 'Evento atualizado com sucesso',
+                event: updatedEvent
+            });
         } catch (error) {
             console.error('Erro ao atualizar evento:', error);
             res.status(500).send('Erro ao atualizar evento');

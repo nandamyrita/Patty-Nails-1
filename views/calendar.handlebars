@@ -360,40 +360,40 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        locale       : 'pt-br',
-        initialView  : 'dayGridMonth',
+        locale: 'pt-br',
+        initialView: 'dayGridMonth',
         headerToolbar: {
-            left  : 'prev,next today',
+            left: 'prev,next today',
             center: 'title',
-            right : 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-      
-        events    : '/events',
+        events: '/events',
         eventClick: function (info) {
-                  // Preencher o modal com as informações do evento clicado
-            document.getElementById('eventTitle').innerText            = info.event.title;
+            // Preencher o modal com as informações do evento clicado
+            document.getElementById('eventTitle').innerText = info.event.title;
             document.getElementById('eventprofessionalName').innerText = info.event.extendedProps.professionalName || 'Desconhecido';
-            document.getElementById('eventStart').innerText            = info.event.start.toLocaleDateString();
-            document.getElementById('eventHora').innerText             = info.event.extendedProps.hora || 'Desconhecido';
-            document.getElementById('eventUser').innerText             = info.event.extendedProps.user.nome || 'Desconhecido';
-            document.getElementById('eventUserEmail').innerText        = info.event.extendedProps.user.email || 'N/A';
-            document.getElementById('eventUserPhone').innerText        = info.event.extendedProps.user.telefone || 'N/A';
+            document.getElementById('eventStart').innerText = info.event.start.toLocaleDateString();
+            document.getElementById('eventHora').innerText = info.event.extendedProps.hora || 'Desconhecido';
+            document.getElementById('eventUser').innerText = info.event.extendedProps.user.nome || 'Desconhecido';
+            document.getElementById('eventUserEmail').innerText = info.event.extendedProps.user.email || 'N/A';
+            document.getElementById('eventUserPhone').innerText = info.event.extendedProps.user.telefone || 'N/A';
 
-                  // Definir os valores padrão da data e horário com os dados do evento
-const                   originalDate             = moment(info.event.start).format('YYYY-MM-DD');
-const                   originalHour             = moment(info.event.extendedProps.hora, 'HH:mm').format('HH:mm');
-const                   originalProfessionalName = info.event.extendedProps.professionalName;
-document.getElementById('newEventDate').value    = originalDate;
-document.getElementById('newEventHour').value    = originalHour;
-const                   professionalSelect       = document.getElementById('newEventProfessional');
-                        professionalSelect.value = originalProfessionalName;                                        // Define o valor padrão
+        // Definir os valores padrão da data e horário com os dados do evento
+            const originalDate = moment(info.event.start).format('YYYY-MM-DD');
+            const originalHour = info.event.extendedProps.hora || moment(info.event.start).format('HH:mm');
+            const originalProfessionalName = info.event.extendedProps.professionalName;
+            
+            document.getElementById('newEventDate').value = originalDate;
+            document.getElementById('newEventHour').value = originalHour;
+            const professionalSelect = document.getElementById('newEventProfessional');
+            professionalSelect.value = originalProfessionalName;                                      // Define o valor padrão
 
-                  // Desabilitar o botão de editar inicialmente
-            const editButton          = document.getElementById('editEvent');
-                  editButton.disabled = true;
+         // Desabilitar o botão de editar inicialmente
+            const editButton = document.getElementById('editEvent');
+            editButton.disabled = true;
             editButton.classList.add('btn-disabled');
 
-                  // Adicionar evento de input para verificar alterações
+            // Adicionar evento de input para verificar alterações
             document.getElementById('newEventDate').addEventListener('input', checkEditability);
             document.getElementById('newEventHour').addEventListener('input', checkEditability);
             document.getElementById('newEventProfessional').addEventListener('change', checkEditability);
@@ -430,20 +430,20 @@ const                   professionalSelect       = document.getElementById('newE
                 });
             };
 
-  // Função para verificar se os campos foram alterados
-function checkEditability() {
-    const newDate         = document.getElementById('newEventDate').value;
-    const newHour         = document.getElementById('newEventHour').value;
-    const newProfessional = document.getElementById('newEventProfessional').value;
+     // Função para verificar se os campos foram alterados
+            function checkEditability() {
+                const newDate = document.getElementById('newEventDate').value;
+                const newHour = document.getElementById('newEventHour').value;
+                const newProfessional = document.getElementById('newEventProfessional').value;
 
-    if (newDate !== originalDate || newHour !== originalHour || newProfessional !== originalProfessionalName) {
-        editButton.disabled = false;
-        editButton.classList.remove('btn-disabled');
-    } else {
-        editButton.disabled = true;
-        editButton.classList.add('btn-disabled');
-    }
-}
+                if (newDate !== originalDate || newHour !== originalHour || newProfessional !== originalProfessionalName) {
+                    editButton.disabled = false;
+                    editButton.classList.remove('btn-disabled');
+                } else {
+                    editButton.disabled = true;
+                    editButton.classList.add('btn-disabled');
+                }
+            }
 
 
 
@@ -452,33 +452,40 @@ function checkEditability() {
                 $('#eventModal').modal('hide');
             };
 
-                  // Ação de editar o evento
+                 
+            // Ação de editar o evento
             document.getElementById('editEvent').onclick = async function () {
-                const newStart = document.getElementById('newEventDate').value;
+                const newDate = document.getElementById('newEventDate').value;
                 const newHour = document.getElementById('newEventHour').value;
                 const newProfessional = document.getElementById('newEventProfessional').value;
 
-                if (newStart && newHour && newProfessional) {
-                    const newStartDateTime = moment(`${newStart}T${newHour}`).format();
+                if (newDate && newHour && newProfessional) {
+                    const newStartDateTime = moment(`${newDate} ${newHour}`).format();
 
                     $('#eventModal').modal('hide');
                     showSpinner('Atualizando seu agendamento...');
 
                     try {
                         const response = await fetch(`/edit-event/${info.event.id}`, {
-                            method : 'POST',
+                            method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
-                                title           : info.event.title,
-                                start           : newStartDateTime,
+                                title: info.event.title,
+                                start: newStartDateTime,
+                                hora: newHour, // Adiciona a hora separadamente
                                 professionalName: newProfessional,
                             }),
                         });
 
                         if (response.ok) {
                             localStorage.setItem('message', 'Evento atualizado com sucesso!');
+                            // Atualiza o evento no calendário antes de recarregar
+                            info.event.setStart(newStartDateTime);
+                            info.event.setExtendedProp('hora', newHour);
+                            info.event.setExtendedProp('professionalName', newProfessional);
+                            calendar.render();
                             location.reload();
                         } else {
                             hideSpinner();
