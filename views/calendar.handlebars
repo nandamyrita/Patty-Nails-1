@@ -378,26 +378,71 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('eventUserEmail').innerText = info.event.extendedProps.user.email || 'N/A';
             document.getElementById('eventUserPhone').innerText = info.event.extendedProps.user.telefone || 'N/A';
 
-        // Definir os valores padrão da data e horário com os dados do evento
+            // Definir os valores padrão da data e horário com os dados do evento
             const originalDate = moment(info.event.start).format('YYYY-MM-DD');
             const originalHour = info.event.extendedProps.hora || moment(info.event.start).format('HH:mm');
             const originalProfessionalName = info.event.extendedProps.professionalName;
             
-            document.getElementById('newEventDate').value = originalDate;
+            // Configurar a data mínima como hoje
+            const dateInput = document.getElementById('newEventDate');
+            const today = moment().format('YYYY-MM-DD');
+            dateInput.min = today; // Impede a seleção de datas anteriores a hoje
+            dateInput.value = originalDate;
+            
             document.getElementById('newEventHour').value = originalHour;
             const professionalSelect = document.getElementById('newEventProfessional');
-            professionalSelect.value = originalProfessionalName;                                      // Define o valor padrão
+            professionalSelect.value = originalProfessionalName;
 
-         // Desabilitar o botão de editar inicialmente
+            // Desabilitar o botão de editar inicialmente
             const editButton = document.getElementById('editEvent');
             editButton.disabled = true;
             editButton.classList.add('btn-disabled');
 
-            // Adicionar evento de input para verificar alterações
+            // Função para verificar se a data selecionada é válida (não anterior a hoje)
+            function isValidDate(selectedDate) {
+                const selected = moment(selectedDate).startOf('day');
+                const today = moment().startOf('day');
+                return selected.isSameOrAfter(today);
+            }
+
+            // Função para verificar se os campos foram alterados e são válidos
+            function checkEditability() {
+                const newDate = document.getElementById('newEventDate').value;
+                const newHour = document.getElementById('newEventHour').value;
+                const newProfessional = document.getElementById('newEventProfessional').value;
+
+                const isDateValid = isValidDate(newDate);
+                const hasChanges = newDate !== originalDate || 
+                                 newHour !== originalHour || 
+                                 newProfessional !== originalProfessionalName;
+
+                if (hasChanges && isDateValid) {
+                    editButton.disabled = false;
+                    editButton.classList.remove('btn-disabled');
+                } else {
+                    editButton.disabled = true;
+                    editButton.classList.add('btn-disabled');
+                }
+
+                // Mostrar aviso se a data for anterior a hoje
+                if (!isDateValid) {
+                    Swal.fire({
+                        title: 'Data inválida!',
+                        text: 'Não é possível selecionar uma data anterior ao dia atual.',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                    });
+                    // Se a data original é anterior a hoje, usa hoje como valor padrão
+                    document.getElementById('newEventDate').value = isValidDate(originalDate) ? originalDate : today;
+                }
+            }
+
+            // Adicionar eventos de input para verificar alterações
             document.getElementById('newEventDate').addEventListener('input', checkEditability);
             document.getElementById('newEventHour').addEventListener('input', checkEditability);
             document.getElementById('newEventProfessional').addEventListener('change', checkEditability);
-                  // Exibir o modal
+
+            // Exibir o modal
             $('#eventModal').modal('show');
 
                   // Ação de deletar o evento
