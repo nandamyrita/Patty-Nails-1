@@ -313,10 +313,31 @@
       </div>
   </div>
 </footer>
+<!-- Loading Spinner Container -->
+<div id="loading-spinner" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-8 rounded-lg flex flex-col items-center">
+    <div class="w-16 h-16 border-4 border-t-pink-500 border-pink-200 rounded-full animate-spin mb-4"></div>
+    <p class="text-gray-700 text-lg font-medium">Processando seu agendamento...</p>
+    <p class="text-gray-500 text-sm mt-2">Por favor, aguarde</p>
+  </div>
+</div>
     <script src = "https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
     <script src = "https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
+    // Funções auxiliares para controlar o spinner
+function showSpinner(message = 'Processando seu agendamento...') {
+    const spinner = document.getElementById('loading-spinner');
+    const messageElement = spinner.querySelector('.text-lg');
+    messageElement.textContent = message;
+    spinner.classList.remove('hidden');
+}
+
+function hideSpinner() {
+    const spinner = document.getElementById('loading-spinner');
+    spinner.classList.add('hidden');
+}
+
 function confirmarLogout(event) {
     event.preventDefault();  // Previne a ação padrão do botão
     Swal.fire({
@@ -390,16 +411,18 @@ const                   professionalSelect       = document.getElementById('newE
                     cancelButtonText : 'Não, cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        $('#eventModal').modal('hide');
+                        showSpinner('Excluindo seu agendamento...');
+                        
                         $.ajax({
                             url    : `/delete-event/${info.event.id}`,
                             type   : 'DELETE',
                             success: function () {
-                                      // Armazenar a mensagem de sucesso no localStorage
                                 localStorage.setItem('message', 'Seu agendamento foi excluído com sucesso.');
-                                      // Recarregar a página
                                 location.reload();
                             },
                             error: function (xhr, status, error) {
+                                hideSpinner();
                                 Swal.fire('Erro!', 'Não foi possível excluir o evento: ' + xhr.responseText, 'error');
                             }
                         });
@@ -430,60 +453,63 @@ function checkEditability() {
             };
 
                   // Ação de editar o evento
-           document.getElementById('editEvent').onclick = async function () {
-    const newStart        = document.getElementById('newEventDate').value;
-    const newHour         = document.getElementById('newEventHour').value;
-    const newProfessional = document.getElementById('newEventProfessional').value;
+            document.getElementById('editEvent').onclick = async function () {
+                const newStart = document.getElementById('newEventDate').value;
+                const newHour = document.getElementById('newEventHour').value;
+                const newProfessional = document.getElementById('newEventProfessional').value;
 
-    if (newStart && newHour && newProfessional) {
-        const newStartDateTime = moment(`${newStart}T${newHour}`).format();
+                if (newStart && newHour && newProfessional) {
+                    const newStartDateTime = moment(`${newStart}T${newHour}`).format();
 
-        try {
-            const response = await fetch(`/edit-event/${info.event.id}`, {
-                method : 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    title           : info.event.title,
-                    start           : newStartDateTime,
-                    professionalName: newProfessional,    // Adicionando o novo profissional
-                }),
-            });
+                    $('#eventModal').modal('hide');
+                    showSpinner('Atualizando seu agendamento...');
 
-            if (response.ok) {
-                localStorage.setItem('message', 'Evento atualizado com sucesso!');
-                location.reload();
-            } else {
-                throw new Error('Erro ao atualizar o evento');
-            }
-        } catch (error) {
-            console.error('Erro:', error);
-            Swal.fire(
-                'Erro!',
-                'Erro ao atualizar o evento. Verifique o console para mais detalhes.',
-                'error'
-            );
-        }
-    } else {
-        Swal.fire(
-            'Atenção!',
-            'Por favor, preencha a nova data, o novo horário e escolha um novo profissional.',
-            'warning'
-        );
-    }
-};
+                    try {
+                        const response = await fetch(`/edit-event/${info.event.id}`, {
+                            method : 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                title           : info.event.title,
+                                start           : newStartDateTime,
+                                professionalName: newProfessional,
+                            }),
+                        });
 
+                        if (response.ok) {
+                            localStorage.setItem('message', 'Evento atualizado com sucesso!');
+                            location.reload();
+                        } else {
+                            hideSpinner();
+                            throw new Error('Erro ao atualizar o evento');
+                        }
+                    } catch (error) {
+                        console.error('Erro:', error);
+                        hideSpinner();
+                        Swal.fire(
+                            'Erro!',
+                            'Erro ao atualizar o evento. Verifique o console para mais detalhes.',
+                            'error'
+                        );
+                    }
+                } else {
+                    Swal.fire(
+                        'Atenção!',
+                        'Por favor, preencha a nova data, o novo horário e escolha um novo profissional.',
+                        'warning'
+                    );
+                }
+            };
         }
     });
 
     calendar.render();
 
-          // Exibir mensagem de sucesso após recarregar a página
+           // Exibir mensagem de sucesso após recarregar a página
     const message = localStorage.getItem('message');
     if (message) {
         Swal.fire('Sucesso!', message, 'success');
-              // Remover a mensagem do localStorage após exibi-la
         localStorage.removeItem('message');
     }
 });
