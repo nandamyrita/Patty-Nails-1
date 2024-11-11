@@ -227,36 +227,38 @@
             <div class="alert alert-danger">{{error_msg}}</div>
             {{/if}}
             {{#if events.length}}
-            <table class="table-custom">
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Profissional</th>
-                        <th>Deseja Cancelar?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each events}}
-                    <tr>
-                        <td>{{this.title}}</td>
-                        <td>{{this.start}}</td>
-                        <td>{{this.hora}}</td>
-                        <td>{{this.professionalName}}</td>
-                        <td>
-                            {{#if (canCancel this.start)}}
-                            <form action="/delete-event-user/{{this.id}}" method="POST" onsubmit="return confirmarCancelamento(event)">
-                                <button type="submit" class="btn btn-danger">Cancelar</button>
-                            </form>
-                            {{else}}
-                            <button class="btn btn-secondary" disabled>Não pode cancelar</button>
-                            {{/if}}
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+<table class="table-custom">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Duração</th>  <!-- Nova coluna -->
+            <th>Profissional</th>
+            <th>Deseja Cancelar?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each events}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.start}}</td>
+            <td>{{this.hora}}</td>
+            <td>{{this.duration}}</td>  <!-- Nova coluna -->
+            <td>{{this.professionalName}}</td>
+            <td>
+                {{#if (canCancel this.start)}}
+                <form action="/delete-event-user/{{this.id}}" method="POST" onsubmit="return confirmarCancelamento(event)">
+                    <button type="submit" class="btn btn-danger">Cancelar</button>
+                </form>
+                {{else}}
+                <button class="btn btn-secondary" disabled>Não pode cancelar</button>
+                {{/if}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
             {{else}}
             <h6>Você não possui nenhum agendamento no momento.</h6>
             {{/if}}
@@ -326,6 +328,54 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    const serviceDurations = {
+    'Manicure Simples - R$ 25,00'    : 40,
+    'Pedicure Simples - R$ 30,00'    : 45,
+    'Pedicure Completa - R$ 55,00'   : 60,
+    'Esmaltação em Gel - R$ 45,00'   : 45,
+    'Alongamento de Unhas - R$ 80,00': 60,
+    'Remoção de Cutículas - R$ 20,00': 30,
+    'Spa para Pés - R$ 40,00'        : 60,
+    'Francesinha - R$ 35,00'         : 45,
+    'Decoração de Unhas - R$ 60,00'  : 60
+  };
+   // Função para formatar a duração
+  function formatDuration(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    if (hours > 0) {
+      return `${hours}h ${mins}min`;
+    }
+    return `${mins}min`;
+  }
+
+  // Função para adicionar as durações às linhas da tabela
+function addDurations() {
+    const table = document.querySelector('.table-custom');
+    if (!table) {
+        console.log('Tabela não encontrada');
+        return;
+    }
+
+    const rows = table.querySelectorAll('tbody tr');
+    console.log('Número de linhas encontradas:', rows.length);  // Debug
+
+    rows.forEach(row => {
+        const titleCell = row.cells[0];
+        const durationCell = row.cells[3];
+        
+        if (titleCell && durationCell) {
+            const title = titleCell.textContent.trim();
+            const duration = serviceDurations[title];
+            
+            if (duration) {
+                durationCell.textContent = formatDuration(duration);
+            } else {
+                console.log('Duração não encontrada para:', title);  // Debug
+            }
+        }
+    });
+}
   // Função para ordenar os eventos por data
   function sortEventsByDate() {
     const tableBody = document.querySelector('.table-custom tbody');
@@ -349,7 +399,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   
   // Chama a função de ordenação quando a página carrega
-  sortEventsByDate();
+    sortEventsByDate();
+  addDurations();
   
   // Resto do código existente
   const urlParams = new URLSearchParams(window.location.search);

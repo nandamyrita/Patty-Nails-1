@@ -7,7 +7,17 @@ const fs = require('fs'); // Para anexar arquivos
 const path = require('path');
 const Handlebars = require('handlebars');
 
-
+const serviceDurations = {
+    'Manicure Simples - R$ 25,00'    : 40,
+    'Pedicure Simples - R$ 30,00'    : 45,
+    'Pedicure Completa - R$ 55,00'   : 60,
+    'Esmaltação em Gel - R$ 45,00'   : 45,
+    'Alongamento de Unhas - R$ 80,00': 60,
+    'Remoção de Cutículas - R$ 20,00': 30,
+    'Spa para Pés - R$ 40,00'        : 60,
+    'Francesinha - R$ 35,00'         : 45,
+    'Decoração de Unhas - R$ 60,00'  : 60
+};
     // Configuração do transportador para envio de email
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -71,14 +81,17 @@ router.post('/add-event', async (req, res) => {
         });
 
         console.log('Evento criado com sucesso!', event);
-
+   // Calcular a duração formatada
+   const duration = serviceDurations[event.title];
+   const durationFormatted = `${Math.floor(duration / 60)}h ${duration % 60}min`;
         // Dados de contexto para o template
         const context = {
             event: {
                 title: event.title,
                 start: event.start,
                 hora: event.hora,
-                professionalName: event.professionalName
+                professionalName: event.professionalName,
+                duration: durationFormatted  // Adicionando a duração formatada
             },
             user: {
                 nome: req.user.nome,
