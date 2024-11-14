@@ -376,33 +376,33 @@ function addDurations() {
         }
     });
 }
-  // Função para ordenar os eventos por data
-  function sortEventsByDate() {
-    const tableBody = document.querySelector('.table-custom tbody');
-    if (!tableBody) return; // Se não houver tabela, retorna
-    
-    // Converte as linhas da tabela em um array
-    const rows = Array.from(tableBody.querySelectorAll('tr'));
-    
-    // Ordena as linhas baseado na data (segunda coluna)
-    rows.sort((a, b) => {
-      const dateA = new Date(a.cells[1].textContent + ' ' + a.cells[2].textContent);
-      const dateB = new Date(b.cells[1].textContent + ' ' + b.cells[2].textContent);
-      return dateA - dateB;
-    });
-    
-    // Remove as linhas existentes
-    rows.forEach(row => row.remove());
-    
-    // Adiciona as linhas ordenadas
-    rows.forEach(row => tableBody.appendChild(row));
-  }
+// Função para ordenar os eventos por data em ordem decrescente
+function sortEventsByDate() {
+  const tableBody = document.querySelector('.table-custom tbody');
+  if (!tableBody) return; // Se não houver tabela, retorna
+  
+  // Converte as linhas da tabela em um array
+  const rows = Array.from(tableBody.querySelectorAll('tr'));
+  
+  // Ordena as linhas baseado na data (segunda coluna), em ordem decrescente
+  rows.sort((a, b) => {
+    const dateA = new Date(a.cells[1].textContent + ' ' + a.cells[2].textContent);
+    const dateB = new Date(b.cells[1].textContent + ' ' + b.cells[2].textContent);
+    return dateB - dateA; // Inverte a ordem
+  });
+  
+  // Remove as linhas existentes
+  rows.forEach(row => row.remove());
+  
+  // Adiciona as linhas ordenadas
+  rows.forEach(row => tableBody.appendChild(row));
+}
   
   // Chama a função de ordenação quando a página carrega
     sortEventsByDate();
   addDurations();
   
-  // Resto do código existente
+
   const urlParams = new URLSearchParams(window.location.search);
   const status = urlParams.get('status');
   const message = urlParams.get('message');
