@@ -324,6 +324,14 @@
             </div>
         </div>
     </footer>
+    <!-- Loading Spinner Container -->
+<div id="loading-spinner" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-8 rounded-lg flex flex-col items-center">
+    <div class="w-16 h-16 border-4 border-t-pink-500 border-pink-200 rounded-full animate-spin mb-4"></div>
+    <p class="text-gray-700 text-lg font-medium">Cancelando seu agendamento...</p>
+    <p class="text-gray-500 text-sm mt-2">Por favor, aguarde</p>
+  </div>
+</div>
 </body>
 
 <script>
@@ -464,23 +472,27 @@ function sortEventsByDate() {
 
 // Função para confirmar cancelamento de agendamento
 window.confirmarCancelamento = function(event) {
-  event.preventDefault();
-  const form = event.target;
+    event.preventDefault();
+    const form = event.target;
 
-  Swal.fire({
-    title: 'Tem certeza?',
-    text: "Você está prestes a cancelar este agendamento.",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#d33',
-    cancelButtonColor: '#3085d6',
-    confirmButtonText: 'Sim, cancelar!',
-    cancelButtonText: 'Não!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      form.submit();
-    }
-  });
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: "Você está prestes a cancelar este agendamento.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sim, cancelar!',
+        cancelButtonText: 'Não!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Mostrar o loading spinner
+            $('#loading-spinner').removeClass('hidden');
+            
+            // Submeter o formulário de cancelamento
+            form.submit();
+        }
+    });
 };
 
 // Função para confirmar logout
