@@ -22,26 +22,26 @@
    padding-top: 20px;                                                                        /* Ajuste conforme necessário */
    background : radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, rgb(250, 193, 193) 71%);
 }
-  /* Estilo para o grupo de botões do FullCalendar */
+    /* Estilo para o grupo de botões do FullCalendar */
 .fc-button-group .fc-button {
     background-color: transparent !important;      /* Fundo transparente */
     color           : white !important;            /* Texto branco */
     border          : 1px solid black !important;  /* Borda preta */
 }
 
-  /* Estilo para os botões dentro do grupo quando são clicados (selecionados) */
+    /* Estilo para os botões dentro do grupo quando são clicados (selecionados) */
 .fc-button-group .fc-button.fc-state-active {
     background-color: black !important;            /* Fundo preto quando selecionado */
     color           : white !important;            /* Texto branco quando selecionado */
     border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 
-  /* Estilo para os botões ao passar o mouse (hover) */
+    /* Estilo para os botões ao passar o mouse (hover) */
 .fc-button-group .fc-button:hover {
     background-color: black!important;             /* Fundo transparente ao passar o mouse */
     border          : 1px solid black !important;  /* Borda preta ao passar o mouse */
 }
-  /* Estilo para os botões de Mês */
+    /* Estilo para os botões de Mês */
 .fc-dayGridMonth-button {
     background-color: transparent !important;      /* Fundo transparente */
     color           : white !important;            /* Texto branco */
@@ -59,7 +59,7 @@
     border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 
-  /* Estilo para os botões de Semana */
+    /* Estilo para os botões de Semana */
 .fc-timeGridWeek-button {
     background-color: transparent !important;      /* Fundo transparente */
     color           : white !important;            /* Texto branco */
@@ -77,7 +77,7 @@
     border          : 1px solid black !important;  /* Borda preta quando selecionado */
 }
 
-  /* Estilo para os botões de Dia */
+    /* Estilo para os botões de Dia */
 .fc-timeGridDay-button {
     background-color: transparent !important;      /* Fundo transparente */
     color           : white !important;            /* Texto branco */
@@ -99,7 +99,7 @@
     background-color: rgba(255, 181, 255, 0.544) !important;
 }
 
-  /* Remove as bordas das células do calendário */
+    /* Remove as bordas das células do calendário */
 .fc-daygrid-day,
 .fc-daygrid-day-frame,
 .fc-daygrid-week-number,
@@ -107,12 +107,12 @@
     border: none !important;
 }
 
-  /* Remove as bordas ao redor do calendário, se houver */
+    /* Remove as bordas ao redor do calendário, se houver */
 .fc-daygrid {
     border: none !important;
 }
 
-  /* Estilo para o botão de Voltar ao Dia Atual */
+    /* Estilo para o botão de Voltar ao Dia Atual */
 .fc-today-button {
     background-color: transparent !important;      /* Fundo transparente */
     color           : white !important;            /* Texto branco */
@@ -150,7 +150,7 @@
    .custom-button {
     margin-right: 60px;  /* Ajuste conforme necessário */
 }
-               /* Botão desativado */
+                 /* Botão desativado */
         .btn-disabled {
             background-color: gray;         /* Fundo cinza */
             cursor          : not-allowed;  /* Cursor não permitido */
@@ -186,9 +186,41 @@
     border          : 1px solid #ccc;            /* Bordas sutis */
 }
 
-  /* Para placeholders com cor cinza claro */
+    /* Para placeholders com cor cinza claro */
 .modal-content .form-control::placeholder {
     color: rgba(255, 255, 255, 0.7);
+}
+.search-container {
+  position: relative;
+  z-index : 1000;
+}
+
+#searchResults:empty {
+  display: none;
+}
+
+.search-result-item {
+  padding      : 1rem;
+  border-bottom: 1px solid #eee;
+  cursor       : pointer;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #f3f4f6;
+}
+
+.search-result-name {
+  font-weight: 500;
+  color      : #000;
+}
+
+.search-result-email, .search-result-phone {
+  font-size: 0.875rem;
+  color    : #666;
 }
     </style>
 </head>
@@ -198,11 +230,62 @@
 <header class = "w-full flex justify-center relative z-10">
 <nav    class = "bg-transparent shadow- w-full px-20 py-1 flex justify-around absolute items-center text-black shadow-sm">
 <div    class = "flex space-x-6">
-<a      href  = "/#home" class         = "hover:underline text-lg">Home</a>
-<a      href  = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
-<a      href  = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
-<a      href  = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
-<a      href  = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
+    <!-- Adicione isso logo após a abertura da nav no header -->
+{{!-- <div    class = "search-container relative">
+<div    class = "flex items-center space-x-2">
+<div    class = "relative">
+<button id    = "searchTypeBtn" class = "flex items-center px-3 py-2 text-sm border border-black rounded-l-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+        Email
+        <svg      xmlns  = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "ml-2">
+        <polyline points = "6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      
+      <div id    = "searchTypeDropdown" class                                                = "hidden absolute mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+      <div class = "px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type = "email">Email</div>
+      <div class = "px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type = "phone">Telefone</div>
+      </div>
+    </div>
+
+    <input 
+      type        = "text"
+      id          = "searchInput"
+      placeholder = "Buscar por email..."
+      class       = "px-4 py-2 border border-black rounded-none text-black focus:outline-none focus:border-pink-500"
+    >
+
+    <button id    = "searchBtn" class                  = "px-4 py-2 border border-black rounded-r-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+    <svg    xmlns = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round">
+    <circle cx    = "11" cy                            = "11" r      = "8"></circle>
+    <line   x1    = "21" y1                            = "21" x2     = "16.65" y2   = "16.65"></line>
+      </svg>
+    </button>
+
+    <button id    = "allUsersBtn" class                = "px-4 py-2 border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+    <svg    xmlns = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round">
+    <path   d     = "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+    <circle cx    = "12" cy                            = "7" r       = "4"></circle>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Results Dropdown -->
+  <div id = "searchResults" class = "hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+    <!-- Results will be populated here -->
+  </div>
+
+  <!-- Loading Spinner -->
+  <div id    = "searchSpinner" class = "hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 p-4">
+  <div class = "flex justify-center">
+  <div class = "animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
+    </div>
+  </div>
+</div> --}}
+<a href = "/#home" class         = "hover:underline text-lg">Home</a>
+<a href = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
+<a href = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
+<a href = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
+<a href = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
 
       </div class = "logo-container">
       <div  class = "flex justify-center items-center flex-grow">
@@ -281,55 +364,55 @@
         </div>
     </div>
 </div>
-<footer class="bg-pink-50 text-center py-10 w-full">
+<footer class = "bg-pink-50 text-center py-10 w-full">
   <!-- Navigation Links -->
-  <div class="flex justify-center space-x-8 text-gray-700 mb-6">
- <a      href  = "/#home" class         = "hover:underline text-lg">Home</a>
-<a      href  = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
-<a      href  = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
-<a      href  = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
-<a      href  = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
+<div class = "flex justify-center space-x-8 text-gray-700 mb-6">
+<a   href  = "/#home" class         = "hover:underline text-lg">Home</a>
+<a   href  = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
+<a   href  = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
+<a   href  = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
+<a   href  = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
   </div>
   
   <!-- Social Media Icons -->
-  <div class="flex justify-center space-x-6 text-gray-700 mb-10">
-    <a href="#" class="hover:text-gray-900"><img src="img/facebook-black.svg" alt="Facebook" class="w-5 h-5"></a>
-    <a href="#" class="hover:text-gray-900"><img src="img/Twitter.png" alt="Twitter" class="w-5 h-5"></a>
-    <a href="#" class="hover:text-gray-900"><img src="img/Instagram.png" alt="Instagram" class="w-5 h-5"></a>
-    <a href="#" class="hover:text-gray-900"><img src="img/Youtube.png" alt="YouTube" class="w-5 h-5"></a>
+  <div class = "flex justify-center space-x-6 text-gray-700 mb-10">
+  <a   href  = "#" class = "hover:text-gray-900"><img src = "img/facebook-black.svg" alt = "Facebook" class  = "w-5 h-5"></a>
+  <a   href  = "#" class = "hover:text-gray-900"><img src = "img/Twitter.png" alt        = "Twitter" class   = "w-5 h-5"></a>
+  <a   href  = "#" class = "hover:text-gray-900"><img src = "img/Instagram.png" alt      = "Instagram" class = "w-5 h-5"></a>
+  <a   href  = "#" class = "hover:text-gray-900"><img src = "img/Youtube.png" alt        = "YouTube" class   = "w-5 h-5"></a>
   </div>
 
   <!-- Logo and Legal Links -->
-  <div class="flex flex-col items-center space-y-4">
+  <div class = "flex flex-col items-center space-y-4">
     
-    <div class="flex items-center space-x-4 text-sm text-gray-500">
+    <div class = "flex items-center space-x-4 text-sm text-gray-500">
       <p>© 2024 PattyNails. Todos os direitos reservados.</p>
      
  
     </div>
-         <div class="flex justify-center space-x-6 text-gray-500 mb-10">
-        <a href="#" class="hover:underline">Termos de Uso</a>
-        <a href="#" class="hover:underline">Política de Privacidade</a>
+        <div class = "flex justify-center space-x-6 text-gray-500 mb-10">
+        <a   href  = "#" class = "hover:underline">Termos de Uso</a>
+        <a   href  = "#" class = "hover:underline">Política de Privacidade</a>
       </div>
   </div>
 </footer>
 <!-- Loading Spinner Container -->
-<div id="loading-spinner" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-  <div class="bg-white p-8 rounded-lg flex flex-col items-center">
-    <div class="w-16 h-16 border-4 border-t-pink-500 border-pink-200 rounded-full animate-spin mb-4"></div>
-    <p class="text-gray-700 text-lg font-medium">Processando seu agendamento...</p>
-    <p class="text-gray-500 text-sm mt-2">Por favor, aguarde</p>
+<div id    = "loading-spinner" class                = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+<div class = "bg-white p-8 rounded-lg flex flex-col items-center">
+<div class = "w-16 h-16 border-4 border-t-pink-500 border-pink-200 rounded-full animate-spin mb-4"></div>
+<p   class = "text-gray-700 text-lg font-medium">Processando seu agendamento...</p>
+<p   class = "text-gray-500 text-sm mt-2">Por favor, aguarde</p>
   </div>
 </div>
     <script src = "https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
     <script src = "https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Funções auxiliares para controlar o spinner
+      // Funções auxiliares para controlar o spinner
 function showSpinner(message = 'Processando seu agendamento...') {
-    const spinner = document.getElementById('loading-spinner');
-    const messageElement = spinner.querySelector('.text-lg');
-    messageElement.textContent = message;
+    const spinner                    = document.getElementById('loading-spinner');
+    const messageElement             = spinner.querySelector('.text-lg');
+          messageElement.textContent = message;
     spinner.classList.remove('hidden');
 }
 
@@ -360,61 +443,61 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        locale: 'pt-br',
-        initialView: 'dayGridMonth',
+        locale       : 'pt-br',
+        initialView  : 'dayGridMonth',
         headerToolbar: {
-            left: 'prev,next today',
+            left  : 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right : 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        events: '/events',
+        events    : '/events',
         eventClick: function (info) {
-            // Preencher o modal com as informações do evento clicado
-            document.getElementById('eventTitle').innerText = info.event.title;
+              // Preencher o modal com as informações do evento clicado
+            document.getElementById('eventTitle').innerText            = info.event.title;
             document.getElementById('eventprofessionalName').innerText = info.event.extendedProps.professionalName || 'Desconhecido';
-            document.getElementById('eventStart').innerText = info.event.start.toLocaleDateString();
-            document.getElementById('eventHora').innerText = info.event.extendedProps.hora || 'Desconhecido';
-            document.getElementById('eventUser').innerText = info.event.extendedProps.user.nome || 'Desconhecido';
-            document.getElementById('eventUserEmail').innerText = info.event.extendedProps.user.email || 'N/A';
-            document.getElementById('eventUserPhone').innerText = info.event.extendedProps.user.telefone || 'N/A';
+            document.getElementById('eventStart').innerText            = info.event.start.toLocaleDateString();
+            document.getElementById('eventHora').innerText             = info.event.extendedProps.hora || 'Desconhecido';
+            document.getElementById('eventUser').innerText             = info.event.extendedProps.user.nome || 'Desconhecido';
+            document.getElementById('eventUserEmail').innerText        = info.event.extendedProps.user.email || 'N/A';
+            document.getElementById('eventUserPhone').innerText        = info.event.extendedProps.user.telefone || 'N/A';
 
-            // Definir os valores padrão da data e horário com os dados do evento
-            const originalDate = moment(info.event.start).format('YYYY-MM-DD');
-            const originalHour = info.event.extendedProps.hora || moment(info.event.start).format('HH:mm');
+              // Definir os valores padrão da data e horário com os dados do evento
+            const originalDate             = moment(info.event.start).format('YYYY-MM-DD');
+            const originalHour             = info.event.extendedProps.hora || moment(info.event.start).format('HH:mm');
             const originalProfessionalName = info.event.extendedProps.professionalName;
             
-            // Configurar a data mínima como hoje
-            const dateInput = document.getElementById('newEventDate');
-            const today = moment().format('YYYY-MM-DD');
-            dateInput.min = today; // Impede a seleção de datas anteriores a hoje
-            dateInput.value = originalDate;
+              // Configurar a data mínima como hoje
+            const dateInput       = document.getElementById('newEventDate');
+            const today           = moment().format('YYYY-MM-DD');
+                  dateInput.min   = today;                                    // Impede a seleção de datas anteriores a hoje
+                  dateInput.value = originalDate;
             
-            document.getElementById('newEventHour').value = originalHour;
-            const professionalSelect = document.getElementById('newEventProfessional');
-            professionalSelect.value = originalProfessionalName;
+            document.getElementById('newEventHour').value    = originalHour;
+            const                   professionalSelect       = document.getElementById('newEventProfessional');
+                                    professionalSelect.value = originalProfessionalName;
 
-            // Desabilitar o botão de editar inicialmente
-            const editButton = document.getElementById('editEvent');
-            editButton.disabled = true;
+              // Desabilitar o botão de editar inicialmente
+            const editButton          = document.getElementById('editEvent');
+                  editButton.disabled = true;
             editButton.classList.add('btn-disabled');
 
-            // Função para verificar se a data selecionada é válida (não anterior a hoje)
+              // Função para verificar se a data selecionada é válida (não anterior a hoje)
             function isValidDate(selectedDate) {
                 const selected = moment(selectedDate).startOf('day');
-                const today = moment().startOf('day');
+                const today    = moment().startOf('day');
                 return selected.isSameOrAfter(today);
             }
 
-            // Função para verificar se os campos foram alterados e são válidos
+              // Função para verificar se os campos foram alterados e são válidos
             function checkEditability() {
-                const newDate = document.getElementById('newEventDate').value;
-                const newHour = document.getElementById('newEventHour').value;
+                const newDate         = document.getElementById('newEventDate').value;
+                const newHour         = document.getElementById('newEventHour').value;
                 const newProfessional = document.getElementById('newEventProfessional').value;
 
-                const isDateValid = isValidDate(newDate);
-                const hasChanges = newDate !== originalDate || 
-                                 newHour !== originalHour || 
-                                 newProfessional !== originalProfessionalName;
+                const isDateValid       = isValidDate(newDate);
+                const hasChanges        = newDate !== originalDate ||
+                      newHour         !== originalHour ||
+                      newProfessional !== originalProfessionalName;
 
                 if (hasChanges && isDateValid) {
                     editButton.disabled = false;
@@ -424,28 +507,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     editButton.classList.add('btn-disabled');
                 }
 
-                // Mostrar aviso se a data for anterior a hoje
+                  // Mostrar aviso se a data for anterior a hoje
                 if (!isDateValid) {
                     Swal.fire({
-                        title: 'Data inválida!',
-                        text: 'Não é possível selecionar uma data anterior ao dia atual.',
-                        icon: 'warning',
+                        title            : 'Data inválida!',
+                        text             : 'Não é possível selecionar uma data anterior ao dia atual.',
+                        icon             : 'warning',
                         confirmButtonText: 'Ok'
                     });
-                    // Se a data original é anterior a hoje, usa hoje como valor padrão
+                      // Se a data original é anterior a hoje, usa hoje como valor padrão
                     document.getElementById('newEventDate').value = isValidDate(originalDate) ? originalDate : today;
                 }
             }
 
-            // Adicionar eventos de input para verificar alterações
+              // Adicionar eventos de input para verificar alterações
             document.getElementById('newEventDate').addEventListener('input', checkEditability);
             document.getElementById('newEventHour').addEventListener('input', checkEditability);
             document.getElementById('newEventProfessional').addEventListener('change', checkEditability);
 
-            // Exibir o modal
+              // Exibir o modal
             $('#eventModal').modal('show');
 
-                  // Ação de deletar o evento
+                    // Ação de deletar o evento
             document.getElementById('deleteEvent').onclick = function () {
                 Swal.fire({
                     title            : 'Você tem certeza?',
@@ -475,10 +558,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             };
 
-     // Função para verificar se os campos foram alterados
+       // Função para verificar se os campos foram alterados
             function checkEditability() {
-                const newDate = document.getElementById('newEventDate').value;
-                const newHour = document.getElementById('newEventHour').value;
+                const newDate         = document.getElementById('newEventDate').value;
+                const newHour         = document.getElementById('newEventHour').value;
                 const newProfessional = document.getElementById('newEventProfessional').value;
 
                 if (newDate !== originalDate || newHour !== originalHour || newProfessional !== originalProfessionalName) {
@@ -492,16 +575,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-                  // Função para fechar o modal
+                    // Função para fechar o modal
             document.getElementById('closeModal').onclick = function () {
                 $('#eventModal').modal('hide');
             };
 
                  
-            // Ação de editar o evento
+              // Ação de editar o evento
             document.getElementById('editEvent').onclick = async function () {
-                const newDate = document.getElementById('newEventDate').value;
-                const newHour = document.getElementById('newEventHour').value;
+                const newDate         = document.getElementById('newEventDate').value;
+                const newHour         = document.getElementById('newEventHour').value;
                 const newProfessional = document.getElementById('newEventProfessional').value;
 
                 if (newDate && newHour && newProfessional) {
@@ -512,21 +595,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     try {
                         const response = await fetch(`/edit-event/${info.event.id}`, {
-                            method: 'POST',
+                            method : 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
-                                title: info.event.title,
-                                start: newStartDateTime,
-                                hora: newHour, // Adiciona a hora separadamente
+                                title           : info.event.title,
+                                start           : newStartDateTime,
+                                hora            : newHour,            // Adiciona a hora separadamente
                                 professionalName: newProfessional,
                             }),
                         });
 
                         if (response.ok) {
                             localStorage.setItem('message', 'Evento atualizado com sucesso!');
-                            // Atualiza o evento no calendário antes de recarregar
+                              // Atualiza o evento no calendário antes de recarregar
                             info.event.setStart(newStartDateTime);
                             info.event.setExtendedProp('hora', newHour);
                             info.event.setExtendedProp('professionalName', newProfessional);
@@ -558,7 +641,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     calendar.render();
 
-           // Exibir mensagem de sucesso após recarregar a página
+             // Exibir mensagem de sucesso após recarregar a página
     const message = localStorage.getItem('message');
     if (message) {
         Swal.fire('Sucesso!', message, 'success');
@@ -580,7 +663,357 @@ FullCalendar.globalLocales.push({
         day  : 'Dia',
         list : 'Agenda'
     },
-      // Adicionar traduções de outros textos conforme necessário
+        // Adicionar traduções de outros textos conforme necessário
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const searchTypeBtn      = document.getElementById('searchTypeBtn');
+  const searchTypeDropdown = document.getElementById('searchTypeDropdown');
+  const searchInput        = document.getElementById('searchInput');
+  const searchBtn          = document.getElementById('searchBtn');
+  const allUsersBtn        = document.getElementById('allUsersBtn');
+  const searchResults      = document.getElementById('searchResults');
+  const searchSpinner      = document.getElementById('searchSpinner');
+
+  let currentSearchType = 'email';
+
+    // Toggle search type dropdown
+  searchTypeBtn.addEventListener('click', () => {
+    searchTypeDropdown.classList.toggle('hidden');
+  });
+
+    // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchTypeBtn.contains(e.target) && !searchTypeDropdown.contains(e.target)) {
+      searchTypeDropdown.classList.add('hidden');
+    }
+  });
+
+    // Handle search type selection
+  document.querySelectorAll('.search-type-option').forEach(option => {
+    option.addEventListener('click', (e) => {
+      const type                    = e.target.dataset.type;
+            currentSearchType       = type;
+            searchTypeBtn.innerHTML = `${type === 'email' ? 'Email' : 'Telefone'}
+        <svg      xmlns  = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "ml-2">
+        <polyline points = "6 9 12 15 18 9"></polyline>
+        </svg>`;
+      searchInput.placeholder = `Buscar por ${type === 'email' ? 'email' : 'telefone'}...`;
+      searchTypeDropdown.classList.add('hidden');
+    });
+  });
+
+    // Search function
+  async function performSearch(showAll = false) {
+    searchSpinner.classList.remove('hidden');
+    searchResults.classList.add('hidden');
+
+    try {
+      const endpoint = showAll
+        ? '/api/users/all'
+        :  `/api/users/search?type=${currentSearchType}&query=${searchInput.value}`;
+
+      const response = await fetch(endpoint);
+      const data     = await response.json();
+
+      displayResults(data);
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire('Erro!', 'Erro ao buscar usuários.', 'error');
+    } finally {
+      searchSpinner.classList.add('hidden');
+    }
+  }
+
+    // Display results function
+  function displayResults(users) {
+    searchResults.innerHTML = '';
+    
+    if (users.length === 0) {
+      searchResults.innerHTML = `
+        <div class = "p-4 text-center text-gray-500">
+          Nenhum resultado encontrado
+        </div>
+      `;
+    } else {
+      users.forEach(user => {
+        const userElement           = document.createElement('div');
+              userElement.className = 'search-result-item';
+              userElement.innerHTML = `
+          <div class = "search-result-name">${user.nome}</div>
+          <div class = "search-result-email">${user.email}</div>
+          <div class = "search-result-phone">${user.telefone}</div>
+        `;
+        
+        userElement.addEventListener('click', () => showUserAppointments(user.id));
+        searchResults.appendChild(userElement);
+      });
+    }
+
+    searchResults.classList.remove('hidden');
+  }
+
+    // Show user appointments function
+async function showUserAppointments(userId) {
+  searchSpinner.classList.remove('hidden');
+  
+  try {
+    const response = await fetch(`/api/appointments/${userId}`);
+    const data = await response.json();
+    
+    if (data.events && data.events.length > 0) {
+      // Cria uma lista formatada dos agendamentos
+      const appointmentsList = data.events.map(event => {
+        const eventDate = moment(event.start).format('DD/MM/YYYY');
+        return `
+          <div class="appointment-item p-4 mb-4 border rounded hover:bg-gray-50 cursor-pointer"
+               data-event='${JSON.stringify({
+                 id: event.id,
+                 title: event.title,
+                 professionalName: event.professionalName,
+                 start: event.start,
+                 hora: event.hora,
+                 userName: data.user.nome,
+                 userEmail: data.user.email,
+                 userPhone: data.user.telefone
+               })}'>
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="font-bold text-lg">${event.title}</h3>
+                <p class="text-gray-600">Data: ${eventDate}</p>
+                <p class="text-gray-600">Horário: ${event.hora}</p>
+                <p class="text-gray-600">Profissional: ${event.professionalName}</p>
+                <p class="text-gray-600">Status: ${event.status || 'Confirmado'}</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Mostra a lista de agendamentos em um modal simples
+      Swal.fire({
+        title: `Agendamentos de ${data.user.nome}`,
+        html: `
+          <div class="text-left">
+            <div class="mb-4 p-4 bg-gray-50 rounded">
+              <h3 class="font-bold mb-2">Informações do Cliente</h3>
+              <p><strong>Nome:</strong> ${data.user.nome}</p>
+              <p><strong>Email:</strong> ${data.user.email}</p>
+              <p><strong>Telefone:</strong> ${data.user.telefone}</p>
+            </div>
+            <div class="mt-4">
+              <h3 class="font-bold mb-2">Histórico de Agendamentos</h3>
+              ${appointmentsList}
+            </div>
+          </div>
+        `,
+        width: '800px',
+        showConfirmButton: false,
+        showCloseButton: true,
+        didRender: () => {
+          // Adiciona event listeners para os itens de agendamento
+          document.querySelectorAll('.appointment-item').forEach(item => {
+            item.addEventListener('click', () => {
+              const eventData = JSON.parse(item.dataset.event);
+              openEventModal(eventData);
+            });
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: 'Sem Agendamentos',
+        text: 'Este usuário não possui agendamentos.',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    Swal.fire({
+      title: 'Erro!',
+      text: 'Erro ao buscar agendamentos. Por favor, tente novamente.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  } finally {
+    searchSpinner.classList.add('hidden');
+  }
+}
+
+// Função auxiliar para abrir o modal de evento existente
+function openEventModal(eventData) {
+  // Fecha o modal do SweetAlert
+  Swal.close();
+  
+  // Preenche os dados no modal existente
+  document.getElementById('eventTitle').innerText = eventData.title;
+  document.getElementById('eventprofessionalName').innerText = eventData.professionalName;
+  document.getElementById('eventStart').innerText = moment(eventData.start).format('DD/MM/YYYY');
+  document.getElementById('eventHora').innerText = eventData.hora;
+  document.getElementById('eventUser').innerText = eventData.userName;
+  document.getElementById('eventUserEmail').innerText = eventData.userEmail;
+  document.getElementById('eventUserPhone').innerText = eventData.userPhone;
+
+  // Configurar valores originais para comparação
+  const originalDate = moment(eventData.start).format('YYYY-MM-DD');
+  const originalHour = eventData.hora;
+  const originalProfessionalName = eventData.professionalName;
+
+  // Configura os campos de edição
+  const dateInput = document.getElementById('newEventDate');
+  const hourInput = document.getElementById('newEventHour');
+  const professionalSelect = document.getElementById('newEventProfessional');
+  const editButton = document.getElementById('editEvent');
+
+  dateInput.value = originalDate;
+  dateInput.min = moment().format('YYYY-MM-DD'); // Impede datas anteriores a hoje
+  hourInput.value = originalHour;
+  professionalSelect.value = originalProfessionalName;
+
+  // Função para verificar se a data selecionada é válida
+  function isValidDate(selectedDate) {
+    const selected = moment(selectedDate).startOf('day');
+    const today = moment().startOf('day');
+    return selected.isSameOrAfter(today);
+  }
+
+  // Função para verificar se os campos foram alterados e são válidos
+  function checkEditability() {
+    const newDate = dateInput.value;
+    const newHour = hourInput.value;
+    const newProfessional = professionalSelect.value;
+
+    const isDateValid = isValidDate(newDate);
+    const hasChanges = 
+      newDate !== originalDate || 
+      newHour !== originalHour || 
+      newProfessional !== originalProfessionalName;
+
+    if (hasChanges && isDateValid) {
+      editButton.disabled = false;
+      editButton.classList.remove('btn-disabled');
+    } else {
+      editButton.disabled = true;
+      editButton.classList.add('btn-disabled');
+    }
+
+    // Mostrar aviso se a data for anterior a hoje
+    if (!isDateValid) {
+      Swal.fire({
+        title: 'Data inválida!',
+        text: 'Não é possível selecionar uma data anterior ao dia atual.',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      });
+      dateInput.value = isValidDate(originalDate) ? originalDate : moment().format('YYYY-MM-DD');
+    }
+  }
+
+  // Adicionar eventos de input para verificar alterações
+  dateInput.addEventListener('input', checkEditability);
+  hourInput.addEventListener('input', checkEditability);
+  professionalSelect.addEventListener('change', checkEditability);
+
+  // Configurar o botão de edição
+  editButton.onclick = async function() {
+    const newDate = dateInput.value;
+    const newHour = hourInput.value;
+    const newProfessional = professionalSelect.value;
+
+    if (newDate && newHour && newProfessional) {
+      const newStartDateTime = moment(`${newDate} ${newHour}`).format();
+
+      $('#eventModal').modal('hide');
+      showSpinner('Atualizando seu agendamento...');
+
+      try {
+        const response = await fetch(`/edit-event/${eventData.id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: eventData.title,
+            start: newStartDateTime,
+            hora: newHour,
+            professionalName: newProfessional,
+          }),
+        });
+
+        if (response.ok) {
+          localStorage.setItem('message', 'Evento atualizado com sucesso!');
+          location.reload();
+        } else {
+          hideSpinner();
+          throw new Error('Erro ao atualizar o evento');
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        hideSpinner();
+        Swal.fire('Erro!', 'Erro ao atualizar o evento. Verifique o console para mais detalhes.', 'error');
+      }
+    } else {
+      Swal.fire('Atenção!', 'Por favor, preencha todos os campos necessários.', 'warning');
+    }
+  };
+
+  // Configurar o botão de deletar
+  document.getElementById('deleteEvent').onclick = function() {
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Esta ação não pode ser desfeita!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Não, cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $('#eventModal').modal('hide');
+        showSpinner('Excluindo seu agendamento...');
+        
+        $.ajax({
+          url: `/delete-event/${eventData.id}`,
+          type: 'DELETE',
+          success: function() {
+            localStorage.setItem('message', 'Seu agendamento foi excluído com sucesso.');
+            location.reload();
+          },
+          error: function(xhr, status, error) {
+            hideSpinner();
+            Swal.fire('Erro!', 'Não foi possível excluir o evento: ' + xhr.responseText, 'error');
+          }
+        });
+      }
+    });
+  };
+
+  // Reset o estado do botão de edição
+  editButton.disabled = true;
+  editButton.classList.add('btn-disabled');
+
+  // Abre o modal
+  $('#eventModal').modal('show');
+}
+
+  searchBtn.addEventListener('click', () => performSearch(false));
+  allUsersBtn.addEventListener('click', () => performSearch(true));
+
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      performSearch(false);
+    }
+  });
+
+    // Close results when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchResults.contains(e.target) && !searchBtn.contains(e.target) && !allUsersBtn.contains(e.target) && !searchInput.contains(e.target)) {
+      searchResults.classList.add('hidden');
+    }
+  });
 });
 </script>
 

@@ -770,7 +770,82 @@ app.post('/update-profile', async (req, res) => {
 
 app.use('/img', express.static(__dirname + './views/img'));
 
+// Buscar usuários por email ou telefone
+app.get('/api/users/search', async (req, res) => {
+  const { type, query } = req.query;
+  try {
+    const searchField = type === 'email' ? 'email' : 'telefone';
+    const users = await sequelize.query(
+      `SELECT * FROM users WHERE ${searchField} LIKE :query`, 
+      {
+        replacements: { query: `%${query}%` }, // proteção contra SQL Injection
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+    res.json(users);
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
+// Buscar todos os usuários
+app.get('/api/users/all', async (req, res) => {
+  try {
+    const users = await sequelize.query('SELECT * FROM users', { type: sequelize.QueryTypes.SELECT });
+    res.json(users);
+  } catch (error) {
+    console.error('Erro ao buscar todos os usuários:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Buscar agendamentos de um usuário específico
+app.get("/api/appointments/:userId", async (req, res) => {
+  const userId = req.params.userId; // Pega o userId da URL
+
+  try {
+    // Busca os dados do usuário pelo ID (semelhante à /profile)
+    const user = await User.findByPk(userId); // Verifica se o usuário existe
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" }); // Se o usuário não for encontrado, retorna um erro
+    }
+
+    // Busca todos os eventos do usuário
+    const userEvents = await Event.findAll({ where: { userId } });
+
+    // Verifica se há eventos para o usuário
+    if (userEvents.length > 0) {
+      // Formata os eventos, adicionando um valor padrão caso não haja o nome do profissional
+      const eventsWithProfessionalNames = userEvents.map((event) => ({
+        ...event.dataValues, // Inclui todos os dados do evento
+        professionalName:
+          event.professionalName || "Profissional não informado", // Verifica se existe professionalName
+      }));
+
+      // Retorna os eventos formatados junto com as informações do usuário
+      return res.json({
+        user: {
+          id: user.id,
+          nome: user.nome,
+          email: user.email,
+          telefone: user.telefone,
+        },
+        events: eventsWithProfessionalNames,
+      });
+    } else {
+      return res
+        .status(404)
+        .json({ message: "Nenhum evento encontrado para este usuário." });
+    }
+  } catch (error) {
+    console.error("Erro ao buscar dados do usuário ou eventos:", error);
+    res
+      .status(500)
+      .json({ error: "Erro ao buscar dados do usuário ou eventos" });
+  }
+});
     // Inicializa o servidor
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
