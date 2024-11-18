@@ -111,39 +111,53 @@ p {
 
 <body>
     
-<header class = "w-full flex justify-center relative z-10">
-<nav    class = "bg-transparent shadow- w-full px-20 py-1 flex justify-around absolute items-center text-black shadow-sm">
-<div    class = "flex space-x-6">
-<a      href  = "/#home" class         = "hover:underline text-lg">Home</a>
-<a      href  = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
-<a      href  = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
-<a      href  = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
-<a      href  = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
-    </div>
-    <div class = "logo-container">
-    <div class = "flex justify-center items-center flex-grow">
-    <a   href  = "/"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
-        </div>
-    </div>
-      <!-- Botões de Ação -->
-      <div class="flex gap-4">
-        <button onclick="window.location.href='/login'" 
-    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
-    <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Agende Aqui</span>
-</button>
+ <header class="w-full flex justify-center relative z-10">
+    <nav class="bg-transparent w-full px-4 sm:px-8 py-1 flex items-center justify-between text-black shadow-sm absolute">
+      <!-- Logo -->
+      <a href="/" aria-label="Início">
+        <img src="img/logo.svg" alt="Logo Patty Nails" class="h-24">
+      </a>
 
-         <button onclick="window.location.href='/profile'" 
-    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
-    <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Meu Perfil</span>
-</button>
+      <!-- Links de Navegação (Desktop) -->
+      <div class="hidden md:flex space-x-6 text-[15px]">
+       <a href="/#home" class="hover:underline text-lg">Home</a>
+       <a href="/#mais-pedidos" class="hover:underline text-lg">Mais pedidos</a>
+       <a href="/#sobre" class="hover:underline text-lg">Sobre</a>
+       <a href="/#depoimentos" class="hover:underline text-base">Depoimentos</a>
+       <a href="/#bestsellers" class="hover:underline text-base">Bestsellers</a>
       </div>
 
-</nav>
+      <!-- Botões de Ação -->
+      <div class="hidden md:flex gap-4">
+        <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Agende Aqui</span>
+        </button>
+        <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Meu Perfil</span>
+        </button>
+      </div>
 
-</header>
+      <!-- Botão Mobile -->
+      <button id="mobile-menu-toggle" class="md:hidden text-black focus:outline-none">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
 
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-md md:hidden">
+      <div class="px-4 py-2 space-y-2">
+        <a href="#home" class="block text-sm hover:underline">Home</a>
+        <a href="#mais-pedidos" class="block text-sm hover:underline">Serviços</a>
+        <a href="#sobre" class="block text-sm hover:underline">Sobre</a>
+        <a href="#depoimentos" class="block text-sm hover:underline">Depoimentos</a>
+        <a href="#bestsellers" class="block text-sm hover:underline">Bestsellers</a>
+      </div>
+    </div>
+  </header>
 
   <!-- vlibras -->
     <div vw class               = "enabled">
