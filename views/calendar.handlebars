@@ -227,81 +227,62 @@
 <body class = "text-white font-sans custom-gradient2" >
     <!-- Navbar -->
 
-<header class = "w-full flex justify-center relative z-10">
-<nav    class = "bg-transparent shadow- w-full px-20 py-1 flex justify-around absolute items-center text-black shadow-sm">
-<div    class = "flex space-x-6">
-    <!-- Adicione isso logo após a abertura da nav no header -->
-{{!-- <div    class = "search-container relative">
-<div    class = "flex items-center space-x-2">
-<div    class = "relative">
-<button id    = "searchTypeBtn" class = "flex items-center px-3 py-2 text-sm border border-black rounded-l-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-        Email
-        <svg      xmlns  = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "ml-2">
-        <polyline points = "6 9 12 15 18 9"></polyline>
+<header class="w-full flex justify-center relative z-10">
+  <nav class="bg-transparent shadow-sm w-full px-4 py-1 flex justify-between items-center text-black">
+    <!-- Logo -->
+    <div class="flex items-center">
+      <a href="/"><img src="img/logo.svg" alt="unha" class="h-24" /></a>
+    </div>
+
+    <!-- Barra de pesquisa -->
+    <div class="search-container relative flex items-center space-x-4 flex-grow max-w-lg mx-auto">
+      <div class="relative">
+        <button id="searchTypeBtn" class="flex items-center px-3 py-2 text-sm border border-black rounded-l-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+          Email
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div id="searchTypeDropdown" class="hidden absolute mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+          <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type="email">Email</div>
+          <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type="phone">Telefone</div>
+        </div>
+      </div>
+      <input type="text" id="searchInput" placeholder="Buscar por email..." class="px-4 py-2 border border-black rounded-none text-black focus:outline-none focus:border-pink-500">
+      <button id="searchBtn" class="px-4 py-2 border border-black rounded-r-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </button>
-      
-      <div id    = "searchTypeDropdown" class                                                = "hidden absolute mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-      <div class = "px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type = "email">Email</div>
-      <div class = "px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type = "phone">Telefone</div>
+      <button id="allUsersBtn" class="px-4 py-2 border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Resultados de pesquisa (dropdown) -->
+    <div id="searchResults" class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+      <!-- Resultados populados aqui -->
+    </div>
+
+    <!-- Carregando (spinner) -->
+    <div id="searchSpinner" class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 p-4">
+      <div class="flex justify-center">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
       </div>
     </div>
 
-    <input 
-      type        = "text"
-      id          = "searchInput"
-      placeholder = "Buscar por email..."
-      class       = "px-4 py-2 border border-black rounded-none text-black focus:outline-none focus:border-pink-500"
-    >
-
-    <button id    = "searchBtn" class                  = "px-4 py-2 border border-black rounded-r-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-    <svg    xmlns = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round">
-    <circle cx    = "11" cy                            = "11" r      = "8"></circle>
-    <line   x1    = "21" y1                            = "21" x2     = "16.65" y2   = "16.65"></line>
-      </svg>
-    </button>
-
-    <button id    = "allUsersBtn" class                = "px-4 py-2 border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-    <svg    xmlns = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round">
-    <path   d     = "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-    <circle cx    = "12" cy                            = "7" r       = "4"></circle>
-      </svg>
-    </button>
-  </div>
-
-  <!-- Results Dropdown -->
-  <div id = "searchResults" class = "hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
-    <!-- Results will be populated here -->
-  </div>
-
-  <!-- Loading Spinner -->
-  <div id    = "searchSpinner" class = "hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 p-4">
-  <div class = "flex justify-center">
-  <div class = "animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
+    <!-- Logout Button -->
+    <div class="flex items-center space-x-4">
+      <button onclick="confirmarLogout(event)" class="px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">Logout</button>
     </div>
-  </div>
-</div> --}}
-<a href = "/#home" class         = "hover:underline text-lg">Home</a>
-<a href = "/#mais-pedidos" class = "hover:underline text-lg">Mais pedidos</a>
-<a href = "/#sobre" class        = "hover:underline text-lg">Sobre</a>
-<a href = "/#depoimentos" class  = "hover:underline text-base">Depoimentos</a>
-<a href = "/#bestsellers" class  = "hover:underline text-base">Bestsellers</a>
+  </nav>
+</header>
 
-      </div class = "logo-container">
-      <div  class = "flex justify-center items-center flex-grow">
-      <a    href  = "/"><img src = "img/logo.svg" alt = "unha" class = "h-24" /></a>
-      </div>
-      
-   <div class = "flex space-x-16"> <!-- Aumentei o espaçamento aqui -->
 
-    <button onclick = "confirmarLogout(event)" class = "px-4 py-2 text-sm border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-        Logout
-    </button>
-</div>
-  
-</div>
-    </nav>
-  </header>
   <!-- vlibras -->
     <div vw class               = "enabled">
     <div vw-access-button class = "active"></div>

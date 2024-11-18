@@ -49,12 +49,15 @@
 </head>
 
 <body class="flex flex-col items-center">
+ <header class="w-full flex justify-center relative z-10">
+    <nav class="bg-transparent w-full px-4 sm:px-8 py-1 flex items-center justify-between text-black shadow-sm absolute">
+      <!-- Logo -->
+      <a href="/" aria-label="Início">
+        <img src="img/logo.svg" alt="Logo Patty Nails" class="h-24">
+      </a>
 
-  <header class="w-full flex justify-center relative z-10">
-    <nav class="bg-transparent w-full px-20 py-1 flex justify-between items-center text-black shadow-sm absolute">
-      
-      <!-- Links de navegação -->
-      <div class="flex space-x-6 text-[15px]">
+      <!-- Links de Navegação (Desktop) -->
+      <div class="hidden md:flex space-x-6 text-[15px]">
         <a href="#home" class="hover:underline">Home</a>
         <a href="#mais-pedidos" class="hover:underline">Serviços</a>
         <a href="#sobre" class="hover:underline">Sobre</a>
@@ -62,27 +65,47 @@
         <a href="#bestsellers" class="hover:underline">Bestsellers</a>
       </div>
 
-      <!-- Logo -->
-      <div class="flex-grow flex justify-center items-center">
-        <a href="/" aria-label="Início"><img src="img/logo.svg" alt="Logo Patty Nails" class="h-24 mr-48" /></a>
-      </div>
-
       <!-- Botões de Ação -->
-      <div class="flex gap-4">
-        <button onclick="window.location.href='/login'" 
-    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
-    <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Agende Aqui</span>
-</button>
-
-        <button onclick="window.location.href='/profile'" 
-    class="relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-white rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
-    <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Meu Perfil</span>
-</button>
+      <div class="hidden md:flex gap-4">
+        <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Agende Aqui</span>
+        </button>
+        <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Meu Perfil</span>
+        </button>
       </div>
+
+      <!-- Botão Mobile -->
+      <button id="mobile-menu-toggle" class="md:hidden text-black focus:outline-none">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </nav>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-md md:hidden">
+      <div class="px-4 py-2 space-y-2">
+        <a href="#home" class="block text-sm hover:underline">Home</a>
+        <a href="#mais-pedidos" class="block text-sm hover:underline">Serviços</a>
+        <a href="#sobre" class="block text-sm hover:underline">Sobre</a>
+        <a href="#depoimentos" class="block text-sm hover:underline">Depoimentos</a>
+        <a href="#bestsellers" class="block text-sm hover:underline">Bestsellers</a>
+      </div>
+    </div>
   </header>
+
+ <script>
+ 
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 
   <!-- Plugin VLibras -->
   <div vw class="enabled">
@@ -111,125 +134,132 @@
     <span class="relative text-[#000000] transition-colors duration-150 ease-in-out ">Agende Aqui </span>
 </button>
 
-        <div class="flex gap-8 mt-4 md:mt-8">
-          <!-- Itens estatísticos -->
-          <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 border-2 border-white bg-cover rounded-3xl shadow-md text-center space-y-2 hover:scale-110 transition-transform duration-500">
-            <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4 ">
-              <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
-            </div>
-            <h2 class="text-[18px] font-semibold text-black">2k</h2>
-            <p class="text-gray-500 w-1/2 text-[13px]">Seguidores no Instagram que acompanham</p>
-          </div>
-          <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 bg-cover rounded-3xl shadow-md text-center border-2 border-white space-y-2 hover:scale-110 transition-transform duration-500">
-            <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
-              <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
-            </div>
-            <h2 class="text-[18px] font-semibold text-black">50</h2>
-            <p class="text-gray-500 w-1/2 text-[13px]">Atendimentos que fazemos em um dia</p>
-          </div>
-          <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 bg-cover rounded-3xl shadow-md text-center border-2 border-white space-y-2 hover:scale-110 transition-transform duration-500">
-            <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
-              <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
-            </div>
-            <h2 class="text-[18px] font-semibold text-black">400</h2>
-            <p class="text-gray-500 w-1/2 text-[13px]">Maiores avaliações positivas</p>
-          </div>
-        </div>
-      </div>
+       <div class="flex gap-8 mt-4 md:mt-8 flex-wrap justify-center">
+  <!-- Itens estatísticos -->
+  <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 border-2 border-white bg-cover rounded-3xl shadow-md text-center space-y-2 hover:scale-110 transition-transform duration-500">
+    <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+      <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+    </div>
+    <h2 class="text-[18px] font-semibold text-black">2k</h2>
+    <p class="text-gray-500 w-1/2 text-[13px]">Seguidores no Instagram que acompanham</p>
+  </div>
 
-      <div class="absolute inset-y-0 right-0 flex items-center">
-        <img class="max-w-none h-full xl:block" src="./img/heroImg.svg" alt="Imagem de unha">
-      </div>
+  <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 bg-cover rounded-3xl shadow-md text-center border-2 border-white space-y-2 hover:scale-110 transition-transform duration-500">
+    <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+      <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+    </div>
+    <h2 class="text-[18px] font-semibold text-black">50</h2>
+    <p class="text-gray-500 w-1/2 text-[13px]">Atendimentos que fazemos em um dia</p>
+  </div>
+
+  <div class="flex flex-col items-center justify-center w-48 h-48 bg-white/50 bg-cover rounded-3xl shadow-md text-center border-2 border-white space-y-2 hover:scale-110 transition-transform duration-500">
+    <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+      <img src="./img/heart.svg" alt="Ícone de coração" class="w-5 h-5">
+    </div>
+    <h2 class="text-[18px] font-semibold text-black">400</h2>
+    <p class="text-gray-500 w-1/2 text-[13px]">Maiores avaliações positivas</p>
+  </div>
+</div>
+
+
+      <div class="absolute inset-y-0 right-0 items-center xl:block hidden">
+      <img class="max-w-none h-full" src="./img/heroImg.svg" alt="Imagem de unha">
+    </div>
     </section>
 
-    <!-- Seção de Serviços Mais Pedidos -->
-    <section id="mais-pedidos" class="py-12 bg-white w-full justify-center">
-      <div class="container mx-auto text-center flex flex-col items-center justify-center w-full">
-        <p class="text-gray-600 mb-10 w-1/2 text-center">Serviços</p>
-        <h2 class="text-3xl font-bold mb-2">Os Mais Pedidos</h2>
-        <p class=" text-gray-600 mb-10 w-1/2 text-center">
-          Salão especializado em cuidados com unhas. Venha para uma experiência completa de beleza e relaxamento. Oferecemos serviços de manicure, pedicure, alongamento de unhas e tratamento de spa para mãos e pés.
-        </p>
+ <section id="mais-pedidos" class="py-12 bg-white w-full justify-center">
+  <div class="container mx-auto text-center flex flex-col items-center justify-center px-4 md:px-8">
+    <p class="text-gray-600 mb-4 text-base md:text-lg">Serviços</p>
+    <h2 class="text-3xl font-bold mb-4">Os Mais Pedidos</h2>
+    <p class="text-gray-600 mb-8 text-sm md:text-base w-full md:w-2/3 lg:w-1/2">
+      Salão especializado em cuidados com unhas. Venha para uma experiência completa de beleza e relaxamento. Oferecemos serviços de manicure, pedicure, alongamento de unhas e tratamento de spa para mãos e pés.
+    </p>
+  </div>
+
+  <!-- Grid de serviços -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-20">
+    <!-- Card de Serviço 1 -->
+    <div class="border border-black rounded-3xl p-6 flex flex-col hover:bg-[#FFC0CB] transition-colors">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/top1.svg" alt="Ícone de Manicure e Pedicure" class="w-5 h-5">
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-11 mt-8 mb-8 mx-20">
-        <!-- Card de Serviço 1 -->
-        <div class="border border-black rounded-3xl p-6 h-72 gap-4 flex flex-col hover:bg-[#FFC0CB]">
-          <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
-            <img src="./img/top1.svg" alt="Ícone de Manicure e Pedicure" class="w-5 h-5">
-          </div>
-          <div class="text-left">
-            <h3 class="text-xl font-semibold mb-2">Manicure e Pedicure</h3>
-            <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
-          </div>
-        </div>
-
-        <!-- Card de Serviço 2 -->
-        <div class="border-1 border-black rounded-3xl p-6 h-72 gap-4 flex flex-col hover:bg-[#FFC0CB]">
-          <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
-            <img src="./img/top2.svg" alt="Ícone de Alongamento de Unhas" class="w-5 h-5">
-          </div>
-          <div class="text-left">
-            <h3 class="text-xl font-semibold mb-2">Alongamento de Unhas</h3>
-            <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
-          </div>
-        </div>
-
-        <!-- Card de Serviço 3 -->
-        <div class="border-1 border-black rounded-3xl p-6 h-72 gap-4 flex flex-col hover:bg-[#FFC0CB]">
-          <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
-            <img src="./img/top3.svg" alt="Ícone de Tratamento de Spa" class="w-5 h-5">
-          </div>
-          <div class="text-left">
-            <h3 class="text-xl font-semibold mb-2">Tratamento de Spa</h3>
-            <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
-          </div>
-        </div>
-
-        <div class="border-1 border-black rounded-3xl p-6 h-72 gap-4 flex flex-col hover:bg-[#FFC0CB]">
-          <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
-            <img src="./img/top4.svg" alt="Unha Decorada" class="w-5 h-5">
-          </div>
-          <div class="text-left">
-            <h3 class="text-xl font-semibold mb-2">Unha Decorada</h3>
-            <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
-          </div>
-        </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Manicure e Pedicure</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
       </div>
+    </div>
 
-      <div class="container mx-auto text-center flex flex-col items-center justify-center w-full">
-         
+    <!-- Card de Serviço 2 -->
+    <div class="border border-black rounded-3xl p-6 flex flex-col hover:bg-[#FFC0CB] transition-colors">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/top2.svg" alt="Ícone de Alongamento de Unhas" class="w-5 h-5">
+      </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Alongamento de Unhas</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
+      </div>
+    </div>
+
+    <!-- Card de Serviço 3 -->
+    <div class="border border-black rounded-3xl p-6 flex flex-col hover:bg-[#FFC0CB] transition-colors">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/top3.svg" alt="Ícone de Tratamento de Spa" class="w-5 h-5">
+      </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Tratamento de Spa</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
+      </div>
+    </div>
+
+    <!-- Card de Serviço 4 -->
+    <div class="border border-black rounded-3xl p-6 flex flex-col hover:bg-[#FFC0CB] transition-colors">
+      <div class="bg-[#FFC0CB] rounded-full w-10 h-10 flex items-center justify-center mt-4">
+        <img src="./img/top4.svg" alt="Ícone de Unha Decorada" class="w-5 h-5">
+      </div>
+      <div class="text-left">
+        <h3 class="text-xl font-semibold mb-2">Unha Decorada</h3>
+        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="text-[#333333] font-medium">Ver mais →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão final -->
+  <div class="mt-12 text-center">
     <button onclick="window.location.href='/profile'" 
-    class=" relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-transparent rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
-    <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out "> Saiba Mais </span>
-</button>
-      </div>
-    </section>
+            class="relative overflow-hidden text-sm px-8 py-3 border border-[#333333] text-[#FFC0CB] bg-transparent rounded-full transition-all duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
+      <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
+      <span class="relative text-[#000000] transition-colors duration-150 ease-in-out">Saiba Mais</span>
+    </button>
+  </div>
+</section>
 
-    <!-- Terceira seção: Sobre nós -->
-    <section id    = "sobre" class = "image2 bg-no-repeat bg-cover w-full flex items-center">
-    <div     class = "max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20">
-    <div     class = "flex flex-col justify-center gap-6">
-    <h2      class = "text-6xl font-semibold mb-4 text-black">Sobre Nós</h2>
-    <p       class = "text-lg text-gray-500 mb-6 w-10/12">
-            A Patty Esmalteria é uma esmalteria localizada no Shopping Metrô Boulevard Tatuapé, em São Paulo. Iniciando suas atividades em 2012, a loja se especializou em serviços de alongamento de unhas, utilizando técnicas como Gel, Polygel e Fibra de Vidro. Além disso, oferece uma ampla gama de tratamentos de beleza, incluindo esmaltação em gel, design de sobrancelhas, nail art e manicure e pedicure tradicionais. Um dos grandes diferenciais da Patty Esmalteria é a durabilidade de seus serviços: os alongamentos podem durar até três meses, enquanto a esmaltação em gel tem uma durabilidade de 10 a 15 dias sem descascar, borrões ou necessidade de secagem adicional.
-          </p>
-          <button onclick="window.location.href='/login'" 
-    class="w-32 relative overflow-hidden text-sm px-6 py-2 border-1 border-[#333333] text-[#FFC0CB] bg-transparent rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
-    <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
-    <span class="relative text-[#000000] transition-colors duration-150 ease-in-out "> Veja Mais</span>
-</button>
-        </div>
-        <div class = "w-full">
-        <img src   = "./img/imgAboutUs.svg" alt = "Imagem de Sobre nós" class = " h-[95%]">
-        </div>
-      </div>
-    </section>
+
+   <section id="sobre" class="image2 bg-no-repeat bg-cover w-full flex items-center py-12">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <!-- Texto Sobre Nós -->
+    <div class="flex flex-col justify-center items-center md:items-start text-center md:text-left gap-6">
+      <h2 class="text-4xl md:text-6xl font-semibold mb-4 text-black">Sobre Nós</h2>
+      <p class="text-left md:text-lg text-gray-500 mb-6 w-full md:w-10/12">
+        A Patty Esmalteria é uma esmalteria localizada no Shopping Metrô Boulevard Tatuapé, em São Paulo. Iniciando suas atividades em 2012, a loja se especializou em serviços de alongamento de unhas, utilizando técnicas como Gel, Polygel e Fibra de Vidro. Além disso, oferece uma ampla gama de tratamentos de beleza, incluindo esmaltação em gel, design de sobrancelhas, nail art e manicure e pedicure tradicionais. Um dos grandes diferenciais da Patty Esmalteria é a durabilidade de seus serviços: os alongamentos podem durar até três meses, enquanto a esmaltação em gel tem uma durabilidade de 10 a 15 dias sem descascar, borrões ou necessidade de secagem adicional.
+      </p>
+      <button onclick="window.location.href='/login'" 
+              class="w-32 relative overflow-hidden text-sm px-6 py-2 border border-[#333333] text-[#FFC0CB] bg-transparent rounded-full transition-all duration-500 ease-in-out shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F1A7C0] group">
+        <span class="absolute inset-0 bg-gradient-to-r from-[#FFC0CB] to-[#F1A7C0] transition-transform duration-500 ease-in-out transform scale-0 group-hover:scale-150 rounded-full"></span>
+        <span class="relative text-[#000000] transition-colors duration-150 ease-in-out">Veja Mais</span>
+      </button>
+    </div>
+    
+    <!-- Imagem Sobre Nós -->
+    <div class="flex justify-center">
+      <img src="./img/imgAboutUs.svg" alt="Imagem de Sobre nós" class="w-full h-auto max-w-sm md:max-w-full">
+    </div>
+  </div>
+</section>
+
     
     
 
@@ -267,74 +297,71 @@
     </div>
   </section>
 
-<section id    = "bestsellers" class = "flex justify-center items-center mb-40">
-<div     class = "flex flex-col items-center gap-4">
-<div     class = "flex gap-4 w-full flex-row justify-center">
-         <!-- Imagem principal expandida -->
-         <figure id = "first-image" class = "relative transition-all duration-400 ease-in-out transform w-[300px] h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg">
-            <img 
-               src   = "./img/best1.jpg"
-               alt   = "Principal Image"
-               class = "object-cover rounded-lg shadow-md h-full"
-            >
-         </figure>
-         <!-- Imagens menores com hover para expandir -->
-        <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg " onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
-            <img 
-               class = "object-cover rounded-lg shadow-md h-full hover:shadow-lg"
-               src   = "./img/best2.jpg"
-               alt   = "Skyline Oasis preview"
-            >
-         </figure>
-         
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg  " onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
-            <img 
-               class = "object-cover rounded-lg shadow-md h-full hover:shadow-lg"
-               src   = "./img/best9.jpg"
-               alt   = "Skyline Oasis preview"
-            >
-         </figure>
-         <!-- Mais figuras de exemplo -->
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
-            <img 
-               class = "object-cover rounded-lg shadow-md h-full"
-               src   = "./img/best4.jpg"
-               alt   = "Vista Paradiso preview"
-            >
-         </figure>
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
-            <img 
-               class = "object-cover rounded-lg shadow-md h-full"
-               src   = "./img/best5.jpg"
-               alt   = "Villa Verde preview"
-            >
-         </figure>
-         <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
-            <img 
-               class = "object-cover rounded-lg shadow-md h-full"
-               src   = "./img/best6.jpg"
-               alt   = "Villa Verde preview"
-            >
-         </figure>
-          <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
-            <img 
-               class = "object-cover rounded-lg shadow-md h-full"
-               src   = "./img/best7.jpg"
-               alt   = "Villa Verde preview"
-            >
-         </figure>
-          <figure class = "relative transition-all duration-400 ease-in-out transform w-24 h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter = "shrinkFirstImage()" onMouseLeave = "expandFirstImage()">
-            <img 
-               class = "object-cover rounded-lg shadow-md h-full"
-               src   = "./img/best8.jpg"
-               alt   = "Villa Verde preview"
-            >
-         </figure>
-      </div>
-      <!-- Título abaixo das imagens -->
-      <h2 class = "text-[30px] font-semibold mt-4 tracking-widest text-gray-700"> B E S T <span class = "italic "> S E L L E R S </span></h2>
-   </div>
+<section id="bestsellers" class="flex justify-center items-center mb-40 px-4">
+  <div class="flex flex-col items-center gap-4">
+    <!-- Contêiner de imagens -->
+    <div class="flex flex-wrap sm:flex-nowrap justify-center gap-4 w-full">
+      <!-- Imagem principal expandida -->
+      <figure id="first-image" class="relative transition-all duration-400 ease-in-out transform w-full sm:w-[300px] h-[300px] sm:h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg">
+        <img 
+          src="./img/best1.jpg"
+          alt="Principal Image"
+          class="object-cover rounded-lg shadow-md w-full h-full"
+        >
+      </figure>
+      <!-- Imagens menores com hover para expandir -->
+      <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-[300px] sm:h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+        <img 
+          src="./img/best2.jpg"
+          alt="Skyline Oasis preview"
+          class="object-cover rounded-lg shadow-md w-full h-full"
+        >
+      </figure>
+      <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-[300px] sm:h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+        <img 
+          src="./img/best9.jpg"
+          alt="Skyline Oasis preview"
+          class="object-cover rounded-lg shadow-md w-full h-full"
+        >
+      </figure>
+      <!-- Outras imagens -->
+      <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-[300px] sm:h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+        <img 
+          src="./img/best4.jpg"
+          alt="Vista Paradiso preview"
+          class="object-cover rounded-lg shadow-md w-full h-full"
+        >
+      </figure>
+      <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-[300px] sm:h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+        <img 
+          src="./img/best5.jpg"
+          alt="Villa Verde preview"
+          class="object-cover rounded-lg shadow-md w-full h-full"
+        >
+      </figure>
+      <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-[300px] sm:h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+        <img 
+          src="./img/best6.jpg"
+          alt="Villa Verde preview"
+          class="object-cover rounded-lg shadow-md w-full h-full"
+        >
+      </figure>
+      <figure class="relative transition-all duration-400 ease-in-out transform w-24 h-[300px] sm:h-[500px] hover:w-80 cursor-pointer flex-shrink-0 hover:shadow-lg rounded-lg" onMouseEnter="shrinkFirstImage()" onMouseLeave="expandFirstImage()">
+        <img 
+          src="./img/best7.jpg"
+          alt="Villa Verde preview"
+          class="object-cover rounded-lg shadow-md w-full h-full"
+        >
+      </figure>
+      
+    </div>
+    <!-- Título abaixo das imagens -->
+    <h2 class="text-[20px] sm:text-[30px] font-semibold mt-4 tracking-widest text-gray-700">
+      B E S T <span class="italic">S E L L E R S</span>
+    </h2>
+  </div>
 </section>
+
 
 
 
@@ -473,16 +500,16 @@
 
 <footer class="bg-pink-50 text-center py-10 w-full">
   <!-- Navigation Links -->
-  <div class="flex justify-center space-x-8 text-gray-700 mb-6">
-    <a href="#home" class="hover:underline">Home</a>
-    <a href="#mais-pedidos" class="hover:underline">Serviços</a>
-    <a href="#sobre" class="hover:underline">Sobre</a>
-    <a href="#depoimentos" class="hover:underline">Depoimentos</a>
-    <a href="#bestsellers" class="hover:underline">Bestsellers</a>
+  <div class="flex flex-wrap justify-center space-x-4 sm:space-x-8 text-gray-700 mb-6">
+    <a href="#home" class="hover:underline text-sm sm:text-base">Home</a>
+    <a href="#mais-pedidos" class="hover:underline text-sm sm:text-base">Serviços</a>
+    <a href="#sobre" class="hover:underline text-sm sm:text-base">Sobre</a>
+    <a href="#depoimentos" class="hover:underline text-sm sm:text-base">Depoimentos</a>
+    <a href="#bestsellers" class="hover:underline text-sm sm:text-base">Bestsellers</a>
   </div>
   
   <!-- Social Media Icons -->
-  <div class="flex justify-center space-x-6 text-gray-700 mb-10">
+  <div class="flex justify-center space-x-4 sm:space-x-6 text-gray-700 mb-8">
     <a href="#" class="hover:text-gray-900"><img src="img/facebook-black.svg" alt="Facebook" class="w-5 h-5"></a>
     <a href="#" class="hover:text-gray-900"><img src="img/Twitter.png" alt="Twitter" class="w-5 h-5"></a>
     <a href="#" class="hover:text-gray-900"><img src="img/Instagram.png" alt="Instagram" class="w-5 h-5"></a>
@@ -490,17 +517,12 @@
   </div>
 
   <!-- Logo and Legal Links -->
-  <div class="flex flex-col items-center space-y-4">
-    
-    <div class="flex items-center space-x-4 text-sm text-gray-500">
-      <p>© 2024 PattyNails. Todos os direitos reservados.</p>
-     
- 
+  <div class="flex flex-col items-center space-y-4 text-gray-500">
+    <p class="text-xs sm:text-sm">© 2024 PattyNails. Todos os direitos reservados.</p>
+    <div class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-xs sm:text-sm">
+      <a href="#" class="hover:underline">Termos de Uso</a>
+      <a href="#" class="hover:underline">Política de Privacidade</a>
     </div>
-         <div class="flex justify-center space-x-6 text-gray-500 mb-10">
-        <a href="#" class="hover:underline">Termos de Uso</a>
-        <a href="#" class="hover:underline">Política de Privacidade</a>
-      </div>
   </div>
 </footer>
 
