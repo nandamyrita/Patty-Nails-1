@@ -846,6 +846,10 @@ app.get("/api/appointments/:userId", async (req, res) => {
       .json({ error: "Erro ao buscar dados do usuário ou eventos" });
   }
 });
+
+app.get("/politics-&-privacy", (req, res) => {
+  res.render("politics-&-privacy");
+});
     // Inicializa o servidor
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
