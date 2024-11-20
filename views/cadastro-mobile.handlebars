@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <title>Cadastro - Patty Nails</title>
+
+  <style>
+    h1, h2, h3 {
+      font-family: "Poppins", sans-serif;
+    }
+    .eye-icon {
+      color: black;
+      font-size: 1.25rem;
+    } 
+    html, body {
+      scroll-behavior: smooth;
+      min-height: 100vh;
+    }
+    .custom-gradient {
+      background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, hsla(0, 88%, 77%, 1) 71%);
+    }
+    .image {
+      background-image: url(./img/blur.svg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .image2 {
+      background-image: url(./img/backgroundimg2.svg);
+    }
+    input {
+      color: black;
+    }
+    /* Remove margin-top from login form */
+    .login-form {
+      margin: 2rem auto;
+    }
+    header {
+  z-index: 50;
+}
+  </style>
+</head>
+<body class="flex flex-col min-h-screen"></body>
+
+  <!-- Header with Logo -->
+<header class="w-full flex justify-center relative z-50" style="position: relative;">
+  <nav class="bg-transparent w-full px-4 sm:px-8 py-1 flex items-center justify-between text-black shadow-sm absolute">
+    <!-- Logo -->
+    <a href="/" aria-label="Início">
+      <img src="img/logo.svg" alt="Logo Patty Nails" class="h-24">
+    </a>
+
+    <!-- Links de Navegação (Desktop) -->
+    <div class="hidden md:flex space-x-6 text-[15px]">
+      <a href="/#home" class="hover:underline text-lg">Home</a>
+      <a href="/#mais-pedidos" class="hover:underline text-lg">Mais pedidos</a>
+      <a href="/#sobre" class="hover:underline text-lg">Sobre</a>
+      <a href="/#depoimentos" class="hover:underline text-base">Depoimentos</a>
+      <a href="/#bestsellers" class="hover:underline text-base">Bestsellers</a>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="hidden md:flex gap-4">
+      <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+        <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+        <span class="relative">Agende Aqui</span>
+      </button>
+      <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+        <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+        <span class="relative">Meu Perfil</span>
+      </button>
+    </div>
+
+    <!-- Botão Mobile -->
+    <button id="mobile-menu-toggle" class="md:hidden text-black focus:outline-none">
+      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Menu Mobile -->
+  <div id="mobile-menu" style="position: absolute; top: 100%; left: 0; width: 100%; transform: translateY(-100%); transition: transform 0.8s ease-in-out; background-color: white; z-index: 9; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px;">
+      <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 40px; padding-bottom: 16px; width: 100%;">
+        <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Agende Aqui</span>
+        </button>
+        <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Meu Perfil</span>
+        </button>
+      </div>
+      <!-- Links -->
+      <div class="text-black" style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+        <a href="/#home" class="block text-sm hover:underline">Home</a>
+        <a href="/#mais-pedidos" class="block text-sm hover:underline pt-6">Serviços</a>
+        <a href="/#sobre" class="block text-sm hover:underline pt-6">Sobre</a>
+        <a href="/#depoimentos" class="block text-sm hover:underline pt-6">Depoimentos</a>
+        <a href="/#bestsellers" class="block text-sm hover:underline pt-6">Bestsellers</a>
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- Main Content -->
+  <main class="flex-grow image flex items-center justify-center pt-24">
+    <!-- vlibras -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+
+    <!-- cadastro Card -->
+ <div class="login-form max-w-md w-full bg-white/50 backdrop-blur-md rounded-2xl shadow-lg p-6">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-semibold text-black">Cadastro</h2>
+      <p class="text-sm text-black mt-2">Faça seu cadastro e agende seu serviço facilmente.</p>
+    </div>
+
+<form action="/cadastrar-mobile" method="POST" id="cadastroForm" class="space-y-6">
+  <div>
+    <input class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 text-black" 
+           type="text" 
+           name="nome" 
+           placeholder="Nome" 
+           required>
+  </div>
+
+  <div>
+    <input class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 text-black" 
+           type="tel" 
+           name="telefone" 
+           id="telefone" 
+           placeholder="(00) 00000-0000" 
+           required>
+  </div>
+
+  <div>
+    <input class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 text-black" 
+           type="email" 
+           name="email" 
+           placeholder="Email" 
+           required>
+  </div>
+
+  <div class="relative">
+    <input class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 text-black" 
+           type="password" 
+           name="senha" 
+           id="senha-cadastro" 
+           placeholder="Senha" 
+           required>
+    <span class="absolute right-3 top-3 cursor-pointer" onclick="togglePasswordVisibility('senha-cadastro', 'eyeIconCadastro')">
+      <i id="eyeIconCadastro" class="bi bi-eye text-gray-500"></i>
+    </span>
+  </div>
+
+  <button type="submit" 
+          class="w-full py-3 bg-gradient-to-r from-pink-500 to-pink-700 text-white rounded-lg transition-all duration-300 hover:from-pink-700 hover:to-pink-500">
+    Cadastrar
+  </button>
+</form>
+
+
+    <div class="mt-6 text-center">
+      <p class="text-sm text-black">
+        Já tem uma conta? 
+        <a href="/login-mobile" class="text-pink-500 hover:underline">Faça login</a>
+      </p>
+    </div>
+  </div>
+  </main>
+
+  <!-- Footer -->
+ <footer class="bg-pink-50 text-center py-10 w-full">
+  <!-- Navigation Links -->
+  <div class="flex flex-wrap justify-center space-x-4 sm:space-x-8 text-gray-700 mb-6">
+    <a href="/#home" class="hover:underline text-sm sm:text-base">Home</a>
+    <a href="/#mais-pedidos" class="hover:underline text-sm sm:text-base">Serviços</a>
+    <a href="/#sobre" class="hover:underline text-sm sm:text-base">Sobre</a>
+    <a href="/#depoimentos" class="hover:underline text-sm sm:text-base">Depoimentos</a>
+    <a href="/#bestsellers" class="hover:underline text-sm sm:text-base">Bestsellers</a>
+  </div>
+  
+  <!-- Social Media Icons -->
+  <div class="flex justify-center space-x-4 sm:space-x-6 text-gray-700 mb-8">
+    <a href="https://wa.me/5511947161392?text=Ol%C3%A1!%20Vim%20pelo%20Site%20e%20gostaria%20de%20agendar%20um%20hor%C3%A1rio!"target = "_blank" class="hover:text-gray-900"><img src="img/WhatsApp.png" alt="Twitter" class="w-5 h-5"></a>
+    <a href="https://www.facebook.com/pattyesmalteria"target = "_blank" class="hover:text-gray-900"><img src="img/facebook-black.svg" alt="Facebook" class="w-5 h-5"></a>
+    <a href="https://www.instagram.com/patty_esmalteria/"target = "_blank" class="hover:text-gray-900"><img src="img/Instagram.png" alt="Instagram" class="w-5 h-5"></a>
+  </div>
+
+  <!-- Logo and Legal Links -->
+  <div class="flex flex-col items-center space-y-4 text-gray-500">
+    <p class="text-xs sm:text-sm">© 2024 PattyNails. Todos os direitos reservados.</p>
+    <div class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-xs sm:text-sm">
+      <a href="/politics-&-privacy" class="hover:underline">Termos de Uso</a>
+      <a href="/politics-&-privacy" class="hover:underline">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    function togglePasswordVisibility(inputId, iconId) {
+      const passwordInput = document.getElementById(inputId);
+      const eyeIcon = document.getElementById(iconId);
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeIcon.classList.remove("bi-eye");
+        eyeIcon.classList.add("bi-eye-slash");
+      } else {
+        passwordInput.type = "password";
+        eyeIcon.classList.remove("bi-eye-slash");
+        eyeIcon.classList.add("bi-eye");
+      }
+    }
+
+    // Phone number formatter
+    document.getElementById('telefone').addEventListener('input', function(e) {
+      let telefone = e.target.value.replace(/\D/g, "");
+      if (telefone.length > 11) {
+        telefone = telefone.slice(0, 11);
+      }
+      telefone = telefone.replace(/^(\d{2})(\d)/g, "($1) $2");
+      telefone = telefone.replace(/(\d{5})(\d)/, "$1-$2");
+      e.target.value = telefone;
+    });
+
+    // Form validation
+    document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const telefone = document.getElementById('telefone').value.replace(/\D/g, "");
+      const senha = document.getElementById('senha-cadastro').value;
+      
+      if (telefone.length !== 11) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'O telefone deve conter 11 dígitos.',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
+      
+      if (senha.length < 6) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'A senha deve conter no mínimo 6 caracteres.',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
+      
+      this.submit();
+    });
+        // Exibir SweetAlert2 em caso de erro
+const urlParams = new URLSearchParams(window.location.search);
+const errorMsg = urlParams.get('error');
+const successMsg = urlParams.get('success');
+
+if (errorMsg) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: errorMsg,
+        confirmButtonText: 'OK'
+    });
+}
+if (successMsg) {
+    Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: successMsg,
+        confirmButtonText: 'OK'
+    });
+}
+ // Função para pegar os parâmetros da URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Verifica se há mensagens de erro ou sucesso
+  const error = getQueryParam("error");
+  const success = getQueryParam("success");
+
+  if (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error,
+    });
+  }
+
+  if (success) {
+    Swal.fire({
+      icon: "success",
+      title: "Sucesso!",
+      text: success,
+    });
+  }
+
+  // Função para pegar os parâmetros da URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Preenche os campos com os valores da query string, se existirem
+  document.addEventListener("DOMContentLoaded", () => {
+    const nome = getQueryParam("nome");
+    const telefone = getQueryParam("telefone");
+    const email = getQueryParam("email");
+
+    if (nome) document.querySelector('input[name="nome"]').value = nome;
+    if (telefone) document.querySelector('input[name="telefone"]').value = telefone;
+    if (email) document.querySelector('input[name="email"]').value = email;
+
+    // Exibe a mensagem de erro, se existir
+    const error = getQueryParam("error");
+    if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+      });
+    }
+  });
+  </script>
+</body>
+</html>

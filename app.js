@@ -229,7 +229,6 @@ app.get('/login', (req, res) => {
     res.render('login', { error: req.flash('error_msg') });
 });
 
-
     // Rota de logout
 app.get('/logout', (req, res, next) => {
     req.logout((err) => {
@@ -849,6 +848,105 @@ app.get("/api/appointments/:userId", async (req, res) => {
 
 app.get("/politics-&-privacy", (req, res) => {
   res.render("politics-&-privacy");
+});
+
+app.get("/auth/status", (req, res) => {
+  res.json({
+    isAuthenticated: req.isAuthenticated(),
+    isAdmin: req.user?.isAdmin || false,
+    user: req.user
+      ? {
+          id: req.user.id,
+          nome: req.user.nome,
+          email: req.user.email,
+        }
+      : null,
+  });
+});
+app.get("/login-mobile", (req, res) => {
+  res.render("login-mobile");
+});
+app.get("/cadastro-mobile", (req, res) => {
+  res.render("cadastro-mobile");
+});
+
+  app.post("/cadastrar-mobile", async (req, res) => {
+    // Verifica se o usuário já está logado
+    if (req.isAuthenticated()) {
+      return res.redirect(req.user.isAdmin ? "/calendar" : "/agendamento"); // Redireciona para a página correspondente
+    }
+
+    const { nome, telefone, email, senha } = req.body;
+   try {
+     const userExists = await User.findOne({ where: { email } });
+     if (userExists) {
+  const query = `error=${encodeURIComponent("Email já registrado!")}&nome=${encodeURIComponent(nome)}&telefone=${encodeURIComponent(telefone)}&email=${encodeURIComponent(email)}`;
+  return res.redirect(`/cadastro-mobile?${query}`);
+}
+if (userExists) {
+  const query = `error=${encodeURIComponent(
+    "Email já registrado!"
+  )}&nome=${encodeURIComponent(nome)}&telefone=${encodeURIComponent(
+    telefone
+  )}&email=${encodeURIComponent(email)}`;
+  return res.redirect(`/cadastro-mobile?${query}`);
+}
+
+     const hashedPassword = await bcrypt.hash(senha, 10);
+     await User.create({ nome, telefone, email, senha: hashedPassword });
+
+     // Redireciona com mensagem de sucesso
+     return res.redirect(
+       `/login-mobile?success=${encodeURIComponent(
+         "Cadastro realizado com sucesso!"
+       )}`
+     );
+   } catch (error) {
+     console.error("Erro ao gravar os dados na entidade:", error);
+     // Redireciona com mensagem de erro
+     return res.redirect(
+       `/login-mobile?error=${encodeURIComponent(
+         "Erro ao gravar os dados na entidade."
+       )}`
+     );
+   }
+  });
+
+  // Rota para o login (POST)
+  app.post('/login-mobile', async (req, res, next) => {
+    const { email, senha } = req.body;
+
+      // Verifique se o email existe
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+          // Se o usuário não existir, redirecione com mensagem de erro
+        return res.redirect(`/login-mobile?error=${encodeURIComponent('Email não encontrado!')}`);
+    }
+
+      // Use passport.authenticate para verificar a senha
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            console.error('Erro durante a autenticação:', err);
+            return next(err);
+        }
+        if (!user) {
+              // Se a senha estiver incorreta, redirecione com mensagem de erro
+            return res.redirect(`/login-mobile?error=${encodeURIComponent('Senha incorreta!')}`);
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                console.error('Erro ao logar:', err);
+                return next(err);
+            }
+            req.session.user = {
+                id      : user.id,
+                username: user.nome,
+                isAdmin : user.isAdmin
+            };
+              // Direciona para a página correta
+            return res.redirect(user.isAdmin ? '/calendar' : '/agendamento');
+        });
+    })(req, res, next);
 });
     // Inicializa o servidor
 const PORT = process.env.PORT || 3003;

@@ -63,5 +63,77 @@
       `;
     });
   });
+
+// Função para verificar se está em dispositivo móvel
+function isMobile() {
+  return window.innerWidth < 768;
+}
+
+// Função para verificar autenticação
+async function checkAuthStatus(route) {
+  try {
+    const response = await fetch('/auth/status', {
+      method: 'GET',
+      credentials: 'include' // Importante para enviar cookies
+    });
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Erro ao verificar autenticação:', error);
+    return { isAuthenticated: false, isAdmin: false };
+  }
+}
+
+// Função principal para lidar com a navegação
+async function handleNavigation(route) {
+  try {
+    const mobileSuffix = isMobile() ? '-mobile' : '';
+    
+    // Se for rota de login
+    if (route === '/login') {
+      const authStatus = await checkAuthStatus();
+      
+      if (authStatus.isAuthenticated) {
+        // Se já estiver autenticado, redireciona baseado no tipo de usuário
+        window.location.href = authStatus.isAdmin ? '/calendar' : '/agendamento';
+      } else {
+        // Se não estiver autenticado, vai para a página de login
+        window.location.href = `/login${mobileSuffix}`;
+      }
+    }
+    // Se for rota de profile
+    else if (route === '/profile') {
+      const authStatus = await checkAuthStatus();
+      
+      if (authStatus.isAuthenticated) {
+        // Se autenticado, vai para o profile
+        window.location.href = `/profile`;
+      } else {
+        // Se não autenticado, redireciona para login com returnTo
+        const currentPath = encodeURIComponent(window.location.pathname);
+        window.location.href = `/login${mobileSuffix}?returnTo=/profile`;
+      }
+    }
+    // Para outras rotas
+    else {
+      window.location.href = `${route}${mobileSuffix}`;
+    }
+  } catch (error) {
+    console.error('Erro na navegação:', error);
+    // Em caso de erro, redireciona para login
+    window.location.href = `/login${mobileSuffix}`;
+  }
+}
+
+// Adiciona evento de redimensionamento
+window.addEventListener('resize', () => {
+  console.log('Is Mobile:', isMobile());
+});
+
 </script>
 </html>
