@@ -22,48 +22,81 @@
 </body>
 <script>
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  let isMenuOpen = false;
+const mobileMenu = document.getElementById('mobile-menu');
+const searchContainer = document.querySelector('.search-container');
+let isMenuOpen = false;
 
-  mobileMenuToggle.addEventListener('click', () => {
-    isMenuOpen = !isMenuOpen;
-    if (isMenuOpen) {
-      mobileMenu.style.transform = 'translateY(0)';
-      mobileMenu.style.marginTop = '100px';
-    } else {
-      mobileMenu.style.transform = 'translateY(-100%)';
-      mobileMenu.style.marginTop = '0';
-    }
-    
-    // Alterna o ícone do menu
-    const icon = mobileMenuToggle.querySelector('svg');
-    if (isMenuOpen) {
-      icon.innerHTML = `
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      `;
-    } else {
-      icon.innerHTML = `
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      `;
-    }
-  });
+// Function to close the mobile menu
+const closeMobileMenu = () => {
+  mobileMenu.style.transform = 'translateY(-100%)';
+  mobileMenu.style.marginTop = '0';
+  isMenuOpen = false;
+  
+  // Restaura o ícone do menu
+  const icon = mobileMenuToggle.querySelector('svg');
+  icon.innerHTML = `
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+  `;
+};
 
-  // Fecha o menu ao clicar em um link
-  const mobileLinks = mobileMenu.querySelectorAll('a');
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.style.transform = 'translateY(-100%)';
-      mobileMenu.style.marginTop = '0';
-      isMenuOpen = false;
-      
-      // Restaura o ícone do menu
-      const icon = mobileMenuToggle.querySelector('svg');
-      icon.innerHTML = `
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      `;
+// Toggle menu when clicking the menu button
+mobileMenuToggle.addEventListener('click', () => {
+  isMenuOpen = !isMenuOpen;
+  if (isMenuOpen) {
+    mobileMenu.style.transform = 'translateY(0)';
+    mobileMenu.style.marginTop = '100px';
+  } else {
+    mobileMenu.style.transform = 'translateY(-100%)';
+    mobileMenu.style.marginTop = '0';
+  }
+  
+  // Toggle menu icon
+  const icon = mobileMenuToggle.querySelector('svg');
+  if (isMenuOpen) {
+    icon.innerHTML = `
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    `;
+  } else {
+    icon.innerHTML = `
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    `;
+  }
+});
+
+// Close menu when clicking on mobile links
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
+  link.addEventListener('click', closeMobileMenu);
+});
+
+// Close menu when clicking on search container elements
+const searchElements = [
+  document.getElementById('searchTypeBtn'),
+  document.getElementById('searchInput'),
+  document.getElementById('searchBtn'),
+  document.getElementById('allUsersBtn'),
+  document.getElementById('searchResults'),
+  document.getElementById('searchSpinner')
+];
+
+searchElements.forEach(element => {
+  if (element) {
+    element.addEventListener('click', (e) => {
+      if (isMenuOpen) {
+        e.stopPropagation(); // Prevent event bubbling
+        closeMobileMenu();
+      }
     });
-  });
+  }
+});
 
+// Close menu when clicking anywhere in the search container
+searchContainer.addEventListener('click', (e) => {
+  if (isMenuOpen) {
+    e.stopPropagation(); // Prevent event bubbling
+    closeMobileMenu();
+  }
+});
 // Função para verificar se está em dispositivo móvel
 function isMobile() {
   return window.innerWidth < 768;

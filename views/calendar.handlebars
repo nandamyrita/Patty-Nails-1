@@ -22,6 +22,7 @@
    padding-top: 20px;                                                                        /* Ajuste conforme necessário */
    background : radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, rgb(250, 193, 193) 71%);
 }
+
     /* Estilo para o grupo de botões do FullCalendar */
 .fc-button-group .fc-button {
     background-color: transparent !important;      /* Fundo transparente */
@@ -123,7 +124,27 @@
     background-color: transparent !important;      /* Fundo transparente ao passar o mouse */
     border          : 1px solid black !important;  /* Borda preta */
 }
+@media screen and (max-width: 800px) {
 
+
+    .fc-button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .fc-view {
+        font-size: 0.75rem;
+    }
+
+    /* Remove 'Today' button on mobile */
+    .fc-today-button {
+        display: none !important;
+    }
+    .fc-toolbar {
+    font-size: 9px;
+    
+}
+}
 .fc-today-button.fc-state-active {
     background-color: black !important;            /* Fundo preto quando selecionado */
     color           : white !important;            /* Texto branco quando selecionado */
@@ -192,7 +213,7 @@
 }
 .search-container {
   position: relative;
-  z-index : 1000;
+
 }
 
 #searchResults:empty {
@@ -222,9 +243,79 @@
   font-size: 0.875rem;
   color    : #666;
 }
+
+  @media screen and (max-width: 525px) {
+        #searchResults {
+            left: 0; /* Mover para a esquerda da tela */
+            right: auto; /* Remover a posição à direita */
+        }
+    }
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+    /* Garantir que o calendário ocupe o restante do espaço */
+}
+
+footer {
+    margin-top: auto; /* Empurra o footer para o fundo */
+    width: 100%;
+    background-color: rgb(253 242 248); /* pink-50 */
+    padding: 2.5rem 0; /* py-10 */
+}
+@media screen and (max-width: 800px) and (min-height: 1000px) {
+  .container {
+    margin-bottom: 0; /* Evita margens desnecessárias */
+    margin-top: 100px;
+  }
+
+  .fc-toolbar {
+    font-size: 11px;
+    }
+
+  #calendar {
+    max-width: 100%; /* Garante que o calendário ocupe toda a largura disponível */
+    height: 600px;
+    margin: 20px auto; /* Centraliza o calendário */
+    padding-top: 20px;
+    background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, rgb(250, 193, 193) 71%);
+  } 
+} 
+@media screen and (max-width: 450px) and (max-height: 999px) {
+  .container {
+    margin-bottom: 0; /* Evita margens desnecessárias */
+    margin-top: 100px;
+  }
+
+  #calendar {
+    max-width: 100%; /* Garante que o calendário ocupe toda a largura disponível */
+    height: 500px;
+    margin: 20px auto; /* Centraliza o calendário */
+    padding-top: 20px;
+    background: radial-gradient(circle, hsla(26, 100%, 92%, 1) 0%, rgb(250, 193, 193) 71%);
+  } 
+}
+
     </style>
 </head>
-<body class = "text-white font-sans custom-gradient2" >
+<body class="text-white font-sans custom-gradient2">
     <!-- Navbar -->
 
  <header class="w-full flex justify-center relative z-10" style="position: relative;">
@@ -233,51 +324,85 @@
     <a href="/" aria-label="Início">
       <img src="img/logo.svg" alt="Logo Patty Nails" class="h-24">
     </a>
-
-      <!-- Links de Navegação (Desktop) -->
-      <div class="hidden md:flex space-x-6 text-[15px]">
-       <a href="/#home" class="hover:underline text-lg">Home</a>
-       <a href="/#mais-pedidos" class="hover:underline text-lg">Mais pedidos</a>
-       <a href="/#sobre" class="hover:underline text-lg">Sobre</a>
-       <a href="/#depoimentos" class="hover:underline text-base">Depoimentos</a>
-       <a href="/#bestsellers" class="hover:underline text-base">Bestsellers</a>
+<!-- Barra de pesquisa -->
+<div class="search-container relative">
+  <div class="flex items-center space-x-2">
+    <div class="relative">
+<button id    = "searchTypeBtn" class = "hidden md:flex items-center px-3 py-2 text-sm border border-black rounded-l-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+        Email
+        <svg      xmlns  = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "ml-2">
+        <polyline points = "6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      
+    <div id    = "searchTypeDropdown" class                                                = "hidden absolute mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+      <div class = "px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type = "email">Email</div>
+      <div class = "px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type = "phone">Telefone</div>
       </div>
-
-    <!-- Botões de Ação -->
-    <div class="hidden md:flex gap-4">
-      <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
-        <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
-        <span class="relative">Agende Aqui</span>
-      </button>
-      <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
-        <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
-        <span class="relative">Meu Perfil</span>
-      </button>
     </div>
 
+    <input 
+      type="text"
+      id="searchInput"
+      placeholder="Buscar por email..."
+      class="hidden md:block px-4 py-2 border border-black rounded-none text-black focus:outline-none focus:border-pink-500"
+    >
+
+    <button id="searchBtn" class="hidden md:block px-4 py-2 border border-black rounded-r-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+
+<button id    = "allUsersBtn" class                = "px-4 py-2 border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100 ">
+    <svg    xmlns = "http://www.w3.org/2000/svg" width = "16" height = "16" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round">
+    <path   d     = "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+    <circle cx    = "12" cy                            = "7" r       = "4"></circle>
+      </svg>
+    </button>
+  </div>
+
+<!-- Results Dropdown -->
+<div id="searchResults" class="right-2 hidden absolute mt-2 bg-white rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto md:w-full">
+    <!-- Results will be populated here -->
+</div>
+</div>
+
+
+  <!-- Loading Spinner -->
+    <div id    = "searchSpinner" class = "hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 p-4">
+  <div class = "flex justify-center">
+  <div class = "animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
+    </div>
+  </div>
+</div>
+
+    <!-- Botões de Ação -->
+<div class="flex gap-4">
+  <button onclick="confirmarLogout(event)" class="relative overflow-hidden text-sm px-6 py-2 border border-black text-black rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group hover:bg-white">
+    <span class="absolute transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+    <span class="relative">Logout</span>
+  </button>
+</div>
+
+
+
     <!-- Botão Mobile -->
+    
     <button id="mobile-menu-toggle" class="md:hidden text-black focus:outline-none">
       <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
+    
   </nav>
 
   <!-- Menu Mobile -->
-  <div id="mobile-menu" style="position: absolute; top: 100%; left: 0; width: 100%; transform: translateY(-100%); transition: transform 0.8s ease-in-out; background-color: white; z-index: 9; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px;">
-      <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 40px; padding-bottom: 16px; width: 100%;">
-        <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
-          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
-          <span class="relative">Agende Aqui</span>
-        </button>
-        <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
-          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
-          <span class="relative">Meu Perfil</span>
-        </button>
-      </div>
+  <div id="mobile-menu" style="position: absolute; top: 100%; left: 0; width: 100%; transform: translateY(-100%); transition: transform 0.8s ease-in-out; background-color: white; z-index: 900; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+
       <!-- Links -->
-    <div class="text-black" style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+    <div class="text-black" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
         <a href="/#home" class="block text-sm hover:underline">Home</a>
         <a href="/#mais-pedidos" class="block text-sm hover:underline pt-6">Serviços</a>
         <a href="/#sobre" class="block text-sm hover:underline pt-6">Sobre</a>
@@ -289,7 +414,7 @@
 </header>
 
 
-
+ <main class="main-content">
   <!-- vlibras -->
     <div vw class               = "enabled">
     <div vw-access-button class = "active"></div>
@@ -302,11 +427,10 @@
         new window.VLibras.Widget('https://vlibras.gov.br/app');
       </script>
 
-      
-    <div class = "container mx-auto mt-16 p-2 justify-center w-full">
-    <h1  class = "text-3xl text-center font-bold mb-6"></h1>
-    <div id    = "calendar" class = " rounded-lg p-4 shadow-lg"></div>
-    </div>
+   <div class="container mx-auto mt-16 p-2 justify-center w-full">
+            <h1 class="text-3xl text-center font-bold mb-6"></h1>
+            <div id="calendar" class="rounded-lg p-4 shadow-lg"></div>
+        </div>
 
 <!-- Modal para Detalhar Evento -->
 <div    class       = "modal fade" id     = "eventModal" tabindex = "-1" role               = "dialog" aria-labelledby = "eventModalLabel" aria-hidden = "true">
@@ -352,6 +476,7 @@
         </div>
     </div>
 </div>
+</main>
   <!-- Footer -->
  <footer class="bg-pink-50 text-center py-10 w-full">
   <!-- Navigation Links -->
@@ -378,6 +503,7 @@
       <a href="/politics-&-privacy" class="hover:underline">Política de Privacidade</a>
     </div>
   </div>
+  </body>
 </footer>
 <!-- Loading Spinner Container -->
 <div id    = "loading-spinner" class                = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
@@ -998,8 +1124,8 @@ function openEventModal(eventData) {
     }
   });
 });
+
 </script>
 
 
-</body>
 </html> 
