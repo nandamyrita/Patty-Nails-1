@@ -227,78 +227,65 @@
 <body class = "text-white font-sans custom-gradient2" >
     <!-- Navbar -->
 
-<header class="w-full flex items-center px-4 py-2 bg-transparent shadow-sm fixed top-0 z-10">
-  <!-- Navbar -->
-  <nav class="w-full flex items-center justify-between">
+ <header class="w-full flex justify-center relative z-10" style="position: relative;">
+  <nav class="bg-transparent w-full px-4 sm:px-8 py-1 flex items-center justify-between text-black shadow-sm absolute">
     <!-- Logo -->
-    <div class="flex items-center flex-shrink-0">
-      <a href="/">
-        <img src="img/logo.svg" alt="unha" class="h-24">
-      </a>
+    <a href="/" aria-label="Início">
+      <img src="img/logo.svg" alt="Logo Patty Nails" class="h-24">
+    </a>
+
+      <!-- Links de Navegação (Desktop) -->
+      <div class="hidden md:flex space-x-6 text-[15px]">
+       <a href="/#home" class="hover:underline text-lg">Home</a>
+       <a href="/#mais-pedidos" class="hover:underline text-lg">Mais pedidos</a>
+       <a href="/#sobre" class="hover:underline text-lg">Sobre</a>
+       <a href="/#depoimentos" class="hover:underline text-base">Depoimentos</a>
+       <a href="/#bestsellers" class="hover:underline text-base">Bestsellers</a>
+      </div>
+
+    <!-- Botões de Ação -->
+    <div class="hidden md:flex gap-4">
+      <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+        <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+        <span class="relative">Agende Aqui</span>
+      </button>
+      <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+        <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+        <span class="relative">Meu Perfil</span>
+      </button>
     </div>
 
-    <!-- Barra de pesquisa -->
-    <div class="flex-grow flex justify-center">
-      <div class="search-container relative">
-        <div class="flex items-center space-x-2">
-          <div class="relative">
-            <button id="searchTypeBtn" class="flex items-center px-3 py-2 text-sm border border-black rounded-l-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-              Email
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div id="searchTypeDropdown" class="hidden absolute mt-1 w-full bg-white border text-black border-gray-200 rounded-lg shadow-lg z-50">
-              <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type="email">Email</div>
-              <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer search-type-option" data-type="phone">Telefone</div>
-            </div>
-          </div>
+    <!-- Botão Mobile -->
+    <button id="mobile-menu-toggle" class="md:hidden text-black focus:outline-none">
+      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
 
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Buscar por email..."
-            class="px-4 py-2 border border-black rounded-none text-black focus:outline-none focus:border-pink-500"
-          />
-
-          <button id="searchBtn" class="px-4 py-2 border border-black rounded-r-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-
-          <button id="allUsersBtn" class="px-4 py-2 border border-black rounded-3xl text-black hover:border-pink-500 hover:bg-white transition duration-100">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Results Dropdown -->
-        <div id="searchResults" class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
-          <!-- Results will be populated here -->
-        </div>
-
-        <!-- Loading Spinner -->
-        <div id="searchSpinner" class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg z-50 p-4">
-          <div class="flex justify-center">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
-          </div>
-        </div>
+  <!-- Menu Mobile -->
+  <div id="mobile-menu" style="position: absolute; top: 100%; left: 0; width: 100%; transform: translateY(-100%); transition: transform 0.8s ease-in-out; background-color: white; z-index: 9; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px;">
+      <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 40px; padding-bottom: 16px; width: 100%;">
+        <button onclick="window.location.href='/login'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Agende Aqui</span>
+        </button>
+        <button onclick="window.location.href='/profile'" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
+          <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
+          <span class="relative">Meu Perfil</span>
+        </button>
+      </div>
+      <!-- Links -->
+    <div class="text-black" style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+        <a href="/#home" class="block text-sm hover:underline">Home</a>
+        <a href="/#mais-pedidos" class="block text-sm hover:underline pt-6">Serviços</a>
+        <a href="/#sobre" class="block text-sm hover:underline pt-6">Sobre</a>
+        <a href="/#depoimentos" class="block text-sm hover:underline pt-6">Depoimentos</a>
+        <a href="/#bestsellers" class="block text-sm hover:underline pt-6">Bestsellers</a>
       </div>
     </div>
-
-    <!-- Logout Button -->
-    <div class="flex items-center flex-shrink-0">
-       <!-- Botão Logout -->
-        <button onclick="confirmarLogout(event);" class="relative overflow-hidden text-sm px-6 py-2 border border-gray-400 text-pink-500 bg-white rounded-full transition duration-500 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-200 group">
-            <span class="absolute inset-0 bg-gradient-to-r from-pink-400 to-pink-200 transform scale-0 group-hover:scale-150 transition-transform duration-500 rounded-full"></span>
-            <span class="relative">Logout</span>
-        </button>
-    </div>
-  </nav>
+  </div>
 </header>
 
 
